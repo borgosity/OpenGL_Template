@@ -1,6 +1,6 @@
 #include <iostream>
 
-
+#define GLEW_STATIC 0
 // opengl includes
 #include <glew.h>
 #include <glfw3.h>
@@ -34,7 +34,7 @@ int main()
 	glfwMakeContextCurrent(window);
 
 	// draw triangle
-	GLuint VertexArrayID;
+	GLuint VertexArrayID = 0;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 	// An array of 3 vectors which represents 3 vertices
