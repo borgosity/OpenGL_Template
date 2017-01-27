@@ -1,78 +1,150 @@
+/****************************************************************
+  Tutorial followed from https://learnopengl.com/
+*****************************************************************/
+
 #include <iostream>
 
-#define GLEW_STATIC 0
 // opengl includes
+#define GLEW_STATIC
 #include <glew.h>
 #include <glfw3.h>
 #include <glm.hpp>
+// Window dimensions
+const GLuint WIDTH = 800, HEIGHT = 600;
+
+/// key press callback function
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
+{
+	// When a user presses the escape key, we set the WindowShouldClose property to true, 
+	// closing the application
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(window, GL_TRUE);
+		std::cout << "Escape Key Pressed" << std::endl;
+	}
+}
+
+/// function that alternates screens background colour
+void screenColour(GLfloat *red, GLfloat *green, GLfloat *blue, GLboolean *allColour)
+{
+	std::cout << "red = " << *red << " green = " << *green << " blue = " << *blue << std::endl;
+	if (*red >= 1.0f && *green >= 1.0f && *blue >= 1.0f)
+	{
+		*allColour = true;
+		std::cout << " - allColour = true" << std::endl;
+	}
+	if (*red <= 0 && *green <= 0 && *blue <= 0)
+	{
+		*allColour = false;
+		std::cout << " - allColour = false" << std::endl;
+	}
+	// change red
+	if (!*allColour)
+	{
+		if (*red < 1.0f)
+		{
+			*red += 0.01f;
+		}
+		else if (*green < 1.0f)
+		{
+			*green += 0.01f;
+		}
+		else if (*blue < 1.0f)
+		{
+			*blue += 0.01f;
+		}
+	}
+	else if (*allColour)
+	{
+		if (*blue > 0.0f)
+		{
+			*blue -= 0.01f;
+		}
+		else if (*green > 0.0f)
+		{
+			*green -= 0.01f;
+		}
+		else if (*red > 0.0f)
+		{
+			*red -= 0.01f;
+		}
+	}
 
 
+
+}
+
+/// main function
 int main()
 {
-	std::cout << "Hello World" << std::endl;
+	std::cout << "Starting OpenGL Test" << std::endl;
 
-	if (!glfwInit()) {
-		std::cout << "GLFW failed to initialise" << std::endl;
-		return -1;
-	}
-	//// 4 x AntiAlising
-	glfwWindowHint(GLFW_SAMPLES, 4);
-	// set opengl version and profile
+	// setup window options
+	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	// open a window
-	GLFWwindow * window;
-	window = glfwCreateWindow(640, 480, "OpengGL Template Project", NULL, NULL);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	if (!window) {
-		std::cout << "window failed" << std::endl;
+	// create window
+	GLFWwindow * window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);
+	if (window == nullptr)
+	{
+		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
+		return - 1;
+	}
+	glfwMakeContextCurrent(window);
+	
+	// initialise GLEW
+	glewExperimental = GL_TRUE;
+	if (glewInit() != GLEW_OK)
+	{
+		std::cout << "Failed to initialise GLEW" << std::endl;
 		return -1;
 	}
-	// set current context to window
-	glfwMakeContextCurrent(window);
 
-	// draw triangle
-	GLuint VertexArrayID = 0;
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
-	// An array of 3 vectors which represents 3 vertices
-	static const GLfloat g_vertex_buffer_data[] = {
-		-1.0f, -1.0f, 0.0f,
-		1.0f, -1.0f, 0.0f,
-		0.0f,  1.0f, 0.0f,
-	};
-	//// This will identify our vertex buffer
-	//GLuint vertexbuffer;
-	//// Generate 1 buffer, put the resulting identifier in vertexbuffer
-	//glGenBuffers(1, &vertexbuffer);
-	//// The following commands will talk about our 'vertexbuffer' buffer
-	//glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	//// Give our vertices to OpenGL.
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	// define rendering viewport
+	int width, height;
+	glfwGetFramebufferSize(window, &width, &height);
+	glViewport(0, 0, width, height);
 
-	do {
-		//// 1rst attribute buffer : vertices
-		//glEnableVertexAttribArray(0);
-		//glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		//glVertexAttribPointer(
-		//	0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-		//	3,                  // size
-		//	GL_FLOAT,           // type
-		//	GL_FALSE,           // normalized?
-		//	0,                  // stride
-		//	(void*)0            // array buffer offset
-		//);
-		//// Draw the triangle !
-		//glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
-		//glDisableVertexAttribArray(0);
-		glfwSwapBuffers(window);
+	GLfloat green = 1.0f;
+	GLfloat red = 1.0f;
+	GLfloat blue = 1.0f;
+	GLboolean maxColour = false;
+
+	// time
+	GLdouble prevTime = glfwGetTime();
+	GLdouble currTime = 0;
+	float deltaTime = 0;
+
+	// draw loop
+	while (currTime = glfwGetTime(), !glfwWindowShouldClose(window))
+	{
+		// update delta time
+		deltaTime = (float)(currTime - prevTime);
+		std::cout << "delta time = " << deltaTime << " modula time = " << (int)currTime % 3 << std::endl;
+
+		// check and call events
 		glfwPollEvents();
-	} 
-	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0);
 
+		// rendering commands
+		//if ((int)currTime % 3 > 0)
+			screenColour(&red, &green, &blue, &maxColour);
+		glClearColor(red, green, blue, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		// swap the buffers
+		glfwSwapBuffers(window);
+		glfwSetKeyCallback(window, key_callback);
+
+		// update current time
+		prevTime = currTime;
+	}
+	// Terminate GLFW
+	glfwTerminate();
 	std::cout << "Finished!! \n\n" << std::endl;
-
 	return 0;
 }
+
