@@ -39,6 +39,9 @@
     <ClCompile Include="src\tests\tests.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderEngine\Shaderer.cpp">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\renderEngine\DisplayManager.h">
@@ -55,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="src\tests\tests.h">
       <Filter>Source Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderEngine\Shaderer.h">
+      <Filter>Source Files\renderEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

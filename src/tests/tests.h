@@ -8,6 +8,7 @@
 
 // tests
 void helloWorld();
+void helloTriangle();
 void renderEngineTest();
 
 // miscellaneous functions
