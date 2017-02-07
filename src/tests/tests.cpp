@@ -136,88 +136,61 @@ void helloTriangle()
 	glfwTerminate();
 }
 
-//void renderEngineTest()
-//{
-//	std::cout << "Starting OpenGL Test - 02" << std::endl;
-//
-//	// initialise display
-//	DisplayManager * display = new DisplayManager();
-//	display->createDisplay();
-//
-//	// initialise loader
-//	Loader * loader = new Loader();
-//	Renderer * renderer = new Renderer();
-//
-//	// Build and compile our shader program
-//	// Vertex shader
-//	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-//	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-//	glCompileShader(vertexShader);
-//	// Check for compile time errors
-//	GLint success;
-//	GLchar infoLog[512];
-//	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-//	if (!success)
-//	{
-//		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-//		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-//	}
-//	// Fragment shader
-//	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-//	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-//	glCompileShader(fragmentShader);
-//	// Check for compile time errors
-//	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-//	if (!success)
-//	{
-//		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-//		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-//	}
-//	// Link shaders
-//	GLuint shaderProgram = glCreateProgram();
-//	glAttachShader(shaderProgram, vertexShader);
-//	glAttachShader(shaderProgram, fragmentShader);
-//	glLinkProgram(shaderProgram);
-//	// Check for linking errors
-//	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-//	if (!success) {
-//		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-//		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-//	}
-//	glDeleteShader(vertexShader);
-//	glDeleteShader(fragmentShader);
-//
-//	// initialise vertices for triangle
-//	// Set up vertex data (and buffer(s)) and attribute pointers
-//	GLfloat vertices[] = {
-//		-0.5f, -0.5f, 0.0f, // Left  
-//		0.5f, -0.5f, 0.0f, // Right 
-//		0.0f,  0.5f, 0.0f  // Top   
-//	};
-//
-//	RawModel * model = loader->loadToVAO(vertices, sizeof(vertices));
-//
-//	// draw loop
-//	while (!glfwWindowShouldClose(display->window()))
-//	{
-//		// check and call events
-//		glfwPollEvents();
-//
-//		// game logic
-//		// render
-//		renderer->prepare(1,0,0);
-//		renderer->render(model, shaderProgram);
-//		// swap the buffers
-//		glfwSwapBuffers(display->window());
-//		glfwSetKeyCallback(display->window(), key_callback);
-//
-//	}
-//	// VAO VBO clean up
-//	loader->cleanUp();
-//	// Terminate GLFW
-//	glfwTerminate();
-//	std::cout << "Finished!!  - 02 \n\n" << std::endl;
-//}
+void renderEngineTest()
+{
+	std::cout << "Starting OpenGL Test - 02" << std::endl;
+
+	// initialise display
+	DisplayManager * display = new DisplayManager();
+	display->createDisplay();
+
+	// initialise loader
+	Loader * loader = new Loader();
+	Renderer * renderer = new Renderer();
+
+	// Build and compile our shader program
+	Shaderer * shader = new Shaderer();
+	GLuint shaderProgram = shader->buildShader();
+
+	// initialise vertices for triangle
+	// Set up vertex data (and buffer(s)) and attribute pointers
+	GLfloat vertices[] = {
+		-0.5f, -0.5f, 0.0f, // Left  
+		0.5f, -0.5f, 0.0f, // Right 
+		0.0f,  0.5f, 0.0f  // Top   
+	};
+
+	RawModel * model = loader->loadToVAO(vertices, 9);
+
+	// draw loop
+	while (!glfwWindowShouldClose(display->window()))
+	{
+		// check and call events
+		glfwPollEvents();
+
+		// game logic
+		// render
+		renderer->prepare(0.2f, 0.3f, 0.3f);
+		//renderer->render(model, shaderProgram);
+
+		// Draw our first triangle
+		glUseProgram(shaderProgram);
+		std::cout << "VAO ID - " << model->vaoID() << std::endl;
+		glBindVertexArray(model->vaoID());
+		glDrawArrays(GL_TRIANGLES, 0, model->vertexCount());
+		glBindVertexArray(0);
+
+		// swap the buffers
+		glfwSwapBuffers(display->window());
+		glfwSetKeyCallback(display->window(), key_callback);
+
+	}
+	// VAO VBO clean up
+	loader->cleanUp();
+	// Terminate GLFW
+	glfwTerminate();
+	std::cout << "Finished!!  - 02 \n\n" << std::endl;
+}
 
 /// key press callback function
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)

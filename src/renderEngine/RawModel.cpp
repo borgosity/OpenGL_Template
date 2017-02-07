@@ -1,10 +1,10 @@
 #include "RawModel.h"
 
 
-RawModel::RawModel(int vertCount, int vaoID)
+RawModel::RawModel(int vaoID, int vertCount )
 {
-	m_iVertexCount = vertCount;
 	m_iVaoID = vaoID;
+	m_iVertexCount = vertCount;
 }
 
 

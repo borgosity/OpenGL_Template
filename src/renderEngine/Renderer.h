@@ -8,7 +8,7 @@ public:
 	Renderer();
 	~Renderer();
 
-	void prepare(int red, int green, int blue);
+	void prepare(GLfloat red, GLfloat green, GLfloat blue);
 	void render(RawModel * model, GLuint shaderProgram);
 };
 

@@ -1,16 +1,18 @@
 #pragma once
+#include <glew.h>
+
 class RawModel
 {
 public:
 	RawModel(int vaoID, int vertextCount);
 	~RawModel();
 
-	int vaoID() { return m_iVaoID; };
-	int vertexCount() { return m_iVertexCount; };
+	GLuint vaoID() { return m_iVaoID; };
+	GLuint vertexCount() { return m_iVertexCount; };
 
 private:
-	int m_iVaoID;
-	int m_iVertexCount;
+	GLuint m_iVaoID;
+	GLuint m_iVertexCount;
 
 };
 

@@ -15,8 +15,30 @@ RawModel * Loader::loadToVAO(GLfloat positions[], int size)
 {
 	createVAO();
 	storeDataInAttributeList(0, positions, size);
-	unbindVAO();
 	return new RawModel(m_iVAO, size/3);
+}
+
+void Loader::createVAO()
+{
+	glGenVertexArrays(1, &m_iVAO);
+	glGenBuffers(1, &m_iVBO);
+	// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
+	glBindVertexArray(m_iVAO);
+}
+
+void Loader::storeDataInAttributeList(int attributeNumber, GLfloat data[], int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << "vertex position - " << i << " = " << data[i] << std::endl;
+	}
+	
+	glBindBuffer(GL_ARRAY_BUFFER, m_iVBO);
+	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+	glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 }
 
 void Loader::cleanUp()
@@ -26,23 +48,3 @@ void Loader::cleanUp()
 	glDeleteBuffers(1, &m_iVBO);
 }
 
-void Loader::createVAO()
-{
-	glGenVertexArrays(1, &m_iVAO);
-	glBindVertexArray(m_iVAO);
-}
-
-void Loader::storeDataInAttributeList(int attributeNumber, GLfloat data[], int size)
-{
-	glGenBuffers(1, &m_iVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, m_iVBO);
-	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
-	glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
-
-void Loader::unbindVAO()
-{
-	glBindVertexArray(0);
-}

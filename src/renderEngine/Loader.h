@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <glew.h>
 #include <vector>
 
@@ -16,7 +17,6 @@ public:
 private:
 	void createVAO();
 	void storeDataInAttributeList(int attributeNumber, GLfloat data[], int size);
-	void unbindVAO();
 	GLuint m_iVBO, m_iVAO;
 
 };
