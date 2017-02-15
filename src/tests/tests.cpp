@@ -2,6 +2,10 @@
 #include "Loader.h"
 #include "Renderer.h"
 #include "Shaderer.h"
+//#include "ShaderProgram.h"
+#include "StaticShader.h"
+
+
 
 
 void helloWorld()
@@ -144,13 +148,12 @@ void renderEngineTest()
 	DisplayManager * display = new DisplayManager();
 	display->createDisplay();
 
-	// initialise loader
+	// initialise loader and renderer
 	Loader * loader = new Loader();
 	Renderer * renderer = new Renderer();
-
-	// Build and compile our shader program
-	Shaderer * shader = new Shaderer();
-	GLuint shaderProgram = shader->buildShader();
+	// initialise shader program
+	StaticShader * staticShader = new StaticShader();
+	
 
 	// initialise vertices for triangle
 	// Set up vertex data (and buffer(s)) and attribute pointers
@@ -160,7 +163,7 @@ void renderEngineTest()
 		0.0f,  0.5f, 0.0f  // Top   
 	};
 
-	RawModel * model = loader->loadToVAO(vertices, 9);
+	RawModel * model = loader->loadToVAO(vertices, sizeof(vertices));
 
 	// draw loop
 	while (!glfwWindowShouldClose(display->window()))
@@ -169,13 +172,12 @@ void renderEngineTest()
 		glfwPollEvents();
 
 		// game logic
+
 		// render
 		renderer->prepare(0.2f, 0.3f, 0.3f);
-		//renderer->render(model, shaderProgram);
 
 		// Draw our first triangle
-		glUseProgram(shaderProgram);
-		std::cout << "VAO ID - " << model->vaoID() << std::endl;
+		staticShader->start();
 		glBindVertexArray(model->vaoID());
 		glDrawArrays(GL_TRIANGLES, 0, model->vertexCount());
 		glBindVertexArray(0);
@@ -185,7 +187,8 @@ void renderEngineTest()
 		glfwSetKeyCallback(display->window(), key_callback);
 
 	}
-	// VAO VBO clean up
+	//clean up
+	staticShader->cleanUp();
 	loader->cleanUp();
 	// Terminate GLFW
 	glfwTerminate();

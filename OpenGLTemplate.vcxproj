@@ -106,7 +106,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\renderEngine\;$(SolutionDir)src\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\shaders;$(SolutionDir)src\renderEngine\;$(SolutionDir)src\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -177,7 +177,9 @@
     <ClCompile Include="src\renderEngine\Loader.cpp" />
     <ClCompile Include="src\renderEngine\RawModel.cpp" />
     <ClCompile Include="src\renderEngine\Renderer.cpp" />
-    <ClCompile Include="src\renderEngine\Shaderer.cpp" />
+    <ClCompile Include="src\shaders\Shaderer.cpp" />
+    <ClCompile Include="src\shaders\ShaderProgram.cpp" />
+    <ClCompile Include="src\shaders\StaticShader.cpp" />
     <ClCompile Include="src\tests\tests.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,8 +187,14 @@
     <ClInclude Include="src\renderEngine\Loader.h" />
     <ClInclude Include="src\renderEngine\RawModel.h" />
     <ClInclude Include="src\renderEngine\Renderer.h" />
-    <ClInclude Include="src\renderEngine\Shaderer.h" />
+    <ClInclude Include="src\shaders\Shaderer.h" />
+    <ClInclude Include="src\shaders\ShaderProgram.h" />
+    <ClInclude Include="src\shaders\StaticShader.h" />
     <ClInclude Include="src\tests\tests.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\shaders\fragmentShader.txt" />
+    <Text Include="src\shaders\vertexShader.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

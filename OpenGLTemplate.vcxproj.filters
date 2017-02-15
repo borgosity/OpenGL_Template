@@ -19,6 +19,9 @@
     <Filter Include="Source Files\tests">
       <UniqueIdentifier>{461d30e9-814f-40ac-881f-1d664d937f64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\shaders">
+      <UniqueIdentifier>{79cd287e-8b0b-40cc-9804-0b1a5fcfb3ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -39,8 +42,14 @@
     <ClCompile Include="src\tests\tests.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderEngine\Shaderer.cpp">
-      <Filter>Source Files\renderEngine</Filter>
+    <ClCompile Include="src\shaders\Shaderer.cpp">
+      <Filter>Source Files\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shaders\ShaderProgram.cpp">
+      <Filter>Source Files\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shaders\StaticShader.cpp">
+      <Filter>Source Files\shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,8 +68,22 @@
     <ClInclude Include="src\tests\tests.h">
       <Filter>Source Files\tests</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderEngine\Shaderer.h">
-      <Filter>Source Files\renderEngine</Filter>
+    <ClInclude Include="src\shaders\Shaderer.h">
+      <Filter>Source Files\shaders</Filter>
     </ClInclude>
+    <ClInclude Include="src\shaders\ShaderProgram.h">
+      <Filter>Source Files\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shaders\StaticShader.h">
+      <Filter>Source Files\shaders</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\shaders\fragmentShader.txt">
+      <Filter>Source Files\shaders</Filter>
+    </Text>
+    <Text Include="src\shaders\vertexShader.txt">
+      <Filter>Source Files\shaders</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -4,13 +4,13 @@
 
 DisplayManager::DisplayManager()
 {
-	std::cout << "New Display Manager" << std::endl;
+
 }
 
 
 DisplayManager::~DisplayManager()
 {
-	std::cout << "Destroy Display Manager" << std::endl;
+
 }
 
 void DisplayManager::createDisplay()
