@@ -1,9 +1,12 @@
 #include "StaticShader.h"
+#include "ShaderFileList.h"
 
 
 
-StaticShader::StaticShader()
+StaticShader::StaticShader() : ShaderProgram(STATIC_VERTEX_FILE, STATIC_FRAGMENT_FILE)
 {
+	std::cout << "Derived Class" << std::endl;
+
 	bindAttributes();
 }
 

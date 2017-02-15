@@ -5,7 +5,7 @@
 class ShaderProgram
 {
 public:
-	ShaderProgram();
+	ShaderProgram(const GLchar * a_vertexShaderPath, const GLchar * a_fragmentShaderPath);
 	virtual ~ShaderProgram();
 
 	void start();
@@ -24,11 +24,13 @@ private:
 	GLchar m_iInfoLog[512];
 
 	// Shaders
+	std::string m_spShaderSourceTemp;
 	const GLchar * m_cpVertexShaderSource;
 	const GLchar * m_cpFragmentShaderSource;
 
 	// private functions
-	GLuint loadShader(const GLchar * a_shaderFile, GLuint a_shaderType);
+	std::string & readFile(const GLchar * a_filePath);
+	GLuint loadShader(const GLchar * a_shaderSource, GLuint a_shaderType);
 	GLuint linkShaders(GLuint a_vertexShader, GLuint a_fragmentShader);
 
 };

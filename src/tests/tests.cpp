@@ -174,7 +174,7 @@ void renderEngineTest()
 		// game logic
 
 		// render
-		renderer->prepare(0.2f, 0.3f, 0.3f);
+		renderer->prepare(0.0f, 0.3f, 0.3f);
 
 		// Draw our first triangle
 		staticShader->start();
