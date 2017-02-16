@@ -5,17 +5,39 @@
 #include <iostream>
 
 
+ShaderProgram::ShaderProgram()
+{
+	m_cpVertexShaderSource = "#version 330 core\n"
+		"layout (location = 0) in vec3 position;\n"
+		"layout (location = 1) in vec3 color;\n"
+		"out vec3 ourColor;\n"
+		"void main()\n"
+		"{\n"
+		"gl_Position = vec4(position, 1.0);\n"
+		"ourColor = color;\n"
+		"}\0";
+	m_cpFragmentShaderSource = "#version 330 core\n"
+		"out vec4 color;\n"
+		"uniform vec4 ourColor;\n"
+		"void main()\n"
+		"{\n"
+		"color = ourColor;\n"
+		"}\n\0";
+
+	m_iSuccess = 0;
+	m_uiVertexShaderID = loadShader(m_cpVertexShaderSource, GL_VERTEX_SHADER);
+	m_uiFragmentShaderID = loadShader(m_cpFragmentShaderSource, GL_FRAGMENT_SHADER);
+	linkShaders(m_uiVertexShaderID, m_uiFragmentShaderID);
+}
 
 ShaderProgram::ShaderProgram(const GLchar * a_vertexShaderPath, const GLchar * a_fragmentShaderPath)
 {
-	m_iSuccess = 0;
 	// Shaders
-	m_cpVertexShaderSource = readFile(a_vertexShaderPath).c_str();
-	m_cpFragmentShaderSource = readFile(a_fragmentShaderPath).c_str();
-
+	readFiles(a_vertexShaderPath, a_fragmentShaderPath);
+	m_iSuccess = 0;
 	m_uiVertexShaderID = loadShader(m_cpVertexShaderSource, GL_VERTEX_SHADER);
 	m_uiFragmentShaderID = loadShader(m_cpFragmentShaderSource, GL_FRAGMENT_SHADER);
-	m_uiProgramID = linkShaders(m_uiVertexShaderID, m_uiFragmentShaderID);
+	linkShaders(m_uiVertexShaderID, m_uiFragmentShaderID);
 	
 }
 
@@ -53,6 +75,12 @@ void ShaderProgram::bindAttribute(GLuint a_attribute, const GLchar * a_variableN
 	glBindAttribLocation(m_uiProgramID, a_attribute, a_variableName);
 }
 
+void ShaderProgram::uniform4f(const GLchar * a_uniformName, glm::vec4 & a_values)
+{
+	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
+	glUniform4f(uniformLocation, a_values.x, a_values.y, a_values.z, a_values.w);
+}
+
 /// pull shader code from file
 std::string & ShaderProgram::readFile(const GLchar * a_filePath)
 {
@@ -74,12 +102,50 @@ std::string & ShaderProgram::readFile(const GLchar * a_filePath)
 		shaderSource = shaderStream.str();
 	}
 	catch(std::ifstream::failure e) {
-		std::cout << "ERROR -> Failure reading shader file" << std::endl;
+		std::cout << "ERROR -> Failure reading shader file: " << std::endl;
 	}
 	// return shader source 
 	m_spShaderSourceTemp = shaderSource;
 
 	return m_spShaderSourceTemp;
+}
+
+void ShaderProgram::readFiles(const GLchar * a_vsFilePath, const GLchar * a_fsFilePath)
+{
+	std::string vsShaderSource;
+	std::ifstream vsShaderFile;
+	std::string fsShaderSource;
+	std::ifstream fsShaderFile;
+	// allow throwing of exceptions
+	vsShaderFile.exceptions(std::ifstream::badbit);
+	fsShaderFile.exceptions(std::ifstream::badbit);
+
+	try {
+		// open file
+		vsShaderFile.open(a_vsFilePath);
+		fsShaderFile.open(a_fsFilePath);
+		std::stringstream vsShaderStream;
+		std::stringstream fsShaderStream;
+		// read file buffer contents into stream
+		vsShaderStream << vsShaderFile.rdbuf();
+		fsShaderStream << fsShaderFile.rdbuf();
+		// close file handler
+		vsShaderFile.close();
+		fsShaderFile.close();
+		// convert stream
+		vsShaderSource = vsShaderStream.str();
+		fsShaderSource = fsShaderStream.str();
+	}
+	catch (std::ifstream::failure e) {
+		std::cout << "ERROR -> Failure reading shader file: " << std::endl;
+	}
+	// return shader source 
+	m_cpVertexShaderSource = new GLchar[vsShaderSource.length() + 1];
+	m_cpFragmentShaderSource = new GLchar[fsShaderSource.length() + 1];
+
+	strcpy((char*)m_cpVertexShaderSource, vsShaderSource.c_str());
+	strcpy((char*)m_cpFragmentShaderSource, fsShaderSource.c_str());
+
 }
 
 /// load shader from file
@@ -101,20 +167,20 @@ GLuint ShaderProgram::loadShader(const GLchar * a_shaderSource, GLuint a_shaderT
 }
 
 /// link shaders to a shader program
-GLuint ShaderProgram::linkShaders(GLuint a_vertexShader, GLuint a_fragmentShader)
+void ShaderProgram::linkShaders(GLuint a_vertexShader, GLuint a_fragmentShader)
 {
 	// Link shaders
-	GLuint programID = glCreateProgram();
-	glAttachShader(programID, a_vertexShader);
-	glAttachShader(programID, a_fragmentShader);
-	glLinkProgram(programID);
+	m_uiProgramID = glCreateProgram();
+	glAttachShader(m_uiProgramID, a_vertexShader);
+	glAttachShader(m_uiProgramID, a_fragmentShader);
+	glLinkProgram(m_uiProgramID);
 	// Check for linking errors
-	glGetProgramiv(programID, GL_LINK_STATUS, &m_iSuccess);
+	glGetProgramiv(m_uiProgramID, GL_LINK_STATUS, &m_iSuccess);
 	if (!m_iSuccess) {
-		glGetProgramInfoLog(programID, 512, NULL, m_iInfoLog);
+		glGetProgramInfoLog(m_uiProgramID, 512, NULL, m_iInfoLog);
 		std::cout << "ERROR -> SHADER PROGRAM LINKING_FAILED\n" << m_iInfoLog << std::endl;
 	}
-	return programID;
+
 }
 
 

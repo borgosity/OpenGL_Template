@@ -51,6 +51,9 @@
     <ClCompile Include="src\shaders\StaticShader.cpp">
       <Filter>Source Files\shaders</Filter>
     </ClCompile>
+    <ClCompile Include="src\shaders\IndexShader.cpp">
+      <Filter>Source Files\shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\renderEngine\DisplayManager.h">
@@ -80,12 +83,21 @@
     <ClInclude Include="src\shaders\ShaderFileList.h">
       <Filter>Source Files\shaders</Filter>
     </ClInclude>
+    <ClInclude Include="src\shaders\IndexShader.h">
+      <Filter>Source Files\shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\shaders\fragmentShader.txt">
       <Filter>Source Files\shaders</Filter>
     </Text>
     <Text Include="src\shaders\vertexShader.txt">
+      <Filter>Source Files\shaders</Filter>
+    </Text>
+    <Text Include="src\shaders\fragmentShader_Rainbow.txt">
+      <Filter>Source Files\shaders</Filter>
+    </Text>
+    <Text Include="src\shaders\vertexShader_Rainbow.txt">
       <Filter>Source Files\shaders</Filter>
     </Text>
   </ItemGroup>

@@ -3,13 +3,12 @@
 
 
 
-class StaticShader :
+class IndexShader :
 	public ShaderProgram
 {
 public:
-	StaticShader();
-	StaticShader(int a_attribNum);
-	virtual ~StaticShader();
+	IndexShader();
+	virtual ~IndexShader();
 
 	virtual void bindAttributes();
 

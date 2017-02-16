@@ -9,7 +9,11 @@
 // tests
 void helloWorld();
 void helloTriangle();
-void renderEngineTest();
+void renderEngineTest();	// using all classes
+void greenTriangleChange(); // static file 
+void gtShaderTest();		// using all classes
+void rainbowTri();
+void multipleShaders();
 
 // miscellaneous functions
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);

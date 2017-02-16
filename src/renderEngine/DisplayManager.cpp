@@ -46,6 +46,8 @@ void DisplayManager::createDisplay()
 
 void DisplayManager::updateDisplay()
 {
+	// swap buffers
+	glfwSwapBuffers(m_window);
 }
 
 void DisplayManager::closeDisplay()

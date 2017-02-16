@@ -15,7 +15,11 @@ int main()
 	
 	//helloWorld(); // run test 01
 	//helloTriangle();
-	renderEngineTest(); // run test 02
+	//renderEngineTest(); // run test 02
+	//greenTriangleChange();
+	//gtShaderTest();
+	//rainbowTri();
+	multipleShaders();
 	return 0;
 }
 
