@@ -1,8 +1,12 @@
 #pragma once
+// std includes
 #include <iostream>
-#include <glew.h>
 #include <vector>
-
+#include <list>
+// gl includes
+#include <glew.h>
+#include <SOIL.h>   // texturing
+// local includes
 #include "RawModel.h"
 
 class Loader
@@ -12,14 +16,24 @@ public:
 	~Loader();
 
 	RawModel * loadToVAO(GLfloat positions[], int size);
+	RawModel * loadToVAO(GLfloat a_positions[], int a_posSize, GLuint a_indicies[], int a_indSize);
 	RawModel * loadToVAO(GLfloat a_positions[], int a_size, int a_attribNum);
+	RawModel * loadTextureVAO(GLfloat a_positions[], int a_size);
+	//GLuint loadTexture(std::string a_fileName, int a_width, int a_height);
 	void cleanUp();
 
 private:
-	void createVAO();
-	void storePositionDataInAttributeList(int attributeNumber, GLfloat data[], int size);
-	void storeColourDataInAttributeList(int attributeNumber, GLfloat data[], int size);
-	GLuint m_iVBO, m_iVAO;
-
+	
+	std::list<GLuint> m_vVAOs;
+	std::list<GLuint> m_vVBOs;
+	std::list<GLuint> m_vTextures; // list of textures
+	
+	// private functions
+	GLuint createVAO();
+	void createVBO(GLfloat data[], int size);
+	void bindIndicesBuffer(GLuint indices[], int size);
+	void storePositionDataInAttributeList(int attributeNumber);
+	void storeColourDataInAttributeList(int attributeNumber);
+	void storeTextureDataInAttributeList(int attributeNumber);
 };
 

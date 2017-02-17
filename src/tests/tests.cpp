@@ -2,12 +2,17 @@
 #include "Loader.h"
 #include "Renderer.h"
 #include "Shaderer.h"
-//#include "ShaderProgram.h"
+// shaders
 #include "StaticShader.h"
+#include "UniformShader.h"
 #include "IndexShader.h"
+// textures
+#include "ModelTexture.h"
+#include "TexturedModel.h"
 
 
 
+bool wireFrame = false;
 
 void helloWorld()
 {
@@ -148,12 +153,13 @@ void renderEngineTest()
 	// initialise display
 	DisplayManager * display = new DisplayManager();
 	display->createDisplay();
+	
+	// initialise shader program
+	StaticShader * staticShader = new StaticShader(0);
 
 	// initialise loader and renderer
 	Loader * loader = new Loader();
 	Renderer * renderer = new Renderer();
-	// initialise shader program
-	StaticShader * staticShader = new StaticShader();
 	
 
 	// initialise vertices for triangle
@@ -164,12 +170,6 @@ void renderEngineTest()
 		-0.5f, -0.5f, 0.0f,  // Bottom Left
 		0.0f,  0.5f, 0.0f    // Top   
 	};
-	//GLfloat vertices[] = {
-	//	// Positions         // Colors
-	//	0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // Bottom Right
-	//	-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // Bottom Left
-	//	0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // Top   
-	//};
 
 	// load model to VAO
 	RawModel * model = loader->loadToVAO(vertices, sizeof(vertices));
@@ -187,15 +187,9 @@ void renderEngineTest()
 
 		// starty using shader
 		staticShader->start();
-
-		// Update the uniform color
-		GLfloat timeValue = glfwGetTime();
-		GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
-		staticShader->uniform4f("ourColor", glm::vec4(0.0f, greenValue, 0.0f, 1.0f));
 		
 		// Draw triangle
 		renderer->render(model);
-		//renderer->render(model, staticShader->spID());
 
 		// stop using shader
 		staticShader->stop();
@@ -213,6 +207,80 @@ void renderEngineTest()
 	// Terminate GLFW
 	glfwTerminate();
 	std::cout << "Finished!!  - 02 \n\n" << std::endl;
+}
+
+void indexBuffer()
+{
+	// initialise display
+	DisplayManager * display = new DisplayManager();
+	display->createDisplay();
+
+	// initialise shader program
+	StaticShader * staticShader = new StaticShader(0);
+
+	// initialise loader and renderer
+	Loader * loader = new Loader();
+	Renderer * renderer = new Renderer();
+
+
+	// initialise vertices for triangle
+	// Set up vertex data (and buffer(s)) and attribute pointers
+	//GLfloat vertices[] = {
+	//	// First triangle
+	//	0.5f,  0.5f, 0.0f,  // Top Right
+	//	0.5f, -0.5f, 0.0f,  // Bottom Right
+	//	-0.5f,  0.5f, 0.0f,  // Top Left 
+	//	// Second triangle
+	//	0.5f, -0.5f, 0.0f,  // Bottom Right
+	//	-0.5f, -0.5f, 0.0f,  // Bottom Left
+	//	-0.5f,  0.5f, 0.0f   // Top Left
+	//};
+	GLfloat vertices[] = {
+		0.5f,  0.5f, 0.0f,  // Top Right
+		0.5f, -0.5f, 0.0f,  // Bottom Right
+		-0.5f, -0.5f, 0.0f,  // Bottom Left
+		-0.5f,  0.5f, 0.0f   // Top Left 
+	};
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3,   // First Triangle
+		1, 2, 3    // Second Triangle
+	};
+
+	// load model to VAO
+	RawModel * model = loader->loadToVAO(vertices, sizeof(vertices), indices, sizeof(indices));
+
+	// draw loop
+	while (!glfwWindowShouldClose(display->window()))
+	{
+		// check and call events
+		glfwPollEvents();
+
+		// game logic
+
+		// render
+		renderer->prepare(0.0f, 0.3f, 0.3f);
+
+		// starty using shader
+		staticShader->start();
+
+		// Draw triangle
+		renderer->renderInd(model);
+
+		// stop using shader
+		staticShader->stop();
+
+		// update display
+		display->updateDisplay();
+
+		// check key presses
+		glfwSetKeyCallback(display->window(), key_callback);
+
+	}
+	//clean up
+	staticShader->cleanUp();
+	loader->cleanUp();
+	// Terminate GLFW
+	glfwTerminate();
 }
 
 void greenTriangleChange()
@@ -364,8 +432,7 @@ void gtShaderTest()
 
 
 	// Build and compile our shader program
-	//StaticShader * shader = new StaticShader();
-	StaticShader * shader = new StaticShader(0);
+	UniformShader * shader = new UniformShader();
 
 	// Set up vertex data (and buffer(s)) and attribute pointers
 	GLfloat vertices[] = {
@@ -392,20 +459,18 @@ void gtShaderTest()
 
 		// Be sure to activate the shader
 		shader->start();
-
 		// Update the uniform color
 		GLfloat timeValue = glfwGetTime();
 		GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
-		//GLint vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
-		GLint vertexColorLocation = glGetUniformLocation(shader->spID(), "ourColor");
-		glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
-
+		shader->uniform4f("ourColor", glm::vec4(0.0f, greenValue, 0.0f, 1.0f));
 		// Draw the triangle
 		renderer->render(model);
 		// stop using shader
 		shader->stop();
 		// Swap the screen buffers
 		display->updateDisplay();
+		// check key presses
+		glfwSetKeyCallback(display->window(), key_callback);
 	}
 	// Properly de-allocate all resources once they've outlived their purpose
 	loader->cleanUp();
@@ -420,12 +485,12 @@ void rainbowTri()
 	// initialise display
 	DisplayManager * display = new DisplayManager();
 	display->createDisplay();
+	// initialise shader program
+	IndexShader * indexShader = new IndexShader();
 
 	// initialise loader and renderer
 	Loader * loader = new Loader();
 	Renderer * renderer = new Renderer();
-	// initialise shader program
-	IndexShader * indexShader = new IndexShader();
 
 
 	// initialise vertices for triangle
@@ -488,7 +553,7 @@ void multipleShaders()
 	Renderer * renderer = new Renderer();
 
 	// initialise shader program
-	StaticShader * staticShader = new StaticShader(0);
+	UniformShader * uniformShader = new UniformShader();
 	IndexShader * indexShader = new IndexShader();
 
 	// Set up vertex data (and buffer(s)) and attribute pointers
@@ -523,14 +588,14 @@ void multipleShaders()
 		renderer->prepare(0.0f, 0.3f, 0.3f);
 
 		// starty using shader
-		staticShader->start();
+		uniformShader->start();
 		GLfloat timeValue = glfwGetTime();
 		GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
-		staticShader->uniform4f("ourColor", glm::vec4(0.0f, greenValue, 0.0f, 1.0f));
+		uniformShader->uniform4f("ourColor", glm::vec4(0.0f, greenValue, 0.0f, 1.0f));
 		// Draw triangle
 		renderer->render(modelA);
 		// stop using shader
-		staticShader->stop();
+		uniformShader->stop();
 
 		// starty using shader
 		indexShader->start();
@@ -554,6 +619,93 @@ void multipleShaders()
 	std::cout << "Finished!!  - 02 \n\n" << std::endl;
 }
 
+void textures()
+{
+	// initialise display
+	DisplayManager * display = new DisplayManager();
+	display->createDisplay();
+
+	// initialise shader program
+	StaticShader * staticShader = new StaticShader(0);
+
+	// initialise loader and renderer
+	Loader * loader = new Loader();
+	Renderer * renderer = new Renderer();
+
+
+	// initialise vertices for triangle
+	GLfloat vertices[] = {
+		// Positions          // Colors           // Texture Coords
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // Top Right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // Bottom Right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // Bottom Left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // Top Left  
+	};
+
+	// load model to VAO
+	RawModel * model = loader->loadToVAO(vertices, sizeof(vertices), 3);
+	ModelTexture * texture = new ModelTexture(loader->loadTexture());
+	TexturedModel * textureModel = new TexturedModel(model, texture);
+
+	// textures
+	GLuint texture;
+	glGenTextures(1, &texture);
+	// bind texture
+	glBindTexture(GL_TEXTURE_2D, texture);
+	// read in texture file
+	int width, height;
+	unsigned char* image = SOIL_load_image("res/textures/container.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+	// generate texture from the image
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	// clear image memory and unbind the texture
+	SOIL_free_image_data(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+
+	// draw loop
+	while (!glfwWindowShouldClose(display->window()))
+	{
+		// check and call events
+		glfwPollEvents();
+
+		// game logic
+
+		// render
+		renderer->prepare(0.0f, 0.3f, 0.3f);
+
+		// starty using shader
+		staticShader->start();
+
+/***********************************************************************************
+
+OpenGL 3D Game Tutorial 6: Texturing
+7m:20s
+
+************************************************************************************/
+
+
+		// Draw triangle
+		renderer->renderTexture(textureModel);
+
+		// stop using shader
+		staticShader->stop();
+
+		// update display
+		display->updateDisplay();
+
+		// check key presses
+		glfwSetKeyCallback(display->window(), key_callback);
+
+	}
+	//clean up
+	staticShader->cleanUp();
+	loader->cleanUp();
+	// Terminate GLFW
+	glfwTerminate();
+
+}
+
 /// key press callback function
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
@@ -563,6 +715,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		glfwSetWindowShouldClose(window, GL_TRUE);
 		std::cout << "Escape Key Pressed" << std::endl;
+	}
+
+	if (key == GLFW_KEY_W && action == GLFW_PRESS)
+	{
+		// toggle wireFrame bool
+		wireFrame = !wireFrame; 
+		// toggle wire frame based on bool state
+		wireFrame ? glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) : glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
 

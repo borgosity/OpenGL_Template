@@ -8,21 +8,17 @@
 ShaderProgram::ShaderProgram()
 {
 	m_cpVertexShaderSource = "#version 330 core\n"
-		"layout (location = 0) in vec3 position;\n"
-		"layout (location = 1) in vec3 color;\n"
-		"out vec3 ourColor;\n"
-		"void main()\n"
-		"{\n"
-		"gl_Position = vec4(position, 1.0);\n"
-		"ourColor = color;\n"
-		"}\0";
+    "layout (location = 0) in vec3 position;\n"
+    "void main()\n"
+    "{\n"
+    "gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
+	"}\0";
 	m_cpFragmentShaderSource = "#version 330 core\n"
-		"out vec4 color;\n"
-		"uniform vec4 ourColor;\n"
-		"void main()\n"
-		"{\n"
-		"color = ourColor;\n"
-		"}\n\0";
+    "out vec4 color;\n"
+    "void main()\n"
+    "{\n"
+    "color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+	"}\n\0";
 
 	m_iSuccess = 0;
 	m_uiVertexShaderID = loadShader(m_cpVertexShaderSource, GL_VERTEX_SHADER);
@@ -75,11 +71,7 @@ void ShaderProgram::bindAttribute(GLuint a_attribute, const GLchar * a_variableN
 	glBindAttribLocation(m_uiProgramID, a_attribute, a_variableName);
 }
 
-void ShaderProgram::uniform4f(const GLchar * a_uniformName, glm::vec4 & a_values)
-{
-	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
-	glUniform4f(uniformLocation, a_values.x, a_values.y, a_values.z, a_values.w);
-}
+
 
 /// pull shader code from file
 std::string & ShaderProgram::readFile(const GLchar * a_filePath)

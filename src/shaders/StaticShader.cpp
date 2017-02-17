@@ -1,8 +1,8 @@
 #include "StaticShader.h"
 
 // Static Shader files
-const GLchar * STATIC_VERTEX_FILE = "src/shaders/vertexShader.txt";
-const GLchar * STATIC_FRAGMENT_FILE = "src/shaders/fragmentShader.txt";
+const GLchar * STATIC_VERTEX_FILE = "src/shaders/staticShader.vs";
+const GLchar * STATIC_FRAGMENT_FILE = "src/shaders/staticShader.fs";
 
 
 StaticShader::StaticShader()

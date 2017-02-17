@@ -106,13 +106,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\shaders;$(SolutionDir)src\renderEngine\;$(SolutionDir)src\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\textures;$(SolutionDir)src\models;$(SolutionDir)src\shaders;$(SolutionDir)src\renderEngine\;$(SolutionDir)src\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\soil\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\glm\;$(SolutionDir)lib\glew\x86\;$(SolutionDir)lib\glfw\x86\;$(SolutionDir)lib\sdl2\x86\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;SOIL.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\glm\;$(SolutionDir)lib\glew\x86\;$(SolutionDir)lib\glfw\x86\;$(SolutionDir)lib\soil\x86\;$(SolutionDir)lib\sdl2\x86\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -173,33 +173,43 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\models\RawModel.cpp" />
+    <ClCompile Include="src\models\TexturedModel.cpp" />
     <ClCompile Include="src\renderEngine\DisplayManager.cpp" />
     <ClCompile Include="src\renderEngine\Loader.cpp" />
-    <ClCompile Include="src\renderEngine\RawModel.cpp" />
     <ClCompile Include="src\renderEngine\Renderer.cpp" />
     <ClCompile Include="src\shaders\IndexShader.cpp" />
     <ClCompile Include="src\shaders\Shaderer.cpp" />
     <ClCompile Include="src\shaders\ShaderProgram.cpp" />
     <ClCompile Include="src\shaders\StaticShader.cpp" />
+    <ClCompile Include="src\shaders\UniformShader.cpp" />
     <ClCompile Include="src\tests\tests.cpp" />
+    <ClCompile Include="src\textures\ModelTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\models\RawModel.h" />
+    <ClInclude Include="src\models\TexturedModel.h" />
     <ClInclude Include="src\renderEngine\DisplayManager.h" />
     <ClInclude Include="src\renderEngine\Loader.h" />
-    <ClInclude Include="src\renderEngine\RawModel.h" />
     <ClInclude Include="src\renderEngine\Renderer.h" />
     <ClInclude Include="src\shaders\IndexShader.h" />
     <ClInclude Include="src\shaders\Shaderer.h" />
     <ClInclude Include="src\shaders\ShaderFileList.h" />
     <ClInclude Include="src\shaders\ShaderProgram.h" />
     <ClInclude Include="src\shaders\StaticShader.h" />
+    <ClInclude Include="src\shaders\UniformShader.h" />
     <ClInclude Include="src\tests\tests.h" />
+    <ClInclude Include="src\textures\ModelTexture.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="src\shaders\fragmentShader.txt" />
-    <Text Include="src\shaders\fragmentShader_Rainbow.txt" />
-    <Text Include="src\shaders\vertexShader.txt" />
-    <Text Include="src\shaders\vertexShader_Rainbow.txt" />
+    <None Include="src\shaders\indexShader.fs" />
+    <None Include="src\shaders\indexShader.vs" />
+    <None Include="src\shaders\staticShader.fs" />
+    <None Include="src\shaders\staticShader.vs" />
+    <None Include="src\shaders\textureShader.fs" />
+    <None Include="src\shaders\textureShader.vs" />
+    <None Include="src\shaders\uniformShader.fs" />
+    <None Include="src\shaders\uniformShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

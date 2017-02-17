@@ -13,13 +13,15 @@
 int main()
 {
 	
-	//helloWorld(); // run test 01
+	//helloWorld(); 
 	//helloTriangle();
-	//renderEngineTest(); // run test 02
+	//renderEngineTest(); 
+	//indexBuffer();
 	//greenTriangleChange();
 	//gtShaderTest();
 	//rainbowTri();
-	multipleShaders();
+	//multipleShaders();
+	textures();
 	return 0;
 }
 

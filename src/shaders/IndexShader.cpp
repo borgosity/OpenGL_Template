@@ -1,8 +1,8 @@
 #include "IndexShader.h"
 
 // Rainbow Shader files
-const GLchar * INDEX_VERTEX_FILE = "src/shaders/vertexShader_Rainbow.txt";
-const GLchar * INDEX_FRAGMENT_FILE = "src/shaders/fragmentShader_Rainbow.txt";
+const GLchar * INDEX_VERTEX_FILE = "src/shaders/indexShader.vs";
+const GLchar * INDEX_FRAGMENT_FILE = "src/shaders/indexShader.fs";
 
 
 IndexShader::IndexShader() : ShaderProgram(INDEX_VERTEX_FILE, INDEX_FRAGMENT_FILE)

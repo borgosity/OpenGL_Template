@@ -18,10 +18,11 @@ public:
 	// this function must be implemented by the derived class
 	virtual void bindAttributes() = 0;
 	void bindAttribute(GLuint a_attribute, const GLchar * a_variableName);
-	void uniform4f(const GLchar* a_uniformName, glm::vec4 & a_values);
+	
+protected:
+	GLuint m_uiProgramID;
 
 private:
-	GLuint m_uiProgramID;
 	GLuint m_uiVertexShaderID;
 	GLuint m_uiFragmentShaderID;
 	GLint m_iSuccess;
