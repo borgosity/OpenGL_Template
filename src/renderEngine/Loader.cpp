@@ -41,20 +41,40 @@ RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_size, int a_attribNum)
 	
 	return new RawModel(vaoID, a_size / (3 * a_attribNum));
 }
-RawModel * Loader::loadTextureVAO(GLfloat a_positions[], int a_size)
+RawModel * Loader::loadTextureVAO(GLfloat a_positions[], int a_size, GLuint a_indicies[], int a_indSize)
 {
 	GLuint vaoID = createVAO();
 	createVBO(a_positions, a_size);
+	bindIndicesBuffer(a_indicies, a_indSize);	// bind indicies
 	storeTextureDataInAttributeList(0);
 
 	return new RawModel(vaoID, 6);
 }
-//GLuint Loader::loadTexture(std::string a_fileName, int a_width, int a_height)
-//{
-//	unsigned char* image = SOIL_load_image(a_fileName.c_str(), &a_width, &a_height, 0, SOIL_LOAD_RGB);
-//
-//	return result;
-//}
+GLuint Loader::loadTexture(std::string a_fileName, int a_width, int a_height)
+{
+
+	GLuint textureID = 0;
+	glGenTextures(1, &textureID);
+	// bind texture
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	// All upcoming GL_TEXTURE_2D operations now have effect on this texture object
+	// Set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// Set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// read in the texture file
+	unsigned char* image = SOIL_load_image(a_fileName.c_str(), &a_width, &a_height, 0, SOIL_LOAD_RGB);
+	// generate texture from the image
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, a_width, a_height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	// clear image memory and unbind the texture
+	SOIL_free_image_data(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	
+	return textureID;
+}
 
 GLuint Loader::createVAO()
 {

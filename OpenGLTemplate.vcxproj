@@ -182,6 +182,7 @@
     <ClCompile Include="src\shaders\Shaderer.cpp" />
     <ClCompile Include="src\shaders\ShaderProgram.cpp" />
     <ClCompile Include="src\shaders\StaticShader.cpp" />
+    <ClCompile Include="src\shaders\TextureShader.cpp" />
     <ClCompile Include="src\shaders\UniformShader.cpp" />
     <ClCompile Include="src\tests\tests.cpp" />
     <ClCompile Include="src\textures\ModelTexture.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="src\shaders\ShaderFileList.h" />
     <ClInclude Include="src\shaders\ShaderProgram.h" />
     <ClInclude Include="src\shaders\StaticShader.h" />
+    <ClInclude Include="src\shaders\TextureShader.h" />
     <ClInclude Include="src\shaders\UniformShader.h" />
     <ClInclude Include="src\tests\tests.h" />
     <ClInclude Include="src\textures\ModelTexture.h" />

@@ -48,8 +48,9 @@ void Renderer::renderInd(RawModel * model)
 
 void Renderer::renderTexture(TexturedModel * a_texturedModel)
 {
-	RawModel model = a_texturedModel->rawModel();
-	glBindVertexArray(model.vaoID());
-	glDrawElements(GL_TRIANGLES, model.vertexCount(), GL_UNSIGNED_INT, 0);
+	// Bind Texture
+	glBindTexture(GL_TEXTURE_2D, a_texturedModel->rawModel().vaoID());
+	glBindVertexArray(a_texturedModel->rawModel().vaoID());
+	glDrawElements(GL_TRIANGLES, a_texturedModel->rawModel().vertexCount(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }

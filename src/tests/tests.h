@@ -16,6 +16,7 @@ void gtShaderTest();		// using all classes
 void rainbowTri();
 void multipleShaders();
 void textures();
+void texturesTute();
 
 // miscellaneous functions
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);

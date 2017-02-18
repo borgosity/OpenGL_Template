@@ -72,6 +72,9 @@
     <ClCompile Include="src\textures\ModelTexture.cpp">
       <Filter>Source Files\textures</Filter>
     </ClCompile>
+    <ClCompile Include="src\shaders\TextureShader.cpp">
+      <Filter>Source Files\shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="src\textures\ModelTexture.h">
       <Filter>Source Files\textures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shaders\TextureShader.h">
+      <Filter>Source Files\shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

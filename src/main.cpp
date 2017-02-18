@@ -22,6 +22,7 @@ int main()
 	//rainbowTri();
 	//multipleShaders();
 	textures();
+	//texturesTute();
 	return 0;
 }
 
