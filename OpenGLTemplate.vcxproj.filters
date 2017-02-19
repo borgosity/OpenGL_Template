@@ -63,8 +63,11 @@
     <ClCompile Include="src\textures\ModelTexture.cpp">
       <Filter>Source Files\textures</Filter>
     </ClCompile>
-    <ClCompile Include="Shaders.cpp">
+    <ClCompile Include="src\shaders\Shaders.cpp">
       <Filter>Source Files\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\textures\Texture.cpp">
+      <Filter>Source Files\textures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="src\shaders\Shaders.h">
       <Filter>Source Files\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\textures\Texture.h">
+      <Filter>Source Files\textures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

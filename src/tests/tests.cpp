@@ -8,6 +8,7 @@
 // textures
 #include "ModelTexture.h"
 #include "TexturedModel.h"
+#include "Texture.h"
 
 
 
@@ -996,13 +997,15 @@ void dualTextTute()
 	TexturedModel * texturedModel = new TexturedModel(*model, *modelTexture);
 
 
-						  // Load and create a texture 
+	 // Load and create a texture 
+	Texture * textureFile = new Texture("res/textures/container.jpg");
 	GLuint texture1;
 	GLuint texture2;
 	// ====================
 	// Texture 1
 	// ====================
-	texture1 = loader->loadTexture("res/textures/container.jpg", 512, 512);
+	//texture1 = loader->loadTexture("res/textures/container.jpg", 512, 512);
+	texture1 = textureFile->ID();
 
 									 
 	// ===================
