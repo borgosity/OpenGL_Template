@@ -172,18 +172,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\models\RawModel.cpp" />
     <ClCompile Include="src\models\TexturedModel.cpp" />
     <ClCompile Include="src\renderEngine\DisplayManager.cpp" />
     <ClCompile Include="src\renderEngine\Loader.cpp" />
     <ClCompile Include="src\renderEngine\Renderer.cpp" />
-    <ClCompile Include="src\shaders\IndexShader.cpp" />
     <ClCompile Include="src\shaders\Shaderer.cpp" />
     <ClCompile Include="src\shaders\ShaderProgram.cpp" />
-    <ClCompile Include="src\shaders\StaticShader.cpp" />
-    <ClCompile Include="src\shaders\TextureShader.cpp" />
-    <ClCompile Include="src\shaders\UniformShader.cpp" />
     <ClCompile Include="src\tests\tests.cpp" />
     <ClCompile Include="src\textures\ModelTexture.cpp" />
   </ItemGroup>
@@ -193,17 +190,15 @@
     <ClInclude Include="src\renderEngine\DisplayManager.h" />
     <ClInclude Include="src\renderEngine\Loader.h" />
     <ClInclude Include="src\renderEngine\Renderer.h" />
-    <ClInclude Include="src\shaders\IndexShader.h" />
     <ClInclude Include="src\shaders\Shaderer.h" />
-    <ClInclude Include="src\shaders\ShaderFileList.h" />
+    <ClInclude Include="src\shaders\Shaders.h" />
     <ClInclude Include="src\shaders\ShaderProgram.h" />
-    <ClInclude Include="src\shaders\StaticShader.h" />
-    <ClInclude Include="src\shaders\TextureShader.h" />
-    <ClInclude Include="src\shaders\UniformShader.h" />
     <ClInclude Include="src\tests\tests.h" />
     <ClInclude Include="src\textures\ModelTexture.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\shaders\dualTextureShader.fs" />
+    <None Include="src\shaders\dualTextureShader.vs" />
     <None Include="src\shaders\indexShader.fs" />
     <None Include="src\shaders\indexShader.vs" />
     <None Include="src\shaders\staticShader.fs" />

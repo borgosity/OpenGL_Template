@@ -1,0 +1,7 @@
+#include "Shaders.h"
+
+ ShaderPath Shader::staticShader = { "src/shaders/staticShader.vs", "src/shaders/staticShader.fs" };
+ ShaderPath Shader::indexShader = { "src/shaders/indexShader.vs", "src/shaders/indexShader.fs" };
+ ShaderPath Shader::textureShader = { "src/shaders/textureShader.vs", "src/shaders/textureShader.fs" };
+ ShaderPath Shader::dualTextureShader = { "src/shaders/dualTextureShader.vs", "src/shaders/dualTextureShader.fs" };
+ ShaderPath Shader::uniformShader = { "src/shaders/uniformShader.vs", "src/shaders/uniformShader.fs" };

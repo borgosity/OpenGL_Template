@@ -26,17 +26,15 @@ ShaderProgram::ShaderProgram()
 	linkShaders(m_uiVertexShaderID, m_uiFragmentShaderID);
 }
 
-ShaderProgram::ShaderProgram(const GLchar * a_vertexShaderPath, const GLchar * a_fragmentShaderPath)
+ShaderProgram::ShaderProgram(ShaderPath a_shaderPath)
 {
 	// Shaders
-	readFiles(a_vertexShaderPath, a_fragmentShaderPath);
+	readFiles(a_shaderPath.vertexShader, a_shaderPath.fragmentShader);
 	m_iSuccess = 0;
 	m_uiVertexShaderID = loadShader(m_cpVertexShaderSource, GL_VERTEX_SHADER);
 	m_uiFragmentShaderID = loadShader(m_cpFragmentShaderSource, GL_FRAGMENT_SHADER);
 	linkShaders(m_uiVertexShaderID, m_uiFragmentShaderID);
-	
 }
-
 
 ShaderProgram::~ShaderProgram()
 {
@@ -66,11 +64,30 @@ void ShaderProgram::cleanUp()
 }
 
 /// bind attribute to shader program
-void ShaderProgram::bindAttribute(GLuint a_attribute, const GLchar * a_variableName)
+/*
+	the below was commented out in favour of attribute binding in shader files
+*/
+//void ShaderProgram::bindAttribute(GLuint a_attribute, const GLchar * a_variableName)
+//{
+//	glBindAttribLocation(m_uiProgramID, a_attribute, a_variableName);
+//}
+void ShaderProgram::uniform4f(const GLchar * a_uniformName, glm::vec4 & a_values)
 {
-	glBindAttribLocation(m_uiProgramID, a_attribute, a_variableName);
+	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
+	glUniform4f(uniformLocation, a_values.x, a_values.y, a_values.z, a_values.w);
 }
 
+void ShaderProgram::uniform3f(const GLchar * a_uniformName, glm::vec3 & a_values)
+{
+	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
+	glUniform3f(uniformLocation, a_values.x, a_values.y, a_values.z);
+}
+
+void ShaderProgram::uniform2f(const GLchar * a_uniformName, glm::vec2 & a_values)
+{
+	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
+	glUniform2f(uniformLocation, a_values.x, a_values.y);
+}
 
 
 /// pull shader code from file

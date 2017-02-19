@@ -21,8 +21,11 @@ int main()
 	//gtShaderTest();
 	//rainbowTri();
 	//multipleShaders();
-	textures();
+	//textures();
 	//texturesTute();
+	// texturesSplitData(); //## not working
+	dualTextures();
+	dualTextTute();
 	return 0;
 }
 

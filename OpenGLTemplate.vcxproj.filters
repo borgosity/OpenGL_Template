@@ -54,15 +54,6 @@
     <ClCompile Include="src\shaders\ShaderProgram.cpp">
       <Filter>Source Files\shaders</Filter>
     </ClCompile>
-    <ClCompile Include="src\shaders\StaticShader.cpp">
-      <Filter>Source Files\shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\IndexShader.cpp">
-      <Filter>Source Files\shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\UniformShader.cpp">
-      <Filter>Source Files\shaders</Filter>
-    </ClCompile>
     <ClCompile Include="src\models\RawModel.cpp">
       <Filter>Source Files\models</Filter>
     </ClCompile>
@@ -72,7 +63,7 @@
     <ClCompile Include="src\textures\ModelTexture.cpp">
       <Filter>Source Files\textures</Filter>
     </ClCompile>
-    <ClCompile Include="src\shaders\TextureShader.cpp">
+    <ClCompile Include="Shaders.cpp">
       <Filter>Source Files\shaders</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,18 +75,6 @@
       <Filter>Source Files\shaders</Filter>
     </ClInclude>
     <ClInclude Include="src\shaders\ShaderProgram.h">
-      <Filter>Source Files\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\StaticShader.h">
-      <Filter>Source Files\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\ShaderFileList.h">
-      <Filter>Source Files\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\IndexShader.h">
-      <Filter>Source Files\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\UniformShader.h">
       <Filter>Source Files\shaders</Filter>
     </ClInclude>
     <ClInclude Include="src\renderEngine\Renderer.h">
@@ -116,7 +95,7 @@
     <ClInclude Include="src\textures\ModelTexture.h">
       <Filter>Source Files\textures</Filter>
     </ClInclude>
-    <ClInclude Include="src\shaders\TextureShader.h">
+    <ClInclude Include="src\shaders\Shaders.h">
       <Filter>Source Files\shaders</Filter>
     </ClInclude>
   </ItemGroup>
@@ -143,6 +122,12 @@
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
     <None Include="src\shaders\textureShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\dualTextureShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\dualTextureShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
   </ItemGroup>

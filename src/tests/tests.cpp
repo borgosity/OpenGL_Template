@@ -3,10 +3,8 @@
 #include "Renderer.h"
 #include "Shaderer.h"
 // shaders
-#include "StaticShader.h"
-#include "UniformShader.h"
-#include "IndexShader.h"
-#include "TextureShader.h"
+#include "ShaderProgram.h"
+#include "Shaders.h"
 // textures
 #include "ModelTexture.h"
 #include "TexturedModel.h"
@@ -62,6 +60,7 @@ void helloWorld()
 
 void helloTriangle()
 {
+	std::cout << "\n### --> Starting helloTriangle" << std::endl;
 	//// Init GLFW
 	//glfwInit();
 	//// Set all the required options for GLFW
@@ -149,14 +148,14 @@ void helloTriangle()
 
 void renderEngineTest()
 {
-	std::cout << "Starting OpenGL Test - 02" << std::endl;
+	std::cout << "\n### --> Starting renderEngineTest" << std::endl;
 
 	// initialise display
 	DisplayManager * display = new DisplayManager();
 	display->createDisplay();
 	
 	// initialise shader program
-	StaticShader * staticShader = new StaticShader(0);
+	ShaderProgram * staticShader = new ShaderProgram(Shader::staticShader);
 
 	// initialise loader and renderer
 	Loader * loader = new Loader();
@@ -212,12 +211,13 @@ void renderEngineTest()
 
 void indexBuffer()
 {
+	std::cout << "\n### --> Starting indexBuffer" << std::endl;
 	// initialise display
 	DisplayManager * display = new DisplayManager();
 	display->createDisplay();
 
 	// initialise shader program
-	StaticShader * staticShader = new StaticShader(0);
+	ShaderProgram * staticShader = new ShaderProgram(Shader::indexShader);
 
 	// initialise loader and renderer
 	Loader * loader = new Loader();
@@ -286,6 +286,8 @@ void indexBuffer()
 
 void greenTriangleChange()
 {
+	std::cout << "\n### --> Starting greenTriangleTute" << std::endl;
+
 	const GLchar* vertexShaderSource = "#version 330 core\n"
 		"layout (location = 0) in vec3 position;\n"
 		"layout (location = 1) in vec3 color;\n"
@@ -427,13 +429,14 @@ void greenTriangleChange()
 
 void gtShaderTest()
 {
+	std::cout << "\n### --> Starting gtShaderTest" << std::endl;
 	// create display
 	DisplayManager * display = new DisplayManager();
 	display->createDisplay();
 
 
 	// Build and compile our shader program
-	UniformShader * shader = new UniformShader();
+	ShaderProgram * shader = new ShaderProgram(Shader::uniformShader);
 
 	// Set up vertex data (and buffer(s)) and attribute pointers
 	GLfloat vertices[] = {
@@ -481,13 +484,13 @@ void gtShaderTest()
 
 void rainbowTri()
 {
-	std::cout << "Starting Rainbow Triangle Test" << std::endl;
+	std::cout << "\n### --> Starting Rainbow Triangle" << std::endl;
 
 	// initialise display
 	DisplayManager * display = new DisplayManager();
 	display->createDisplay();
 	// initialise shader program
-	IndexShader * indexShader = new IndexShader();
+	ShaderProgram * indexShader = new ShaderProgram(Shader::indexShader);
 
 	// initialise loader and renderer
 	Loader * loader = new Loader();
@@ -543,7 +546,7 @@ void rainbowTri()
 
 void multipleShaders()
 {
-	std::cout << "Starting Rainbow Triangle Test" << std::endl;
+	std::cout << "\n### --> Starting multiple shaders test" << std::endl;
 
 	// initialise display
 	DisplayManager * display = new DisplayManager();
@@ -554,8 +557,8 @@ void multipleShaders()
 	Renderer * renderer = new Renderer();
 
 	// initialise shader program
-	UniformShader * uniformShader = new UniformShader();
-	IndexShader * indexShader = new IndexShader();
+	ShaderProgram * uniformShader = new ShaderProgram(Shader::uniformShader);
+	ShaderProgram * indexShader = new ShaderProgram(Shader::indexShader);
 
 	// Set up vertex data (and buffer(s)) and attribute pointers
 	GLfloat verticesA[] = {
@@ -622,12 +625,13 @@ void multipleShaders()
 
 void textures()
 {
+	std::cout << "\n### --> Starting Textures" << std::endl;
 	// initialise display
 	DisplayManager * display = new DisplayManager();
 	display->createDisplay();
 
 	// initialise shader program
-	TextureShader * textureShader = new TextureShader();
+	ShaderProgram * textureShader = new ShaderProgram(Shader::textureShader);
 
 	// initialise loader and renderer
 	Loader * loader = new Loader();
@@ -637,10 +641,10 @@ void textures()
 	// initialise vertices for triangle
 	GLfloat vertices[] = {
 		// Positions          // Colors           // Texture Coords
-		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // Top Right
-		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // Bottom Right
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   2.0f, 2.0f,   // Top Right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   2.0f, 0.0f,   // Bottom Right
 		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // Bottom Left
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // Top Left  
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 2.0f    // Top Left  
 	};
 	GLuint indices[] = {  // Note that we start from 0!
 		0, 1, 3, // First Triangle
@@ -701,7 +705,7 @@ void texturesTute()
 	display->createDisplay();
 
 	// initialise shader program
-	TextureShader * textureShader = new TextureShader();
+	ShaderProgram * textureShader = new ShaderProgram(Shader::textureShader);
 
 
 	// Set up vertex data (and buffer(s)) and attribute pointers
@@ -797,6 +801,254 @@ void texturesTute()
 	glfwTerminate();
 }
 
+void texturesSplitData()
+{
+	std::cout << "\n### --> Starting Textures Split Data" << std::endl;
+	// initialise display
+	DisplayManager * display = new DisplayManager();
+	display->createDisplay();
+
+	// initialise shader program
+	ShaderProgram * textureShader = new ShaderProgram(Shader::textureShader);
+
+	// initialise loader and renderer
+	Loader * loader = new Loader();
+	Renderer * renderer = new Renderer();
+
+
+	// initialise vertices for triangle
+	GLfloat vertices[] = {
+		// Positions          
+		0.5f,  0.5f, 0.0f,      // Top Right
+		0.5f, -0.5f, 0.0f,      // Bottom Right
+		-0.5f, -0.5f, 0.0f,     // Bottom Left
+		-0.5f,  0.5f, 0.0f      // Top Left  
+	};
+	GLfloat colours[] = {
+		// Colors        
+		1.0f, 0.0f, 0.0f, // Top Right
+		0.0f, 1.0f, 0.0f, // Bottom Right
+		0.0f, 0.0f, 1.0f, // Bottom Left
+		1.0f, 1.0f, 0.0f  // Top Left  
+	};
+	GLfloat textureCord[] = {
+		// Texture Coords
+		2.0f, 2.0f,   // Top Right
+		2.0f, 0.0f,   // Bottom Right
+		0.0f, 0.0f,   // Bottom Left
+		0.0f, 2.0f    // Top Left  
+	};
+
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3, // First Triangle
+		1, 2, 3  // Second Triangle
+	};
+
+	// load model to VAO
+	RawModel * model = loader->loadToVAO(vertices, sizeof(vertices), colours, sizeof(colours), 
+										 textureCord, sizeof(textureCord),indices, sizeof(indices));
+	ModelTexture * texture = new ModelTexture(loader->loadTexture("res/textures/container.jpg", 512, 512));
+	TexturedModel * texturedModel = new TexturedModel(*model, *texture);
+
+
+	// draw loop
+	while (!glfwWindowShouldClose(display->window()))
+	{
+		// check and call events
+		glfwPollEvents();
+
+		// game logic
+
+		// render
+		renderer->prepare(0.0f, 0.3f, 0.3f);
+
+		// starty using shader
+		textureShader->start();
+
+		// Draw triangle
+		renderer->renderTexture(texturedModel);
+
+		// stop using shader
+		textureShader->stop();
+
+		// update display
+		display->updateDisplay();
+
+		// check key presses
+		glfwSetKeyCallback(display->window(), key_callback);
+
+	}
+	//clean up
+	textureShader->cleanUp();
+	loader->cleanUp();
+	// Terminate GLFW
+	glfwTerminate();
+
+}
+
+void dualTextures()
+{
+	std::cout << "\n### --> Starting Textures" << std::endl;
+	// initialise display
+	DisplayManager * display = new DisplayManager();
+	display->createDisplay();
+
+	// initialise shader program
+	ShaderProgram * textureShader = new ShaderProgram(Shader::dualTextureShader);
+
+	// initialise loader and renderer
+	Loader * loader = new Loader();
+	Renderer * renderer = new Renderer();
+
+
+	// initialise vertices for triangle
+	GLfloat vertices[] = {
+		// Positions          // Colors           // Texture Coords
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // Top Right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // Bottom Right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // Bottom Left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // Top Left  
+	};
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3, // First Triangle
+		1, 2, 3  // Second Triangle
+	};
+
+	// load model to VAO
+	RawModel * model = loader->loadTextureVAO(vertices, sizeof(vertices), indices, sizeof(indices));
+	ModelTexture * texture1 = new ModelTexture(loader->loadTexture("res/textures/container.jpg", 512, 512));
+	ModelTexture * texture2 = new ModelTexture(loader->loadTexture("res/textures/awesomeface.png", 512, 512));
+	TexturedModel * texturedModel1 = new TexturedModel(*model, *texture1);
+	TexturedModel * texturedModel2 = new TexturedModel(*model, *texture2);
+
+
+	// draw loop
+	while (!glfwWindowShouldClose(display->window()))
+	{
+		// check and call events
+		glfwPollEvents();
+
+		// game logic
+
+		// render
+		renderer->prepare(0.0f, 0.3f, 0.3f);
+
+		// starty using shader
+		textureShader->start();
+
+		// bind textures
+		glActiveTexture(GL_TEXTURE0);
+		renderer->bindTexture(texturedModel1, textureShader, "ourTexture1", 0);
+		glActiveTexture(GL_TEXTURE1);
+		renderer->bindTexture(texturedModel2, textureShader, "ourTexture2", 1);
+		// Draw 
+		renderer->renderTexture(texturedModel1);
+
+		// stop using shader
+		textureShader->stop();
+
+		// update display
+		display->updateDisplay();
+
+		// check key presses
+		glfwSetKeyCallback(display->window(), key_callback);
+
+	}
+	//clean up
+	textureShader->cleanUp();
+	loader->cleanUp();
+	// Terminate GLFW
+	glfwTerminate();
+
+}
+
+void dualTextTute()
+{
+	std::cout << "\n### --> Starting Textures Tute" << std::endl;
+	// initialise display
+	DisplayManager * display = new DisplayManager();
+	display->createDisplay();
+
+
+	// Build and compile our shader program
+	// initialise shader program
+	ShaderProgram * textureShader = new ShaderProgram(Shader::dualTextureShader);
+
+
+	// Set up vertex data (and buffer(s)) and attribute pointers
+	GLfloat vertices[] = {
+		// Positions          // Colors           // Texture Coords  (Note that we changed them to 'zoom in' on our texture image)
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,  // Top Right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left 
+	};
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3, // First Triangle
+		1, 2, 3  // Second Triangle
+	};
+	// load model to VAO
+	Loader * loader = new Loader();
+	Renderer * renderer = new Renderer();
+	RawModel * model = loader->loadTextureVAO(vertices, sizeof(vertices), indices, sizeof(indices));
+	
+	ModelTexture * modelTexture = new ModelTexture(loader->loadTexture("res/textures/container.jpg", 512, 512));
+	TexturedModel * texturedModel = new TexturedModel(*model, *modelTexture);
+
+
+						  // Load and create a texture 
+	GLuint texture1;
+	GLuint texture2;
+	// ====================
+	// Texture 1
+	// ====================
+	texture1 = loader->loadTexture("res/textures/container.jpg", 512, 512);
+
+									 
+	// ===================
+	// Texture 2
+	// ===================
+	texture2 = loader->loadTexture("res/textures/awesomeface.png", 512, 512);
+
+
+	// Game loop
+	while (!glfwWindowShouldClose(display->window()))
+	{
+		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
+		glfwPollEvents();
+
+		// Render
+		// Clear the colorbuffer
+		renderer->prepare(0.0f, 0.3f, 0.3f);
+
+		// Activate shader
+		textureShader->start();
+
+		// Bind Textures using texture units
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture1);
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2);
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture2"), 1);
+
+		// Draw 
+		renderer->renderTexture(texturedModel);
+
+		// stop using shader
+		textureShader->stop();
+
+		// update display
+		display->updateDisplay();
+
+		// check for key presses
+		glfwSetKeyCallback(display->window(), key_callback);
+	}
+	// Properly de-allocate all resources once they've outlived their purpose
+	loader->cleanUp();
+	// Terminate GLFW, clearing any resources allocated by GLFW.
+	glfwTerminate();
+}
 /// key press callback function
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {

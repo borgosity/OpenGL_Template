@@ -3,26 +3,34 @@
 #include <glew.h>
 #include <glm.hpp>
 
+#include "Shaders.h"
+
 class ShaderProgram
 {
 public:
 	ShaderProgram();
-	ShaderProgram(const GLchar * a_vertexShaderPath, const GLchar * a_fragmentShaderPath);
+	ShaderProgram(ShaderPath a_shaderPath);
 	virtual ~ShaderProgram();
-
+	// shader control
 	void start();
 	void stop();
 	void cleanUp();
+	// uniform functions
+	void uniform4f(const GLchar * a_uniformName, glm::vec4 & a_values);
+	void uniform3f(const GLchar * a_uniformName, glm::vec3 & a_values);
+	void uniform2f(const GLchar * a_uniformName, glm::vec2 & a_values);
+	// variable accessors
 	GLuint spID() { return m_uiProgramID; };
 
+	/*
+		the below was commented out in favour of attribute binding in shader files
+	*/
 	// this function must be implemented by the derived class
-	virtual void bindAttributes() = 0;
-	void bindAttribute(GLuint a_attribute, const GLchar * a_variableName);
+	// virtual void bindAttributes() = 0;
+	// void bindAttribute(GLuint a_attribute, const GLchar * a_variableName);
 	
-protected:
-	GLuint m_uiProgramID;
-
 private:
+	GLuint m_uiProgramID;
 	GLuint m_uiVertexShaderID;
 	GLuint m_uiFragmentShaderID;
 	GLint m_iSuccess;

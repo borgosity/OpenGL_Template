@@ -18,6 +18,10 @@ void multipleShaders();
 void textures();
 void texturesTute();
 
+void texturesSplitData();
+void dualTextures();
+void dualTextTute();
+
 // miscellaneous functions
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void screenColour(GLfloat *red, GLfloat *green, GLfloat *blue, GLboolean *allColour);

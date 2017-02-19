@@ -41,18 +41,30 @@ RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_size, int a_attribNum)
 	
 	return new RawModel(vaoID, a_size / (3 * a_attribNum));
 }
+// refactor attempt
+RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_pSize, GLfloat a_colours[], int a_cSize, 
+							 GLfloat a_textures[], int a_tSize, GLuint a_indicies[], int a_iSize)
+{
+	GLuint vaoID = createVAO();
+	bindIndicesBuffer(a_indicies, a_iSize);	// bind indicies
+	storeTextureDataInAttributeList(0, 3, a_positions, a_pSize);
+	//storeTextureDataInAttributeList(1, 3, a_colours, a_cSize);
+	//storeTextureDataInAttributeList(2, 2, a_textures, a_tSize);
+
+	return new RawModel(vaoID, a_iSize / sizeof(GLuint));
+}
 RawModel * Loader::loadTextureVAO(GLfloat a_positions[], int a_size, GLuint a_indicies[], int a_indSize)
 {
 	GLuint vaoID = createVAO();
-	createVBO(a_positions, a_size);
 	bindIndicesBuffer(a_indicies, a_indSize);	// bind indicies
+	createVBO(a_positions, a_size);
 	storeTextureDataInAttributeList(0);
 
-	return new RawModel(vaoID, 6);
+	return new RawModel(vaoID, a_indSize / sizeof(GLuint));
 }
 GLuint Loader::loadTexture(std::string a_fileName, int a_width, int a_height)
 {
-
+	int width, height;
 	GLuint textureID = 0;
 	glGenTextures(1, &textureID);
 	// bind texture
@@ -62,12 +74,12 @@ GLuint Loader::loadTexture(std::string a_fileName, int a_width, int a_height)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	// Set texture filtering parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	// read in the texture file
-	unsigned char* image = SOIL_load_image(a_fileName.c_str(), &a_width, &a_height, 0, SOIL_LOAD_RGB);
+	unsigned char* image = SOIL_load_image(a_fileName.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
 	// generate texture from the image
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, a_width, a_height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	// clear image memory and unbind the texture
 	SOIL_free_image_data(image);
@@ -145,6 +157,20 @@ void Loader::storeTextureDataInAttributeList(int attributeNumber)
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind current VBO
 	glBindVertexArray(0);			  // unbind current VAO
 }
+// refactor attempt
+void Loader::storeTextureDataInAttributeList(int attributeNumber, int coordinateSize, GLfloat data[], int dataSize)
+{
+	createVBO(data, dataSize);
+	// Position attribute
+	glVertexAttribPointer(attributeNumber, coordinateSize, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(attributeNumber);
+
+	// unbind
+	glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind current VBO
+	glBindVertexArray(0);			  // unbind current VAO
+}
+
+
 
 void Loader::cleanUp()
 {
