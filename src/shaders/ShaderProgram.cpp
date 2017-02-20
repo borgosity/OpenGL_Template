@@ -71,23 +71,43 @@ void ShaderProgram::cleanUp()
 //{
 //	glBindAttribLocation(m_uiProgramID, a_attribute, a_variableName);
 //}
-void ShaderProgram::uniform4f(const GLchar * a_uniformName, glm::vec4 & a_values)
+void ShaderProgram::uniformVec4(const GLchar * a_uniformName, glm::vec4 & a_values)
 {
 	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
 	glUniform4f(uniformLocation, a_values.x, a_values.y, a_values.z, a_values.w);
 }
 
-void ShaderProgram::uniform3f(const GLchar * a_uniformName, glm::vec3 & a_values)
+void ShaderProgram::uniformVec3(const GLchar * a_uniformName, glm::vec3 & a_values)
 {
 	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
 	glUniform3f(uniformLocation, a_values.x, a_values.y, a_values.z);
 }
 
-void ShaderProgram::uniform2f(const GLchar * a_uniformName, glm::vec2 & a_values)
+void ShaderProgram::uniformVec2(const GLchar * a_uniformName, glm::vec2 & a_values)
 {
 	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
 	glUniform2f(uniformLocation, a_values.x, a_values.y);
 }
+
+void ShaderProgram::uniformFloat(const GLchar * a_uniformName, GLfloat a_value)
+{
+	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
+	glUniform1f(uniformLocation, a_value);
+}
+
+void ShaderProgram::uniformBool(const GLchar * a_uniformName, bool a_value)
+{
+	float boolValue = 0;
+	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
+	// since there is no bool in gl shader code, we use 1 to denote true and 0 to denote false
+	glUniform1f(uniformLocation, (a_value ? boolValue = 1.0f : boolValue = 0.0f));
+}
+
+//void ShaderProgram::uniformMat4(const GLchar * a_uniformName, glm::mat4 & a_values)
+//{
+//	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
+//	glUniformMatrix4fv(uniformLocation, 16, false, a_values);
+//}
 
 
 /// pull shader code from file
@@ -182,6 +202,7 @@ void ShaderProgram::linkShaders(GLuint a_vertexShader, GLuint a_fragmentShader)
 	m_uiProgramID = glCreateProgram();
 	glAttachShader(m_uiProgramID, a_vertexShader);
 	glAttachShader(m_uiProgramID, a_fragmentShader);
+	// -> binding attributes would normally occur here, however, binding is done in the shader files using 'location'
 	glLinkProgram(m_uiProgramID);
 	// Check for linking errors
 	glGetProgramiv(m_uiProgramID, GL_LINK_STATUS, &m_iSuccess);

@@ -31,6 +31,9 @@
     <Filter Include="Source Files\textures">
       <UniqueIdentifier>{e1c9dc39-714f-4d17-9549-efbb1a7c743a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\toolBox">
+      <UniqueIdentifier>{6abf966d-6b99-4434-87c7-9424862285ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -47,9 +50,6 @@
     </ClCompile>
     <ClCompile Include="src\tests\tests.cpp">
       <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\Shaderer.cpp">
-      <Filter>Source Files\shaders</Filter>
     </ClCompile>
     <ClCompile Include="src\shaders\ShaderProgram.cpp">
       <Filter>Source Files\shaders</Filter>
@@ -69,13 +69,13 @@
     <ClCompile Include="src\textures\Texture.cpp">
       <Filter>Source Files\textures</Filter>
     </ClCompile>
+    <ClCompile Include="src\toolBox\Maths.cpp">
+      <Filter>Source Files\toolBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
       <Filter>Source Files\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\Shaderer.h">
-      <Filter>Source Files\shaders</Filter>
     </ClInclude>
     <ClInclude Include="src\shaders\ShaderProgram.h">
       <Filter>Source Files\shaders</Filter>
@@ -103,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="src\textures\Texture.h">
       <Filter>Source Files\textures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\toolBox\Maths.h">
+      <Filter>Source Files\toolBox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

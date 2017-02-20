@@ -16,9 +16,12 @@ public:
 	void stop();
 	void cleanUp();
 	// uniform functions
-	void uniform4f(const GLchar * a_uniformName, glm::vec4 & a_values);
-	void uniform3f(const GLchar * a_uniformName, glm::vec3 & a_values);
-	void uniform2f(const GLchar * a_uniformName, glm::vec2 & a_values);
+	void uniformVec4(const GLchar * a_uniformName, glm::vec4 & a_values);
+	void uniformVec3(const GLchar * a_uniformName, glm::vec3 & a_values);
+	void uniformVec2(const GLchar * a_uniformName, glm::vec2 & a_values);
+	void uniformFloat(const GLchar * a_uniformName, GLfloat a_value);
+	void uniformBool(const GLchar * a_uniformName, bool a_value);
+	void uniformMat4(const GLchar * a_uniformName, glm::mat4 & a_values);
 	// variable accessors
 	GLuint spID() { return m_uiProgramID; };
 

@@ -1,7 +1,7 @@
 #include "tests.h"
 #include "Loader.h"
 #include "Renderer.h"
-#include "Shaderer.h"
+#include "Maths.h"
 // shaders
 #include "ShaderProgram.h"
 #include "Shaders.h"
@@ -92,8 +92,8 @@ void helloTriangle()
 	display->createDisplay();
 
 	// Build and compile our shader program
-	Shaderer * shader = new Shaderer();
-	GLuint shaderProgram = shader->buildShader();
+	ShaderProgram * shader = new ShaderProgram();
+	GLuint shaderProgram = shader->spID();
 
 
 	// Set up vertex data (and buffer(s)) and attribute pointers
@@ -467,7 +467,7 @@ void gtShaderTest()
 		// Update the uniform color
 		GLfloat timeValue = glfwGetTime();
 		GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
-		shader->uniform4f("ourColor", glm::vec4(0.0f, greenValue, 0.0f, 1.0f));
+		shader->uniformVec4("ourColor", glm::vec4(0.0f, greenValue, 0.0f, 1.0f));
 		// Draw the triangle
 		renderer->render(model);
 		// stop using shader
@@ -596,7 +596,7 @@ void multipleShaders()
 		uniformShader->start();
 		GLfloat timeValue = glfwGetTime();
 		GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
-		uniformShader->uniform4f("ourColor", glm::vec4(0.0f, greenValue, 0.0f, 1.0f));
+		uniformShader->uniformVec4("ourColor", glm::vec4(0.0f, greenValue, 0.0f, 1.0f));
 		// Draw triangle
 		renderer->render(modelA);
 		// stop using shader
@@ -966,6 +966,9 @@ void dualTextures()
 void dualTextTute()
 {
 	std::cout << "\n### --> Starting Textures Tute" << std::endl;
+
+	glm::mat4 matrix = Maths::createTransormationMatrix(glm::vec3(3, 3, 3), glm::vec3(2, 2, 2), 5.0f);
+
 	// initialise display
 	DisplayManager * display = new DisplayManager();
 	display->createDisplay();
