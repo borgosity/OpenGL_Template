@@ -22,6 +22,9 @@ void texturesSplitData();
 void dualTextures();
 void dualTextTute();
 
+void transformsTute();
+void transformsTuteRotation();
+
 // miscellaneous functions
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void screenColour(GLfloat *red, GLfloat *green, GLfloat *blue, GLboolean *allColour);

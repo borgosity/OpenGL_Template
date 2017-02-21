@@ -207,6 +207,8 @@
     <None Include="src\shaders\staticShader.vs" />
     <None Include="src\shaders\textureShader.fs" />
     <None Include="src\shaders\textureShader.vs" />
+    <None Include="src\shaders\transformShader.fs" />
+    <None Include="src\shaders\transformShader.vs" />
     <None Include="src\shaders\uniformShader.fs" />
     <None Include="src\shaders\uniformShader.vs" />
   </ItemGroup>

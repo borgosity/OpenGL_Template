@@ -103,11 +103,12 @@ void ShaderProgram::uniformBool(const GLchar * a_uniformName, bool a_value)
 	glUniform1f(uniformLocation, (a_value ? boolValue = 1.0f : boolValue = 0.0f));
 }
 
-//void ShaderProgram::uniformMat4(const GLchar * a_uniformName, glm::mat4 & a_values)
-//{
-//	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
-//	glUniformMatrix4fv(uniformLocation, 16, false, a_values);
-//}
+void ShaderProgram::uniformMat4(const GLchar * a_uniformName, glm::mat4 & a_values)
+{
+	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
+	// mat4 needs to be converted to an opengl friendly format using 'value_ptr'
+	glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(a_values));
+}
 
 
 /// pull shader code from file

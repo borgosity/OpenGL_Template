@@ -25,7 +25,9 @@ int main()
 	//texturesTute();
 	// texturesSplitData(); //## not working
 	//dualTextures();
-	dualTextTute();
+	//dualTextTute();
+	//transformsTute();
+	transformsTuteRotation();
 	return 0;
 }
 

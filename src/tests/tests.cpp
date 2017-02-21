@@ -654,7 +654,7 @@ void textures()
 
 	// load model to VAO
 	RawModel * model = loader->loadTextureVAO(vertices, sizeof(vertices), indices, sizeof(indices));
-	ModelTexture * texture = new ModelTexture(loader->loadTexture("res/textures/container.jpg", 512, 512));
+	Texture * texture = new Texture("res/textures/container.jpg");
 	TexturedModel * texturedModel = new TexturedModel(*model, *texture);
 
 
@@ -848,7 +848,7 @@ void texturesSplitData()
 	// load model to VAO
 	RawModel * model = loader->loadToVAO(vertices, sizeof(vertices), colours, sizeof(colours), 
 										 textureCord, sizeof(textureCord),indices, sizeof(indices));
-	ModelTexture * texture = new ModelTexture(loader->loadTexture("res/textures/container.jpg", 512, 512));
+	Texture * texture = new Texture("res/textures/container.jpg");
 	TexturedModel * texturedModel = new TexturedModel(*model, *texture);
 
 
@@ -917,8 +917,8 @@ void dualTextures()
 
 	// load model to VAO
 	RawModel * model = loader->loadTextureVAO(vertices, sizeof(vertices), indices, sizeof(indices));
-	ModelTexture * texture1 = new ModelTexture(loader->loadTexture("res/textures/container.jpg", 512, 512));
-	ModelTexture * texture2 = new ModelTexture(loader->loadTexture("res/textures/awesomeface.png", 512, 512));
+	Texture * texture1 = new Texture("res/textures/container.jpg");
+	Texture * texture2 = new Texture("res/textures/awesomeface.png");
 	TexturedModel * texturedModel1 = new TexturedModel(*model, *texture1);
 	TexturedModel * texturedModel2 = new TexturedModel(*model, *texture2);
 
@@ -967,7 +967,7 @@ void dualTextTute()
 {
 	std::cout << "\n### --> Starting Textures Tute" << std::endl;
 
-	glm::mat4 matrix = Maths::createTransormationMatrix(glm::vec3(3, 3, 3), glm::vec3(2, 2, 2), 5.0f);
+	//glm::mat4 matrix = Maths::createTransormationMatrix(glm::vec3(3, 3, 3), glm::vec3(2, 2, 2), 5.0f);
 
 	// initialise display
 	DisplayManager * display = new DisplayManager();
@@ -996,25 +996,25 @@ void dualTextTute()
 	Renderer * renderer = new Renderer();
 	RawModel * model = loader->loadTextureVAO(vertices, sizeof(vertices), indices, sizeof(indices));
 	
-	ModelTexture * modelTexture = new ModelTexture(loader->loadTexture("res/textures/container.jpg", 512, 512));
-	TexturedModel * texturedModel = new TexturedModel(*model, *modelTexture);
 
 
 	 // Load and create a texture 
 	Texture * textureFile = new Texture("res/textures/container.jpg");
+	TexturedModel * texturedModel = new TexturedModel(*model, *textureFile);
+	
 	GLuint texture1;
 	GLuint texture2;
 	// ====================
 	// Texture 1
 	// ====================
-	//texture1 = loader->loadTexture("res/textures/container.jpg", 512, 512);
+	//texture1 = loader->loadTexture("res/textures/container.jpg");
 	texture1 = textureFile->ID();
 
 									 
 	// ===================
 	// Texture 2
 	// ===================
-	texture2 = loader->loadTexture("res/textures/awesomeface.png", 512, 512);
+	texture2 = loader->loadTexture("res/textures/awesomeface.png");
 
 
 	// Game loop
@@ -1041,6 +1041,183 @@ void dualTextTute()
 		// Draw 
 		renderer->renderTexture(texturedModel);
 
+		// stop using shader
+		textureShader->stop();
+
+		// update display
+		display->updateDisplay();
+
+		// check for key presses
+		glfwSetKeyCallback(display->window(), key_callback);
+	}
+	// Properly de-allocate all resources once they've outlived their purpose
+	loader->cleanUp();
+	// Terminate GLFW, clearing any resources allocated by GLFW.
+	glfwTerminate();
+}
+void transformsTute()
+{
+	std::cout << "\n### --> Starting Transforms Tute" << std::endl;
+
+
+	// initialise display
+	DisplayManager * display = new DisplayManager();
+	display->createDisplay();
+
+
+	// Build and compile our shader program
+	// initialise shader program
+	ShaderProgram * textureShader = new ShaderProgram(Shader::transformShader);
+
+	// Set up vertex data (and buffer(s)) and attribute pointers
+	GLfloat vertices[] = {
+		// Positions          // Colors           // Texture Coords  (Note that we changed them to 'zoom in' on our texture image)
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,  // Top Right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left 
+	};
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3, // First Triangle
+		1, 2, 3  // Second Triangle
+	};
+	// load model to VAO
+	Loader * loader = new Loader();
+	Renderer * renderer = new Renderer();
+	RawModel * model = loader->loadTextureVAO(vertices, sizeof(vertices), indices, sizeof(indices));
+
+	// Load and create a texture 
+	Texture * textureFile1 = new Texture("res/textures/container.jpg");
+	Texture * textureFile2 = new Texture("res/textures/awesomeface.png");
+
+	TexturedModel * texturedModel = new TexturedModel(*model, *textureFile1, *textureFile2);
+
+	GLuint texture1 = textureFile1->ID();
+	GLuint texture2 = textureFile2->ID();
+
+	glm::mat4 transformMatrix = Maths::createTransormationMatrix(glm::vec3(0, 0, 0), glm::vec3(45.0f, 0, 45.0f), 0.5f);
+
+	// Game loop
+	while (!glfwWindowShouldClose(display->window()))
+	{
+		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
+		glfwPollEvents();
+
+		// Render
+		// Clear the colorbuffer
+		renderer->prepare(0.0f, 0.3f, 0.3f);
+
+		// Activate shader
+		textureShader->start();
+
+		// Bind Textures using texture units
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture1);
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2);
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture2"), 1);
+
+		textureShader->uniformMat4("transform", transformMatrix);
+
+		// Draw 
+		renderer->renderTexture(texturedModel);
+
+		// stop using shader
+		textureShader->stop();
+
+		// update display
+		display->updateDisplay();
+
+		// check for key presses
+		glfwSetKeyCallback(display->window(), key_callback);
+	}
+	// Properly de-allocate all resources once they've outlived their purpose
+	loader->cleanUp();
+	// Terminate GLFW, clearing any resources allocated by GLFW.
+	glfwTerminate();
+}
+void transformsTuteRotation()
+{
+	std::cout << "\n### --> Starting Transforms Tute" << std::endl;
+
+
+	// initialise display
+	DisplayManager * display = new DisplayManager();
+	display->createDisplay();
+
+
+	// Build and compile our shader program
+	// initialise shader program
+	ShaderProgram * textureShader = new ShaderProgram(Shader::transformShader);
+
+	// Set up vertex data (and buffer(s)) and attribute pointers
+	GLfloat vertices[] = {
+		// Positions          // Colors           // Texture Coords  (Note that we changed them to 'zoom in' on our texture image)
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,  // Top Right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left 
+	};
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3, // First Triangle
+		1, 2, 3  // Second Triangle
+	};
+	// load model to VAO
+	Loader * loader = new Loader();
+	Renderer * renderer = new Renderer();
+	RawModel * model = loader->loadTextureVAO(vertices, sizeof(vertices), indices, sizeof(indices));
+
+	// Load and create a texture 
+	Texture * textureFile1 = new Texture("res/textures/container.jpg");
+	Texture * textureFile2 = new Texture("res/textures/awesomeface.png");
+
+	TexturedModel * texturedModel = new TexturedModel(*model, *textureFile1, *textureFile2);
+
+	GLuint texture1 = textureFile1->ID();
+	GLuint texture2 = textureFile2->ID();
+
+
+	// Game loop
+	while (!glfwWindowShouldClose(display->window()))
+	{
+		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
+		glfwPollEvents();
+
+		// Render
+		// Clear the colorbuffer
+		renderer->prepare(0.0f, 0.3f, 0.3f);
+
+
+		// Activate shader
+		textureShader->start();
+
+		// Bind Textures using texture units
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture1);
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2);
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture2"), 1);
+
+		// ================== first container ================
+		// create transform, with rotation changed over time
+		glm::mat4 transformMatrix = Maths::createTransormationMatrix(glm::vec3(0.3f, -0.3f, 0), glm::vec3(45.0f, 0, glfwGetTime() * 10.0f), 0.5f);
+		// set matrix to trnasformuniform
+		textureShader->uniformMat4("transform", transformMatrix);
+		// Draw 
+		renderer->renderTexture(texturedModel);
+
+		// ================== second container ================
+		// reset transform transform
+		transformMatrix = glm::mat4();
+		// set transform wirh scale changed over time
+		transformMatrix = Maths::createTransormationMatrix(glm::vec3(-0.25f, 0.25f, 0), glm::vec3(45.0f, 0, 45.0f), sin(glfwGetTime()));
+		// set matrix to trnasformuniform
+		textureShader->uniformMat4("transform", transformMatrix);
+		// Draw 
+		renderer->renderTexture(texturedModel);
+		
 		// stop using shader
 		textureShader->stop();
 

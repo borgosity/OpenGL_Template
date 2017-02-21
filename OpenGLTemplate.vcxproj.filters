@@ -139,5 +139,11 @@
     <None Include="src\shaders\dualTextureShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
+    <None Include="src\shaders\transformShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\transformShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
   </ItemGroup>
 </Project>
