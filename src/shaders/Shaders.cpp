@@ -1,5 +1,6 @@
 #include "Shaders.h"
 
+ ShaderPath Shader::cameraShader = { "src/shaders/cameraShader.vs", "src/shaders/cameraShader.fs" };
  ShaderPath Shader::staticShader = { "src/shaders/staticShader.vs", "src/shaders/staticShader.fs" };
  ShaderPath Shader::indexShader = { "src/shaders/indexShader.vs", "src/shaders/indexShader.fs" };
  ShaderPath Shader::textureShader = { "src/shaders/textureShader.vs", "src/shaders/textureShader.fs" };

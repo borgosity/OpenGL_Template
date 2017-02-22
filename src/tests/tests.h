@@ -24,8 +24,11 @@ void dualTextTute();
 
 void transformsTute();
 void transformsTuteRotation();
-
 void transformsRotationPlanets();
+
+void quaterionsTute();
+
+void threeDeeObjects();
 
 // miscellaneous functions
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);

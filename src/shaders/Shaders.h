@@ -11,6 +11,7 @@ struct ShaderPath
 
 struct Shader
 {
+	static ShaderPath cameraShader;
 	static ShaderPath staticShader;
 	static ShaderPath indexShader;
 	static ShaderPath textureShader;

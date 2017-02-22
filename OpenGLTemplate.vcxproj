@@ -199,6 +199,8 @@
     <ClInclude Include="src\toolBox\Maths.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\shaders\cameraShader.fs" />
+    <None Include="src\shaders\cameraShader.vs" />
     <None Include="src\shaders\dualTextureShader.fs" />
     <None Include="src\shaders\dualTextureShader.vs" />
     <None Include="src\shaders\indexShader.fs" />

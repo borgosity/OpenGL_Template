@@ -145,5 +145,11 @@
     <None Include="src\shaders\transformShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
+    <None Include="src\shaders\cameraShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\cameraShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
   </ItemGroup>
 </Project>

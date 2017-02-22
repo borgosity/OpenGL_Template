@@ -1234,7 +1234,7 @@ void transformsTuteRotation()
 }
 void transformsRotationPlanets()
 {
-	std::cout << "\n### --> Starting Transforms Tute" << std::endl;
+	std::cout << "\n### --> Starting Rotating Planets" << std::endl;
 
 
 	// initialise display
@@ -1350,6 +1350,303 @@ void transformsRotationPlanets()
 	// Terminate GLFW, clearing any resources allocated by GLFW.
 	glfwTerminate();
 }
+void quaterionsTute()
+{
+	std::cout << "\n### --> Starting Quaternion tute" << std::endl;
+
+//==================== Start Up===============================
+	// initialise display
+	DisplayManager * display = new DisplayManager();
+	display->createDisplay();
+
+
+	// Build and compile our shader program
+	// initialise shader program
+	ShaderProgram * textureShader = new ShaderProgram(Shader::transformShader);
+
+	// Set up vertex data (and buffer(s)) and attribute pointers
+	GLfloat vertices[] = {
+		// Positions          // Colors           // Texture Coords  (Note that we changed them to 'zoom in' on our texture image)
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,  // Top Right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left 
+	};
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3, // First Triangle
+		1, 2, 3  // Second Triangle
+	};
+
+	// Quaterions
+	glm::vec3 positions[2];
+	glm::quat rotations[2];
+
+	positions[0] = glm::vec3(0,0,0);
+	positions[1] = glm::vec3(0,0,0);
+	rotations[0] = glm::quat(glm::vec3(0, -1, 0));
+	rotations[1] = glm::quat(glm::vec3(0, 1, 0));
+
+
+	// load model to VAO
+	Loader * loader = new Loader();
+	Renderer * renderer = new Renderer();
+	RawModel * model = loader->loadTextureVAO(vertices, sizeof(vertices), indices, sizeof(indices));
+
+	// Load and create a texture 
+	Texture * starTexture = new Texture("res/textures/Stars.png");
+	Texture * sunTexture = new Texture("res/textures/Sun.png");
+	Texture * planetTexture = new Texture("res/textures/M-Class.png");
+	Texture * moonTexture = new Texture("res/textures/Moon.png");
+
+	TexturedModel * starsModel = new TexturedModel(*model, *starTexture);
+	TexturedModel * sunModel = new TexturedModel(*model, *sunTexture);
+	TexturedModel * planetModel = new TexturedModel(*model, *planetTexture);
+	TexturedModel * moonModel = new TexturedModel(*model, *moonTexture);
+//=================== End Start Up ========================
+
+//=================== Update & Draw ==============================
+
+	// Game loop
+	while (!glfwWindowShouldClose(display->window()))
+	{
+		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
+		glfwPollEvents();
+
+
+		// Render
+		// Clear the colorbuffer
+		renderer->prepare(0.0f, 0.0f, 0.0f);
+
+		// Activate shader
+		textureShader->start();
+
+		// ================== stars ========================
+		// Bind Textures using texture units
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, starTexture->ID());
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		// create transform, with rotation changed over time
+		glm::mat4 transformMatrix = Maths::createTransormationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 2.0f);
+
+		textureShader->uniformMat4("transform", transformMatrix);
+		// Draw 
+		renderer->renderTexture(sunModel);
+
+		// ================== sun container ================
+		// quaterion values
+		// use time to animate a alue between [0, 1]
+		float s = glm::cos((float)glfwGetTime() * 0.25f);
+		// standard linear interpolation
+		glm::vec3 p = (1.0f - s) * positions[0] + s * positions[1];
+		// quaternion slerp
+		glm::quat r = glm::slerp(rotations[0], rotations[1], s);
+		// build a matrix
+		glm::mat4 m = glm::translate(p) * glm::toMat4(r);
+	
+		// Bind Textures using texture units
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, sunTexture->ID());
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		// reset transform transform
+		transformMatrix = glm::mat4();
+		// create transform, with rotation changed over time
+		transformMatrix = Maths::quaternionTransformation(glm::vec3(s, 0, s), r, 0.3f);
+
+		// set matrix to trnasformuniform
+		textureShader->uniformMat4("transform", transformMatrix);
+		// Draw 
+		renderer->renderTexture(sunModel);
+
+		//// ================== planet container ================
+		//// Bind Textures using texture units
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, planetTexture->ID());
+		//glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		//// reset transform transform
+		//transformMatrix = glm::mat4();
+		//// set transform with local and world rotation changed over time
+		//transformMatrix = Maths::createWorldRotationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, glfwGetTime() * -20.0f), 0) *
+		//	Maths::createTransormationMatrix(glm::vec3(0.45f, -0.45f, 0), glm::vec3(0, 0, glfwGetTime() * -20.0f), 0.2f);
+		//// set matrix to trnasformuniform
+		//textureShader->uniformMat4("transform", transformMatrix);
+		//// Draw 
+		//renderer->renderTexture(planetModel);
+
+		//// ================== moon container ================
+		//// Bind Textures using texture units
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, moonTexture->ID());
+		//glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		//// multiple planets transformation by world rotation changed over time (scale and translate value need to be increased above the norm to achieve similar sizing and distance)
+		//transformMatrix = transformMatrix * Maths::createWorldRotationMatrix(glm::vec3(0.8f, -0.8f, 0), glm::vec3(0, 0, glfwGetTime() * -40.0f), 0.5f);
+		//// set matrix to trnasformuniform
+		//textureShader->uniformMat4("transform", transformMatrix);
+		//// Draw 
+		//renderer->renderTexture(moonModel);
+
+		// stop using shader
+		textureShader->stop();
+
+		// update display
+		display->updateDisplay();
+
+		// check for key presses
+		glfwSetKeyCallback(display->window(), key_callback);
+	}
+	// Properly de-allocate all resources once they've outlived their purpose
+	textureShader->cleanUp();
+	loader->cleanUp();
+	// Terminate GLFW, clearing any resources allocated by GLFW.
+	glfwTerminate();
+}
+
+void threeDeeObjects()
+{
+	std::cout << "\n### --> Starting Transforms Tute" << std::endl;
+
+
+	// initialise display
+	DisplayManager * display = new DisplayManager();
+	display->createDisplay();
+
+
+	// Build and compile our shader program
+	// initialise shader program
+	ShaderProgram * textureShader = new ShaderProgram(Shader::cameraShader);
+
+	// Set up vertex data (and buffer(s)) and attribute pointers
+	//GLfloat vertices[] = {
+	//	// Positions          // Colors           // Texture Coords  (Note that we changed them to 'zoom in' on our texture image)
+	//	0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,  // Top Right
+	//	0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
+	//	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
+	//	-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left 
+	//};
+	GLfloat vertices[] = {
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+		0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+	};
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3, // First Triangle
+		1, 2, 3  // Second Triangle
+	};
+	// load model to VAO
+	Loader * loader = new Loader();
+	Renderer * renderer = new Renderer();
+	RawModel * model = loader->loadTextureVAO(vertices, sizeof(vertices), indices, sizeof(indices));
+
+	// Load and create a texture 
+	Texture * texture1 = new Texture("res/textures/container.jpg");
+	Texture * texture2 = new Texture("res/textures/awesomeface.png");
+
+	TexturedModel * texturedModel = new TexturedModel(*model, *texture1, *texture2);
+
+	glm::mat4 transformMatrix = Maths::createTransormationMatrix(glm::vec3(0, 0, 0), glm::vec3(45.0f, 0, 0), 0.5f);
+
+	// Game loop
+	while (!glfwWindowShouldClose(display->window()))
+	{
+		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
+		glfwPollEvents();
+
+		// Render
+		// Clear the colorbuffer
+		renderer->prepare(0.0f, 0.3f, 0.3f);
+
+		// Activate shader
+		textureShader->start();
+
+		// Bind Textures using texture units
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture1->ID());
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2->ID());
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture2"), 1);
+
+		// ========================== ccamera ===========================
+		// Create transformations
+		glm::mat4 model;
+		glm::mat4 view;
+		glm::mat4 projection;
+		model = glm::rotate(model, (GLfloat)glfwGetTime() * 10.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+		projection = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 100.0f);
+		// Get their uniform location
+		GLint modelLoc = glGetUniformLocation(textureShader->spID(), "model");
+		GLint viewLoc = glGetUniformLocation(textureShader->spID(), "view");
+		GLint projLoc = glGetUniformLocation(textureShader->spID(), "projection");
+		// Pass them to the shaders
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		// Note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+
+		//glm::mat4 transformMatrix = Maths::createTransormationMatrix(glm::vec3(0.3f, -0.3f, 0), glm::vec3(45.0f, 0, glfwGetTime() * 20.0f), 0.5f);
+
+		//textureShader->uniformMat4("transform", transformMatrix);
+
+		// Draw 
+		glBindVertexArray(texturedModel->rawModel().vaoID());
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+
+		// stop using shader
+		textureShader->stop();
+
+		// update display
+		display->updateDisplay();
+
+		// check for key presses
+		glfwSetKeyCallback(display->window(), key_callback);
+	}
+	// Properly de-allocate all resources once they've outlived their purpose
+	textureShader->cleanUp();
+	loader->cleanUp();
+	// Terminate GLFW, clearing any resources allocated by GLFW.
+	glfwTerminate();
+}
+
 /// key press callback function
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {

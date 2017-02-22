@@ -47,3 +47,20 @@ glm::mat4 Maths::createTransormationMatrix(glm::vec3 a_translation, glm::vec3 a_
 	// return transformed matrix
 	return matrix;
 }
+
+glm::mat4 Maths::quaternionTransformation(glm::vec3 a_translation, glm::quat a_rotation, float a_scale)
+{
+	// create an identity matrix
+	glm::mat4 matrix(1.0f);
+	// translate matrix
+	matrix = glm::translate(matrix, a_translation);
+	// rotate matrix around quaterion
+	matrix = matrix * glm::toMat4(a_rotation);
+
+	// scale matrix uniformly on all axis
+	if (a_scale > 0) {
+		matrix = glm::scale(matrix, glm::vec3(a_scale, a_scale, a_scale));
+	}
+	// return transformed matrix
+	return matrix;
+}
