@@ -27,7 +27,8 @@ int main()
 	//dualTextures();
 	//dualTextTute();
 	//transformsTute();
-	transformsTuteRotation();
+	//transformsTuteRotation();
+	transformsRotationPlanets();
 	return 0;
 }
 

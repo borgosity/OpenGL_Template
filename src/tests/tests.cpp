@@ -1202,7 +1202,7 @@ void transformsTuteRotation()
 
 		// ================== first container ================
 		// create transform, with rotation changed over time
-		glm::mat4 transformMatrix = Maths::createTransormationMatrix(glm::vec3(0.3f, -0.3f, 0), glm::vec3(45.0f, 0, glfwGetTime() * 10.0f), 0.5f);
+		glm::mat4 transformMatrix = Maths::createTransormationMatrix(glm::vec3(0.3f, -0.3f, 0), glm::vec3(45.0f, 0, glfwGetTime() * 20.0f), 0.5f);
 		// set matrix to trnasformuniform
 		textureShader->uniformMat4("transform", transformMatrix);
 		// Draw 
@@ -1218,6 +1218,124 @@ void transformsTuteRotation()
 		// Draw 
 		renderer->renderTexture(texturedModel);
 		
+		// stop using shader
+		textureShader->stop();
+
+		// update display
+		display->updateDisplay();
+
+		// check for key presses
+		glfwSetKeyCallback(display->window(), key_callback);
+	}
+	// Properly de-allocate all resources once they've outlived their purpose
+	loader->cleanUp();
+	// Terminate GLFW, clearing any resources allocated by GLFW.
+	glfwTerminate();
+}
+void transformsRotationPlanets()
+{
+	std::cout << "\n### --> Starting Transforms Tute" << std::endl;
+
+
+	// initialise display
+	DisplayManager * display = new DisplayManager();
+	display->createDisplay();
+
+
+	// Build and compile our shader program
+	// initialise shader program
+	ShaderProgram * textureShader = new ShaderProgram(Shader::transformShader);
+
+	// Set up vertex data (and buffer(s)) and attribute pointers
+	GLfloat vertices[] = {
+		// Positions          // Colors           // Texture Coords  (Note that we changed them to 'zoom in' on our texture image)
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,  // Top Right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left 
+	};
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3, // First Triangle
+		1, 2, 3  // Second Triangle
+	};
+	// load model to VAO
+	Loader * loader = new Loader();
+	Renderer * renderer = new Renderer();
+	RawModel * model = loader->loadTextureVAO(vertices, sizeof(vertices), indices, sizeof(indices));
+	//RawModel * rawModel = loader->loadTextureVAO(vertices, sizeof(vertices), indices, sizeof(indices));
+
+	// Load and create a texture 
+	Texture * sunTexture = new Texture("res/textures/Sun.png");
+	Texture * planetTexture = new Texture("res/textures/M-Class.png");
+	Texture * moonTexture = new Texture("res/textures/Moon.png");
+
+	TexturedModel * sunModel = new TexturedModel(*model, *sunTexture, *sunTexture);
+	TexturedModel * planetModel = new TexturedModel(*model, *planetTexture);
+	TexturedModel * moonModel = new TexturedModel(*model, *moonTexture);
+
+
+	// Game loop
+	while (!glfwWindowShouldClose(display->window()))
+	{
+		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
+		glfwPollEvents();
+
+		// Render
+		// Clear the colorbuffer
+		renderer->prepare(0.0f, 0.0f, 0.0f);
+
+
+		// Activate shader
+		textureShader->start();
+
+		// Bind Textures using texture units
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, texture1);
+		//glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		//glActiveTexture(GL_TEXTURE1);
+		//glBindTexture(GL_TEXTURE_2D, texture2);
+		//glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture2"), 1);
+
+		// ================== sun container ================
+		// Bind Textures using texture units
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, sunTexture->ID());
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		// create transform, with rotation changed over time
+		glm::mat4 transformMatrix = Maths::createTransormationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, glfwGetTime() * -10.0f), 0.3f);
+			
+		// set matrix to trnasformuniform
+		textureShader->uniformMat4("transform", transformMatrix);
+		// Draw 
+		renderer->renderTexture(sunModel);
+
+		// ================== planet container ================
+		// Bind Textures using texture units
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, planetTexture->ID());
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		// reset transform transform
+		transformMatrix = glm::mat4();
+		// set transform with local and world rotation changed over time
+		transformMatrix = Maths::createWorldRotationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, glfwGetTime() * -20.0f), 0) *
+			Maths::createTransormationMatrix(glm::vec3(0.45f, -0.45f, 0), glm::vec3(0, 0, glfwGetTime() * -20.0f), 0.2f);
+		// set matrix to trnasformuniform
+		textureShader->uniformMat4("transform", transformMatrix);
+		// Draw 
+		renderer->renderTexture(planetModel);
+
+		// ================== moon container ================
+		// Bind Textures using texture units
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, moonTexture->ID());
+		glUniform1i(glGetUniformLocation(textureShader->spID(), "ourTexture1"), 0);
+		// multiple planets transformation by world rotation changed over time (scale and translate value need to be increased above the norm to achieve similar sizing and distance)
+		transformMatrix = transformMatrix * Maths::createWorldRotationMatrix(glm::vec3(0.8f, -0.8f, 0), glm::vec3(0, 0, glfwGetTime() * -40.0f), 0.5f);
+		// set matrix to trnasformuniform
+		textureShader->uniformMat4("transform", transformMatrix);
+		// Draw 
+		renderer->renderTexture(moonModel);
+
 		// stop using shader
 		textureShader->stop();
 

@@ -9,6 +9,8 @@ public:
 	Maths();
 	~Maths();
 
+	static glm::mat4 createWorldRotationMatrix(glm::vec3 a_translation, glm::vec3 a_rotation, float a_scale);
+
 	static glm::mat4 createTransormationMatrix(glm::vec3 a_translation, glm::vec3 a_rotation, float a_scale);
 };
 
