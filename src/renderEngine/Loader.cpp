@@ -62,6 +62,8 @@ RawModel * Loader::loadTextureVAO(GLfloat a_positions[], int a_size, GLuint a_in
 
 	return new RawModel(vaoID, a_indSize / sizeof(GLuint));
 }
+
+// !!!!--- this function has been moved to the Texture class
 GLuint Loader::loadTexture(std::string a_fileName)
 {
 	int width, height;

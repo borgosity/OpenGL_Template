@@ -15,7 +15,7 @@ void Renderer::prepare(GLfloat red, GLfloat green, GLfloat blue)
 {
 	// Clear the colorbuffer
 	glClearColor(red, green, blue, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 /// render model

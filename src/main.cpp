@@ -28,7 +28,7 @@ int main()
 	//dualTextTute();
 	//transformsTute();
 	//transformsTuteRotation();
-	//transformsRotationPlanets();
+	transformsRotationPlanets();
 	//quaterionsTute();
 	threeDeeObjects();
 	return 0;
