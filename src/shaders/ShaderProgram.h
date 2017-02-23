@@ -24,7 +24,7 @@ public:
 	void uniformBool(const GLchar * a_uniformName, bool a_value);
 	void uniformMat4(const GLchar * a_uniformName, glm::mat4 & a_values);
 	// variable accessors
-	GLuint spID() { return m_uiProgramID; };
+	GLuint ID() { return m_uiProgramID; };
 
 	/*
 		the below was commented out in favour of attribute binding in shader files

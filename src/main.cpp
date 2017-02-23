@@ -28,9 +28,10 @@ int main()
 	//dualTextTute();
 	//transformsTute();
 	//transformsTuteRotation();
-	transformsRotationPlanets();
+	//transformsRotationPlanets();
 	//quaterionsTute();
-	threeDeeObjects();
+	//threeDeeObjects();
+	camera();
 	return 0;
 }
 

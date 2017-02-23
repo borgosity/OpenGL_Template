@@ -34,6 +34,9 @@
     <Filter Include="Source Files\toolBox">
       <UniqueIdentifier>{6abf966d-6b99-4434-87c7-9424862285ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\entities">
+      <UniqueIdentifier>{dc25674c-2283-4c71-bfcc-91fb58787667}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -72,6 +75,12 @@
     <ClCompile Include="src\toolBox\Maths.cpp">
       <Filter>Source Files\toolBox</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderEngine\Camera.cpp">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\Entity.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -106,6 +115,15 @@
     </ClInclude>
     <ClInclude Include="src\toolBox\Maths.h">
       <Filter>Source Files\toolBox</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderEngine\Camera.h">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Entity.h">
+      <Filter>Source Files\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

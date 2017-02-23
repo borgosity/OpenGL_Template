@@ -21,6 +21,33 @@ RawModel * Loader::loadToVAO(GLfloat positions[], int size)
 	storePositionDataInAttributeList(0);
 	return new RawModel(vaoID, size/3);
 }
+///
+/// Function to Load data to VAO - 
+/// positions = vertex data ( it can contain	- position and colour and texture 
+///												- position and colour
+///												- position and texture
+///												- position ) 
+/// posSize = size of vertex data array
+/// vertexSize = size of the vertex buffer blocks	- 8(p & c & t)
+///													- 6 (p & C) 
+///													- 5 (p & t) 
+///													- 3 (p)
+///
+RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_posSize, int a_vertexSize)
+{
+	GLuint vaoID = createVAO();
+	createVBO(a_positions, a_posSize);
+	// assume there is always position data
+	storePositionData(0, a_vertexSize);
+	// if there is more than 1 set of 3 data assume second set is colour
+	if (a_vertexSize / 3 >= 2) storeColourData(1, a_vertexSize);
+	// if the data has a remainder of 2 then assume there is texture data
+	if (a_vertexSize % 3 == 2) storeTextureData(2, a_vertexSize);
+	// unbind vbo and vao
+	unbind();
+	// return a RawModel object
+	return new RawModel(vaoID, a_posSize / a_vertexSize);
+}
 /// VAO loader that includes indicies
 RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_posSize, GLuint a_indicies[], int a_indSize)
 {
@@ -30,29 +57,23 @@ RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_posSize, GLuint a_indi
 	storePositionDataInAttributeList(0);
 	return new RawModel(vaoID, a_indSize);
 }
-/// VAO loader for more than one attribute (1-3)
-RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_size, int a_attribNum)
-{
-	GLuint vaoID = createVAO();
-	createVBO(a_positions, a_size);
-	if (a_attribNum == 1) storePositionDataInAttributeList(0);
-	if (a_attribNum == 2) storeColourDataInAttributeList(0);
-	if (a_attribNum == 3) storeTextureDataInAttributeList(0);
-	
-	return new RawModel(vaoID, a_size / (3 * a_attribNum));
-}
+
 // refactor attempt
+// TO BE TESTED
 RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_pSize, GLfloat a_colours[], int a_cSize, 
 							 GLfloat a_textures[], int a_tSize, GLuint a_indicies[], int a_iSize)
 {
 	GLuint vaoID = createVAO();
 	bindIndicesBuffer(a_indicies, a_iSize);	// bind indicies
-	storeTextureDataInAttributeList(0, 3, a_positions, a_pSize);
-	//storeTextureDataInAttributeList(1, 3, a_colours, a_cSize);
-	//storeTextureDataInAttributeList(2, 2, a_textures, a_tSize);
-
+	// bind to VBO in the below functions
+	storePositionData(0, a_positions, a_pSize);
+	storeTextureData(1, a_colours, a_cSize);
+	storeTextureData(2, a_textures, a_tSize);
+	// unbind vbo and vao
+	unbind();
 	return new RawModel(vaoID, a_iSize / sizeof(GLuint));
 }
+
 RawModel * Loader::loadTextureVAO(GLfloat a_positions[], int a_size, GLuint a_indicies[], int a_indSize)
 {
 	GLuint vaoID = createVAO();
@@ -63,7 +84,9 @@ RawModel * Loader::loadTextureVAO(GLfloat a_positions[], int a_size, GLuint a_in
 	return new RawModel(vaoID, a_indSize / sizeof(GLuint));
 }
 
-// !!!!--- this function has been moved to the Texture class
+/* 
+!!!!--- this function has been moved to the Texture class
+*/
 GLuint Loader::loadTexture(std::string a_fileName)
 {
 	int width, height;
@@ -159,14 +182,65 @@ void Loader::storeTextureDataInAttributeList(int attributeNumber)
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind current VBO
 	glBindVertexArray(0);			  // unbind current VAO
 }
-// refactor attempt
-void Loader::storeTextureDataInAttributeList(int attributeNumber, int coordinateSize, GLfloat data[], int dataSize)
-{
-	createVBO(data, dataSize);
-	// Position attribute
-	glVertexAttribPointer(attributeNumber, coordinateSize, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(attributeNumber);
 
+/*****************************************************************************************
+	Single VBO with a single array of data functions - ## NOT TESTED ##
+*******************************************************************************************/
+void Loader::storePositionData(int attributeNumber, int vertSize)
+{
+	// Position attribute
+	glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, GL_FALSE, vertSize * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(attributeNumber);
+}
+
+void Loader::storeColourData(int attributeNumber, int vertSize)
+{
+	// Color attribute
+	glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, GL_FALSE, vertSize * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(attributeNumber + 1);
+}
+
+void Loader::storeTextureData(int attributeNumber, int vertSize)
+{
+	int startPos = 0;
+	// check vert size
+	vertSize > 5 ? startPos = 6 : startPos = 3;
+	// Texture attribute
+	glVertexAttribPointer(attributeNumber, 2, GL_FLOAT, GL_FALSE, vertSize * sizeof(GLfloat), (GLvoid*)(startPos * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
+}
+/*****************************************************************************************
+	- ## NOT TESTED ## - Indiviual VBOs for each individual data array functions 
+*******************************************************************************************/
+void Loader::storePositionData(int attributeNumber, GLfloat data[], int size)
+{
+	// create VBO with data
+	createVBO(data, size);	
+	// Position attribute
+	glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(attributeNumber);
+}
+
+void Loader::storeColourData(int attributeNumber, GLfloat data[], int size)
+{
+	// create VBO with data
+	createVBO(data, size);
+	// Color attribute
+	glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(attributeNumber);
+}
+
+void Loader::storeTextureData(int attributeNumber, GLfloat data[], int size)
+{
+	// create VBO with data
+	createVBO(data, size);
+	// Texture attribute
+	glVertexAttribPointer(attributeNumber, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(attributeNumber);
+}
+
+void Loader::unbind()
+{
 	// unbind
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind current VBO
 	glBindVertexArray(0);			  // unbind current VAO

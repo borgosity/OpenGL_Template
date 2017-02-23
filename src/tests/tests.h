@@ -29,6 +29,7 @@ void transformsRotationPlanets();
 void quaterionsTute();
 
 void threeDeeObjects();
+void camera();
 
 // miscellaneous functions
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);

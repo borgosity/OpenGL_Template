@@ -58,12 +58,22 @@ void Renderer::bindRenderTexture(TexturedModel * a_texturedModel)
 void Renderer::bindTexture(TexturedModel * a_texturedModel, ShaderProgram * a_shader, const char * a_uniformName, int a_texNumber )
 {
 	glBindTexture(GL_TEXTURE_2D, a_texturedModel->rawModel().vaoID());
-	glUniform1i(glGetUniformLocation(a_shader->spID(), a_uniformName), a_texNumber);
+	glUniform1i(glGetUniformLocation(a_shader->ID(), a_uniformName), a_texNumber);
 }
 
-void Renderer::renderTexture(TexturedModel * a_texturedModel)
+void Renderer::renderTexturedModel(TexturedModel * a_texturedModel)
 {
-	glBindVertexArray(a_texturedModel->rawModel().vaoID());
-	glDrawElements(GL_TRIANGLES, a_texturedModel->rawModel().vertexCount(), GL_UNSIGNED_INT, 0);
+	glBindVertexArray(a_texturedModel->vaoID());
+	//glDrawElements(GL_TRIANGLES, a_texturedModel->vertexCount(), GL_UNSIGNED_INT, 0);
+	glDrawArrays(GL_TRIANGLES, 0, a_texturedModel->vertexCount());
+	glBindVertexArray(0);
+}
+
+void Renderer::renderEntity(Entity * a_entity, ShaderProgram * a_shader)
+{
+	glBindVertexArray(a_entity->model()->vaoID());
+	glm::mat4 modelTransform = a_entity->transform();
+	a_shader->uniformMat4("model", modelTransform);
+	glDrawArrays(GL_TRIANGLES, 0, a_entity->model()->vertexCount());
 	glBindVertexArray(0);
 }
