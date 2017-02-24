@@ -13,10 +13,7 @@ Application::~Application()
 
 bool Application::start()
 {
-	std::cout << "\n### --> Starting Transforms Tute" << std::endl;
-	// key strokes
-	bool keys[1024];
-
+	std::cout << "\n### --> Start Application" << std::endl;
 
 	// initialise display
 	m_display = new DisplayManager();
@@ -54,15 +51,17 @@ bool Application::start()
 	// camera projection matrix ## NOW HANDLED IN THE RENDERER
 
 	// camera position
-	glm::mat4 cameraPosition;
-	cameraPosition = glm::translate(cameraPosition, glm::vec3(0.0f, 0.5f, -2.0f));
+	m_cameraPosition = glm::translate(m_cameraPosition, glm::vec3(0.0f, 0.5f, -2.0f));
 
 	return true;
 }
 
 bool Application::run()
 {
-	// Game loop
+	// initialise everything
+	start();
+
+	// application loop
 	while (!glfwWindowShouldClose(m_display->window()))
 	{
 		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
@@ -76,19 +75,19 @@ bool Application::run()
 		draw();
 
 		// check for key presses
-		glfwSetKeyCallback(m_display->window(), key_callback);
+		//glfwSetKeyCallback(m_display->window(), key_callback);
 	}
 	return true;
 }
 
 bool Application::update()
 {
-	return false;
+	return true;
 }
 
 bool Application::fixedUpdate()
 {
-	return false;
+	return true;
 }
 
 bool Application::draw()
@@ -101,9 +100,8 @@ bool Application::draw()
 	// Activate shader
 	m_shaderProgram->start();
 
-	// pass camera position to shader
-	glm::mat4 cameraPosition = glm::translate(cameraPosition, glm::vec3(0.0f, 0.5f, -2.0f)); 
-	m_shaderProgram->uniformMat4("view", cameraPosition);
+	// pass camera position to shader 
+	m_shaderProgram->uniformMat4("view", m_cameraPosition);
 
 	// ## NOW HANDLED IN THE RENDERER
 	// pass camera projection to shader
@@ -142,20 +140,3 @@ bool Application::stop()
 	return true;
 }
 
-void key_callback(GLFWwindow * window, int key, int scancode, int action, int mode)
-{
-	// When a user presses the escape key, we set the WindowShouldClose property to true, 
-	// closing the application
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-	{
-		glfwSetWindowShouldClose(window, GL_TRUE);
-	}
-
-	//if (key == GLFW_KEY_L && action == GLFW_PRESS)
-	//{
-	//	// toggle wireFrame bool
-	//	m_bWireframe = !m_bWireframe;
-	//	// toggle wire frame based on bool state
-	//	m_bWireframe ? glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) : glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//}
-}

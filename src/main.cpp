@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "tests\tests.h"
+#include "Application.h"
 
 
 /// main function
@@ -31,7 +32,17 @@ int main()
 	//transformsRotationPlanets();
 	//quaterionsTute();
 	//threeDeeObjects();
-	camera();
+	//camera();
+
+	Application * app = new Application();
+
+	if (app != nullptr)
+	{
+		app->run();
+	}
+
+	delete app;
+
 	return 0;
 }
 

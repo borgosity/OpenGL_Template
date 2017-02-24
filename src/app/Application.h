@@ -45,6 +45,8 @@ private:
 	Loader * m_loader;
 	Renderer * m_renderer;
 	Camera * m_camera;
+	glm::mat4 m_cameraPosition;
+
 	// textures
 	ShaderProgram * m_shaderProgram;
 	Texture * m_sunTexture;
@@ -63,5 +65,3 @@ private:
 	//private functions
 
 };
-
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
