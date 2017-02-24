@@ -37,6 +37,9 @@
     <Filter Include="Source Files\entities">
       <UniqueIdentifier>{dc25674c-2283-4c71-bfcc-91fb58787667}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\app">
+      <UniqueIdentifier>{377faaac-9603-4f16-a707-9eefa8ed6ddd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -81,6 +84,15 @@
     <ClCompile Include="src\entities\Entity.cpp">
       <Filter>Source Files\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\models\DynamicModels.cpp">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Application.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Controller.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -119,11 +131,17 @@
     <ClInclude Include="src\renderEngine\Camera.h">
       <Filter>Source Files\renderEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\entities\Entity.h">
       <Filter>Source Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\models\DynamicModels.h">
+      <Filter>Source Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Application.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Controller.h">
+      <Filter>Source Files\app</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

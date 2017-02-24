@@ -15,6 +15,11 @@ Entity::Entity(TexturedModel * a_texturedModel, glm::vec3 a_position, glm::vec3 
 Entity::~Entity()
 {
 }
+/// binds textures to shader uniforms
+void Entity::bindTextures(const GLchar * a_uniformA, const GLchar * a_uniformB)
+{
+	m_texturedModel->bindTextures(a_uniformA, a_uniformB);
+}
 /// current position += vec3
 void Entity::movePosition(glm::vec3 a_position)
 {

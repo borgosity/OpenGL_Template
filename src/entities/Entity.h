@@ -9,7 +9,7 @@ public:
 	Entity(TexturedModel * a_texturedModel, glm::vec3 a_position, glm::vec3 a_rotation, GLfloat a_scale);
 	~Entity();
 
-
+	void bindTextures(const GLchar * a_uniformA, const GLchar * a_uniformB);
 	void movePosition(glm::vec3 a_position);
 	void rotate(glm::vec3 a_rotation);
 	void scaleSize(GLfloat a_scale);
@@ -32,5 +32,6 @@ private:
 	glm::vec3		m_vPosition;
 	glm::vec3		m_vRotation;
 	GLfloat			m_fScale;
+	
 };
 

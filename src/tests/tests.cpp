@@ -1,6 +1,9 @@
 #include "tests.h"
+// display
 #include "Loader.h"
 #include "Renderer.h"
+#include "Camera.h"
+// utility
 #include "Maths.h"
 // shaders
 #include "ShaderProgram.h"
@@ -9,7 +12,10 @@
 #include "ModelTexture.h"
 #include "TexturedModel.h"
 #include "Texture.h"
+// models
 #include "Entity.h"
+#include "DynamicModels.h"
+
 
 
 
@@ -1635,6 +1641,9 @@ void threeDeeObjects()
 void camera()
 {
 	std::cout << "\n### --> Starting Transforms Tute" << std::endl;
+	// key strokes
+	bool keys[1024];
+
 
 	// initialise display
 	DisplayManager * display = new DisplayManager();
@@ -1647,78 +1656,37 @@ void camera()
 	// initialise shader program
 	ShaderProgram * shaderProgram = new ShaderProgram(Shader::cameraShader);
 
-	// Set up vertex data (and buffer(s)) and attribute pointers
-	GLfloat vertices[] = {
-		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-		0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-		0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-
-		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-	};
-
 	// load model to VAO
 	Loader * loader = new Loader();
-	Renderer * renderer = new Renderer();
+	Renderer * renderer = new Renderer(shaderProgram);
+	
+	// create cube model
+	RawModel * rawModel = DynamicModels::cube(); 
 
-	RawModel * rawModel = loader->loadToVAO(vertices, sizeof(vertices), 5);
-
+	// create textures
 	Texture * sunTexture = new Texture("res/textures/Sun.png");
 	Texture * planetTexture = new Texture("res/textures/M-Class.png");
 	Texture * moonTexture = new Texture("res/textures/Moon.png");
 
+	// add textures to cube models
 	TexturedModel * sunModel = new TexturedModel(*rawModel, *sunTexture, *sunTexture, shaderProgram->ID());
 	TexturedModel * planetModel = new TexturedModel(*rawModel, *planetTexture, *planetTexture, shaderProgram->ID());
 	TexturedModel * moonModel = new TexturedModel(*rawModel, *moonTexture, *moonTexture, shaderProgram->ID());
 
-	// create entity
+	// create planetary entities 
 	Entity * sun = new Entity(sunModel, glm::vec3(0,0,0), glm::vec3(0, 0, 0), 1.0f);
 	Entity * planet = new Entity(planetModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 	Entity * moon = new Entity(moonModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 
+	// ## NOW HANDLED IN THE RENDERER
 	// the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-	glm::mat4 cameraProjection;
-	// set the cameras - FOV, Screen Ratio, near plane, far plane
-	cameraProjection = glm::perspective(55.0f, 800.0f / 600.0f, 0.1f, 100.0f);
+	//glm::mat4 cameraProjection;
+	//// set the cameras - FOV, Screen Ratio, near plane, far plane
+	//cameraProjection = glm::perspective(55.0f, 800.0f / 600.0f, 0.1f, 100.0f);
 
 	// camera position
 	glm::mat4 cameraPosition;
-	cameraPosition = glm::translate(cameraPosition, glm::vec3(0.0f, 0.0f, -3.0f));
+	cameraPosition = glm::translate(cameraPosition, glm::vec3(0.0f, 0.5f, -2.0f));
 
 	// Game loop
 	while (!glfwWindowShouldClose(display->window()))
@@ -1734,45 +1702,29 @@ void camera()
 		// Activate shader
 		shaderProgram->start();
 
-
-		//// create transform, with rotation changed over time
-		//glm::mat4 modelTransform = Maths::createTransormationMatrix(glm::vec3(0, 0, 0),  // position
-		//															glm::vec3(time * -20.0f, time * -15.0f, 0.0f), // rotation
-		//															1.0f); // scale
-		//// pass updated model to shader
-		//shaderProgram->uniformMat4("model", modelTransform);
-		//entity->movePosition(glm::vec3(glm::sin(time * -50.0f), 0, 0));
-
-		//entity->rotate(glm::vec3(glm::cos(time * -1.0f), glm::sin(time * -1.0f), 0.0f));
-
-
-		// ================== sun  ================
-
-		// create transform, with rotation changed over time
-		sun->transform(Maths::createTransormationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, glfwGetTime() * -10.0f), 0.3f));
-		renderer->renderEntity(sun, shaderProgram);
-
-
-		// ================== planet  ================
-		// set transform with local and world rotation changed over time
-		planet->transform(Maths::createWorldRotationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, glfwGetTime() * -20.0f), 0) *
-						  Maths::createTransormationMatrix(glm::vec3(0.45f, -0.45f, 0), glm::vec3(0, 0, glfwGetTime() * -20.0f), 0.2f));
-		renderer->renderEntity(planet, shaderProgram);
-
-
-		// ================== moon  ================
-
-		// multiple planets transformation by world rotation changed over time (scale and translate value need to be increased above the norm to achieve similar sizing and distance)
-		moon->transform(planet->transform() * Maths::createWorldRotationMatrix(glm::vec3(0.8f, -0.8f, 0), glm::vec3(0, 0, glfwGetTime() * -40.0f), 0.5f));
-		renderer->renderEntity(moon, shaderProgram);
-
 		// pass camera position to shader
 		shaderProgram->uniformMat4("view", cameraPosition);
 
+		// ## NOW HANDLED IN THE RENDERER
 		// pass camera projection to shader
-		shaderProgram->uniformMat4("projection", cameraProjection);
-		// Draw container
-		//renderer->renderTexturedModel(texturedModel);
+		/*shaderProgram->uniformMat4("projection", cameraProjection);*/
+
+		// ================== sun  ================
+		// create transform, with rotation changed over time
+		sun->transform(Maths::createTransormationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, time * -15.0f, 0), 0.3f));
+		renderer->renderEntity(sun, shaderProgram);
+
+		// ================== planet  ================
+		// set transform with local and world rotation changed over time
+		planet->transform(Maths::createWorldRotationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, time * -25.0f, 0), 0) *
+			Maths::createTransormationMatrix(glm::vec3(0.45f, 0, -0.45f), glm::vec3(0, time * -25.0f, 0), 0.2f));
+		renderer->renderEntity(planet, shaderProgram);
+
+		// ================== moon  ================
+		// multiple planets transformation by world rotation changed over time 
+		// - scale and translate value need to be increased above the norm to achieve similar sizing and distance
+		moon->transform(planet->transform() * Maths::createWorldRotationMatrix(glm::vec3(0.8f, 0, -0.8f), glm::vec3(0, time * -75.0f, 0), 0.5f));
+		renderer->renderEntity(moon, shaderProgram);
 
 		// Swap the screen buffers
 		glfwSwapBuffers(display->window());
@@ -1796,16 +1748,21 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, GL_TRUE);
-		std::cout << "Escape Key Pressed" << std::endl;
 	}
 
-	if (key == GLFW_KEY_W && action == GLFW_PRESS)
+	if (key == GLFW_KEY_L && action == GLFW_PRESS)
 	{
 		// toggle wireFrame bool
 		wireFrame = !wireFrame; 
 		// toggle wire frame based on bool state
 		wireFrame ? glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) : glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
+
+	//if (action == GLFW_PRESS)
+	//	keys[key] = true;
+	//else if (action == GLFW_RELEASE)
+	//	keys[key] = false;
+
 }
 
 /// function that alternates screens background colour

@@ -15,7 +15,10 @@ public:
 	// access raw model values
 	GLuint vaoID() { return m_rawModel->vaoID(); }
 	GLuint vertexCount() { return m_rawModel->vertexCount(); };
-
+	// bind textures to shader uniforms
+	void bindTextures(const GLchar * a_uniformA, const GLchar * a_uniformB);
+	// does the model use indeces
+	bool hasIndices() { return rawModel().hasIndecies(); };
 
 private:
 	RawModel *	m_rawModel;
@@ -23,6 +26,5 @@ private:
 	Texture *	m_textureB;
 	GLuint		m_shaderProgramID;
 	// private functions
-	void bindTextures();
 };
 

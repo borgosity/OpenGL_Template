@@ -11,8 +11,10 @@ class Renderer
 {
 public:
 	Renderer();
+	Renderer(ShaderProgram * a_shader);
 	~Renderer();
 
+	void createProjectionMatrix();
 	void prepare(GLfloat red, GLfloat green, GLfloat blue);
 	void render(RawModel * model);
 	void render(RawModel * model, GLuint shaderProgram);
@@ -21,5 +23,8 @@ public:
 	void renderEntity(Entity * a_entity, ShaderProgram * a_shader);
 	void bindRenderTexture(TexturedModel * a_texturedModel);
 	void bindTexture(TexturedModel * a_texturedModel, ShaderProgram * a_shader, const char * a_uniformName, int a_texNumber);
+
+private:
+	glm::mat4 m_mCameraProjection;
 };
 

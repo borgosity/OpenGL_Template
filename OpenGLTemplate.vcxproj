@@ -106,7 +106,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\entities;$(SolutionDir)src\toolBox;$(SolutionDir)src\textures;$(SolutionDir)src\models;$(SolutionDir)src\shaders;$(SolutionDir)src\renderEngine\;$(SolutionDir)src\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\soil\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\app;$(SolutionDir)src\entities;$(SolutionDir)src\toolBox;$(SolutionDir)src\textures;$(SolutionDir)src\models;$(SolutionDir)src\shaders;$(SolutionDir)src\renderEngine\;$(SolutionDir)src\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\soil\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -172,8 +172,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\app\Application.cpp" />
+    <ClCompile Include="src\app\Controller.cpp" />
     <ClCompile Include="src\entities\Entity.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\models\DynamicModels.cpp" />
     <ClCompile Include="src\models\RawModel.cpp" />
     <ClCompile Include="src\models\TexturedModel.cpp" />
     <ClCompile Include="src\renderEngine\Camera.cpp" />
@@ -188,8 +191,10 @@
     <ClCompile Include="src\toolBox\Maths.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entity.h" />
+    <ClInclude Include="src\app\Application.h" />
+    <ClInclude Include="src\app\Controller.h" />
     <ClInclude Include="src\entities\Entity.h" />
+    <ClInclude Include="src\models\DynamicModels.h" />
     <ClInclude Include="src\models\RawModel.h" />
     <ClInclude Include="src\models\TexturedModel.h" />
     <ClInclude Include="src\renderEngine\Camera.h" />

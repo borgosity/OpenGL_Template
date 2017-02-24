@@ -6,9 +6,23 @@ Renderer::Renderer()
 {
 }
 
+Renderer::Renderer(ShaderProgram * a_shader)
+{
+	createProjectionMatrix();
+	a_shader->start();
+	a_shader->uniformMat4("projection", m_mCameraProjection);
+	a_shader->stop();
+}
+
 
 Renderer::~Renderer()
 {
+}
+
+void Renderer::createProjectionMatrix()
+{
+	// set the cameras - FOV, Screen Ratio, near plane, far plane
+	m_mCameraProjection = glm::perspective(55.0f, 800.0f / 600.0f, 0.1f, 100.0f);
 }
 
 void Renderer::prepare(GLfloat red, GLfloat green, GLfloat blue)
@@ -64,16 +78,29 @@ void Renderer::bindTexture(TexturedModel * a_texturedModel, ShaderProgram * a_sh
 void Renderer::renderTexturedModel(TexturedModel * a_texturedModel)
 {
 	glBindVertexArray(a_texturedModel->vaoID());
-	//glDrawElements(GL_TRIANGLES, a_texturedModel->vertexCount(), GL_UNSIGNED_INT, 0);
-	glDrawArrays(GL_TRIANGLES, 0, a_texturedModel->vertexCount());
+	// check if the model uses indices
+	if (a_texturedModel->rawModel().hasIndecies()){
+		glDrawElements(GL_TRIANGLES, a_texturedModel->vertexCount(), GL_UNSIGNED_INT, 0);
+	}
+	else {
+		glDrawArrays(GL_TRIANGLES, 0, a_texturedModel->vertexCount());
+	}
+
 	glBindVertexArray(0);
 }
 
 void Renderer::renderEntity(Entity * a_entity, ShaderProgram * a_shader)
 {
 	glBindVertexArray(a_entity->model()->vaoID());
-	glm::mat4 modelTransform = a_entity->transform();
-	a_shader->uniformMat4("model", modelTransform);
-	glDrawArrays(GL_TRIANGLES, 0, a_entity->model()->vertexCount());
+	a_entity->bindTextures("ourTexture1", "ourTexture2");
+	a_shader->uniformMat4("model", a_entity->transform());
+	// check if the entities model uses indices
+	if (a_entity->model()->hasIndices()) {
+		glDrawElements(GL_TRIANGLES, a_entity->model()->vertexCount(), GL_UNSIGNED_INT, 0);
+	}
+	else {
+		glDrawArrays(GL_TRIANGLES, 0, a_entity->model()->vertexCount());
+	}
+
 	glBindVertexArray(0);
 }

@@ -48,6 +48,36 @@ RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_posSize, int a_vertexS
 	// return a RawModel object
 	return new RawModel(vaoID, a_posSize / a_vertexSize);
 }
+
+///
+/// Function to Load data to VAO - 
+/// positions = vertex data ( it can contain	- position and colour and texture 
+///												- position and colour
+///												- position and texture
+///												- position ) 
+/// posSize = size of vertex data array
+/// vertexSize = size of the vertex buffer blocks	- 8(p & c & t)
+///													- 6 (p & C) 
+///													- 5 (p & t) 
+///													- 3 (p)
+///
+RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_posSize, int a_vertexSize, GLuint a_indicies[], int a_indSize)
+{
+	GLuint vaoID = createVAO();					// create and bind VAO
+	createVBO(a_positions, a_posSize);			// create and bind VBOs
+	bindIndicesBuffer(a_indicies, a_indSize);	// create and bind indicies
+	// assume there is always position data
+	storePositionData(0, a_vertexSize);
+	// if there is more than 1 set of 3 data assume second set is colour
+	if (a_vertexSize / 3 >= 2) storeColourData(1, a_vertexSize);
+	// if the data has a remainder of 2 then assume there is texture data
+	if (a_vertexSize % 3 == 2) storeTextureData(2, a_vertexSize);
+	// unbind vbo and vao
+	unbind();
+	// return a RawModel object
+	return new RawModel(vaoID, a_indSize / sizeof(GLuint), true);
+}
+
 /// VAO loader that includes indicies
 RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_posSize, GLuint a_indicies[], int a_indSize)
 {
@@ -184,7 +214,10 @@ void Loader::storeTextureDataInAttributeList(int attributeNumber)
 }
 
 /*****************************************************************************************
-	Single VBO with a single array of data functions - ## NOT TESTED ##
+	Single VBO with a single array of data functions 
+	
+	# TODO # adjust vertex data size to not be fixed pos and colour can be 3 or 4 which will also change start pos
+
 *******************************************************************************************/
 void Loader::storePositionData(int attributeNumber, int vertSize)
 {

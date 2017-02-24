@@ -17,8 +17,8 @@ public:
 
 	RawModel * loadToVAO(GLfloat positions[], int size);
 	RawModel * loadToVAO(GLfloat a_positions[], int a_posSize, int a_vertexSize);
+	RawModel * loadToVAO(GLfloat a_positions[], int a_posSize, int a_vertexSize, GLuint a_indicies[], int a_indSize);
 	RawModel * loadToVAO(GLfloat a_positions[], int a_posSize, GLuint a_indicies[], int a_indSize);
-//	RawModel * loadToVAO(GLfloat a_positions[], int a_size, int a_attribNum);
 	RawModel * loadToVAO(GLfloat a_positions[], int a_pSize, GLfloat a_colours[], int a_cSize, GLfloat a_textures[], int a_tSize, GLuint a_indicies[], int a_iSize);
 	RawModel * loadTextureVAO(GLfloat a_positions[], int a_size, GLuint a_indicies[], int a_indSize);
 	GLuint loadTexture(std::string a_fileName);
