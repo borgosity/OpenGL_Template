@@ -173,7 +173,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\app\Application.cpp" />
+    <ClCompile Include="src\app\CameraController.cpp" />
     <ClCompile Include="src\app\Controller.cpp" />
+    <ClCompile Include="src\app\ExampleApp.cpp" />
     <ClCompile Include="src\entities\Entity.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\models\DynamicModels.cpp" />
@@ -192,7 +194,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\Application.h" />
+    <ClInclude Include="src\app\CameraController.h" />
     <ClInclude Include="src\app\Controller.h" />
+    <ClInclude Include="src\app\ExampleApp.h" />
     <ClInclude Include="src\entities\Entity.h" />
     <ClInclude Include="src\models\DynamicModels.h" />
     <ClInclude Include="src\models\RawModel.h" />

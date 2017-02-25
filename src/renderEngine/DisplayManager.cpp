@@ -30,6 +30,7 @@ void DisplayManager::createDisplay()
 		glfwTerminate();
 	}
 	glfwMakeContextCurrent(m_window);
+	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// initialise GLEW
 	glewExperimental = GL_TRUE;
@@ -42,6 +43,9 @@ void DisplayManager::createDisplay()
 	int width, height;
 	glfwGetFramebufferSize(m_window, &width, &height);
 	glViewport(0, 0, width, height);
+
+	// Setup OpenGL options
+	glEnable(GL_DEPTH_TEST);
 }
 
 void DisplayManager::updateDisplay()

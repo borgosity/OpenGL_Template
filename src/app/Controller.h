@@ -1,15 +1,41 @@
 #pragma once
+#include <glew.h>
+#include <glfw3.h>
+#include <glm.hpp>
+// source includes
+#include "Camera.h"
+
 class Controller
 {
 public:
 	Controller();
-	~Controller();
+	virtual ~Controller();
 
-	void keyPress();
-	void mouseMovement();
-	void mouseClick();
+	static bool close() { return m_bClose; };
+	// user input callbacks
+	static void keyCallback(GLFWwindow* a_window, int a_key, int a_scanCode, int a_action, int a_mode);
+	static void mouseCallback(GLFWwindow * a_window, double a_xPos, double a_yPos);
+	static void scrollCallback(GLFWwindow * a_window, double a_xOffset, double a_yOffset);
 
-private:
-	bool m_bKeys[1024];
+protected:
+	// key states
+	static GLboolean m_bKeys[1024];
+	static bool		 m_bClose;
+	// mouse privates
+	static bool		m_bDoubleClick;
+	static GLfloat	m_fOldXpos;
+	static GLfloat	m_fOldYpos;
+	static GLfloat	m_fXoffset;
+	static GLfloat	m_fYoffset;
+	// scroll offsets
+	static GLfloat	m_fScrollXoffset;
+	static GLfloat	m_fScrollYoffset;
+	// debug variables
+	static bool m_bWireFrame;
+
+	// protected functions
+	virtual void keyPress(Camera & a_camera) = 0;
+	virtual void mouseMovement(Camera & a_camera) = 0;
+	virtual void mouseClick(Camera & a_camera) = 0;
 };
 

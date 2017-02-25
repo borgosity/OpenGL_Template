@@ -1,5 +1,5 @@
 #include "Maths.h"
-
+#include <iostream>
 
 
 Maths::Maths()
@@ -46,6 +46,19 @@ glm::mat4 Maths::createTransormationMatrix(glm::vec3 a_translation, glm::vec3 a_
 	}
 	// return transformed matrix
 	return matrix;
+}
+
+glm::mat4 Maths::createViewMatrix(Camera & a_camera)
+{
+	// create an identity matrix
+	glm::mat4 viewMatrix(1.0f);
+	// rotate
+	viewMatrix = glm::rotate(viewMatrix, glm::radians(a_camera.pitch()), glm::vec3(1, 0, 0));
+	viewMatrix = glm::rotate(viewMatrix, glm::radians(a_camera.yaw()), glm::vec3(0, 1, 0));
+	// translate
+	viewMatrix = glm::translate(viewMatrix, -a_camera.position());
+	// return new viewMatrix
+	return viewMatrix;
 }
 
 glm::mat4 Maths::quaternionTransformation(glm::vec3 a_translation, glm::quat a_rotation, float a_scale)

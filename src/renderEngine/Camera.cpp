@@ -12,23 +12,46 @@ Camera::~Camera()
 {
 }
 
-void Camera::move()
+void Camera::moveForward()
 {
-	//// camera movement
-	//if (key == GLFW_KEY_W && action == GLFW_PRESS)
-	//{
-
-	//}
-	//if (key == GLFW_KEY_S && action == GLFW_PRESS)
-	//{
-
-	//}
-	//if (key == GLFW_KEY_A && action == GLFW_PRESS)
-	//{
-
-	//}
-	//if (key == GLFW_KEY_D && action == GLFW_PRESS)
-	//{
-
-	//}
+	std::cout << "\n MOVE FORWARD" << std::endl;
+	m_vPosition.z -= 0.001f;
 }
+
+void Camera::moveBack()
+{
+	std::cout << "\n MOVE BACK" << std::endl;
+	m_vPosition.z += 0.001f;
+}
+
+void Camera::moveLeft()
+{
+	std::cout << "\n MOVE LEFT" << std::endl;
+	m_vPosition.x -= 0.001f;
+}
+
+void Camera::moveRight()
+{
+	std::cout << "\n MOVE RIGHT" << std::endl;
+	m_vPosition.x += 0.001f;
+}
+
+void Camera::pitchUpdate(GLfloat a_xOffset)
+{
+	std::cout << "\n PITCH CHANGE - " << a_xOffset << std::endl;
+	m_fPitch += a_xOffset;
+}
+
+void Camera::yawUpdate(GLfloat a_yOffset)
+{
+	std::cout << "\n YAW CHANGE" << a_yOffset << std::endl;
+	m_fYaw += a_yOffset;
+}
+
+void Camera::rollUpdate(GLfloat a_zOffset)
+{
+	std::cout << "\n ROLL CHANGE" << a_zOffset << std::endl;
+	m_fRoll += a_zOffset;
+}
+
+

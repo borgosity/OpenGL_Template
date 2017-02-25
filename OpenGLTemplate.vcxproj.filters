@@ -93,6 +93,12 @@
     <ClCompile Include="src\app\Controller.cpp">
       <Filter>Source Files\app</Filter>
     </ClCompile>
+    <ClCompile Include="src\app\CameraController.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\ExampleApp.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -141,6 +147,12 @@
       <Filter>Source Files\app</Filter>
     </ClInclude>
     <ClInclude Include="src\app\Controller.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\CameraController.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\ExampleApp.h">
       <Filter>Source Files\app</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,6 +12,7 @@
 #include "Camera.h"
 // utility
 #include "Maths.h"
+#include "CameraController.h"
 // shaders
 #include "ShaderProgram.h"
 #include "Shaders.h"
@@ -29,39 +30,20 @@ public:
 	Application();
 	~Application();
 
-	bool start();
 	bool run();
-	bool update();
-	bool fixedUpdate();
-	bool draw();
-	bool stop();
+	virtual bool start();
+	virtual bool update(GLfloat a_deltaTime);
+	virtual bool fixedUpdate(GLfloat a_deltaTime);
+	virtual bool draw(GLfloat a_deltaTime);
+	virtual bool stop();
+
+protected:
+	void deltaTime();
 
 private:
-	
-	Controller * m_controller;
-	bool m_bWireframe;
-	// display
-	DisplayManager * m_display;
-	Loader * m_loader;
-	Renderer * m_renderer;
-	Camera * m_camera;
-	glm::mat4 m_cameraPosition;
-
-	// textures
-	ShaderProgram * m_shaderProgram;
-	Texture * m_sunTexture;
-	Texture * m_planetTexture;
-	Texture * m_moonTexture;
-	// models
-	RawModel * m_rawModel;
-	TexturedModel * m_sunModel;
-	TexturedModel * m_planetModel;
-	TexturedModel * m_moonModel;
-	// planetary entities 
-	Entity * m_sun;
-	Entity * m_planet;
-	Entity * m_moon;
-
-	//private functions
+	// time
+	GLfloat m_fDeltaTime;
+	GLfloat m_fCurrentTime;
+	GLfloat m_fPrevTime;
 
 };

@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include "tests\tests.h"
-#include "Application.h"
+#include "ExampleApp.h"
 
 
 /// main function
@@ -34,7 +34,7 @@ int main()
 	//threeDeeObjects();
 	//camera();
 
-	Application * app = new Application();
+	ExampleApp * app = new ExampleApp();
 
 	if (app != nullptr)
 	{
