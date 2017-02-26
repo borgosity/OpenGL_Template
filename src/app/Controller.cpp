@@ -4,11 +4,13 @@
 GLboolean	Controller::m_bKeys[1024];
 bool		Controller::m_bClose = false;
 // mouse movement
-bool		Controller::m_bDoubleClick = false;
-GLfloat		Controller::m_fOldXpos = 0;
-GLfloat		Controller::m_fOldYpos = 0;
+bool		Controller::m_bInitialPos = false;
+GLfloat		Controller::m_fOldXpos = HALFSC_W;
+GLfloat		Controller::m_fOldYpos = HALFSC_H;
 GLfloat		Controller::m_fXoffset = 0;
 GLfloat		Controller::m_fYoffset = 0;
+GLfloat		Controller::m_fMouseSpeed = MOUSE_SPEED;
+
 // scroll offsets
 GLfloat		Controller::m_fScrollXoffset = 0;
 GLfloat		Controller::m_fScrollYoffset = 0;
@@ -49,16 +51,17 @@ void Controller::keyCallback(GLFWwindow * a_window, int a_key, int a_scanCode, i
 
 void Controller::mouseCallback(GLFWwindow* a_window, double a_xPos, double a_yPos)
 {
-	// record position of first click
-	if (!m_bDoubleClick)
+	// set initial pos position, 
+	// stops screen jump on start up when cursor is not centered
+	if (!m_bInitialPos)
 	{
 		m_fOldXpos = a_xPos;
 		m_fOldYpos = a_yPos;
-		m_bDoubleClick = true;
+		m_bInitialPos = true;
 	}
 	// set offsets
 	m_fXoffset = a_xPos - m_fOldXpos;
-	m_fYoffset = m_fOldYpos - a_yPos;  // Reversed since y-coordinates go from bottom to left
+	m_fYoffset = a_yPos - m_fOldYpos;  // Reversed since y-coordinates go from bottom to left
 	// set old position
 	m_fOldXpos = a_xPos;
 	m_fOldYpos = a_yPos;

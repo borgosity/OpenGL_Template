@@ -1,5 +1,6 @@
 #pragma once
 #include "Controller.h"
+#include "ConstValues.h"
 
 
 class CameraController :
@@ -9,9 +10,9 @@ public:
 	CameraController();
 	virtual ~CameraController();
 
-	void update(Camera & camera);
+	void update(Camera & camera, GLfloat a_dt);
 
-	void keyPress(Camera & a_camera) override;
+	void keyPress(Camera & a_camera, GLfloat a_dt) override;
 	void mouseMovement(Camera & a_camera) override;
 	void mouseClick(Camera & a_camera) override;
 private:

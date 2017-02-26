@@ -4,54 +4,85 @@
 
 Camera::Camera()
 {
-	m_vPosition = glm::vec3(0, 0, 0);
+	m_vPosition = glm::vec3(0, 0.5f, -2.0f);
+	m_fPitch = 0.0f;
+	m_fYaw = -10.0f; //set some initial offset to avoid camera pointing to the right
+	m_fRoll = 0.0f;
+	m_fSpeed = 5.0f;
+	m_vFront = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vUp = glm::vec3(0.0f, 0.0f, 0.0f);
 }
 
+Camera::Camera(glm::vec3 a_cameraPostion, GLfloat a_speed)
+{
+	m_vPosition = a_cameraPostion;
+	m_fPitch = 0.0f;
+	m_fYaw = -90.0f; //set some initial offset to avoid camera pointing to the right
+	m_fRoll = 0.0f;
+	m_fSpeed = a_speed;
+	m_vFront = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vUp = glm::vec3(0.0f, 0.1f, 0.0f);
+}
 
 Camera::~Camera()
 {
 }
-
-void Camera::moveForward()
+// update camera
+void Camera::update(GLfloat a_dt)
 {
-	std::cout << "\n MOVE FORWARD" << std::endl;
-	m_vPosition.z -= 0.001f;
+	// update camera view matrix
+	m_mViewMatrix = glm::lookAt(m_vPosition, m_vPosition + m_vFront, m_vUp);
 }
-
-void Camera::moveBack()
+/// move camera into the scene
+void Camera::moveForward(GLfloat a_dt)
 {
-	std::cout << "\n MOVE BACK" << std::endl;
-	m_vPosition.z += 0.001f;
+	m_vPosition += (m_fSpeed * a_dt) * m_vFront;
 }
-
-void Camera::moveLeft()
+/// move camera out of the scene
+void Camera::moveBack(GLfloat a_dt)
 {
-	std::cout << "\n MOVE LEFT" << std::endl;
-	m_vPosition.x -= 0.001f;
+	m_vPosition -= (m_fSpeed * a_dt) * m_vFront;
 }
-
-void Camera::moveRight()
+/// move camera to the left of the scene
+void Camera::moveLeft(GLfloat a_dt)
 {
-	std::cout << "\n MOVE RIGHT" << std::endl;
-	m_vPosition.x += 0.001f;
+	m_vPosition += glm::normalize(glm::cross(m_vFront, m_vUp)) * (m_fSpeed * a_dt);
 }
-
+/// move camera to the right of the scene
+void Camera::moveRight(GLfloat a_dt)
+{
+	m_vPosition -= glm::normalize(glm::cross(m_vFront, m_vUp)) * (m_fSpeed * a_dt);
+}
+/// update the cameras pitch
 void Camera::pitchUpdate(GLfloat a_xOffset)
 {
-	std::cout << "\n PITCH CHANGE - " << a_xOffset << std::endl;
+	// increase pitch by offset
 	m_fPitch += a_xOffset;
+	// constrain up/down mouse movement
+	if (m_fPitch > 89) m_fPitch = 89;
+	if (m_fPitch < -89) m_fPitch = -89;
+	// update cameras front
+	updateFront();
 }
-
+/// update the cameras yaw
 void Camera::yawUpdate(GLfloat a_yOffset)
 {
-	std::cout << "\n YAW CHANGE" << a_yOffset << std::endl;
+	// increase yaw by offset
 	m_fYaw += a_yOffset;
+	// update cameras front
+	updateFront();
 }
 
-void Camera::rollUpdate(GLfloat a_zOffset)
+/// 
+/// Camera Front function calculates the direction the camera should face
+///
+void Camera::updateFront()
 {
-	std::cout << "\n ROLL CHANGE" << a_zOffset << std::endl;
-	m_fRoll += a_zOffset;
+	glm::vec3 front;
+	front.x = glm::cos(glm::radians(m_fYaw)) * glm::cos(glm::radians(m_fPitch));
+	front.y = glm::sin(glm::radians(m_fPitch));
+	front.z = glm::sin(glm::radians(m_fYaw)) * glm::cos(glm::radians(m_fPitch));
+	m_vFront = glm::normalize(front);
 }
 
 

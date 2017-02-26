@@ -155,6 +155,9 @@
     <ClInclude Include="src\app\ExampleApp.h">
       <Filter>Source Files\app</Filter>
     </ClInclude>
+    <ClInclude Include="src\app\ConstValues.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\indexShader.fs">

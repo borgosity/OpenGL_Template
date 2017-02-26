@@ -4,6 +4,7 @@
 #include <glm.hpp>
 // source includes
 #include "Camera.h"
+#include "ConstValues.h"
 
 class Controller
 {
@@ -22,11 +23,12 @@ protected:
 	static GLboolean m_bKeys[1024];
 	static bool		 m_bClose;
 	// mouse privates
-	static bool		m_bDoubleClick;
+	static bool		m_bInitialPos;
 	static GLfloat	m_fOldXpos;
 	static GLfloat	m_fOldYpos;
 	static GLfloat	m_fXoffset;
 	static GLfloat	m_fYoffset;
+	static GLfloat  m_fMouseSpeed;
 	// scroll offsets
 	static GLfloat	m_fScrollXoffset;
 	static GLfloat	m_fScrollYoffset;
@@ -34,7 +36,7 @@ protected:
 	static bool m_bWireFrame;
 
 	// protected functions
-	virtual void keyPress(Camera & a_camera) = 0;
+	virtual void keyPress(Camera & a_camera, GLfloat a_dt) = 0;
 	virtual void mouseMovement(Camera & a_camera) = 0;
 	virtual void mouseClick(Camera & a_camera) = 0;
 };

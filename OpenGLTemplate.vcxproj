@@ -195,6 +195,7 @@
   <ItemGroup>
     <ClInclude Include="src\app\Application.h" />
     <ClInclude Include="src\app\CameraController.h" />
+    <ClInclude Include="src\app\ConstValues.h" />
     <ClInclude Include="src\app\Controller.h" />
     <ClInclude Include="src\app\ExampleApp.h" />
     <ClInclude Include="src\entities\Entity.h" />

@@ -4,7 +4,16 @@
 
 DisplayManager::DisplayManager()
 {
+	m_cTitle = "Used Default Constructor ;)";
+	m_iHeight = SCREEN_H;
+	m_iWidth = SCREEN_W;
+}
 
+DisplayManager::DisplayManager(char * a_title, GLint a_width, GLint a_height)
+{
+	m_cTitle = a_title;
+	m_iHeight = a_height;
+	m_iWidth = a_width;
 }
 
 
@@ -23,7 +32,7 @@ void DisplayManager::createDisplay()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	// create window
-	m_window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);
+	m_window = glfwCreateWindow(m_iWidth, m_iHeight, m_cTitle, nullptr, nullptr);
 	if (m_window == nullptr)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;

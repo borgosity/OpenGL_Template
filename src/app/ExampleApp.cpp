@@ -16,11 +16,11 @@ bool ExampleApp::start()
 	std::cout << "\n### --> Start ExampleApp" << std::endl;
 
 	// camera
-	m_camera = new Camera();
+	m_camera = new Camera(glm::vec3(0, -0.5f, 1.5f), CAM_SPEED);
 	m_cameraController = new CameraController();
 
 	// initialise display
-	m_display = new DisplayManager();
+	m_display = new DisplayManager("Example App", SCREEN_W, SCREEN_H);
 	m_display->createDisplay();
 
 	// Set the required callback functions for user input
@@ -37,36 +37,36 @@ bool ExampleApp::start()
 	m_renderer = new Renderer(m_shaderProgram);
 
 	// create cube model
-	m_rawModel = DynamicModels::cube();
+	m_cubeModel = DynamicModels::cube();
 
 	// create textures
 	m_sunTexture = new Texture("res/textures/Sun.png");
 	m_planetTexture = new Texture("res/textures/M-Class.png");
 	m_moonTexture = new Texture("res/textures/Moon.png");
+	m_starsTexture = new Texture("res/textures/Stars.png");
 
 	// add textures to cube models
-	m_sunModel = new TexturedModel(*m_rawModel, *m_sunTexture, *m_sunTexture, m_shaderProgram->ID());
-	m_planetModel = new TexturedModel(*m_rawModel, *m_planetTexture, *m_planetTexture, m_shaderProgram->ID());
-	m_moonModel = new TexturedModel(*m_rawModel, *m_moonTexture, *m_moonTexture, m_shaderProgram->ID());
+	m_sunModel = new TexturedModel(*m_cubeModel, *m_sunTexture, *m_sunTexture, m_shaderProgram->ID());
+	m_planetModel = new TexturedModel(*m_cubeModel, *m_planetTexture, *m_planetTexture, m_shaderProgram->ID());
+	m_moonModel = new TexturedModel(*m_cubeModel, *m_moonTexture, *m_moonTexture, m_shaderProgram->ID());
+	m_starsModel = new TexturedModel(*m_cubeModel, *m_starsTexture, *m_starsTexture, m_shaderProgram->ID());
 
 	// create planetary entities 
 	m_sun = new Entity(m_sunModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 	m_planet = new Entity(m_planetModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 	m_moon = new Entity(m_moonModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
+	m_stars = new Entity(m_starsModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 
 	// camera projection matrix ## NOW HANDLED IN THE RENDERER
-
-	// camera position
-	m_cameraPosition = glm::translate(m_cameraPosition, glm::vec3(0.0f, 0.5f, -2.0f));
 
 	return true;
 }
 
 bool ExampleApp::update(GLfloat a_deltaTime)
 {
-	//m_camera->viewMatrix(Maths::createViewMatrix(*m_camera));
-	m_cameraPosition = Maths::createViewMatrix(*m_camera);
-	m_cameraController->update(*m_camera);
+
+	m_cameraController->update(*m_camera, a_deltaTime);
+	
 	return true;
 }
 
@@ -86,11 +86,16 @@ bool ExampleApp::draw(GLfloat a_deltaTime)
 	m_shaderProgram->start();
 
 	// pass camera position to shader 
-	m_shaderProgram->uniformMat4("view", m_cameraPosition);
+	m_shaderProgram->uniformMat4("view", m_camera->viewMatrix());
 
 	// ## NOW HANDLED IN THE RENDERER
 	// pass camera projection to shader
 	/*shaderProgram->uniformMat4("projection", cameraProjection);*/
+
+	//// ================== stars  ================
+	//// create transform, with rotation changed over time
+	//m_sun->transform(Maths::createTransormationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 200.0f));
+	//m_renderer->renderEntity(m_stars, m_shaderProgram);
 
 	// ================== sun  ================
 	// create transform, with rotation changed over time

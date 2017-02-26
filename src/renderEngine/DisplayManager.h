@@ -5,11 +5,14 @@
 #define GLEW_STATIC
 #include <glew.h>
 #include <glfw3.h>
+// source includes
+#include "ConstValues.h"
 
 class DisplayManager
 {
 public:
 	DisplayManager();
+	DisplayManager(char * a_title, GLint a_width, GLint a_height);
 	~DisplayManager();
 
 	void createDisplay();
@@ -19,7 +22,9 @@ public:
 
 private:
 	// Window dimensions
-	const GLuint WIDTH = 800, HEIGHT = 600, FPS_CAP = 120;
 	GLFWwindow * m_window;
+	char *		 m_cTitle;
+	GLint		 m_iWidth;
+	GLint		 m_iHeight;
 };
 

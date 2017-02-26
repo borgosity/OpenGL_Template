@@ -22,7 +22,7 @@ Renderer::~Renderer()
 void Renderer::createProjectionMatrix()
 {
 	// set the cameras - FOV, Screen Ratio, near plane, far plane
-	m_mCameraProjection = glm::perspective(55.0f, 800.0f / 600.0f, 0.1f, 100.0f);
+	m_mCameraProjection = glm::perspective(FOV, (GLfloat)SCREEN_W / (GLfloat)SCREEN_H, NEAR_PLANE, FAR_PLANE);
 }
 
 void Renderer::prepare(GLfloat red, GLfloat green, GLfloat blue)

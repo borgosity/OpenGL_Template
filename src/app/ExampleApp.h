@@ -20,20 +20,22 @@ private:
 	Renderer *			m_renderer;
 	Camera *			m_camera;
 	CameraController *	m_cameraController;
-	glm::mat4			m_cameraPosition;
 	// textures
 	ShaderProgram * m_shaderProgram;
 	Texture *		m_sunTexture;
 	Texture *		m_planetTexture;
 	Texture *		m_moonTexture;
+	Texture *		m_starsTexture;
 	// models
-	RawModel *		m_rawModel;
+	RawModel *		m_cubeModel;
 	TexturedModel * m_sunModel;
 	TexturedModel * m_planetModel;
 	TexturedModel * m_moonModel;
+	TexturedModel * m_starsModel;
 	// planetary entities 
 	Entity * m_sun;
 	Entity * m_planet;
 	Entity * m_moon;
+	Entity * m_stars;
 };
 
