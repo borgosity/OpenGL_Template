@@ -11,9 +11,15 @@ Camera::Camera()
 	m_fSpeed = 5.0f;
 	m_vFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	m_vUp = glm::vec3(0.0f, 0.0f, 0.0f);
+	// initialise perspective matrix
+	m_fFOV = FOV;
+	m_fNearPlane = NEAR_PLANE;
+	m_fFarPlane = FAR_PLANE;
+	m_mProjection = glm::perspective(m_fFOV, (GLfloat)SCREEN_W / (GLfloat)SCREEN_H, m_fNearPlane, m_fFarPlane);
+
 }
 
-Camera::Camera(glm::vec3 a_cameraPostion, GLfloat a_speed)
+Camera::Camera(glm::vec3 a_cameraPostion, GLfloat a_speed, GLfloat a_fov, GLfloat a_nearPlane, GLfloat a_farPlane)
 {
 	m_vPosition = a_cameraPostion;
 	m_fPitch = 0.0f;
@@ -22,12 +28,17 @@ Camera::Camera(glm::vec3 a_cameraPostion, GLfloat a_speed)
 	m_fSpeed = a_speed;
 	m_vFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	m_vUp = glm::vec3(0.0f, 0.1f, 0.0f);
+	// initialise perspective matrix
+	m_fFOV = a_fov;
+	m_fNearPlane = a_nearPlane;
+	m_fFarPlane = a_farPlane;
+	m_mProjection = glm::perspective(m_fFOV, (GLfloat)SCREEN_W / (GLfloat)SCREEN_H, m_fNearPlane, m_fFarPlane);
 }
 
 Camera::~Camera()
 {
 }
-// update camera
+/// update camera
 void Camera::update(GLfloat a_dt)
 {
 	// update camera view matrix
@@ -59,8 +70,8 @@ void Camera::pitchUpdate(GLfloat a_xOffset)
 	// increase pitch by offset
 	m_fPitch += a_xOffset;
 	// constrain up/down mouse movement
-	if (m_fPitch > 89) m_fPitch = 89;
-	if (m_fPitch < -89) m_fPitch = -89;
+	if (m_fPitch > PITCH_MAX) m_fPitch = PITCH_MAX;
+	if (m_fPitch < PITCH_MIN) m_fPitch = PITCH_MIN;
 	// update cameras front
 	updateFront();
 }
@@ -72,7 +83,20 @@ void Camera::yawUpdate(GLfloat a_yOffset)
 	// update cameras front
 	updateFront();
 }
-
+/// update camera zoom
+void Camera::zoomUpdate(GLfloat a_yOffset)
+{
+	// update field of view is within constraints
+	if (m_fFOV >= FOV_MIN && m_fFOV <= FOV_MAX) {
+		m_fFOV += a_yOffset;
+	}
+	// constrain field of view
+	if (m_fFOV <= FOV_MIN)	m_fFOV = FOV_MIN;
+	if (m_fFOV >= FOV_MAX) m_fFOV = FOV_MAX;
+	std::cout << a_yOffset << ", " << m_fFOV << std::endl;
+	// update camera projection
+	updateProjection(m_fFOV, 0, 0);
+}
 /// 
 /// Camera Front function calculates the direction the camera should face
 ///
@@ -83,6 +107,19 @@ void Camera::updateFront()
 	front.y = glm::sin(glm::radians(m_fPitch));
 	front.z = glm::sin(glm::radians(m_fYaw)) * glm::cos(glm::radians(m_fPitch));
 	m_vFront = glm::normalize(front);
+}
+///
+/// Function to update the cameras perspecitve matrix
+/// - zero values (0) passed will keep the original value
+///
+void Camera::updateProjection(GLfloat a_fov, GLfloat a_nearPlane, GLfloat a_farPlane)
+{
+	// check if 0 has been passed
+	if (a_fov != 0) m_fFOV = a_fov;
+	if (a_nearPlane != 0) m_fNearPlane = a_nearPlane;
+	if (a_farPlane != 0) m_fFarPlane = a_farPlane;
+	// update perspective with new value
+	m_mProjection = glm::perspective(m_fFOV, (GLfloat)SCREEN_W / (GLfloat)SCREEN_H, m_fNearPlane, m_fFarPlane);
 }
 
 

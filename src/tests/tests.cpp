@@ -1658,7 +1658,7 @@ void camera()
 
 	// load model to VAO
 	Loader * loader = new Loader();
-	Renderer * renderer = new Renderer(shaderProgram);
+	Renderer * renderer = new Renderer();
 	
 	// create cube model
 	RawModel * rawModel = DynamicModels::cube(); 
@@ -1678,11 +1678,10 @@ void camera()
 	Entity * planet = new Entity(planetModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 	Entity * moon = new Entity(moonModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 
-	// ## NOW HANDLED IN THE RENDERER
 	// the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-	//glm::mat4 cameraProjection;
-	//// set the cameras - FOV, Screen Ratio, near plane, far plane
-	//cameraProjection = glm::perspective(55.0f, 800.0f / 600.0f, 0.1f, 100.0f);
+	glm::mat4 cameraProjection;
+	// set the cameras - FOV, Screen Ratio, near plane, far plane
+	cameraProjection = glm::perspective(55.0f, 800.0f / 600.0f, 0.1f, 100.0f);
 
 	// camera position
 	glm::mat4 cameraPosition;
@@ -1705,9 +1704,8 @@ void camera()
 		// pass camera position to shader
 		shaderProgram->uniformMat4("view", cameraPosition);
 
-		// ## NOW HANDLED IN THE RENDERER
 		// pass camera projection to shader
-		/*shaderProgram->uniformMat4("projection", cameraProjection);*/
+		shaderProgram->uniformMat4("projection", cameraProjection);
 
 		// ================== sun  ================
 		// create transform, with rotation changed over time

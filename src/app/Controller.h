@@ -38,6 +38,6 @@ protected:
 	// protected functions
 	virtual void keyPress(Camera & a_camera, GLfloat a_dt) = 0;
 	virtual void mouseMovement(Camera & a_camera) = 0;
-	virtual void mouseClick(Camera & a_camera) = 0;
+	virtual void mouseScroll(Camera & a_camera) = 0;
 };
 

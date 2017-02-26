@@ -16,7 +16,7 @@ bool ExampleApp::start()
 	std::cout << "\n### --> Start ExampleApp" << std::endl;
 
 	// camera
-	m_camera = new Camera(glm::vec3(0, -0.5f, 1.5f), CAM_SPEED);
+	m_camera = new Camera(glm::vec3(0, -0.5f, 1.5f), CAM_SPEED, FOV, NEAR_PLANE, FAR_PLANE);
 	m_cameraController = new CameraController();
 
 	// initialise display
@@ -34,7 +34,7 @@ bool ExampleApp::start()
 
 	// load model to VAO
 	m_loader = new Loader();
-	m_renderer = new Renderer(m_shaderProgram);
+	m_renderer = new Renderer();
 
 	// create cube model
 	m_cubeModel = DynamicModels::cube();
@@ -56,8 +56,6 @@ bool ExampleApp::start()
 	m_planet = new Entity(m_planetModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 	m_moon = new Entity(m_moonModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 	m_stars = new Entity(m_starsModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
-
-	// camera projection matrix ## NOW HANDLED IN THE RENDERER
 
 	return true;
 }
@@ -87,10 +85,8 @@ bool ExampleApp::draw(GLfloat a_deltaTime)
 
 	// pass camera position to shader 
 	m_shaderProgram->uniformMat4("view", m_camera->viewMatrix());
-
-	// ## NOW HANDLED IN THE RENDERER
 	// pass camera projection to shader
-	/*shaderProgram->uniformMat4("projection", cameraProjection);*/
+	m_shaderProgram->uniformMat4("projection", m_camera->projection());
 
 	//// ================== stars  ================
 	//// create transform, with rotation changed over time

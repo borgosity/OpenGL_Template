@@ -14,7 +14,7 @@ public:
 
 	void keyPress(Camera & a_camera, GLfloat a_dt) override;
 	void mouseMovement(Camera & a_camera) override;
-	void mouseClick(Camera & a_camera) override;
+	void mouseScroll(Camera & a_camera) override;
 private:
 	GLfloat m_fOldXoffset;
 	GLfloat m_fOldYoffset;

@@ -6,24 +6,15 @@ Renderer::Renderer()
 {
 }
 
-Renderer::Renderer(ShaderProgram * a_shader)
-{
-	createProjectionMatrix();
-	a_shader->start();
-	a_shader->uniformMat4("projection", m_mCameraProjection);
-	a_shader->stop();
-}
-
-
 Renderer::~Renderer()
 {
 }
 
-void Renderer::createProjectionMatrix()
-{
-	// set the cameras - FOV, Screen Ratio, near plane, far plane
-	m_mCameraProjection = glm::perspective(FOV, (GLfloat)SCREEN_W / (GLfloat)SCREEN_H, NEAR_PLANE, FAR_PLANE);
-}
+//void Renderer::createProjectionMatrix()
+//{
+//	// set the cameras - FOV, Screen Ratio, near plane, far plane
+//	m_mCameraProjection = glm::perspective(FOV, (GLfloat)SCREEN_W / (GLfloat)SCREEN_H, NEAR_PLANE, FAR_PLANE);
+//}
 
 void Renderer::prepare(GLfloat red, GLfloat green, GLfloat blue)
 {
