@@ -31,6 +31,7 @@ public:
 	~Application();
 
 	bool run();
+	virtual bool init();
 	virtual bool start();
 	virtual bool update(GLfloat a_deltaTime);
 	virtual bool fixedUpdate(GLfloat a_deltaTime);
@@ -40,6 +41,9 @@ public:
 protected:
 	void deltaTime();
 
+	template<typename T>
+	void deallocate(T a_ptr);
+
 private:
 	// time
 	GLfloat m_fDeltaTime;
@@ -47,3 +51,10 @@ private:
 	GLfloat m_fPrevTime;
 
 };
+
+template<typename T>
+inline void Application::deallocate(T a_ptr)
+{
+		delete a_ptr;
+		a_ptr = nullptr;
+}

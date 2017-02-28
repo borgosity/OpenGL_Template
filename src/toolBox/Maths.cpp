@@ -12,7 +12,7 @@ Maths::~Maths()
 }
 
 
-glm::mat4 Maths::createWorldRotationMatrix(glm::vec3 a_translation, glm::vec3 a_rotation, float a_scale)
+glm::mat4 Maths::createWorldTransformMatrix(glm::vec3 a_translation, glm::vec3 a_rotation, float a_scale)
 {
 	// create an identity matrix
 	glm::mat4 matrix(1.0f);

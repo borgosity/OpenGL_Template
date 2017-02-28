@@ -5,18 +5,20 @@
 
 struct ShaderPath
 {
-	const GLchar * vertexShader;
-	const GLchar * fragmentShader;
+	std::string vertexShader;
+	std::string fragmentShader;
 };
 
 struct Shader
 {
 	static ShaderPath cameraShader;
-	static ShaderPath staticShader;
+	static ShaderPath colourShader;
+	static ShaderPath dualTextureShader;
 	static ShaderPath indexShader;
+	static ShaderPath rippleShader;
+	static ShaderPath staticShader;
 	static ShaderPath textureShader;
 	static ShaderPath transformShader;
-	static ShaderPath dualTextureShader;
 	static ShaderPath uniformShader;
 };
 

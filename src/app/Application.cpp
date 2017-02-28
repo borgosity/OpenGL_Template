@@ -8,11 +8,18 @@ Application::Application()
 	m_fDeltaTime = 0.0f;
 	m_fCurrentTime = 0.0f;
 	m_fPrevTime = 0.0f;
+	// initialise 
+	init();
 }
 
 
 Application::~Application()
 {
+}
+
+bool Application::init()
+{
+	return true;
 }
 
 bool Application::start()

@@ -96,8 +96,11 @@
     <ClCompile Include="src\app\CameraController.cpp">
       <Filter>Source Files\app</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\ExampleApp.cpp">
-      <Filter>Source Files\app</Filter>
+    <ClCompile Include="src\tests\TerrainApp.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tests\ExampleApp.cpp">
+      <Filter>Source Files\tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,11 +155,14 @@
     <ClInclude Include="src\app\CameraController.h">
       <Filter>Source Files\app</Filter>
     </ClInclude>
-    <ClInclude Include="src\app\ExampleApp.h">
-      <Filter>Source Files\app</Filter>
-    </ClInclude>
     <ClInclude Include="src\app\ConstValues.h">
       <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tests\TerrainApp.h">
+      <Filter>Source Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tests\ExampleApp.h">
+      <Filter>Source Files\tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +206,18 @@
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
     <None Include="src\shaders\cameraShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\colourShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\colourShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\rippleShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\rippleShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
   </ItemGroup>

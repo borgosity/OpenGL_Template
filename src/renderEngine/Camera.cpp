@@ -78,8 +78,8 @@ void Camera::pitchUpdate(GLfloat a_xOffset)
 /// update the cameras yaw
 void Camera::yawUpdate(GLfloat a_yOffset)
 {
-	// increase yaw by offset
-	m_fYaw += a_yOffset;
+	// increase yaw by offset, mod used to stop high values
+	m_fYaw = glm::mod(m_fYaw + a_yOffset, 360.0f);
 	// update cameras front
 	updateFront();
 }
@@ -93,7 +93,6 @@ void Camera::zoomUpdate(GLfloat a_yOffset)
 	// constrain field of view
 	if (m_fFOV <= FOV_MIN)	m_fFOV = FOV_MIN;
 	if (m_fFOV >= FOV_MAX) m_fFOV = FOV_MAX;
-	std::cout << a_yOffset << ", " << m_fFOV << std::endl;
 	// update camera projection
 	updateProjection(m_fFOV, 0, 0);
 }
@@ -106,6 +105,7 @@ void Camera::updateFront()
 	front.x = glm::cos(glm::radians(m_fYaw)) * glm::cos(glm::radians(m_fPitch));
 	front.y = glm::sin(glm::radians(m_fPitch));
 	front.z = glm::sin(glm::radians(m_fYaw)) * glm::cos(glm::radians(m_fPitch));
+	// normalise final vector
 	m_vFront = glm::normalize(front);
 }
 ///

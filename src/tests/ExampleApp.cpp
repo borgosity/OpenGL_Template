@@ -38,24 +38,22 @@ bool ExampleApp::start()
 
 	// create cube model
 	m_cubeModel = DynamicModels::cube();
+	m_squareModel = DynamicModels::square(2.0f);
 
 	// create textures
 	m_sunTexture = new Texture("res/textures/Sun.png");
 	m_planetTexture = new Texture("res/textures/M-Class.png");
 	m_moonTexture = new Texture("res/textures/Moon.png");
-	m_starsTexture = new Texture("res/textures/Stars.png");
 
 	// add textures to cube models
 	m_sunModel = new TexturedModel(*m_cubeModel, *m_sunTexture, *m_sunTexture, m_shaderProgram->ID());
 	m_planetModel = new TexturedModel(*m_cubeModel, *m_planetTexture, *m_planetTexture, m_shaderProgram->ID());
 	m_moonModel = new TexturedModel(*m_cubeModel, *m_moonTexture, *m_moonTexture, m_shaderProgram->ID());
-	m_starsModel = new TexturedModel(*m_cubeModel, *m_starsTexture, *m_starsTexture, m_shaderProgram->ID());
 
 	// create planetary entities 
 	m_sun = new Entity(m_sunModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 	m_planet = new Entity(m_planetModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 	m_moon = new Entity(m_moonModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
-	m_stars = new Entity(m_starsModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 
 	return true;
 }
@@ -78,7 +76,7 @@ bool ExampleApp::draw(GLfloat a_deltaTime)
 	GLdouble time = glfwGetTime();
 	// Render
 	// Clear the colorbuffer
-	m_renderer->prepare(0.0f, 0.0f, 0.0f);
+	m_renderer->prepare(0.1f, 0.1f, 0.1f);
 
 	// Activate shader
 	m_shaderProgram->start();
@@ -88,26 +86,24 @@ bool ExampleApp::draw(GLfloat a_deltaTime)
 	// pass camera projection to shader
 	m_shaderProgram->uniformMat4("projection", m_camera->projection());
 
-	//// ================== stars  ================
-	//// create transform, with rotation changed over time
-	//m_sun->transform(Maths::createTransormationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 200.0f));
-	//m_renderer->renderEntity(m_stars, m_shaderProgram);
-
 	// ================== sun  ================
 	// create transform, with rotation changed over time
-	m_sun->transform(Maths::createTransormationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, time * -15.0f, 0), 0.3f));
+	m_sun->transform(Maths::createTransormationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, time * -15.0f, 0), 0.4f));
 	m_renderer->renderEntity(m_sun, m_shaderProgram);
 
 	// ================== planet  ================
+	// create an elliptical type path for the planet to follow
+	glm::vec3 elipse = glm::vec3(glm::cos(time) * 0.75f, 0, glm::sin(time) * 1.5f);
 	// set transform with local and world rotation changed over time
-	m_planet->transform(Maths::createWorldRotationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, time * -25.0f, 0), 0) *
-		Maths::createTransormationMatrix(glm::vec3(0.45f, 0, -0.45f), glm::vec3(0, time * -25.0f, 0), 0.2f));
+	m_planet->transform(Maths::createWorldTransformMatrix(glm::vec3(0, 0, 0), glm::vec3(0, time * -25.0f, 0), 0) *	// world transform around sun
+						Maths::createTransormationMatrix(elipse, glm::vec3(0, time * -80.0f, 0), 0.2f));			// local rotation
 	m_renderer->renderEntity(m_planet, m_shaderProgram);
 
 	// ================== moon  ================
 	// multiple planets transformation by world rotation changed over time 
 	// - scale and translate value need to be increased above the norm to achieve similar sizing and distance
-	m_moon->transform(m_planet->transform() * Maths::createWorldRotationMatrix(glm::vec3(0.8f, 0, -0.8f), glm::vec3(0, time * -75.0f, 0), 0.5f));
+	m_moon->transform(m_planet->transform() *	// planets transform 
+					  Maths::createWorldTransformMatrix(glm::vec3(0.8f, 0, -0.8f), glm::vec3(0, time * -75.0f, 0), 0.5f)); // world rotation
 	m_renderer->renderEntity(m_moon, m_shaderProgram);
 
 	// De-activate shader

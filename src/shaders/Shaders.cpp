@@ -1,9 +1,11 @@
 #include "Shaders.h"
 
- ShaderPath Shader::cameraShader = { "src/shaders/cameraShader.vs", "src/shaders/cameraShader.fs" };
- ShaderPath Shader::staticShader = { "src/shaders/staticShader.vs", "src/shaders/staticShader.fs" };
- ShaderPath Shader::indexShader = { "src/shaders/indexShader.vs", "src/shaders/indexShader.fs" };
- ShaderPath Shader::textureShader = { "src/shaders/textureShader.vs", "src/shaders/textureShader.fs" };
- ShaderPath Shader::transformShader = { "src/shaders/transformShader.vs", "src/shaders/transformShader.fs" };
- ShaderPath Shader::dualTextureShader = { "src/shaders/dualTextureShader.vs", "src/shaders/dualTextureShader.fs" };
- ShaderPath Shader::uniformShader = { "src/shaders/uniformShader.vs", "src/shaders/uniformShader.fs" };
+ ShaderPath Shader::cameraShader = { "src/shaders/glsl/cameraShader.vs", "src/shaders/glsl/cameraShader.fs" };
+ ShaderPath Shader::colourShader = { "src/shaders/glsl/colourShader.vs", "src/shaders/glsl/colourShader.fs" };
+ ShaderPath Shader::dualTextureShader = { "src/shaders/glsl/dualTextureShader.vs", "src/shaders/glsl/dualTextureShader.fs" };
+ ShaderPath Shader::indexShader = { "src/shaders/glsl/indexShader.vs", "src/shaders/glsl/indexShader.fs" };
+ ShaderPath Shader::rippleShader = { "src/shaders/glsl/rippleShader.vs", "src/shaders/glsl/rippleShader.fs" };
+ ShaderPath Shader::staticShader = { "src/shaders/glsl/staticShader.vs", "src/shaders/glsl/staticShader.fs" };
+ ShaderPath Shader::textureShader = { "src/shaders/glsl/textureShader.vs", "src/shaders/glsl/textureShader.fs" };
+ ShaderPath Shader::transformShader = { "src/shaders/glsl/transformShader.vs", "src/shaders/glsl/transformShader.fs" };
+ ShaderPath Shader::uniformShader = { "src/shaders/glsl/uniformShader.vs", "src/shaders/glsl/uniformShader.fs" };

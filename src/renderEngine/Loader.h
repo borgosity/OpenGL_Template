@@ -5,9 +5,16 @@
 #include <list>
 // gl includes
 #include <glew.h>
+#include <glm.hpp>
 #include <SOIL.h>   // texturing
 // local includes
 #include "RawModel.h"
+
+struct Vertex
+{
+	glm::vec3 position;
+	glm::vec3 colour;
+};
 
 class Loader
 {
@@ -18,6 +25,8 @@ public:
 	RawModel * loadToVAO(GLfloat positions[], int size);
 	RawModel * loadToVAO(GLfloat a_positions[], int a_posSize, int a_vertexSize);
 	RawModel * loadToVAO(GLfloat a_positions[], int a_posSize, int a_vertexSize, GLuint a_indicies[], int a_indSize);
+	RawModel & loadToVAO(Vertex * a_positions, int a_posSize, int a_vertexSize, GLuint * a_indicies, int a_indSize);
+
 	RawModel * loadToVAO(GLfloat a_positions[], int a_posSize, GLuint a_indicies[], int a_indSize);
 	RawModel * loadToVAO(GLfloat a_positions[], int a_pSize, GLfloat a_colours[], int a_cSize, GLfloat a_textures[], int a_tSize, GLuint a_indicies[], int a_iSize);
 	RawModel * loadTextureVAO(GLfloat a_positions[], int a_size, GLuint a_indicies[], int a_indSize);
@@ -33,6 +42,7 @@ private:
 	// private functions
 	GLuint createVAO();
 	void createVBO(GLfloat data[], int size);
+	void createVBO(Vertex * data, int size);
 	void bindIndicesBuffer(GLuint indices[], int size);
 	void storePositionDataInAttributeList(int attributeNumber);
 	void storeColourDataInAttributeList(int attributeNumber);

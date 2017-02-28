@@ -1324,7 +1324,7 @@ void transformsRotationPlanets()
 		// reset transform transform
 		transformMatrix = glm::mat4();
 		// set transform with local and world rotation changed over time
-		transformMatrix = Maths::createWorldRotationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, glfwGetTime() * -20.0f), 0) *
+		transformMatrix = Maths::createWorldTransformMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, glfwGetTime() * -20.0f), 0) *
 			Maths::createTransormationMatrix(glm::vec3(0.45f, -0.45f, 0), glm::vec3(0, 0, glfwGetTime() * -20.0f), 0.2f);
 		// set matrix to trnasformuniform
 		textureShader->uniformMat4("transform", transformMatrix);
@@ -1337,7 +1337,7 @@ void transformsRotationPlanets()
 		glBindTexture(GL_TEXTURE_2D, moonTexture->ID());
 		glUniform1i(glGetUniformLocation(textureShader->ID(), "ourTexture1"), 0);
 		// multiple planets transformation by world rotation changed over time (scale and translate value need to be increased above the norm to achieve similar sizing and distance)
-		transformMatrix = transformMatrix * Maths::createWorldRotationMatrix(glm::vec3(0.8f, -0.8f, 0), glm::vec3(0, 0, glfwGetTime() * -40.0f), 0.5f);
+		transformMatrix = transformMatrix * Maths::createWorldTransformMatrix(glm::vec3(0.8f, -0.8f, 0), glm::vec3(0, 0, glfwGetTime() * -40.0f), 0.5f);
 		// set matrix to trnasformuniform
 		textureShader->uniformMat4("transform", transformMatrix);
 		// Draw 
@@ -1714,14 +1714,14 @@ void camera()
 
 		// ================== planet  ================
 		// set transform with local and world rotation changed over time
-		planet->transform(Maths::createWorldRotationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, time * -25.0f, 0), 0) *
+		planet->transform(Maths::createWorldTransformMatrix(glm::vec3(0, 0, 0), glm::vec3(0, time * -25.0f, 0), 0) *
 			Maths::createTransormationMatrix(glm::vec3(0.45f, 0, -0.45f), glm::vec3(0, time * -25.0f, 0), 0.2f));
 		renderer->renderEntity(planet, shaderProgram);
 
 		// ================== moon  ================
 		// multiple planets transformation by world rotation changed over time 
 		// - scale and translate value need to be increased above the norm to achieve similar sizing and distance
-		moon->transform(planet->transform() * Maths::createWorldRotationMatrix(glm::vec3(0.8f, 0, -0.8f), glm::vec3(0, time * -75.0f, 0), 0.5f));
+		moon->transform(planet->transform() * Maths::createWorldTransformMatrix(glm::vec3(0.8f, 0, -0.8f), glm::vec3(0, time * -75.0f, 0), 0.5f));
 		renderer->renderEntity(moon, shaderProgram);
 
 		// Swap the screen buffers

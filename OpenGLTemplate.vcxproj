@@ -175,7 +175,6 @@
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\CameraController.cpp" />
     <ClCompile Include="src\app\Controller.cpp" />
-    <ClCompile Include="src\app\ExampleApp.cpp" />
     <ClCompile Include="src\entities\Entity.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\models\DynamicModels.cpp" />
@@ -187,6 +186,8 @@
     <ClCompile Include="src\renderEngine\Renderer.cpp" />
     <ClCompile Include="src\shaders\ShaderProgram.cpp" />
     <ClCompile Include="src\shaders\Shaders.cpp" />
+    <ClCompile Include="src\tests\ExampleApp.cpp" />
+    <ClCompile Include="src\tests\TerrainApp.cpp" />
     <ClCompile Include="src\tests\tests.cpp" />
     <ClCompile Include="src\textures\ModelTexture.cpp" />
     <ClCompile Include="src\textures\Texture.cpp" />
@@ -197,7 +198,6 @@
     <ClInclude Include="src\app\CameraController.h" />
     <ClInclude Include="src\app\ConstValues.h" />
     <ClInclude Include="src\app\Controller.h" />
-    <ClInclude Include="src\app\ExampleApp.h" />
     <ClInclude Include="src\entities\Entity.h" />
     <ClInclude Include="src\models\DynamicModels.h" />
     <ClInclude Include="src\models\RawModel.h" />
@@ -208,6 +208,8 @@
     <ClInclude Include="src\renderEngine\Renderer.h" />
     <ClInclude Include="src\shaders\Shaders.h" />
     <ClInclude Include="src\shaders\ShaderProgram.h" />
+    <ClInclude Include="src\tests\ExampleApp.h" />
+    <ClInclude Include="src\tests\TerrainApp.h" />
     <ClInclude Include="src\tests\tests.h" />
     <ClInclude Include="src\textures\ModelTexture.h" />
     <ClInclude Include="src\textures\Texture.h" />
@@ -216,8 +218,12 @@
   <ItemGroup>
     <None Include="src\shaders\cameraShader.fs" />
     <None Include="src\shaders\cameraShader.vs" />
+    <None Include="src\shaders\colourShader.fs" />
+    <None Include="src\shaders\colourShader.vs" />
     <None Include="src\shaders\dualTextureShader.fs" />
     <None Include="src\shaders\dualTextureShader.vs" />
+    <None Include="src\shaders\glsl\rippleShader.fs" />
+    <None Include="src\shaders\glsl\rippleShader.vs" />
     <None Include="src\shaders\indexShader.fs" />
     <None Include="src\shaders\indexShader.vs" />
     <None Include="src\shaders\staticShader.fs" />

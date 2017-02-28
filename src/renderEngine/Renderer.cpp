@@ -82,8 +82,8 @@ void Renderer::renderTexturedModel(TexturedModel * a_texturedModel)
 
 void Renderer::renderEntity(Entity * a_entity, ShaderProgram * a_shader)
 {
-	glBindVertexArray(a_entity->model()->vaoID());
 	a_entity->bindTextures("ourTexture1", "ourTexture2");
+	glBindVertexArray(a_entity->model()->vaoID());
 	a_shader->uniformMat4("model", a_entity->transform());
 	// check if the entities model uses indices
 	if (a_entity->model()->hasIndices()) {

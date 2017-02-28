@@ -4,8 +4,9 @@
 class RawModel
 {
 public:
+	RawModel();
 	RawModel(int vaoID, int vertextCount);
-	RawModel(int a_vaoID, int a_vertextCount, bool a_indecies);
+	RawModel(int a_vaoID, int a_vertextCount, bool a_indices);
 	~RawModel();
 
 	GLuint vaoID() { return m_iVaoID; };

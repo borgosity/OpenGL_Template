@@ -29,7 +29,7 @@ ShaderProgram::ShaderProgram()
 ShaderProgram::ShaderProgram(ShaderPath a_shaderPath)
 {
 	// Shaders
-	readFiles(a_shaderPath.vertexShader, a_shaderPath.fragmentShader);
+	readFiles(a_shaderPath.vertexShader.c_str(), a_shaderPath.fragmentShader.c_str());
 	m_iSuccess = 0;
 	m_uiVertexShaderID = loadShader(m_cpVertexShaderSource, GL_VERTEX_SHADER);
 	m_uiFragmentShaderID = loadShader(m_cpFragmentShaderSource, GL_FRAGMENT_SHADER);
@@ -112,7 +112,7 @@ void ShaderProgram::uniformMat4(const GLchar * a_uniformName, glm::mat4 & a_valu
 
 
 /// pull shader code from file
-std::string & ShaderProgram::readFile(const GLchar * a_filePath)
+std::string & ShaderProgram::readFile(std::string a_filePath)
 {
 	m_spShaderSourceTemp = "";
 	std::string shaderSource;
@@ -140,7 +140,7 @@ std::string & ShaderProgram::readFile(const GLchar * a_filePath)
 	return m_spShaderSourceTemp;
 }
 
-void ShaderProgram::readFiles(const GLchar * a_vsFilePath, const GLchar * a_fsFilePath)
+void ShaderProgram::readFiles(std::string a_vsFilePath, std::string a_fsFilePath)
 {
 	std::string vsShaderSource;
 	std::ifstream vsShaderFile;

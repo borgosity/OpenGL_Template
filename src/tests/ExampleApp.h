@@ -25,17 +25,15 @@ private:
 	Texture *		m_sunTexture;
 	Texture *		m_planetTexture;
 	Texture *		m_moonTexture;
-	Texture *		m_starsTexture;
 	// models
 	RawModel *		m_cubeModel;
+	RawModel *		m_squareModel;
 	TexturedModel * m_sunModel;
 	TexturedModel * m_planetModel;
 	TexturedModel * m_moonModel;
-	TexturedModel * m_starsModel;
 	// planetary entities 
 	Entity * m_sun;
 	Entity * m_planet;
 	Entity * m_moon;
-	Entity * m_stars;
 };
 

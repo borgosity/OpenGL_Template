@@ -46,8 +46,8 @@ private:
 	const GLchar * m_cpFragmentShaderSource;
 
 	// private functions
-	std::string & readFile(const GLchar * a_filePath);
-	void readFiles(const GLchar * a_vsFilePath, const GLchar * a_fsFilePath);
+	std::string & readFile(std::string a_filePath);
+	void readFiles(std::string a_vsFilePath, std::string a_fsFilePath);
 	GLuint loadShader(const GLchar * a_shaderSource, GLuint a_shaderType);
 	void linkShaders(GLuint a_vertexShader, GLuint a_fragmentShader);
 

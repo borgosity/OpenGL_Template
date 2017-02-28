@@ -13,4 +13,6 @@ void main()
 {
 	// Linearly interpolate between both textures (second texture is only slightly combined)
 	color = mix(texture(ourTexture1, TexCoord), texture(ourTexture2, TexCoord), 0.2);
+    //color = texture(ourTexture1, TexCoord) * vec4(ourColor, 1.0f);
+	//color = vec4(ourColor, 1.0f);
 }

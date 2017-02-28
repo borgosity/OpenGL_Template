@@ -5,18 +5,6 @@
 
 #include "Loader.h"
 
-struct Vertex3 
-{
-	glm::vec3 position;
-	glm::vec3 colour;
-	glm::vec2 texture; // texture co-ordinates
-};
-struct Vertex4
-{
-	glm::vec4 position;
-	glm::vec4 colour;
-	glm::vec2 texture; // texture co-ordinates
-};
 
 class DynamicModels
 {
@@ -24,10 +12,13 @@ public:
 	DynamicModels();
 	~DynamicModels();
 
-	static RawModel * grid(unsigned int a_rows, unsigned int a_columns);
+	static void grid(RawModel & a_rawmodel, unsigned int a_rows, unsigned int a_columns);
 	static RawModel * cube();
+	static RawModel * square(GLfloat a_size);
 
 private:
-
+	static Loader * m_loader;
+	//static Vertex * m_vertices;
+	//static unsigned int * m_indices;
 };
 
