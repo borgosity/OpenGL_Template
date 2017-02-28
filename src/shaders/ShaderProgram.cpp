@@ -114,6 +114,7 @@ void ShaderProgram::uniformMat4(const GLchar * a_uniformName, glm::mat4 & a_valu
 /// pull shader code from file
 std::string & ShaderProgram::readFile(std::string a_filePath)
 {
+	
 	m_spShaderSourceTemp = "";
 	std::string shaderSource;
 	std::ifstream shaderFile;

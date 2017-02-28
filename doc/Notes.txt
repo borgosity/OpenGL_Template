@@ -5,6 +5,7 @@ glew
 glfw
 glm - maths library
 soil - image loading library
+tiny_obj - obj file loading tool
 //sdl2
 
 
@@ -45,13 +46,14 @@ Additional includes - $(SolutionDir)src\
                     - $(SolutionDir)include\glfw\
                     - $(SolutionDir)include\sdl2\
                     - $(SolutionDir)lib\glm
-					- $(SolutionDir)lib\soil
+		    - $(SolutionDir)lib\soil
+		    - $(SolutionDir)include\tiny_obj
 Linker
 - Input
 Additional Dependencies //- glew32.lib
-						- glew32s.lib
+			- glew32s.lib
                         - glfw3.lib
-						- SOIL.lib
+			- SOIL.lib
                         - SDL2.lib
                         - SDL2main.lib
                         - SDL2test.lib

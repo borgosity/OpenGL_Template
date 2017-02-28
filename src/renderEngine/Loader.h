@@ -16,6 +16,13 @@ struct Vertex
 	glm::vec3 colour;
 };
 
+struct ObjVertex
+{
+	GLfloat x, y, z;
+	GLfloat nx, ny, nz;
+	GLfloat u, v;
+};
+
 class Loader
 {
 public:

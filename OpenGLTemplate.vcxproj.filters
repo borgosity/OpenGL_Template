@@ -40,6 +40,9 @@
     <Filter Include="Source Files\app">
       <UniqueIdentifier>{377faaac-9603-4f16-a707-9eefa8ed6ddd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\models\tinyObj">
+      <UniqueIdentifier>{745fe59b-8e41-46ef-aa62-f76f9e180582}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -102,6 +105,9 @@
     <ClCompile Include="src\tests\ExampleApp.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
+    <ClCompile Include="src\models\OBJLoader.cpp">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -163,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="src\tests\ExampleApp.h">
       <Filter>Source Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\models\OBJLoader.h">
+      <Filter>Source Files\models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
