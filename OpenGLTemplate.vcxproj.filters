@@ -43,6 +43,9 @@
     <Filter Include="Source Files\models\tinyObj">
       <UniqueIdentifier>{745fe59b-8e41-46ef-aa62-f76f9e180582}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\scenes">
+      <UniqueIdentifier>{664d17bf-b7e8-4916-b4ff-4eec99437688}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
