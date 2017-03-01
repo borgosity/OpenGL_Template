@@ -62,6 +62,9 @@ bool TerrainApp::start()
 	
 	m_cubeModel = DynamicModels::square(1);
 
+	m_objModel = new RawModel();
+	//OBJLoader::loadObjModel("res/models/rubberDuck.obj", *m_objModel, *m_loader);
+
 	// create textures
 	m_groundTexture = new Texture("res/textures/Sun.png");
 

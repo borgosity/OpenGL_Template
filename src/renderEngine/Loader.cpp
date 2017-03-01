@@ -78,22 +78,6 @@ RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_posSize, int a_vertexS
 	return new RawModel(vaoID, a_indSize / sizeof(GLuint), true);
 }
 
-RawModel & Loader::loadToVAO(Vertex * a_positions, int a_posSize, int a_vertexSize, GLuint * a_indicies, int a_indSize)
-{
-	GLuint vaoID = createVAO();					// create and bind VAO
-	createVBO(a_positions, a_posSize);			// create and bind VBOs
-	bindIndicesBuffer(a_indicies, a_indSize);	// create and bind indicies
-												// assume there is always position data
-	storePositionData(0, a_vertexSize);
-	// if there is more than 1 set of 3 data assume second set is colour
-	if (a_vertexSize / 3 >= 2) storeColourData(1, a_vertexSize);
-	// if the data has a remainder of 2 then assume there is texture data
-	if (a_vertexSize % 3 == 2) storeTextureData(2, a_vertexSize);
-	// unbind vbo and vao
-	unbind();
-	// return a RawModel object
-	return RawModel(vaoID, a_indSize / sizeof(GLuint), true);
-}
 
 /// VAO loader that includes indicies
 RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_posSize, GLuint a_indicies[], int a_indSize)
@@ -181,15 +165,15 @@ void Loader::createVBO(GLfloat data[], int size)
 	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 }
 
-void Loader::createVBO(Vertex * data, int size)
-{
-	GLuint vboID = 0;
-	// bind and set vertex buffer(s) and attribute pointer(s).
-	glGenBuffers(1, &vboID);
-	m_vVBOs.push_back(vboID);
-	glBindBuffer(GL_ARRAY_BUFFER, vboID);
-	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
-}
+//void Loader::createVBO(Vertex * data, int size)
+//{
+//	GLuint vboID = 0;
+//	// bind and set vertex buffer(s) and attribute pointer(s).
+//	glGenBuffers(1, &vboID);
+//	m_vVBOs.push_back(vboID);
+//	glBindBuffer(GL_ARRAY_BUFFER, vboID);
+//	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+//}
 
 void Loader::bindIndicesBuffer(GLuint indices[], int size)
 {

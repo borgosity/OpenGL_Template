@@ -172,6 +172,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\tiny_obj\tiny_obj_loader.cc" />
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\CameraController.cpp" />
     <ClCompile Include="src\app\Controller.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="src\toolBox\Maths.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\tiny_obj\tiny_obj_loader.h" />
     <ClInclude Include="src\app\Application.h" />
     <ClInclude Include="src\app\CameraController.h" />
     <ClInclude Include="src\app\ConstValues.h" />

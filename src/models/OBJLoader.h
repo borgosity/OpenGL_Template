@@ -14,6 +14,6 @@ public:
 	OBJLoader();
 	~OBJLoader();
 
-	void loadObjModel(std::string a_filePath, RawModel & a_rawModel, Loader & a_loader );
+	static void loadObjModel(std::string a_filePath, RawModel & a_rawModel, Loader & a_loader );
 };
 

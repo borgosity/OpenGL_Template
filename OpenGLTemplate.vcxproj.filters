@@ -108,6 +108,9 @@
     <ClCompile Include="src\models\OBJLoader.cpp">
       <Filter>Source Files\models</Filter>
     </ClCompile>
+    <ClCompile Include="include\tiny_obj\tiny_obj_loader.cc">
+      <Filter>Source Files\models\tinyObj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -172,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="src\models\OBJLoader.h">
       <Filter>Source Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tiny_obj\tiny_obj_loader.h">
+      <Filter>Source Files\models\tinyObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

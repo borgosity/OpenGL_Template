@@ -1,5 +1,7 @@
 #pragma once
 #include "Application.h"
+#include "OBJLoader.h"
+
 class TerrainApp :
 	public Application
 {
@@ -29,10 +31,13 @@ private:
 	// models
 	RawModel *		m_gridModel = nullptr;
 	RawModel *		m_cubeModel = nullptr;
+	RawModel *		m_objModel = nullptr;
 	TexturedModel * m_groundModel = nullptr;
+	TexturedModel * m_duckModel = nullptr;
 
 	// planetary entities 
 	Entity * m_ground = nullptr;
+	Entity * m_rubberDuck = nullptr;
 
 };
 
