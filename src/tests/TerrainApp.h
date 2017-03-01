@@ -25,9 +25,11 @@ private:
 	// shaders
 	ShaderProgram * m_colourSP = nullptr;
 	ShaderProgram * m_cameraSP = nullptr;
+	ShaderProgram * m_modelSP = nullptr;
 	ShaderProgram * m_rippleSP = nullptr;
 	// textures
 	Texture *		m_groundTexture = nullptr;
+	Texture *		m_duckTexture = nullptr;
 	// models
 	RawModel *		m_gridModel = nullptr;
 	RawModel *		m_cubeModel = nullptr;

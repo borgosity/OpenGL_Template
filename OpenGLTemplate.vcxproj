@@ -220,24 +220,26 @@
     <ClInclude Include="src\toolBox\Maths.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\cameraShader.fs" />
-    <None Include="src\shaders\cameraShader.vs" />
-    <None Include="src\shaders\colourShader.fs" />
-    <None Include="src\shaders\colourShader.vs" />
-    <None Include="src\shaders\dualTextureShader.fs" />
-    <None Include="src\shaders\dualTextureShader.vs" />
+    <None Include="src\shaders\glsl\cameraShader.fs" />
+    <None Include="src\shaders\glsl\cameraShader.vs" />
+    <None Include="src\shaders\glsl\colourShader.fs" />
+    <None Include="src\shaders\glsl\colourShader.vs" />
+    <None Include="src\shaders\glsl\dualTextureShader.fs" />
+    <None Include="src\shaders\glsl\dualTextureShader.vs" />
+    <None Include="src\shaders\glsl\indexShader.fs" />
+    <None Include="src\shaders\glsl\indexShader.vs" />
+    <None Include="src\shaders\glsl\modelShader.fs" />
+    <None Include="src\shaders\glsl\modelShader.vs" />
     <None Include="src\shaders\glsl\rippleShader.fs" />
     <None Include="src\shaders\glsl\rippleShader.vs" />
-    <None Include="src\shaders\indexShader.fs" />
-    <None Include="src\shaders\indexShader.vs" />
-    <None Include="src\shaders\staticShader.fs" />
-    <None Include="src\shaders\staticShader.vs" />
-    <None Include="src\shaders\textureShader.fs" />
-    <None Include="src\shaders\textureShader.vs" />
-    <None Include="src\shaders\transformShader.fs" />
-    <None Include="src\shaders\transformShader.vs" />
-    <None Include="src\shaders\uniformShader.fs" />
-    <None Include="src\shaders\uniformShader.vs" />
+    <None Include="src\shaders\glsl\staticShader.fs" />
+    <None Include="src\shaders\glsl\staticShader.vs" />
+    <None Include="src\shaders\glsl\textureShader.fs" />
+    <None Include="src\shaders\glsl\textureShader.vs" />
+    <None Include="src\shaders\glsl\transformShader.fs" />
+    <None Include="src\shaders\glsl\transformShader.vs" />
+    <None Include="src\shaders\glsl\uniformShader.fs" />
+    <None Include="src\shaders\glsl\uniformShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

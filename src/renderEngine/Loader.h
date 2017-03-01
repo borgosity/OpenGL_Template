@@ -18,9 +18,13 @@ struct Vertex
 
 struct ObjVertex
 {
-	glm::vec3 position;
-	glm::vec3 normal;
-	glm::vec2 uv;
+	//glm::vec3 position;
+	//glm::vec3 normal;
+	//glm::vec2 uv;
+
+	GLfloat x, y, z;
+	GLfloat nx, ny, nz;
+	GLfloat u, v;
 };
 
 class Loader
@@ -83,8 +87,15 @@ inline RawModel & Loader::loadToVAO(T * a_positions, int a_posSize, int a_vertex
 {
 	GLuint vaoID = createVAO();					// create and bind VAO
 	createVBO(a_positions, a_posSize);			// create and bind VBOs
+	
+	// indices checks
+	int vertCount = a_posSize / a_vertexSize;
+	bool hasIndices = false;						// doesn't has indicies unless nullptr check fails
+	// are the indices values
 	if (a_indicies != nullptr) {
 		bindIndicesBuffer(a_indicies, a_indSize);// create and bind indicies
+		hasIndices = true;
+		vertCount = a_indSize / sizeof(GLuint);
 	}
 	// assume there is always position data
 	storePositionData(0, a_vertexSize);
@@ -95,7 +106,7 @@ inline RawModel & Loader::loadToVAO(T * a_positions, int a_posSize, int a_vertex
 	// unbind vbo and vao
 	unbind();
 	// return a RawModel object
-	return RawModel(vaoID, a_indSize / sizeof(GLuint), true);
+	return RawModel(vaoID, vertCount, hasIndices);
 }
 
 template<typename T>

@@ -18,15 +18,21 @@ TerrainApp::~TerrainApp()
 	// shaders
 	deallocate(m_colourSP);
 	deallocate(m_cameraSP);
+	deallocate(m_modelSP);
 	deallocate(m_rippleSP);
 	// textures
 	deallocate(m_groundTexture);
+	deallocate(m_duckTexture);
 	// models
 	deallocate(m_gridModel);
 	deallocate(m_cubeModel);
+	deallocate(m_objModel);
+	// textured models
 	deallocate(m_groundModel);
+	deallocate(m_duckModel);
 	// entities 
 	deallocate(m_ground);
+	deallocate(m_rubberDuck);
 }
 
 bool TerrainApp::start()
@@ -50,29 +56,31 @@ bool TerrainApp::start()
 	// initialise shader program
 	m_colourSP = new ShaderProgram(Shader::colourShader);
 	m_cameraSP = new ShaderProgram(Shader::cameraShader);
+	m_modelSP = new ShaderProgram(Shader::modelShader);
 	m_rippleSP = new ShaderProgram(Shader::rippleShader);
 
 	// load model to VAO
 	m_loader = new Loader();
 	m_renderer = new Renderer();
 
+	// ============= grid setup =====================
 	// create grid model
 	m_gridModel = new RawModel();
 	DynamicModels::grid(*m_gridModel, 10, 20);
+	m_groundTexture = new Texture("res/textures/Sun.png");
+	m_groundModel = new TexturedModel(*m_gridModel, *m_groundTexture, *m_groundTexture, m_rippleSP->ID());
+	m_ground = new Entity(m_groundModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 	
 	m_cubeModel = DynamicModels::square(1);
 
+	//============= obj setup ===========================
 	m_objModel = new RawModel();
-	//OBJLoader::loadObjModel("res/models/rubberDuck.obj", *m_objModel, *m_loader);
+	//OBJLoader::loadObjModel("res/models/stanford/Buddha.obj", *m_objModel, *m_loader);
+	OBJLoader::loadObjModel("res/models/soulspear/soulspear.obj", *m_objModel, *m_loader);
+	m_duckTexture = new Texture("res/models/soulspear/soulspear_diffuse.png");
+	m_duckModel = new TexturedModel(*m_objModel, *m_duckTexture, *m_duckTexture, m_modelSP->ID());
+	m_rubberDuck = new Entity(m_duckModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 
-	// create textures
-	m_groundTexture = new Texture("res/textures/Sun.png");
-
-	// add textures to cube models
-	m_groundModel = new TexturedModel(*m_gridModel, *m_groundTexture, *m_groundTexture, m_colourSP->ID());
-
-	// create planetary entities 
-	m_ground = new Entity(m_groundModel, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 
 
 	return true;
@@ -109,13 +117,29 @@ bool TerrainApp::draw(GLfloat a_deltaTime)
 	// pass camera projection to shader
 	m_rippleSP->uniformMat4("projection", m_camera->projection());
 
-	// ================== ground  ================
+	// ================== water  ================
 	// create transform, with rotation changed over time
-	m_ground->transform(Maths::createTransormationMatrix(glm::vec3(-2.5, 0, -2.5), glm::vec3(0, 0, 0), 0.4f));
+	m_ground->transform(Maths::createTransormationMatrix(glm::vec3(-7.75, 1, 0), glm::vec3(90, 0, 0), 0.4f));
 	m_renderer->renderEntity(m_ground, m_rippleSP);
 
 	// De-activate shader
 	m_rippleSP->stop();
+
+	// ================================= obj model =========================
+	// Activate shader
+	m_modelSP->start();
+	// pass camera position to shader 
+	m_modelSP->uniformMat4("view", m_camera->viewMatrix());
+	// pass camera projection to shader
+	m_modelSP->uniformMat4("projection", m_camera->projection());
+
+	// create transform, with rotation changed over time
+	m_rubberDuck->transform(Maths::createTransormationMatrix(glm::vec3(0, 4.25, 0), glm::vec3(0, 0, 180), 1.0f));
+	m_renderer->renderEntity(m_rubberDuck, m_modelSP);
+
+	// De-activate shader
+	m_modelSP->stop();
+	// ================================ end obj model ==========================
 
 	// Swap the screen buffers
 	glfwSwapBuffers(m_display->window());

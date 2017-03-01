@@ -181,58 +181,64 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\indexShader.fs">
+    <None Include="src\shaders\glsl\cameraShader.fs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
-    <None Include="src\shaders\indexShader.vs">
+    <None Include="src\shaders\glsl\cameraShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
-    <None Include="src\shaders\uniformShader.fs">
+    <None Include="src\shaders\glsl\colourShader.fs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
-    <None Include="src\shaders\uniformShader.vs">
+    <None Include="src\shaders\glsl\colourShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
-    <None Include="src\shaders\staticShader.fs">
+    <None Include="src\shaders\glsl\dualTextureShader.fs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
-    <None Include="src\shaders\staticShader.vs">
+    <None Include="src\shaders\glsl\dualTextureShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
-    <None Include="src\shaders\textureShader.fs">
+    <None Include="src\shaders\glsl\indexShader.fs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
-    <None Include="src\shaders\textureShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\dualTextureShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\dualTextureShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\transformShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\transformShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\cameraShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\cameraShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\colourShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\colourShader.vs">
+    <None Include="src\shaders\glsl\indexShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
     <None Include="src\shaders\glsl\rippleShader.fs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
     <None Include="src\shaders\glsl\rippleShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\staticShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\staticShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\textureShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\textureShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\transformShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\transformShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\uniformShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\uniformShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\modelShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\modelShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
   </ItemGroup>
