@@ -19,14 +19,11 @@ void DynamicModels::grid(RawModel & a_rawmodel, unsigned int a_rows, unsigned in
 
 	for (unsigned int r = 0; r < a_rows; ++r) {
 		for (unsigned int c = 0; c < a_columns; ++c) {
-			vertices[r * a_columns + c].position = glm::vec3(
-				(float)c, 0, (float)r);
+			vertices[r * a_columns + c].position = glm::vec3((float)c, 0, (float)r);
 			// create some arbitrary colour based off something
 			// that might not be related to tiling a texture
 			GLfloat gradient = sinf((c / (float)(a_columns)) * (r / (float)(a_rows)));
-			glm::vec3 colour = glm::vec3(/*r % 1 == 0 ? gradient : 0.5*/gradient,
-										 /*r % 2 == 0 ? gradient : 0.25*/0,
-										 /*r % 3 == 0 ? gradient : 0.15*/0);
+			glm::vec3 colour = glm::vec3(gradient);
 			vertices[r * a_columns + c].colour = colour;
 		}
 	}

@@ -56,7 +56,7 @@ void Texture::load(const char * a_fileName)
 		m_uiID = textureID;
 	}
 	else {
-		std::cout << "ERROR -> Failure reading shader file: " << std::endl;
+		std::cout << "ERROR -> Failure reading texture file: " << std::endl;
 		m_sFilename = "file not found";
 	}
 }

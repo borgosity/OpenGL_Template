@@ -30,24 +30,32 @@ private:
 	ShaderProgram * m_rippleSP = nullptr;
 
 	// textures
-	Texture *		m_groundTexture = nullptr;
-	Texture *		m_duckTexture = nullptr;
-	Texture *		m_duckNormal = nullptr;
+	Texture *		m_soulSpearTexture = nullptr;
+	Texture *		m_soulSpearNormalMap = nullptr;
 	Texture *		m_rocksTexture = nullptr;
 	Texture *		m_rocksNormalMap = nullptr;
+	Texture *		m_duckTexture = nullptr;
+	Texture *		m_waterTexture = nullptr;
+
 	// models
 	RawModel *		m_gridModel = nullptr;
 	RawModel *		m_cubeModel = nullptr;
-	RawModel *		m_objModel = nullptr;
+	RawModel *		m_soulSpearRM = nullptr;
+	RawModel *		m_duckRM = nullptr;
 	RawModel *		m_rocksModel = nullptr;
 
 	// textured models
-	TexturedModel * m_groundModel = nullptr;
-	TexturedModel * m_duckModel = nullptr;
+	TexturedModel * m_waterTM = nullptr;
+	TexturedModel * m_flagTM = nullptr;
+	TexturedModel * m_soulSpearTM = nullptr;
+	TexturedModel * m_duckTM = nullptr;
 	TexturedModel * m_rocksTM = nullptr;
+
 	// planetary entities 
-	Entity * m_ground = nullptr;
+	Entity * m_soulSpear = nullptr;
+	Entity * m_flag = nullptr;
 	Entity * m_rubberDuck = nullptr;
+	Entity * m_water = nullptr;
 	Entity * m_rocksE = nullptr;
 
 

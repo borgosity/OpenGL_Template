@@ -6,7 +6,7 @@ Camera::Camera()
 {
 	m_vPosition = glm::vec3(0, 0.5f, -2.0f);
 	m_fPitch = 0.0f;
-	m_fYaw = -10.0f; //set some initial offset to avoid camera pointing to the right
+	m_fYaw = -90.0f; //set some initial offset to avoid camera pointing to the right
 	m_fRoll = 0.0f;
 	m_fSpeed = 5.0f;
 	m_vFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -32,7 +32,7 @@ Camera::Camera(glm::vec3 a_cameraPostion, GLfloat a_speed, GLfloat a_fov, GLfloa
 	m_fFOV = a_fov;
 	m_fNearPlane = a_nearPlane;
 	m_fFarPlane = a_farPlane;
-	m_mProjection = glm::perspective(m_fFOV, (GLfloat)SCREEN_W / (GLfloat)SCREEN_H, m_fNearPlane, m_fFarPlane);
+	m_mProjection = glm::perspective(glm::radians(m_fFOV), (GLfloat)SCREEN_W / (GLfloat)SCREEN_H, m_fNearPlane, m_fFarPlane);
 }
 
 Camera::~Camera()
@@ -119,7 +119,7 @@ void Camera::updateProjection(GLfloat a_fov, GLfloat a_nearPlane, GLfloat a_farP
 	if (a_nearPlane != 0) m_fNearPlane = a_nearPlane;
 	if (a_farPlane != 0) m_fFarPlane = a_farPlane;
 	// update perspective with new value
-	m_mProjection = glm::perspective(m_fFOV, (GLfloat)SCREEN_W / (GLfloat)SCREEN_H, m_fNearPlane, m_fFarPlane);
+	m_mProjection = glm::perspective(glm::radians(m_fFOV), (GLfloat)SCREEN_W / (GLfloat)SCREEN_H, m_fNearPlane, m_fFarPlane);
 }
 
 
