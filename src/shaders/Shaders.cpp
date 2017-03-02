@@ -5,6 +5,7 @@
  ShaderPath Shader::dualTextureShader = { "src/shaders/glsl/dualTextureShader.vs", "src/shaders/glsl/dualTextureShader.fs" };
  ShaderPath Shader::indexShader = { "src/shaders/glsl/indexShader.vs", "src/shaders/glsl/indexShader.fs" };
  ShaderPath Shader::modelShader = { "src/shaders/glsl/modelShader.vs", "src/shaders/glsl/modelShader.fs" };
+ ShaderPath Shader::phongShader = { "src/shaders/glsl/phongShader.vs", "src/shaders/glsl/phongShader.fs" };
  ShaderPath Shader::rippleShader = { "src/shaders/glsl/rippleShader.vs", "src/shaders/glsl/rippleShader.fs" };
  ShaderPath Shader::staticShader = { "src/shaders/glsl/staticShader.vs", "src/shaders/glsl/staticShader.fs" };
  ShaderPath Shader::textureShader = { "src/shaders/glsl/textureShader.vs", "src/shaders/glsl/textureShader.fs" };

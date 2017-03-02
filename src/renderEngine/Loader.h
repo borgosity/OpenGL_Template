@@ -16,15 +16,19 @@ struct Vertex
 	glm::vec3 colour;
 };
 
-struct ObjVertex
+struct Vertex3
 {
-	//glm::vec3 position;
-	//glm::vec3 normal;
-	//glm::vec2 uv;
+	GLfloat x, y, z;	   // position
+	GLfloat nx, ny, nz;	   // normal
+	GLfloat u, v;		   // texture co-ords
+};						   
 
-	GLfloat x, y, z;
-	GLfloat nx, ny, nz;
-	GLfloat u, v;
+struct Vertex4
+{
+	GLfloat x, y, z;	// position
+	GLfloat nx, ny, nz;	// normal
+	GLfloat tx, ty, tz;	// tangent
+	GLfloat u, v;		// texture co-ords
 };
 
 class Loader
@@ -63,14 +67,14 @@ private:
 	void storePositionDataInAttributeList(int attributeNumber);
 	void storeColourDataInAttributeList(int attributeNumber);
 	void storeTextureDataInAttributeList(int attributeNumber);
-	void storeTextureDataInAttributeList(int attributeNumber, int coordinateSize, GLfloat data[], int dataSize);
-	void storeTextureDataInAttributeList(int attributeNumber, int coordinateSize);
 
 	// refactor
 	// single verticies functions
-	void storePositionData(int attributeNumber, int vertSize);
-	void storeColourData(int attributeNumber, int vertSize);
-	void storeTextureData(int attributeNumber, int vertSize);
+	void storePositionData(int attributeNumber, int vertSize, int startPos);
+	void storeColourData(int attributeNumber, int vertSize, int startPos);
+	void storeTextureData(int attributeNumber, int vertSize, int startPos);
+	void storeTangentData(int attributeNumber, int vertSize, int startPos);
+
 	// split verticies functions
 	void storePositionData(int attributeNumber, GLfloat data[], int size);
 	void storeColourData(int attributeNumber, GLfloat data[], int size);
@@ -80,7 +84,18 @@ private:
 };
 
 ///
-/// load vertices to a VAO, if no indices pass 'nullptr' and 0
+/// Function to Load data to VAO - nullptr and 0 if there are no Indices
+/// positions = vertex data ( it can contain	- position and colour and texture and tangent
+///												- position and colour and texture 
+///												- position and colour
+///												- position and texture
+///												- position ) 
+/// posSize = size of vertex data array
+/// vertexSize = size of the vertex buffer blocks	- 11 (p & c & t and t)
+///													- 8 (p & c & t)
+///													- 6 (p & C) 
+///													- 5 (p & t) 
+///													- 3 (p)
 ///
 template<typename T>
 inline RawModel & Loader::loadToVAO(T * a_positions, int a_posSize, int a_vertexSize, GLuint * a_indicies, int a_indSize)
@@ -97,12 +112,24 @@ inline RawModel & Loader::loadToVAO(T * a_positions, int a_posSize, int a_vertex
 		hasIndices = true;
 		vertCount = a_indSize / sizeof(GLuint);
 	}
+	int startPos = 0;
 	// assume there is always position data
-	storePositionData(0, a_vertexSize);
+	storePositionData(0, a_vertexSize, startPos);
+	startPos += 3;									// add 3 to the startpos for the next attribute
 	// if there is more than 1 set of 3 data assume second set is colour
-	if (a_vertexSize / 3 >= 2) storeColourData(1, a_vertexSize);
+	if (a_vertexSize / 3 >= 2) {
+		storeColourData(1, a_vertexSize, startPos);
+		startPos += 3;								// add 3 to the startpos for the next attribute
+	}
+	// if the data has a remainder of 3 then assume there is tangent data
+	if (a_vertexSize / 3 >= 3) {
+		storeTangentData(3, a_vertexSize, startPos);
+		startPos += 3;								// add 3 to the startpos for the next attribute
+	}
 	// if the data has a remainder of 2 then assume there is texture data
-	if (a_vertexSize % 3 == 2) storeTextureData(2, a_vertexSize);
+	if (a_vertexSize % 3 == 2) {
+		storeTextureData(2, a_vertexSize, startPos);
+	}
 	// unbind vbo and vao
 	unbind();
 	// return a RawModel object

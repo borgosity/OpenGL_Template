@@ -230,6 +230,8 @@
     <None Include="src\shaders\glsl\indexShader.vs" />
     <None Include="src\shaders\glsl\modelShader.fs" />
     <None Include="src\shaders\glsl\modelShader.vs" />
+    <None Include="src\shaders\glsl\phongShader.fs" />
+    <None Include="src\shaders\glsl\phongShader.vs" />
     <None Include="src\shaders\glsl\rippleShader.fs" />
     <None Include="src\shaders\glsl\rippleShader.vs" />
     <None Include="src\shaders\glsl\staticShader.fs" />

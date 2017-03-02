@@ -24,9 +24,9 @@ void DynamicModels::grid(RawModel & a_rawmodel, unsigned int a_rows, unsigned in
 			// create some arbitrary colour based off something
 			// that might not be related to tiling a texture
 			GLfloat gradient = sinf((c / (float)(a_columns)) * (r / (float)(a_rows)));
-			glm::vec3 colour = glm::vec3(/*r % 1 == 0 ? gradient : 0.5*/0,
+			glm::vec3 colour = glm::vec3(/*r % 1 == 0 ? gradient : 0.5*/gradient,
 										 /*r % 2 == 0 ? gradient : 0.25*/0,
-										 /*r % 3 == 0 ? gradient : 0.15*/gradient);
+										 /*r % 3 == 0 ? gradient : 0.15*/0);
 			vertices[r * a_columns + c].colour = colour;
 		}
 	}
@@ -55,57 +55,57 @@ void DynamicModels::grid(RawModel & a_rawmodel, unsigned int a_rows, unsigned in
 
 RawModel * DynamicModels::cube()
 {
-	GLfloat vertices[] = {			
-		-0.5f,0.5f,-0.5f,	0,0,
-		-0.5f,-0.5f,-0.5f,	0,1,
-		0.5f,-0.5f,-0.5f,	1,1,
-		0.5f,0.5f,-0.5f,	1,0,
+	//GLfloat vertices[] = {			
+	//	-0.5f,0.5f,-0.5f,	0,0,
+	//	-0.5f,-0.5f,-0.5f,	0,1,
+	//	0.5f,-0.5f,-0.5f,	1,1,
+	//	0.5f,0.5f,-0.5f,	1,0,
 
-		-0.5f,0.5f,0.5f,	0,0,
-		-0.5f,-0.5f,0.5f,	0,1,
-		0.5f,-0.5f,0.5f,	1,1,
-		0.5f,0.5f,0.5f,	    1,0,
+	//	-0.5f,0.5f,0.5f,	0,0,
+	//	-0.5f,-0.5f,0.5f,	0,1,
+	//	0.5f,-0.5f,0.5f,	1,1,
+	//	0.5f,0.5f,0.5f,	    1,0,
 
-		0.5f,0.5f,-0.5f,	0,0,
-		0.5f,-0.5f,-0.5f,	0,1,
-		0.5f,-0.5f,0.5f,	1,1,
-		0.5f,0.5f,0.5f,     1,0,
+	//	0.5f,0.5f,-0.5f,	0,0,
+	//	0.5f,-0.5f,-0.5f,	0,1,
+	//	0.5f,-0.5f,0.5f,	1,1,
+	//	0.5f,0.5f,0.5f,     1,0,
 
-		-0.5f,0.5f,-0.5f,	0,0,
-		-0.5f,-0.5f,-0.5f,	0,1,
-		-0.5f,-0.5f,0.5f,	1,1,
-		-0.5f,0.5f,0.5f,    1,0,
+	//	-0.5f,0.5f,-0.5f,	0,0,
+	//	-0.5f,-0.5f,-0.5f,	0,1,
+	//	-0.5f,-0.5f,0.5f,	1,1,
+	//	-0.5f,0.5f,0.5f,    1,0,
 
-		-0.5f,0.5f,0.5f,    0,0,
-		-0.5f,0.5f,-0.5f,   0,1,
-		0.5f,0.5f,-0.5f,    1,1,
-		0.5f,0.5f,0.5f,     1,0,
+	//	-0.5f,0.5f,0.5f,    0,0,
+	//	-0.5f,0.5f,-0.5f,   0,1,
+	//	0.5f,0.5f,-0.5f,    1,1,
+	//	0.5f,0.5f,0.5f,     1,0,
 
-		-0.5f,-0.5f,0.5f,   0,0,
-		-0.5f,-0.5f,-0.5f,  0,1,
-		0.5f,-0.5f,-0.5f,   1,1,
-		0.5f,-0.5f,0.5f,    1,0
-	};
+	//	-0.5f,-0.5f,0.5f,   0,0,
+	//	-0.5f,-0.5f,-0.5f,  0,1,
+	//	0.5f,-0.5f,-0.5f,   1,1,
+	//	0.5f,-0.5f,0.5f,    1,0
+	//};
 
-	GLuint indices[] = {
-		0, 1, 3,
-		3, 1, 2,
-		4, 5, 7,
-		7, 5, 6,
-		8, 9, 11,
-		11, 9, 10,
-		12, 13, 15,
-		15, 13, 14,
-		16, 17, 19,
-		19, 17, 18,
-		20, 21, 23,
-		23, 21, 22
+	//GLuint indices[] = {
+	//	0, 1, 3,
+	//	3, 1, 2,
+	//	4, 5, 7,
+	//	7, 5, 6,
+	//	8, 9, 11,
+	//	11, 9, 10,
+	//	12, 13, 15,
+	//	15, 13, 14,
+	//	16, 17, 19,
+	//	19, 17, 18,
+	//	20, 21, 23,
+	//	23, 21, 22
 
-	};
-	//
-	return m_loader->loadToVAO(vertices, sizeof(vertices), 5, indices, sizeof(indices) );
+	//};
+	////
+	//return m_loader->loadToVAO(vertices, sizeof(vertices), 5, indices, sizeof(indices) );
 
-	/*GLfloat vertices[] = {
+	GLfloat vertices[] = {
 		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
 		0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
 		0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
@@ -149,7 +149,7 @@ RawModel * DynamicModels::cube()
 		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
 
-	return m_loader->loadToVAO(vertices, sizeof(vertices), 5);*/
+	return m_loader->loadToVAO(vertices, sizeof(vertices), 5);
 }
 
 RawModel * DynamicModels::square(GLfloat a_size)
@@ -169,13 +169,20 @@ RawModel * DynamicModels::square(GLfloat a_size)
 
 	return m_loader->loadToVAO(vertices, sizeof(vertices), 7, indices, sizeof(indices));
 
-	//GLfloat vertices[] = {
-	//	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-	//	0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-	//	0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-	//	0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-	//	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-	//	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-	//};
-	//return m_loader->loadToVAO(vertices, sizeof(vertices), 5);
+}
+
+void DynamicModels::squareTBN(RawModel & a_rawmodel, GLfloat a_size)
+{
+	Vertex4 vertices[] = {
+		{ -5, 0,  5, 0, 1, 0, 1, 0, 0, 0, 1 },
+		{ 5, 0,  5, 0, 1, 0, 1, 0, 0, 1, 1 },
+		{ 5, 0, -5, 0, 1, 0, 1, 0, 0, 1, 0 },
+		{ -5, 0, -5, 0, 1, 0, 1, 0, 0, 0, 0 },
+	};
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3, // First Triangle
+		1, 2, 3  // Second Triangle
+	};
+	
+	a_rawmodel = m_loader->loadToVAO(vertices, sizeof(vertices), 11, indices, sizeof(indices));
 }

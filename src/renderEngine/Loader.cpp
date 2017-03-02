@@ -38,11 +38,24 @@ RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_posSize, int a_vertexS
 	GLuint vaoID = createVAO();
 	createVBO(a_positions, a_posSize);
 	// assume there is always position data
-	storePositionData(0, a_vertexSize);
+	int startPos = 0;
+	// assume there is always position data
+	storePositionData(0, a_vertexSize, startPos);
+	startPos += 3;
 	// if there is more than 1 set of 3 data assume second set is colour
-	if (a_vertexSize / 3 >= 2) storeColourData(1, a_vertexSize);
+	if (a_vertexSize / 3 >= 2) {
+		startPos += 3;
+		storeColourData(1, a_vertexSize, startPos);
+	}
+	// if the data has a remainder of 3 then assume there is tangent data
+	if (a_vertexSize / 3 >= 3) {
+		startPos += 3;
+		storeTangentData(3, a_vertexSize, startPos);
+	}
 	// if the data has a remainder of 2 then assume there is texture data
-	if (a_vertexSize % 3 == 2) storeTextureData(2, a_vertexSize);
+	if (a_vertexSize % 3 == 2) {
+		storeTextureData(2, a_vertexSize, startPos);
+	}
 	// unbind vbo and vao
 	unbind();
 	// return a RawModel object
@@ -65,17 +78,38 @@ RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_posSize, int a_vertexS
 {
 	GLuint vaoID = createVAO();					// create and bind VAO
 	createVBO(a_positions, a_posSize);			// create and bind VBOs
-	bindIndicesBuffer(a_indicies, a_indSize);	// create and bind indicies
+
+												// indices checks
+	int vertCount = a_posSize / a_vertexSize;
+	bool hasIndices = false;						// doesn't has indicies unless nullptr check fails
+													// are the indices values
+	if (a_indicies != nullptr) {
+		bindIndicesBuffer(a_indicies, a_indSize);// create and bind indicies
+		hasIndices = true;
+		vertCount = a_indSize / sizeof(GLuint);
+	}
+	int startPos = 0;
 	// assume there is always position data
-	storePositionData(0, a_vertexSize);
+	startPos += 3;
+	storePositionData(0, a_vertexSize, startPos);
 	// if there is more than 1 set of 3 data assume second set is colour
-	if (a_vertexSize / 3 >= 2) storeColourData(1, a_vertexSize);
+	if (a_vertexSize / 3 >= 2) {
+		startPos += 3;
+		storeColourData(1, a_vertexSize, startPos);
+	}
+	// if the data has a remainder of 3 then assume there is tangent data
+	if (a_vertexSize / 3 >= 3) {
+		startPos += 3;
+		storeTangentData(3, a_vertexSize, startPos);
+	}
 	// if the data has a remainder of 2 then assume there is texture data
-	if (a_vertexSize % 3 == 2) storeTextureData(2, a_vertexSize);
+	if (a_vertexSize % 3 == 2) {
+		storeTextureData(2, a_vertexSize, startPos);
+	}
 	// unbind vbo and vao
 	unbind();
 	// return a RawModel object
-	return new RawModel(vaoID, a_indSize / sizeof(GLuint), true);
+	return new RawModel(vaoID, vertCount, hasIndices);
 }
 
 
@@ -233,28 +267,31 @@ void Loader::storeTextureDataInAttributeList(int attributeNumber)
 	# TODO # adjust vertex data size to not be fixed pos and colour can be 3 or 4 which will also change start pos
 
 *******************************************************************************************/
-void Loader::storePositionData(int attributeNumber, int vertSize)
+void Loader::storePositionData(int attributeNumber, int vertSize, int startPos)
 {
 	// Position attribute
-	glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, GL_FALSE, vertSize * sizeof(GLfloat), (GLvoid*)0);
+	glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, GL_FALSE, vertSize * sizeof(GLfloat), (GLvoid*)startPos);
 	glEnableVertexAttribArray(attributeNumber);
 }
 
-void Loader::storeColourData(int attributeNumber, int vertSize)
+void Loader::storeColourData(int attributeNumber, int vertSize, int startPos)
 {
 	// Color attribute
-	glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, GL_FALSE, vertSize * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, GL_FALSE, vertSize * sizeof(GLfloat), (GLvoid*)(startPos * sizeof(GLfloat)));
 	glEnableVertexAttribArray(attributeNumber);
 }
 
-void Loader::storeTextureData(int attributeNumber, int vertSize)
+void Loader::storeTextureData(int attributeNumber, int vertSize, int startPos)
 {
-	int startPos = 0;
-	// check vert size
-	vertSize > 5 ? startPos = 6 : startPos = 3;
 	// Texture attribute
 	glVertexAttribPointer(attributeNumber, 2, GL_FLOAT, GL_FALSE, vertSize * sizeof(GLfloat), (GLvoid*)(startPos * sizeof(GLfloat)));
-	glEnableVertexAttribArray(2);
+	glEnableVertexAttribArray(attributeNumber);
+}
+void Loader::storeTangentData(int attributeNumber, int vertSize, int startPos)
+{
+	// Texture attribute
+	glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, GL_FALSE, vertSize * sizeof(GLfloat), (GLvoid*)(startPos * sizeof(GLfloat)));
+	glEnableVertexAttribArray(attributeNumber);
 }
 /*****************************************************************************************
 	- ## NOT TESTED ## - Indiviual VBOs for each individual data array functions 

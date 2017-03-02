@@ -93,14 +93,14 @@ void OBJLoader::loadObjModel(std::string a_filePath, RawModel & a_rawModel, Load
 
 	// initialise some variables for retrieving vertices 
 	auto shape = shapes._Myfirst();
-	std::vector<ObjVertex> vertices;
+	std::vector<Vertex3> vertices;
 	int index = 0;
 
 	// loop though faces and store vertex data
 	for (auto face : shape->mesh.num_face_vertices) {
 		for (int i = 0; i < 3; ++i) {
 			tinyobj::index_t idx = shape->mesh.indices[index + i];
-			ObjVertex v = { 0 };
+			Vertex3 v = { 0 };
 			// positions
 			v.x = attribs.vertices[3 * idx.vertex_index + 0];
 			v.y = attribs.vertices[3 * idx.vertex_index + 1];
@@ -121,6 +121,11 @@ void OBJLoader::loadObjModel(std::string a_filePath, RawModel & a_rawModel, Load
 		index += face;
 	}
 
+	// count vert sizes
+	int vertexSize = 3;
+	if (attribs.normals.size() > 0) vertexSize += 3;
+	if (attribs.texcoords.size() > 0) vertexSize += 2;
+
 	// create raw model from vertex data, there are no indicies so passing nullptr and 0
-	a_rawModel = a_loader.loadToVAO(vertices.data(), vertices.size() * sizeof(ObjVertex), 8, nullptr, 0);
+	a_rawModel = a_loader.loadToVAO(vertices.data(), vertices.size() * sizeof(Vertex3), vertexSize, nullptr, 0);
 }

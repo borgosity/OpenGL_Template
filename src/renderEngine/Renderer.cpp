@@ -35,6 +35,11 @@ void Renderer::render(RawModel * model)
 /// render model using specific shader program
 void Renderer::render(RawModel * model, GLuint shaderProgram)
 {
+	// check entity isn't null
+	if (model == nullptr) {
+		std::cout << "\n ERROR --> RENDERING raw model was null" << std::endl;
+		return;
+	}
 	// Draw model
 	glUseProgram(shaderProgram);
 	glBindVertexArray(model->vaoID());
@@ -45,6 +50,11 @@ void Renderer::render(RawModel * model, GLuint shaderProgram)
 /// render model with indicies
 void Renderer::renderInd(RawModel * model)
 {
+	// check entity isn't null
+	if (model == nullptr) {
+		std::cout << "\n ERROR --> RENDERING raw model was null" << std::endl;
+		return;
+	}
 	// Draw model
 	glBindVertexArray(model->vaoID());
 	glDrawElements(GL_TRIANGLES, model->vertexCount(), GL_UNSIGNED_INT, 0);
@@ -68,6 +78,11 @@ void Renderer::bindTexture(TexturedModel * a_texturedModel, ShaderProgram * a_sh
 
 void Renderer::renderTexturedModel(TexturedModel * a_texturedModel)
 {
+	// check entity isn't null
+	if (a_texturedModel == nullptr) {
+		std::cout << "\n ERROR --> RENDERING textured model was null" << std::endl;
+		return;
+	}
 	glBindVertexArray(a_texturedModel->vaoID());
 	// check if the model uses indices
 	if (a_texturedModel->rawModel().hasIndecies()){
@@ -82,7 +97,13 @@ void Renderer::renderTexturedModel(TexturedModel * a_texturedModel)
 
 void Renderer::renderEntity(Entity * a_entity, ShaderProgram * a_shader)
 {
-	a_entity->bindTextures("ourTexture1", "ourTexture2");
+	// check entity isn't null
+	if (a_entity == nullptr) {
+		std::cout << "\n ERROR --> RENDERING entity was null" << std::endl;
+		return;
+	}
+	
+	a_entity->bindTextures("diffuse", "normal");
 	glBindVertexArray(a_entity->model()->vaoID());
 	a_shader->uniformMat4("model", a_entity->transform());
 	// check if the entities model uses indices

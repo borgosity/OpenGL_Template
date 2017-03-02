@@ -25,21 +25,31 @@ private:
 	// shaders
 	ShaderProgram * m_colourSP = nullptr;
 	ShaderProgram * m_cameraSP = nullptr;
+	ShaderProgram * m_phongSP = nullptr;
 	ShaderProgram * m_modelSP = nullptr;
 	ShaderProgram * m_rippleSP = nullptr;
+
 	// textures
 	Texture *		m_groundTexture = nullptr;
 	Texture *		m_duckTexture = nullptr;
+	Texture *		m_duckNormal = nullptr;
+	Texture *		m_rocksTexture = nullptr;
+	Texture *		m_rocksNormalMap = nullptr;
 	// models
 	RawModel *		m_gridModel = nullptr;
 	RawModel *		m_cubeModel = nullptr;
 	RawModel *		m_objModel = nullptr;
+	RawModel *		m_rocksModel = nullptr;
+
+	// textured models
 	TexturedModel * m_groundModel = nullptr;
 	TexturedModel * m_duckModel = nullptr;
-
+	TexturedModel * m_rocksTM = nullptr;
 	// planetary entities 
 	Entity * m_ground = nullptr;
 	Entity * m_rubberDuck = nullptr;
+	Entity * m_rocksE = nullptr;
+
 
 };
 

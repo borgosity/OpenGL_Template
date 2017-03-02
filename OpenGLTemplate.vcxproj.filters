@@ -244,5 +244,11 @@
     <None Include="src\shaders\glsl\modelShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
+    <None Include="src\shaders\glsl\phongShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\phongShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
   </ItemGroup>
 </Project>
