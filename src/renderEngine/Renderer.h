@@ -22,6 +22,9 @@ public:
 	void renderInd(RawModel * model);
 	void renderTexturedModel(TexturedModel * a_texturedModel);
 	void renderEntity(Entity * a_entity, ShaderProgram * a_shader);
+
+	void renderWithShader(Entity * a_entity, ShaderProgram * a_shader);
+
 	void bindRenderTexture(TexturedModel * a_texturedModel);
 	void bindTexture(TexturedModel * a_texturedModel, ShaderProgram * a_shader, const char * a_uniformName, int a_texNumber);
 };

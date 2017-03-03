@@ -60,8 +60,8 @@ void Controller::mouseCallback(GLFWwindow* a_window, double a_xPos, double a_yPo
 		m_bInitialPos = true;
 	}
 	// set offsets
-	m_fXoffset = m_fOldXpos - a_xPos;
-	m_fYoffset = m_fOldYpos - a_yPos;  // This is inverse look, pull back for looking up
+	m_fXoffset = a_xPos - m_fOldXpos; 
+	m_fYoffset = a_yPos - m_fOldYpos; // This is inverse look, pull back for looking up
 	// set old position
 	m_fOldXpos = a_xPos;
 	m_fOldYpos = a_yPos;

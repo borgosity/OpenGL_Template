@@ -6,7 +6,7 @@ Camera::Camera()
 {
 	m_vPosition = glm::vec3(0, 0.5f, -2.0f);
 	m_fPitch = 0.0f;
-	m_fYaw = -90.0f; //set some initial offset to avoid camera pointing to the right
+	m_fYaw = 0.0f; //set some initial offset to avoid camera pointing to the right
 	m_fRoll = 0.0f;
 	m_fSpeed = 5.0f;
 	m_vFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -23,7 +23,7 @@ Camera::Camera(glm::vec3 a_cameraPostion, GLfloat a_speed, GLfloat a_fov, GLfloa
 {
 	m_vPosition = a_cameraPostion;
 	m_fPitch = 0.0f;
-	m_fYaw = -90.0f; //set some initial offset to avoid camera pointing to the right
+	m_fYaw = 0.0f; //set some initial offset to avoid camera pointing to the right
 	m_fRoll = 0.0f;
 	m_fSpeed = a_speed;
 	m_vFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -57,18 +57,18 @@ void Camera::moveBack(GLfloat a_dt)
 /// move camera to the left of the scene
 void Camera::moveLeft(GLfloat a_dt)
 {
-	m_vPosition += glm::normalize(glm::cross(m_vFront, m_vUp)) * (m_fSpeed * a_dt);
+	m_vPosition -= glm::normalize(glm::cross(m_vFront, m_vUp)) * (m_fSpeed * a_dt);
 }
 /// move camera to the right of the scene
 void Camera::moveRight(GLfloat a_dt)
 {
-	m_vPosition -= glm::normalize(glm::cross(m_vFront, m_vUp)) * (m_fSpeed * a_dt);
+	m_vPosition += glm::normalize(glm::cross(m_vFront, m_vUp)) * (m_fSpeed * a_dt);
 }
 /// update the cameras pitch
-void Camera::pitchUpdate(GLfloat a_xOffset)
+void Camera::pitchUpdate(GLfloat a_yOffset)
 {
 	// increase pitch by offset
-	m_fPitch += a_xOffset;
+	m_fPitch += a_yOffset;
 	// constrain up/down mouse movement
 	if (m_fPitch > PITCH_MAX) m_fPitch = PITCH_MAX;
 	if (m_fPitch < PITCH_MIN) m_fPitch = PITCH_MIN;
@@ -76,10 +76,10 @@ void Camera::pitchUpdate(GLfloat a_xOffset)
 	updateFront();
 }
 /// update the cameras yaw
-void Camera::yawUpdate(GLfloat a_yOffset)
+void Camera::yawUpdate(GLfloat a_xOffset)
 {
 	// increase yaw by offset, mod used to stop high values
-	m_fYaw = glm::mod(m_fYaw + a_yOffset, 360.0f);
+	m_fYaw = glm::mod(m_fYaw + a_xOffset, 360.0f);
 	// update cameras front
 	updateFront();
 }
@@ -102,9 +102,9 @@ void Camera::zoomUpdate(GLfloat a_yOffset)
 void Camera::updateFront()
 {
 	glm::vec3 front;
-	front.x = glm::cos(glm::radians(m_fYaw)) * glm::cos(glm::radians(m_fPitch));
+	front.x = glm::sin(glm::radians(m_fYaw)) * glm::cos(glm::radians(m_fPitch));
 	front.y = glm::sin(glm::radians(m_fPitch));
-	front.z = glm::sin(glm::radians(m_fYaw)) * glm::cos(glm::radians(m_fPitch));
+	front.z = -glm::cos(glm::radians(m_fYaw)) * glm::cos(glm::radians(m_fPitch));
 	// normalise final vector
 	m_vFront = glm::normalize(front);
 }

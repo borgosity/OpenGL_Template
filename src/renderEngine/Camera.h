@@ -23,8 +23,8 @@ public:
 	void moveLeft(GLfloat a_dt);
 	void moveRight(GLfloat a_dt);
 	// camera angles
-	void pitchUpdate(GLfloat a_xOffset);
-	void yawUpdate(GLfloat a_yOffset);
+	void pitchUpdate(GLfloat a_yOffset);
+	void yawUpdate(GLfloat a_xOffset);
 	// camera zoom
 	void zoomUpdate(GLfloat a_yOffset);
 
@@ -39,6 +39,8 @@ public:
 	glm::mat4	viewMatrix() { return m_mViewMatrix; };
 	glm::mat4	viewMatrix(glm::mat4 a_viewMatrix) { return m_mViewMatrix; };
 	glm::vec3	position() { return m_vPosition; };
+	glm::vec3	front() { return m_vFront; };
+	// eulers
 	GLfloat		pitch() { return m_fPitch; };
 	GLfloat		yaw() { return m_fYaw; };
 	GLfloat		roll() { return m_fRoll; };

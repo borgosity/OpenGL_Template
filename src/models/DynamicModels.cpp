@@ -12,78 +12,43 @@ DynamicModels::~DynamicModels()
 {
 }
 
-void DynamicModels::grid(RawModel & a_rawmodel, unsigned int a_rows, unsigned int a_columns)
+void DynamicModels::grid(RawModel & a_rawmodel, unsigned int a_size, unsigned int a_vertCount)
 {
-	Vertex * vertices = new Vertex[a_rows * a_columns];
-	unsigned int* indices = new unsigned int[(a_rows - 1) * (a_columns - 1) *6];
+	Vertex * vertices = new Vertex[a_vertCount * a_vertCount];
+	unsigned int* indices = new unsigned int[(a_vertCount - 1) * (a_vertCount - 1) * 6];
 
-	for (unsigned int r = 0; r < a_rows; ++r) {
-		for (unsigned int c = 0; c < a_columns; ++c) {
-			vertices[r * a_columns + c].position = glm::vec3((float)c, 0, (float)r);
-			// create some arbitrary colour based off something
-			// that might not be related to tiling a texture
-			GLfloat gradient = sinf((c / (float)(a_columns)) * (r / (float)(a_rows)));
-			glm::vec3 colour = glm::vec3(gradient);
-			vertices[r * a_columns + c].colour = colour;
+	for (unsigned int r = 0; r < a_vertCount; ++r) {
+		for (unsigned int c = 0; c < a_vertCount; ++c) {
+			//vertices[r * a_vertCount + c].position = glm::vec3((float)c * a_size, 0, (float)r * a_size);
+			vertices[r * a_vertCount + c].position = glm::vec3((float)c / ((float)(a_vertCount) - 1 ) * a_size, 
+																0, 
+																(float)r / ((float)(a_vertCount) - 1 ) * a_size);
+			vertices[r * a_vertCount + c].normal = glm::vec3(0, 1, 0);
+			vertices[r * a_vertCount + c].texCoords = glm::vec2((c / (float)(a_vertCount - 1)), 
+																(r / (float)(a_vertCount - 1)));
 		}
 	}
 	// defining index count based off quad count (2 triangles per quad)
 	unsigned int index = 0;
-	for (unsigned int r = 0; r < (a_rows - 1); ++r) {
-		for (unsigned int c = 0; c < (a_columns - 1); ++c) {
+	for (unsigned int r = 0; r < (a_vertCount - 1); ++r) {
+		for (unsigned int c = 0; c < (a_vertCount - 1); ++c) {
 			// triangle 1
-			indices[index++] = r * a_columns + c;
-			indices[index++] = (r + 1) * a_columns + c;
-			indices[index++] = (r + 1) * a_columns + (c + 1);
+			indices[index++] = r * a_vertCount + c;
+			indices[index++] = (r + 1) * a_vertCount + c;
+			indices[index++] = (r + 1) * a_vertCount + (c + 1);
 			// triangle 2
-			indices[index++] = r * a_columns + c;
-			indices[index++] = (r + 1) * a_columns + (c + 1);
-			indices[index++] = r * a_columns + (c + 1);
+			indices[index++] = r * a_vertCount + c;
+			indices[index++] = (r + 1) * a_vertCount + (c + 1);
+			indices[index++] = r * a_vertCount + (c + 1);
 		}
 	}
+
 	// create raw model from vertices and indices
-	a_rawmodel =  m_loader->loadToVAO(vertices, (a_rows * a_columns) * sizeof(Vertex), 6,
-									  indices, (a_rows - 1) * (a_columns - 1) * 6 * sizeof(unsigned int));
-	
+	a_rawmodel =  m_loader->loadToVAO(vertices, (a_vertCount * a_vertCount) * sizeof(Vertex), 8,
+									  indices, (a_vertCount - 1) * (a_vertCount - 1) * 8 * sizeof(unsigned int));
 	// cleanup
 	delete[] vertices;
 	delete[] indices;
-
-	//int count = VERTEX_COUNT * VERTEX_COUNT;
-	//float[] vertices = new float[count * 3];
-	//float[] normals = new float[count * 3];
-	//float[] textureCoords = new float[count * 2];
-	//int[] indices = new int[6 * (VERTEX_COUNT - 1)*(VERTEX_COUNT - 1)];
-	//int vertexPointer = 0;
-	//for (int i = 0; i<VERTEX_COUNT; i++) {
-	//	for (int j = 0; j<VERTEX_COUNT; j++) {
-	//		vertices[vertexPointer * 3] = (float)j / ((float)VERTEX_COUNT - 1) * SIZE;
-	//		vertices[vertexPointer * 3 + 1] = 0;
-	//		vertices[vertexPointer * 3 + 2] = (float)i / ((float)VERTEX_COUNT - 1) * SIZE;
-	//		normals[vertexPointer * 3] = 0;
-	//		normals[vertexPointer * 3 + 1] = 1;
-	//		normals[vertexPointer * 3 + 2] = 0;
-	//		textureCoords[vertexPointer * 2] = (float)j / ((float)VERTEX_COUNT - 1);
-	//		textureCoords[vertexPointer * 2 + 1] = (float)i / ((float)VERTEX_COUNT - 1);
-	//		vertexPointer++;
-	//	}
-	//}
-	//int pointer = 0;
-	//for (int gz = 0; gz<VERTEX_COUNT - 1; gz++) {
-	//	for (int gx = 0; gx<VERTEX_COUNT - 1; gx++) {
-	//		int topLeft = (gz*VERTEX_COUNT) + gx;
-	//		int topRight = topLeft + 1;
-	//		int bottomLeft = ((gz + 1)*VERTEX_COUNT) + gx;
-	//		int bottomRight = bottomLeft + 1;
-	//		indices[pointer++] = topLeft;
-	//		indices[pointer++] = bottomLeft;
-	//		indices[pointer++] = topRight;
-	//		indices[pointer++] = topRight;
-	//		indices[pointer++] = bottomLeft;
-	//		indices[pointer++] = bottomRight;
-	//	}
-	//}
-	//return loader.loadToVAO(vertices, textureCoords, normals, indices);
 }
 
 RawModel * DynamicModels::cube()

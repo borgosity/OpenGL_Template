@@ -5,6 +5,9 @@
 #include <gtc/type_ptr.hpp>
 
 #include "Shaders.h"
+#include "TexturedModel.h"
+#include "Light.h"
+#include "Camera.h"
 
 class ShaderProgram
 {
@@ -23,6 +26,12 @@ public:
 	void uniformFloat(const GLchar * a_uniformName, GLfloat a_value);
 	void uniformBool(const GLchar * a_uniformName, bool a_value);
 	void uniformMat4(const GLchar * a_uniformName, glm::mat4 & a_values);
+	// load functions
+	virtual void loadModelTransform(glm::mat4 a_modelTransform) {};
+	virtual void loadCamera(Camera & a_camera) {};
+	virtual void loadLight(Light & a_light) {};
+	virtual void loadTextures(TexturedModel & a_texturedModel) {};
+	virtual void loadShineVariables(GLfloat damper, GLfloat reflectivity) {};
 	// variable accessors
 	GLuint ID() { return m_uiProgramID; };
 
@@ -33,7 +42,7 @@ public:
 	// virtual void bindAttributes() = 0;
 	// void bindAttribute(GLuint a_attribute, const GLchar * a_variableName);
 	
-private:
+protected:
 	GLuint m_uiProgramID;
 	GLuint m_uiVertexShaderID;
 	GLuint m_uiFragmentShaderID;
@@ -50,6 +59,7 @@ private:
 	void readFiles(std::string a_vsFilePath, std::string a_fsFilePath);
 	GLuint loadShader(const GLchar * a_shaderSource, GLuint a_shaderType);
 	void linkShaders(GLuint a_vertexShader, GLuint a_fragmentShader);
+	// virtual functions
 
 };
 

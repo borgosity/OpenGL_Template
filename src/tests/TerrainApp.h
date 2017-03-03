@@ -1,6 +1,8 @@
 #pragma once
 #include "Application.h"
 #include "OBJLoader.h"
+#include "Light.h"
+#include "StaticShader.h"
 
 class TerrainApp :
 	public Application
@@ -22,12 +24,15 @@ private:
 	Renderer *			m_renderer = nullptr;
 	Camera *			m_camera = nullptr;
 	CameraController *	m_cameraController = nullptr;
+
 	// shaders
 	ShaderProgram * m_colourSP = nullptr;
 	ShaderProgram * m_cameraSP = nullptr;
 	ShaderProgram * m_phongSP = nullptr;
 	ShaderProgram * m_modelSP = nullptr;
 	ShaderProgram * m_rippleSP = nullptr;
+
+	StaticShader * m_staticShader = nullptr;
 
 	// textures
 	Texture *		m_soulSpearTexture = nullptr;
@@ -51,12 +56,15 @@ private:
 	TexturedModel * m_duckTM = nullptr;
 	TexturedModel * m_rocksTM = nullptr;
 
-	// planetary entities 
+	// entities 
 	Entity * m_soulSpear = nullptr;
 	Entity * m_flag = nullptr;
 	Entity * m_rubberDuck = nullptr;
 	Entity * m_water = nullptr;
 	Entity * m_rocksE = nullptr;
+
+	// lights
+	Light * m_duckLight = nullptr;
 
 
 };

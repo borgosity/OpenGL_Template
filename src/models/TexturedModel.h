@@ -17,14 +17,22 @@ public:
 	GLuint vertexCount() { return m_rawModel->vertexCount(); };
 	// bind textures to shader uniforms
 	void bindTextures(const GLchar * a_uniformA, const GLchar * a_uniformB);
-	// does the model use indeces
+	// does the model use indices
 	bool hasIndices() { return rawModel().hasIndecies(); };
+	// getters, setters
+	GLfloat shine() { return m_shineDamper; };
+	GLfloat shine(GLfloat a_value) { m_shineDamper = a_value; return m_shineDamper; };
+	GLfloat reflection() { return m_reflectivity; };
+	GLfloat reflection(GLfloat a_value) { m_reflectivity = a_value; return m_reflectivity; };
 
 private:
-	RawModel *	m_rawModel;
-	Texture *	m_textureA;
-	Texture *	m_textureB;
+	RawModel *	m_rawModel = nullptr;
+	Texture *	m_textureA = nullptr;
+	Texture *	m_textureB = nullptr;
 	GLuint		m_shaderProgramID;
+	GLfloat		m_shineDamper;
+	GLfloat		m_reflectivity;
+
 	// private functions
 };
 

@@ -177,6 +177,7 @@
     <ClCompile Include="src\app\CameraController.cpp" />
     <ClCompile Include="src\app\Controller.cpp" />
     <ClCompile Include="src\entities\Entity.cpp" />
+    <ClCompile Include="src\entities\Light.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\models\DynamicModels.cpp" />
     <ClCompile Include="src\models\OBJLoader.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="src\renderEngine\Renderer.cpp" />
     <ClCompile Include="src\shaders\ShaderProgram.cpp" />
     <ClCompile Include="src\shaders\Shaders.cpp" />
+    <ClCompile Include="src\shaders\StaticShader.cpp" />
     <ClCompile Include="src\tests\ExampleApp.cpp" />
     <ClCompile Include="src\tests\TerrainApp.cpp" />
     <ClCompile Include="src\tests\tests.cpp" />
@@ -202,6 +204,7 @@
     <ClInclude Include="src\app\ConstValues.h" />
     <ClInclude Include="src\app\Controller.h" />
     <ClInclude Include="src\entities\Entity.h" />
+    <ClInclude Include="src\entities\Light.h" />
     <ClInclude Include="src\models\DynamicModels.h" />
     <ClInclude Include="src\models\OBJLoader.h" />
     <ClInclude Include="src\models\RawModel.h" />
@@ -212,6 +215,7 @@
     <ClInclude Include="src\renderEngine\Renderer.h" />
     <ClInclude Include="src\shaders\Shaders.h" />
     <ClInclude Include="src\shaders\ShaderProgram.h" />
+    <ClInclude Include="src\shaders\StaticShader.h" />
     <ClInclude Include="src\tests\ExampleApp.h" />
     <ClInclude Include="src\tests\TerrainApp.h" />
     <ClInclude Include="src\tests\tests.h" />

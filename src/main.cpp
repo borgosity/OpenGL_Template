@@ -6,7 +6,7 @@
 ****************************************************************************************************************/
 
 #include <iostream>
-#include "tests\tests.h"
+//#include "tests\tests.h"
 #include "tests\ExampleApp.h"
 #include "tests\TerrainApp.h"
 

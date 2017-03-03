@@ -36,15 +36,16 @@ void CameraController::keyPress(Camera & a_camera, GLfloat a_dt)
 /// User mouse movement check
 void CameraController::mouseMovement(Camera & a_camera)
 {
+	// Update Camera yaw if offset has changed
+	if (m_fOldXoffset != m_fXoffset) {
+		a_camera.yawUpdate(m_fXoffset * m_fMouseSpeed);
+		m_fOldXoffset = m_fXoffset;
+	}
+
 	// Update Camera Pitch if offset has changed
 	if (m_fOldYoffset != m_fYoffset) {
 		a_camera.pitchUpdate(m_fYoffset * m_fMouseSpeed);
 		m_fOldYoffset = m_fYoffset;
-	}
-	// Update Camera Yaw if offset has changed
-	if (m_fOldXoffset != m_fXoffset) {
-		a_camera.yawUpdate(m_fXoffset * m_fMouseSpeed);
-		m_fOldXoffset = m_fXoffset;
 	}
 }
 /// User mouse scroll check

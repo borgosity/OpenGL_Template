@@ -114,6 +114,12 @@
     <ClCompile Include="include\tiny_obj\tiny_obj_loader.cc">
       <Filter>Source Files\models\tinyObj</Filter>
     </ClCompile>
+    <ClCompile Include="src\shaders\StaticShader.cpp">
+      <Filter>Source Files\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\Light.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -181,6 +187,12 @@
     </ClInclude>
     <ClInclude Include="include\tiny_obj\tiny_obj_loader.h">
       <Filter>Source Files\models\tinyObj</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shaders\StaticShader.h">
+      <Filter>Source Files\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Light.h">
+      <Filter>Source Files\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

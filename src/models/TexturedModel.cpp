@@ -6,6 +6,8 @@ TexturedModel::TexturedModel(RawModel & a_model, Texture & a_texture)
 	m_rawModel = &a_model;
 	m_textureA = &a_texture;
 	m_textureB = nullptr;
+	m_shineDamper = 1;
+	m_reflectivity = 0;
 }
 
 TexturedModel::TexturedModel(RawModel & a_model, Texture & a_textureA, Texture & a_textureB)
@@ -13,6 +15,8 @@ TexturedModel::TexturedModel(RawModel & a_model, Texture & a_textureA, Texture &
 	m_rawModel = &a_model;
 	m_textureA = &a_textureA;
 	m_textureB = &a_textureB;
+	m_shineDamper = 1;
+	m_reflectivity = 0;
 }
 
 TexturedModel::TexturedModel(RawModel & a_model, Texture & a_textureA, Texture & a_textureB, GLuint a_shaderProgramID)
@@ -21,6 +25,8 @@ TexturedModel::TexturedModel(RawModel & a_model, Texture & a_textureA, Texture &
 	m_textureA = &a_textureA;
 	m_textureB = &a_textureB;
 	m_shaderProgramID = a_shaderProgramID;
+	m_shineDamper = 1;
+	m_reflectivity = 0;
 }
 
 TexturedModel::~TexturedModel()
