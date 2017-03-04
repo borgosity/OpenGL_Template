@@ -89,7 +89,7 @@ bool TerrainApp::start()
 	// ============= grid setup =====================
 	// create grid model
 	m_gridModel = new RawModel();
-	DynamicModels::grid(*m_gridModel, 50, 15);
+	DynamicModels::grid(*m_gridModel, 50, 25);
 	// water
 	m_waterTexture = new Texture("res/textures/water_0.png");
 	m_waterTM = new TexturedModel(*m_gridModel, *m_waterTexture, *m_waterTexture, m_rippleSP->ID());
@@ -101,16 +101,19 @@ bool TerrainApp::start()
 
 	//============= obj setup ===========================
 	m_soulSpearRM = new RawModel();
-	OBJLoader::loadObjModel("res/models/soulspear/soulspear.obj", *m_soulSpearRM, *m_loader);
-	m_soulSpearTexture = new Texture("res/models/soulspear/soulspear_diffuse.png");
-	m_soulSpearNormalMap = new Texture("res/models/soulspear/soulspear_specular.png");
+	//OBJLoader::loadObjModel("res/models/soulspear/soulspear.obj", *m_soulSpearRM, *m_loader);
+	OBJLoader::loadObjModel("res/models/stanford/Buddha.obj", *m_soulSpearRM, *m_loader);
+	//m_soulSpearTexture = new Texture("res/models/soulspear/soulspear_diffuse.png");
+	//m_soulSpearNormalMap = new Texture("res/models/soulspear/soulspear_specular.png");
+	m_soulSpearTexture = new Texture("res/textures/white.png");
+	m_soulSpearNormalMap = new Texture("res//textures/white.png");
 	m_soulSpearTM = new TexturedModel(*m_soulSpearRM, *m_soulSpearTexture, *m_soulSpearNormalMap, m_phongSP->ID());
 	m_soulSpear = new Entity(m_soulSpearTM, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 	
 	// rubber duck
 	m_duckRM = new RawModel();
 	OBJLoader::loadObjModel("res/models/rubberDuck.obj", *m_duckRM, *m_loader);
-	m_duckTexture = new Texture("res/textures/rubberDuckColour.png");
+	m_duckTexture = new Texture("res/textures/Moon.png");
 	m_duckTM = new TexturedModel(*m_duckRM, *m_duckTexture, *m_waterTexture, m_staticShader->ID());
 	//m_duckTM = new TexturedModel(*m_duckRM, *m_duckTexture, *m_duckTexture, m_modelSP->ID());
 
@@ -119,7 +122,7 @@ bool TerrainApp::start()
 	m_rubberDuck = new Entity(m_duckTM, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0f);
 
 	// duck light
-	m_duckLight = new Light(glm::vec3(0,1,-10), glm::vec3(1,1,1));
+	m_duckLight = new Light(glm::vec3(0,5,-20), glm::vec3(1,1,1));
 
 	//================ normal map test ====================
 
@@ -192,14 +195,14 @@ bool TerrainApp::draw(GLfloat a_deltaTime)
 
 	// --- generate light source ------
 	glm::vec3 light(sin(time), 1, cos(time));
-	m_phongSP->uniformVec3("lightDirection", glm::vec3(0.5, 1, 0));
+	m_phongSP->uniformVec3("lightPos", glm::vec3(0.5, 1, 0));
 	m_phongSP->uniformVec3("lightColour", glm::vec3(1, 0, 0));
-	m_phongSP->uniformVec3("cameraPos", m_camera->position());
-	m_phongSP->uniformFloat("specPow", 0.2);
+	m_phongSP->uniformFloat("shineDamper", 10);
+	m_phongSP->uniformFloat("reflectivity", 1);
 
 	// create transform, with rotation changed over time
 	m_soulSpear->transform(Maths::createTransormationMatrix(glm::vec3(0, 0, -5), glm::vec3(0, 0, 0), 1.0f));
-	//m_renderer->renderEntity(m_soulSpear, m_phongSP);
+	m_renderer->renderEntity(m_soulSpear, m_phongSP);
 
 	m_phongSP->stop();
 
