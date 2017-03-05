@@ -25,26 +25,32 @@
     <Filter Include="Source Files\shaders\glsl">
       <UniqueIdentifier>{d630403c-32c2-4aa7-86d8-3c3a132e8c16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\models">
-      <UniqueIdentifier>{3513aa5e-192d-4a1f-9059-000820135fb1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\textures">
-      <UniqueIdentifier>{e1c9dc39-714f-4d17-9549-efbb1a7c743a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\toolBox">
       <UniqueIdentifier>{6abf966d-6b99-4434-87c7-9424862285ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\entities">
-      <UniqueIdentifier>{dc25674c-2283-4c71-bfcc-91fb58787667}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\app">
       <UniqueIdentifier>{377faaac-9603-4f16-a707-9eefa8ed6ddd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\models\tinyObj">
+    <Filter Include="Source Files\assets">
+      <UniqueIdentifier>{9b910f73-6371-490c-a929-c7ae3183eaa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\assets\models">
+      <UniqueIdentifier>{3513aa5e-192d-4a1f-9059-000820135fb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\assets\models\tinyObj">
       <UniqueIdentifier>{745fe59b-8e41-46ef-aa62-f76f9e180582}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\scenes">
+    <Filter Include="Source Files\assets\textures">
+      <UniqueIdentifier>{e1c9dc39-714f-4d17-9549-efbb1a7c743a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\assets\entities">
+      <UniqueIdentifier>{dc25674c-2283-4c71-bfcc-91fb58787667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\assets\scenes">
       <UniqueIdentifier>{664d17bf-b7e8-4916-b4ff-4eec99437688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\assets\meshes">
+      <UniqueIdentifier>{c4e1bc1e-aa86-484c-9a0c-9eaf45722115}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -67,19 +73,19 @@
       <Filter>Source Files\shaders</Filter>
     </ClCompile>
     <ClCompile Include="src\models\RawModel.cpp">
-      <Filter>Source Files\models</Filter>
+      <Filter>Source Files\assets\models</Filter>
     </ClCompile>
     <ClCompile Include="src\models\TexturedModel.cpp">
-      <Filter>Source Files\models</Filter>
+      <Filter>Source Files\assets\models</Filter>
     </ClCompile>
     <ClCompile Include="src\textures\ModelTexture.cpp">
-      <Filter>Source Files\textures</Filter>
+      <Filter>Source Files\assets\textures</Filter>
     </ClCompile>
     <ClCompile Include="src\shaders\Shaders.cpp">
       <Filter>Source Files\shaders</Filter>
     </ClCompile>
     <ClCompile Include="src\textures\Texture.cpp">
-      <Filter>Source Files\textures</Filter>
+      <Filter>Source Files\assets\textures</Filter>
     </ClCompile>
     <ClCompile Include="src\toolBox\Maths.cpp">
       <Filter>Source Files\toolBox</Filter>
@@ -88,10 +94,10 @@
       <Filter>Source Files\renderEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\entities\Entity.cpp">
-      <Filter>Source Files\entities</Filter>
+      <Filter>Source Files\assets\entities</Filter>
     </ClCompile>
     <ClCompile Include="src\models\DynamicModels.cpp">
-      <Filter>Source Files\models</Filter>
+      <Filter>Source Files\assets\models</Filter>
     </ClCompile>
     <ClCompile Include="src\app\Application.cpp">
       <Filter>Source Files\app</Filter>
@@ -109,16 +115,25 @@
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="src\models\OBJLoader.cpp">
-      <Filter>Source Files\models</Filter>
+      <Filter>Source Files\assets\models</Filter>
     </ClCompile>
     <ClCompile Include="include\tiny_obj\tiny_obj_loader.cc">
-      <Filter>Source Files\models\tinyObj</Filter>
+      <Filter>Source Files\assets\models\tinyObj</Filter>
     </ClCompile>
     <ClCompile Include="src\shaders\StaticShader.cpp">
       <Filter>Source Files\shaders</Filter>
     </ClCompile>
     <ClCompile Include="src\entities\Light.cpp">
-      <Filter>Source Files\entities</Filter>
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tests\ModelApp.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\models\Mesh.cpp">
+      <Filter>Source Files\assets\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\models\MeshModel.cpp">
+      <Filter>Source Files\assets\models</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,19 +153,19 @@
       <Filter>Source Files\renderEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\models\RawModel.h">
-      <Filter>Source Files\models</Filter>
+      <Filter>Source Files\assets\models</Filter>
     </ClInclude>
     <ClInclude Include="src\models\TexturedModel.h">
-      <Filter>Source Files\models</Filter>
+      <Filter>Source Files\assets\models</Filter>
     </ClInclude>
     <ClInclude Include="src\textures\ModelTexture.h">
-      <Filter>Source Files\textures</Filter>
+      <Filter>Source Files\assets\textures</Filter>
     </ClInclude>
     <ClInclude Include="src\shaders\Shaders.h">
       <Filter>Source Files\shaders</Filter>
     </ClInclude>
     <ClInclude Include="src\textures\Texture.h">
-      <Filter>Source Files\textures</Filter>
+      <Filter>Source Files\assets\textures</Filter>
     </ClInclude>
     <ClInclude Include="src\toolBox\Maths.h">
       <Filter>Source Files\toolBox</Filter>
@@ -159,10 +174,10 @@
       <Filter>Source Files\renderEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\entities\Entity.h">
-      <Filter>Source Files\entities</Filter>
+      <Filter>Source Files\assets\entities</Filter>
     </ClInclude>
     <ClInclude Include="src\models\DynamicModels.h">
-      <Filter>Source Files\models</Filter>
+      <Filter>Source Files\assets\models</Filter>
     </ClInclude>
     <ClInclude Include="src\app\Application.h">
       <Filter>Source Files\app</Filter>
@@ -183,16 +198,31 @@
       <Filter>Source Files\tests</Filter>
     </ClInclude>
     <ClInclude Include="src\models\OBJLoader.h">
-      <Filter>Source Files\models</Filter>
+      <Filter>Source Files\assets\models</Filter>
     </ClInclude>
     <ClInclude Include="include\tiny_obj\tiny_obj_loader.h">
-      <Filter>Source Files\models\tinyObj</Filter>
+      <Filter>Source Files\assets\models\tinyObj</Filter>
     </ClInclude>
     <ClInclude Include="src\shaders\StaticShader.h">
       <Filter>Source Files\shaders</Filter>
     </ClInclude>
     <ClInclude Include="src\entities\Light.h">
-      <Filter>Source Files\entities</Filter>
+      <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tests\ModelApp.h">
+      <Filter>Source Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\models\Mesh.h">
+      <Filter>Source Files\assets\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\models\MeshModel.h">
+      <Filter>Source Files\assets\models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -260,6 +290,12 @@
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
     <None Include="src\shaders\glsl\phongShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\meshShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\meshShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
   </ItemGroup>

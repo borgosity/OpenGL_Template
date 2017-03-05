@@ -17,8 +17,8 @@ void DynamicModels::grid(RawModel & a_rawmodel, unsigned int a_size, unsigned in
 	Vertex * vertices = new Vertex[a_vertCount * a_vertCount];
 	unsigned int* indices = new unsigned int[(a_vertCount - 1) * (a_vertCount - 1) * 6];
 
-	for (unsigned int r = 0; r < a_vertCount; ++r) {
-		for (unsigned int c = 0; c < a_vertCount; ++c) {
+	for (unsigned int r = 0; r < a_vertCount; r++) {
+		for (unsigned int c = 0; c < a_vertCount; c++) {
 			//vertices[r * a_vertCount + c].position = glm::vec3((float)c * a_size, 0, (float)r * a_size);
 			vertices[r * a_vertCount + c].position = glm::vec3((float)c / ((float)(a_vertCount) - 1 ) * a_size, 
 																0, 
@@ -30,16 +30,20 @@ void DynamicModels::grid(RawModel & a_rawmodel, unsigned int a_size, unsigned in
 	}
 	// defining index count based off quad count (2 triangles per quad)
 	unsigned int index = 0;
-	for (unsigned int r = 0; r < (a_vertCount - 1); ++r) {
-		for (unsigned int c = 0; c < (a_vertCount - 1); ++c) {
+	for (unsigned int r = 0; r < (a_vertCount - 1); r++) {
+		for (unsigned int c = 0; c < (a_vertCount - 1); c++) {
+			int topLeft = (r*a_vertCount) + c;
+			int topRight = topLeft + 1;
+			int bottomLeft = ((r + 1)*a_vertCount) + c;
+			int bottomRight = bottomLeft + 1;
 			// triangle 1
-			indices[index++] = r * a_vertCount + c;
-			indices[index++] = (r + 1) * a_vertCount + c;
-			indices[index++] = (r + 1) * a_vertCount + (c + 1);
+			indices[index++] = topLeft;
+			indices[index++] = bottomLeft;
+			indices[index++] = topRight;
 			// triangle 2
-			indices[index++] = r * a_vertCount + c;
-			indices[index++] = (r + 1) * a_vertCount + (c + 1);
-			indices[index++] = r * a_vertCount + (c + 1);
+			indices[index++] = topRight;
+			indices[index++] = bottomLeft;
+			indices[index++] = bottomRight;
 		}
 	}
 

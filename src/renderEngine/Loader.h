@@ -7,6 +7,7 @@
 #include <glew.h>
 #include <glm.hpp>
 #include <SOIL.h>   // texturing
+#include <assimp\Importer.hpp>
 // local includes
 #include "RawModel.h"
 
@@ -30,6 +31,12 @@ struct Vertex4
 	GLfloat nx, ny, nz;	// normal
 	GLfloat tx, ty, tz;	// tangent
 	GLfloat u, v;		// texture co-ords
+};
+
+struct MeshTexture {
+	GLuint id;
+	std::string type;
+	aiString path;
 };
 
 class Loader

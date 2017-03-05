@@ -79,7 +79,7 @@ RawModel * Loader::loadToVAO(GLfloat a_positions[], int a_posSize, int a_vertexS
 	GLuint vaoID = createVAO();					// create and bind VAO
 	createVBO(a_positions, a_posSize);			// create and bind VBOs
 
-												// indices checks
+	// indices checks
 	int vertCount = a_posSize / a_vertexSize;
 	bool hasIndices = false;						// doesn't has indicies unless nullptr check fails
 													// are the indices values
@@ -198,7 +198,7 @@ void Loader::createVBO(GLfloat data[], int size)
 	glBindBuffer(GL_ARRAY_BUFFER, vboID);
 	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 }
-
+// template was made for this function
 //void Loader::createVBO(Vertex * data, int size)
 //{
 //	GLuint vboID = 0;
@@ -212,12 +212,11 @@ void Loader::createVBO(GLfloat data[], int size)
 void Loader::bindIndicesBuffer(GLuint indices[], int size)
 {
 	GLuint eboID = 0;
-	// bind and set vertex buffer(s) and attribute pointer(s).
+	// bind and set indicies buffer.
 	glGenBuffers(1, &eboID);
 	m_vVBOs.push_back(eboID);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboID);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
-
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++
 // OLD CODE CAN BE REMOVED LATER

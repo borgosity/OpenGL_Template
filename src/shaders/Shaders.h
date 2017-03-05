@@ -16,6 +16,7 @@ struct Shader
 	static ShaderPath dualTextureShader;
 	static ShaderPath indexShader;
 	static ShaderPath modelShader;
+	static ShaderPath meshShader;
 	static ShaderPath phongShader;
 	static ShaderPath rippleShader;
 	static ShaderPath staticShader;

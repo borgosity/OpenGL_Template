@@ -129,3 +129,8 @@ void OBJLoader::loadObjModel(std::string a_filePath, RawModel & a_rawModel, Load
 	// create raw model from vertex data, there are no indicies so passing nullptr and 0
 	a_rawModel = a_loader.loadToVAO(vertices.data(), vertices.size() * sizeof(Vertex3), vertexSize, nullptr, 0);
 }
+
+void OBJLoader::loadObjWithMaterial(std::string a_filePath, std::string a_materialDir, RawModel & a_rawModel, Loader & a_loader)
+{
+	
+}

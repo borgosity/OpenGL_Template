@@ -106,13 +106,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\app;$(SolutionDir)src\entities;$(SolutionDir)src\toolBox;$(SolutionDir)src\textures;$(SolutionDir)src\models;$(SolutionDir)src\shaders;$(SolutionDir)src\renderEngine\;$(SolutionDir)src\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\tiny_obj;$(SolutionDir)include\soil\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\app;$(SolutionDir)src\entities;$(SolutionDir)src\toolBox;$(SolutionDir)src\textures;$(SolutionDir)src\models;$(SolutionDir)src\shaders;$(SolutionDir)src\renderEngine\;$(SolutionDir)include\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\tiny_obj;$(SolutionDir)include\soil\;$(SolutionDir)include\assimp\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;SOIL.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\glm\;$(SolutionDir)lib\glew\x86\;$(SolutionDir)lib\glfw\x86\;$(SolutionDir)lib\soil\x86\;$(SolutionDir)lib\sdl2\x86\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;SOIL.lib;assimp-vc140-mt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\glm\;$(SolutionDir)lib\glew\x86\;$(SolutionDir)lib\glfw\x86\;$(SolutionDir)lib\soil\x86\;$(SolutionDir)lib\assimp\x86\;$(SolutionDir)lib\sdl2\x86\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -180,6 +180,8 @@
     <ClCompile Include="src\entities\Light.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\models\DynamicModels.cpp" />
+    <ClCompile Include="src\models\Mesh.cpp" />
+    <ClCompile Include="src\models\MeshModel.cpp" />
     <ClCompile Include="src\models\OBJLoader.cpp" />
     <ClCompile Include="src\models\RawModel.cpp" />
     <ClCompile Include="src\models\TexturedModel.cpp" />
@@ -191,6 +193,7 @@
     <ClCompile Include="src\shaders\Shaders.cpp" />
     <ClCompile Include="src\shaders\StaticShader.cpp" />
     <ClCompile Include="src\tests\ExampleApp.cpp" />
+    <ClCompile Include="src\tests\ModelApp.cpp" />
     <ClCompile Include="src\tests\TerrainApp.cpp" />
     <ClCompile Include="src\tests\tests.cpp" />
     <ClCompile Include="src\textures\ModelTexture.cpp" />
@@ -199,6 +202,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\tiny_obj\tiny_obj_loader.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshModel.h" />
     <ClInclude Include="src\app\Application.h" />
     <ClInclude Include="src\app\CameraController.h" />
     <ClInclude Include="src\app\ConstValues.h" />
@@ -206,6 +211,8 @@
     <ClInclude Include="src\entities\Entity.h" />
     <ClInclude Include="src\entities\Light.h" />
     <ClInclude Include="src\models\DynamicModels.h" />
+    <ClInclude Include="src\models\Mesh.h" />
+    <ClInclude Include="src\models\MeshModel.h" />
     <ClInclude Include="src\models\OBJLoader.h" />
     <ClInclude Include="src\models\RawModel.h" />
     <ClInclude Include="src\models\TexturedModel.h" />
@@ -217,6 +224,7 @@
     <ClInclude Include="src\shaders\ShaderProgram.h" />
     <ClInclude Include="src\shaders\StaticShader.h" />
     <ClInclude Include="src\tests\ExampleApp.h" />
+    <ClInclude Include="src\tests\ModelApp.h" />
     <ClInclude Include="src\tests\TerrainApp.h" />
     <ClInclude Include="src\tests\tests.h" />
     <ClInclude Include="src\textures\ModelTexture.h" />
@@ -232,6 +240,8 @@
     <None Include="src\shaders\glsl\dualTextureShader.vs" />
     <None Include="src\shaders\glsl\indexShader.fs" />
     <None Include="src\shaders\glsl\indexShader.vs" />
+    <None Include="src\shaders\glsl\meshShader.fs" />
+    <None Include="src\shaders\glsl\meshShader.vs" />
     <None Include="src\shaders\glsl\modelShader.fs" />
     <None Include="src\shaders\glsl\modelShader.vs" />
     <None Include="src\shaders\glsl\phongShader.fs" />
