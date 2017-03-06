@@ -6,7 +6,7 @@ Mesh::Mesh(std::vector<Vertex> a_vertices, std::vector<GLuint> a_indices, std::v
 	m_vVertices = a_vertices;
 	m_vIndices = a_indices;
 	m_vTextures = a_textures;
-	m_fShininess = 16.0f;
+	m_fShininess = 32.0f;
 	// Now that we have all the required data, set the vertex buffers and its attribute pointers.
 	setupMesh();
 }
@@ -33,9 +33,11 @@ void Mesh::draw(ShaderProgram & a_shaderProgram)
 			ss << specularNr++; // Transfer GLuint to stream
 		number = ss.str();
 		// Now set the sampler to the correct texture unit
-		glUniform1i(glGetUniformLocation(a_shaderProgram.ID(), (name + number).c_str()), i);
+		glUniform1i(glGetUniformLocation(a_shaderProgram.ID(), ("material." + name + number).c_str()), i);
+// ## DEBUG ##
+		//std::cout << ("material." + name + number).c_str() << std::endl;
 		// And finally bind the texture
-		glBindTexture(GL_TEXTURE_2D, this->m_vTextures[i].id);
+		glBindTexture(GL_TEXTURE_2D, m_vTextures[i].id);
 	}
 
 	// Also set each mesh's shininess property to a default value 
@@ -43,7 +45,7 @@ void Mesh::draw(ShaderProgram & a_shaderProgram)
 	glUniform1f(glGetUniformLocation(a_shaderProgram.ID(), "material.shininess"), m_fShininess);
 
 	// Draw mesh
-	glBindVertexArray(this->VAO);
+	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, m_vIndices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 

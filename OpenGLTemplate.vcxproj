@@ -180,6 +180,7 @@
     <ClCompile Include="src\entities\Light.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\models\DynamicModels.cpp" />
+    <ClCompile Include="src\models\Lamp.cpp" />
     <ClCompile Include="src\models\Mesh.cpp" />
     <ClCompile Include="src\models\MeshModel.cpp" />
     <ClCompile Include="src\models\OBJLoader.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="src\renderEngine\DisplayManager.cpp" />
     <ClCompile Include="src\renderEngine\Loader.cpp" />
     <ClCompile Include="src\renderEngine\Renderer.cpp" />
+    <ClCompile Include="src\shaders\LightShader.cpp" />
     <ClCompile Include="src\shaders\ShaderProgram.cpp" />
     <ClCompile Include="src\shaders\Shaders.cpp" />
     <ClCompile Include="src\shaders\StaticShader.cpp" />
@@ -202,8 +204,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\tiny_obj\tiny_obj_loader.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MeshModel.h" />
     <ClInclude Include="src\app\Application.h" />
     <ClInclude Include="src\app\CameraController.h" />
     <ClInclude Include="src\app\ConstValues.h" />
@@ -211,6 +211,7 @@
     <ClInclude Include="src\entities\Entity.h" />
     <ClInclude Include="src\entities\Light.h" />
     <ClInclude Include="src\models\DynamicModels.h" />
+    <ClInclude Include="src\models\Lamp.h" />
     <ClInclude Include="src\models\Mesh.h" />
     <ClInclude Include="src\models\MeshModel.h" />
     <ClInclude Include="src\models\OBJLoader.h" />
@@ -220,6 +221,7 @@
     <ClInclude Include="src\renderEngine\DisplayManager.h" />
     <ClInclude Include="src\renderEngine\Loader.h" />
     <ClInclude Include="src\renderEngine\Renderer.h" />
+    <ClInclude Include="src\shaders\LightShader.h" />
     <ClInclude Include="src\shaders\Shaders.h" />
     <ClInclude Include="src\shaders\ShaderProgram.h" />
     <ClInclude Include="src\shaders\StaticShader.h" />
@@ -240,6 +242,10 @@
     <None Include="src\shaders\glsl\dualTextureShader.vs" />
     <None Include="src\shaders\glsl\indexShader.fs" />
     <None Include="src\shaders\glsl\indexShader.vs" />
+    <None Include="src\shaders\glsl\lampShader.fs" />
+    <None Include="src\shaders\glsl\lampShader.vs" />
+    <None Include="src\shaders\glsl\lightingShader.fs" />
+    <None Include="src\shaders\glsl\lightingShader.vs" />
     <None Include="src\shaders\glsl\meshShader.fs" />
     <None Include="src\shaders\glsl\meshShader.vs" />
     <None Include="src\shaders\glsl\modelShader.fs" />

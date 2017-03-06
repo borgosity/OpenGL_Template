@@ -20,11 +20,12 @@ public:
 	void stop();
 	void cleanUp();
 	// uniform functions
-	void uniformVec4(const GLchar * a_uniformName, glm::vec4 & a_values);
-	void uniformVec3(const GLchar * a_uniformName, glm::vec3 & a_values);
-	void uniformVec2(const GLchar * a_uniformName, glm::vec2 & a_values);
-	void uniformFloat(const GLchar * a_uniformName, GLfloat a_value);
 	void uniformBool(const GLchar * a_uniformName, bool a_value);
+	void uniformInt(const GLchar * a_uniformName, GLuint a_value);
+	void uniformFloat(const GLchar * a_uniformName, GLfloat a_value);
+	void uniformVec2(const GLchar * a_uniformName, glm::vec2 & a_values);
+	void uniformVec3(const GLchar * a_uniformName, glm::vec3 & a_values);
+	void uniformVec4(const GLchar * a_uniformName, glm::vec4 & a_values);
 	void uniformMat4(const GLchar * a_uniformName, glm::mat4 & a_values);
 	// load functions
 	virtual void loadModelTransform(glm::mat4 a_modelTransform) {};

@@ -4,6 +4,8 @@
  ShaderPath Shader::colourShader = { "src/shaders/glsl/colourShader.vs", "src/shaders/glsl/colourShader.fs" };
  ShaderPath Shader::dualTextureShader = { "src/shaders/glsl/dualTextureShader.vs", "src/shaders/glsl/dualTextureShader.fs" };
  ShaderPath Shader::indexShader = { "src/shaders/glsl/indexShader.vs", "src/shaders/glsl/indexShader.fs" };
+ ShaderPath Shader::lampShader = { "src/shaders/glsl/lampShader.vs", "src/shaders/glsl/lampShader.fs" };
+ ShaderPath Shader::lightShader = { "src/shaders/glsl/lightingShader.vs", "src/shaders/glsl/lightingShader.fs" };
  ShaderPath Shader::meshShader = { "src/shaders/glsl/meshShader.vs", "src/shaders/glsl/meshShader.fs" };
  ShaderPath Shader::modelShader = { "src/shaders/glsl/modelShader.vs", "src/shaders/glsl/modelShader.fs" };
  ShaderPath Shader::phongShader = { "src/shaders/glsl/phongShader.vs", "src/shaders/glsl/phongShader.fs" };

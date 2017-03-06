@@ -19,6 +19,7 @@ public:
 
 	glm::mat4 transform;
 	void draw(ShaderProgram & a_shaderProgram);
+	void addTexture(std::string a_fileName);
 
 private:
 	std::vector<Mesh> m_vMeshes;

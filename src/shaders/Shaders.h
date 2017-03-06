@@ -14,7 +14,9 @@ struct Shader
 	static ShaderPath cameraShader;
 	static ShaderPath colourShader;
 	static ShaderPath dualTextureShader;
-	static ShaderPath indexShader;
+	static ShaderPath indexShader; 
+	static ShaderPath lampShader;
+	static ShaderPath lightShader;
 	static ShaderPath modelShader;
 	static ShaderPath meshShader;
 	static ShaderPath phongShader;

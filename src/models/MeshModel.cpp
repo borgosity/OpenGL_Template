@@ -16,9 +16,13 @@ MeshModel::~MeshModel()
 
 void MeshModel::draw(ShaderProgram & a_shaderProgram)
 {
+	// send shader models transform
+	a_shaderProgram.uniformMat4("model", transform);
+	// draw model meshes
 	for (GLuint i = 0; i < m_vMeshes.size(); i++)
 		m_vMeshes[i].draw(a_shaderProgram);
 }
+
 
 void MeshModel::loadModel(std::string a_filePath)
 {
@@ -36,7 +40,7 @@ void MeshModel::loadModel(std::string a_filePath)
 	m_sDirectory = a_filePath.substr(0, a_filePath.find_last_of('/'));
 
 	// Process ASSIMP's root node recursively
-	this->processRootNode(*scene->mRootNode, *scene);
+	processRootNode(*scene->mRootNode, *scene);
 }
 
 void MeshModel::processRootNode(aiNode & a_node, const aiScene & a_scene)
@@ -105,9 +109,9 @@ Mesh MeshModel::processMesh(aiMesh & a_mesh, const aiScene & a_scene)
 	{
 		aiMaterial* material = a_scene.mMaterials[a_mesh.mMaterialIndex];
 		// Shader uniform texture naming convention <type>Texture<number>:
-		// Diffuse: diffuseTexture1...
-		// Specular: specularTexture1...
-		// Normal: normalTexture1...
+		// Diffuse: diffuseTexture1
+		// Specular: specularTexture1
+		// Normal: normalTexture1
 
 		// Diffuse maps
 		std::vector<MeshTexture> diffuseMaps = loadMaterialTextures(*material, aiTextureType_DIFFUSE, "texture_diffuse");
@@ -152,6 +156,15 @@ std::vector<MeshTexture> MeshModel::loadMaterialTextures(aiMaterial & a_material
 	return textures;
 }
 
+void MeshModel::addTexture(std::string a_fileName)
+{
+	MeshTexture texture;
+	texture.id = loadTexture(a_fileName, m_sDirectory);
+	texture.type = "texture_diffuse";
+	texture.path = a_fileName;
+	m_vMeshTextures.push_back(texture);  // store texture
+}
+
 GLint MeshModel::loadTexture(std::string a_path, std::string a_directory)
 {
 	//Generate texture ID and load texture data 
@@ -174,7 +187,7 @@ GLint MeshModel::loadTexture(std::string a_path, std::string a_directory)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		SOIL_free_image_data(image);
 		return textureID;

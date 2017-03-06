@@ -3,7 +3,9 @@
 #include "OBJLoader.h"
 #include "Light.h"
 #include "StaticShader.h"
+#include "LightShader.h"
 #include "MeshModel.h"
+#include "Lamp.h"
 
 class ModelApp :
 	public Application
@@ -28,9 +30,12 @@ private:
 
 	// shaders
 	StaticShader * m_staticShader = nullptr;
+	LightShader * m_lightSP = nullptr;
 	ShaderProgram * m_meshSP = nullptr;
 
 	// textures
+	Texture * m_whiteTexture = nullptr;
+	Texture * m_lightTexture = nullptr;
 
 	// models obj
 	MeshModel * m_crisisModel = nullptr;
@@ -38,18 +43,21 @@ private:
 	MeshModel * m_bunnyModel = nullptr;
 	MeshModel * m_buddhaModel = nullptr;
 	MeshModel * m_lucyModel = nullptr;
-
+	MeshModel * m_soulSpearModel = nullptr;
 	// models fbx
 	MeshModel * m_duckModel = nullptr;
-	MeshModel * m_robotModel = nullptr;
+	MeshModel * m_jeepModel = nullptr;
 
-
+	// raw model
+	RawModel * m_cubeRm = nullptr;
 	// textured models
-	
+	TexturedModel * m_lightingTM = nullptr;
+
 	// entities 
 
 	// lights
-
+	Lamp *	m_lamp = nullptr;
+	Light * m_light = nullptr;
 
 
 };
