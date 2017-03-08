@@ -19,6 +19,7 @@ SoftSpotShader::~SoftSpotShader()
 void SoftSpotShader::update(Camera & a_camera, Light & a_light)
 {
 	// update lighting
+	uniformVec3("light.position", a_light.position());
 	uniformVec3("light.direction", a_light.direction());
 	uniformVec3("viewPos", a_camera.position());
 	// directional

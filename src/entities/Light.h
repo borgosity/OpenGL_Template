@@ -14,10 +14,10 @@ public:
 	Light(glm::vec3 a_direction, glm::vec3 a_ambient, glm::vec3 a_diffuse, glm::vec3 a_specular,
 		  GLfloat a_constant, GLfloat a_linear, GLfloat a_quadratic);
 	// spot light constructor
-	Light(glm::vec3 a_direction, glm::vec3 a_ambient, glm::vec3 a_diffuse, glm::vec3 a_specular,
+	Light(glm::vec3 a_position, glm::vec3 a_direction, glm::vec3 a_ambient, glm::vec3 a_diffuse, glm::vec3 a_specular,
 		  GLfloat a_constant, GLfloat a_linear, GLfloat a_quadratic, GLfloat a_cutOff);
 	// soft spot light constructor
-	Light(glm::vec3 a_direction, glm::vec3 a_ambient, glm::vec3 a_diffuse, glm::vec3 a_specular,
+	Light(glm::vec3 a_position, glm::vec3 a_direction, glm::vec3 a_ambient, glm::vec3 a_diffuse, glm::vec3 a_specular,
 		  GLfloat a_constant, GLfloat a_linear, GLfloat a_quadratic, GLfloat a_cutOff, GLfloat a_outerCutOff);
 	~Light();
 

@@ -1,22 +1,22 @@
-#include "SpotLightShader.h"
+#include "SceneLightingShader.h"
 
 
 
-SpotLightShader::SpotLightShader()
+SceneLightingShader::SceneLightingShader()
 {
 }
 
-SpotLightShader::SpotLightShader(ShaderPath a_shaderPath) : ShaderProgram(a_shaderPath)
+SceneLightingShader::SceneLightingShader(ShaderPath a_shaderPath) : ShaderProgram(a_shaderPath)
 {
 
 }
 
 
-SpotLightShader::~SpotLightShader()
+SceneLightingShader::~SceneLightingShader()
 {
 }
 
-void SpotLightShader::update(Camera & a_camera, Light & a_light)
+void SceneLightingShader::update(Camera & a_camera, Light & a_light)
 {
 	// update lighting
 	uniformVec3("light.direction", a_light.direction());

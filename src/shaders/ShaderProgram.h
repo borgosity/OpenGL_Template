@@ -55,6 +55,9 @@ protected:
 	const GLchar * m_cpVertexShaderSource;
 	const GLchar * m_cpFragmentShaderSource;
 
+	std::string m_vsName;
+	std::string m_fsName;
+
 	// private functions
 	std::string & readFile(std::string a_filePath);
 	void readFiles(std::string a_vsFilePath, std::string a_fsFilePath);

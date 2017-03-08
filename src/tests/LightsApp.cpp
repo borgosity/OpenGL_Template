@@ -76,6 +76,8 @@ bool LightsApp::start()
 	m_lightSP = new LightShader(Shader::lightShader);
 	m_meshSP = new ShaderProgram(Shader::meshShader);
 	m_pLightSP = new PointLightShader(Shader::pointLight);
+	m_sLightSP = new SpotLightShader(Shader::spotLight);
+	m_ssLightSP = new SoftSpotShader(Shader::spotLight_soft);
 
 	// load model to VAO
 	m_loader = new Loader();
@@ -136,12 +138,12 @@ bool LightsApp::draw(GLfloat a_deltaTime)
 
 	m_pLightSP->update(*m_camera, *m_pointLight);
 
-	m_duckModel->transform = Maths::createTransormationMatrix(glm::vec3(6.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.01f);
-	m_duckModel->draw(*m_pLightSP);
+	m_bunnyModel->transform = Maths::createTransormationMatrix(glm::vec3(-4.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
+	m_bunnyModel->draw(*m_pLightSP);
 
-	m_dragonModel->transform = Maths::createTransormationMatrix(glm::vec3(4.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
-	m_dragonModel->draw(*m_pLightSP);
 	//m_square->draw(*m_pLightSP);
+	m_lucyModel->transform = Maths::createTransormationMatrix(glm::vec3(-2.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
+	m_lucyModel->draw(*m_pLightSP);
 
 	m_pLightSP->stop();
 
@@ -150,8 +152,8 @@ bool LightsApp::draw(GLfloat a_deltaTime)
 
 	m_sLightSP->update(*m_camera, *m_spotLight);
 
-	m_lucyModel->transform = Maths::createTransormationMatrix(glm::vec3(-2.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
-	m_lucyModel->draw(*m_sLightSP);
+	m_dragonModel->transform = Maths::createTransormationMatrix(glm::vec3(4.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
+	m_dragonModel->draw(*m_sLightSP);
 
 	m_sLightSP->stop();
 
@@ -160,8 +162,9 @@ bool LightsApp::draw(GLfloat a_deltaTime)
 
 	m_ssLightSP->update(*m_camera, *m_softSpotLight);
 
-	m_bunnyModel->transform = Maths::createTransormationMatrix(glm::vec3(-4.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
-	m_bunnyModel->draw(*m_ssLightSP);
+	m_duckModel->transform = Maths::createTransormationMatrix(glm::vec3(6.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.01f);
+	m_duckModel->draw(*m_ssLightSP);
+
 
 	m_ssLightSP->stop();
 
@@ -171,6 +174,7 @@ bool LightsApp::draw(GLfloat a_deltaTime)
 	m_lamp->draw(*m_camera);
 	m_pointLamp->draw(*m_camera);
 	m_spotLamp->draw(*m_camera);
+	m_softSpotLamp->draw(*m_camera);
 
 
 	// ##############################> END DRAW STUFF <###########################################################
@@ -192,9 +196,9 @@ bool LightsApp::stop()
 void LightsApp::setupLights()
 {
 	m_lamp = new Lamp(glm::vec3(0.0f, 3.0f, 2.0f));
-	m_pointLamp = new Lamp(glm::vec3(4.0f, 2.0f, 2.0f));
-	m_spotLamp = new Lamp(glm::vec3(-2.0f, 2.0f, 2.0f));
-	m_softSpotLamp = new Lamp(glm::vec3(-4.0f, 2.0f, 2.0f));
+	m_pointLamp = new Lamp(glm::vec3(-3.0f, 2.0f, 0.0f));
+	m_spotLamp = new Lamp(glm::vec3(4.0f, 1.0f, 0.0f));
+	m_softSpotLamp = new Lamp(glm::vec3(6.0f, 1.0f, 0.0f));
 	
 	// light shader attributes
 	glm::vec3 lightPosition = m_lamp->position();
@@ -212,29 +216,31 @@ void LightsApp::setupLights()
 	GLfloat	  pLightLinear = 0.22f;
 	GLfloat	  pLightQuadratic = 0.20f;
 	// spot light
+	glm::vec3 sLightPosition = m_spotLamp->position();
 	glm::vec3 sLightDirection = -m_spotLamp->position();
 	glm::vec3 sLightAmbient = glm::vec3(0.1f, 0.1f, 0.1f);
 	glm::vec3 sLightDiffuse = glm::vec3(0.8f, 0.8f, 0.8f);
 	glm::vec3 sLightSpecular = glm::vec3(1.0f, 1.0f, 1.0f);
 	GLfloat	  sLightConstant = 1.0f;
-	GLfloat	  sLightLinear = 0.22f;
-	GLfloat	  sLightQuadratic = 0.20f;
+	GLfloat	  sLightLinear = 0.09f;
+	GLfloat	  sLightQuadratic = 0.032f;
 	GLfloat   sLightCutOff = glm::cos(glm::radians(12.5f));
 	// soft spot light
+	glm::vec3 ssLightPosition = m_softSpotLamp->position();
 	glm::vec3 ssLightDirection = -m_softSpotLamp->position();
 	glm::vec3 ssLightAmbient = glm::vec3(0.1f, 0.1f, 0.1f);
 	glm::vec3 ssLightDiffuse = glm::vec3(0.8f, 0.8f, 0.8f);
 	glm::vec3 ssLightSpecular = glm::vec3(1.0f, 1.0f, 1.0f);
 	GLfloat	  ssLightConstant = 1.0f;
-	GLfloat	  ssLightLinear = 0.22f;
-	GLfloat	  ssLightQuadratic = 0.20f;
+	GLfloat	  ssLightLinear = 0.09f;
+	GLfloat	  ssLightQuadratic = 0.032f;
 	GLfloat   ssLightCutOff = glm::cos(glm::radians(12.5f));
 	GLfloat   ssLightOuterCutOff = glm::cos(glm::radians(17.5f));
 
-	m_light = new Light(lightPosition, lightColour, lightDirection, lightAmbient, lightDiffuse, lightSpecular);
-	m_pointLight = new Light(pLightDirection, pLightAmbient, pLightDiffuse, pLightSpecular, pLightConstant, pLightLinear, pLightQuadratic);
-	m_spotLight = new Light(sLightDirection, sLightAmbient, sLightDiffuse, sLightSpecular, sLightConstant, sLightLinear, sLightQuadratic, sLightCutOff);
-	m_softSpotLight = new Light(ssLightDirection, ssLightAmbient, ssLightDiffuse, ssLightSpecular, ssLightConstant, ssLightLinear, ssLightQuadratic, ssLightCutOff, ssLightOuterCutOff);
+	m_light =         new Light(lightPosition, lightColour, lightDirection, lightAmbient, lightDiffuse, lightSpecular);
+	m_pointLight =    new Light(pLightDirection, pLightAmbient, pLightDiffuse, pLightSpecular, pLightConstant, pLightLinear, pLightQuadratic);
+	m_spotLight =	  new Light(sLightPosition, sLightDirection, sLightAmbient, sLightDiffuse, sLightSpecular, sLightConstant, sLightLinear, sLightQuadratic, sLightCutOff);
+	m_softSpotLight = new Light(ssLightPosition, ssLightDirection, ssLightAmbient, ssLightDiffuse, ssLightSpecular, ssLightConstant, ssLightLinear, ssLightQuadratic, ssLightCutOff, ssLightOuterCutOff);
 
 }
 
@@ -245,16 +251,16 @@ void LightsApp::setupModels()
 	// load models
 	m_crisisModel = new MeshModel("res/models/nanosuit/nanosuit.obj");
 	m_crisisModel->transform = Maths::createTransormationMatrix(glm::vec3(0.0f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
-	m_dragonModel = new MeshModel("res/models/stanford/Dragon.obj");
-	m_dragonModel->transform = Maths::createTransormationMatrix(glm::vec3(2.5f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
 	m_bunnyModel = new MeshModel("res/models/stanford/Bunny.obj");
 	m_bunnyModel->transform = Maths::createTransormationMatrix(glm::vec3(-4.0f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
 	m_lucyModel = new MeshModel("res/models/stanford/Lucy.obj");
 	m_lucyModel->transform = Maths::createTransormationMatrix(glm::vec3(-2.0f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
 	m_soulSpearModel = new MeshModel("res/models/soulspear/soulspear.obj");
-	m_soulSpearModel->transform = Maths::createTransormationMatrix(glm::vec3(-1.42f, 3.0f, 0.52f), glm::vec3(180.0f, 0.0f, 0.0f), 0.3f);
+	m_soulSpearModel->transform = Maths::createTransormationMatrix(glm::vec3(1.0f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.3f);
 	m_buddhaModel = new MeshModel("res/models/stanford/Buddha.obj");
-	m_buddhaModel->transform = Maths::createTransormationMatrix(glm::vec3(4.5f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
+	m_buddhaModel->transform = Maths::createTransormationMatrix(glm::vec3(2.0f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
+	m_dragonModel = new MeshModel("res/models/stanford/Dragon.obj");
+	m_dragonModel->transform = Maths::createTransormationMatrix(glm::vec3(4.5f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
 	// fbx models
 	m_duckModel = new MeshModel("res/models/fbx/duck/duck_ascii.fbx");
 	m_duckModel->transform = Maths::createTransormationMatrix(glm::vec3(6.0f, -1.75f, 0.0f), glm::vec3(0.0f, 180.0f, 0.0f), 0.01f);

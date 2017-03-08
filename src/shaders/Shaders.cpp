@@ -8,8 +8,8 @@
  ShaderPath Shader::lampShader =	{ "src/shaders/glsl/lights/lampShader.vs",		"src/shaders/glsl/lights/lampShader.fs" };
  ShaderPath Shader::lightShader =	{ "src/shaders/glsl/lights/lightingShader.vs",	"src/shaders/glsl/lights/lightingShader.fs" };
  ShaderPath Shader::pointLight =	{ "src/shaders/glsl/lights/pointLight.vs",		"src/shaders/glsl/lights/pointLight.fs" };
- ShaderPath Shader::spotLight =		{ "src/shaders/glsl/lights/spotLight.vs",	"src/shaders/glsl/lights/pointLight.fs" };
- ShaderPath Shader::spotLight_soft = { "src/shaders/glsl/lights/spotLight_soft.vs",	"src/shaders/glsl/lights/pointLight_soft.fs" };
+ ShaderPath Shader::spotLight =		{ "src/shaders/glsl/lights/spotLight.vs",	"src/shaders/glsl/lights/spotLight.fs" };
+ ShaderPath Shader::spotLight_soft = { "src/shaders/glsl/lights/spotLight_soft.vs",	"src/shaders/glsl/lights/spotLight_soft.fs" };
 
  ShaderPath Shader::meshShader =	{ "src/shaders/glsl/meshShader.vs",		"src/shaders/glsl/meshShader.fs" };
  ShaderPath Shader::modelShader =	{ "src/shaders/glsl/modelShader.vs",	"src/shaders/glsl/modelShader.fs" };
