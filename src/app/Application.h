@@ -46,9 +46,9 @@ protected:
 
 private:
 	// time
-	GLfloat m_fDeltaTime;
-	GLfloat m_fCurrentTime;
-	GLfloat m_fPrevTime;
+	GLdouble m_fDeltaTime;
+	GLdouble m_fCurrentTime;
+	GLdouble m_fPrevTime;
 
 };
 

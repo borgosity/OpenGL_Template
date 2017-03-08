@@ -163,7 +163,7 @@ bool TerrainApp::draw(GLfloat a_deltaTime)
 	// Activate shader
 	m_rippleSP->start();
 	// pass uniform data
-	m_rippleSP->uniformFloat("time", time * 1.5);
+	m_rippleSP->uniformFloat("time", (GLfloat)time * 1.5f);
 	m_rippleSP->uniformFloat("heightScale", 0.5f);
 	// pass camera position to shader 
 	m_rippleSP->uniformMat4("view", m_camera->viewMatrix());

@@ -3,8 +3,12 @@
 #include "OBJLoader.h"
 #include "Light.h"
 #include "StaticShader.h"
+/// lights
 #include "lights/LightShader.h"
 #include "lights/PointLightShader.h"
+#include "lights/SpotLightShader.h"
+#include "lights/SoftSpotShader.h"
+
 #include "MeshModel.h"
 #include "Lamp.h"
 #include "Square.h"
@@ -23,6 +27,10 @@ public:
 	bool stop();
 
 private:
+	// private functions
+	void setupLights();
+	void setupModels();
+
 	// display
 	DisplayManager *	m_display = nullptr;
 	Loader *			m_loader = nullptr;
@@ -35,6 +43,8 @@ private:
 	LightShader * m_lightSP = nullptr;
 	ShaderProgram * m_meshSP = nullptr;
 	PointLightShader * m_pLightSP = nullptr;
+	SpotLightShader * m_sLightSP = nullptr;
+	SoftSpotShader * m_ssLightSP = nullptr;
 
 
 	// textures
@@ -58,11 +68,12 @@ private:
 	Lamp *	m_lamp = nullptr;
 	Lamp *	m_pointLamp = nullptr;
 	Lamp *	m_spotLamp = nullptr;
+	Lamp *	m_softSpotLamp = nullptr;
 
 	Light * m_light = nullptr;
 	Light * m_pointLight = nullptr;
 	Light * m_spotLight = nullptr;
-
+	Light * m_softSpotLight = nullptr;
 
 };
 

@@ -106,7 +106,7 @@ void ShaderProgram::uniformBool(const GLchar * a_uniformName, bool a_value)
 void ShaderProgram::uniformInt(const GLchar * a_uniformName, GLuint a_value)
 {
 	GLint uniformLocation = glGetUniformLocation(m_uiProgramID, a_uniformName);
-	glUniform1f(uniformLocation, a_value);
+	glUniform1i(uniformLocation, a_value);
 }
 
 void ShaderProgram::uniformMat4(const GLchar * a_uniformName, glm::mat4 & a_values)

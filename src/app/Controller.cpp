@@ -55,21 +55,21 @@ void Controller::mouseCallback(GLFWwindow* a_window, double a_xPos, double a_yPo
 	// stops screen jump on start up when cursor is not centered
 	if (!m_bInitialPos)
 	{
-		m_fOldXpos = a_xPos;
-		m_fOldYpos = a_yPos;
+		m_fOldXpos = (GLfloat)a_xPos;
+		m_fOldYpos = (GLfloat)a_yPos;
 		m_bInitialPos = true;
 	}
 	// set offsets
-	m_fXoffset = a_xPos - m_fOldXpos; 
-	m_fYoffset = a_yPos - m_fOldYpos; // This is inverse look, pull back for looking up
+	m_fXoffset = (GLfloat)a_xPos - m_fOldXpos; 
+	m_fYoffset = (GLfloat)a_yPos - m_fOldYpos; // This is inverse look, pull back for looking up
 	// set old position
-	m_fOldXpos = a_xPos;
-	m_fOldYpos = a_yPos;
+	m_fOldXpos = (GLfloat)a_xPos;
+	m_fOldYpos = (GLfloat)a_yPos;
 }
 
 
 void Controller::scrollCallback(GLFWwindow* a_window, double a_xOffset, double a_yOffset)
 {
-	m_fScrollXoffset = a_xOffset;
-	m_fScrollYoffset = a_yOffset;
+	m_fScrollXoffset = (GLfloat)a_xOffset;
+	m_fScrollYoffset = (GLfloat)a_yOffset;
 }

@@ -178,6 +178,7 @@
     <ClCompile Include="src\app\Controller.cpp" />
     <ClCompile Include="src\entities\Entity.cpp" />
     <ClCompile Include="src\entities\Light.cpp" />
+    <ClCompile Include="src\entities\SceneLights.cpp" />
     <ClCompile Include="src\entities\Square.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\models\DynamicModels.cpp" />
@@ -193,6 +194,8 @@
     <ClCompile Include="src\renderEngine\Renderer.cpp" />
     <ClCompile Include="src\shaders\lights\LightShader.cpp" />
     <ClCompile Include="src\shaders\lights\PointLightShader.cpp" />
+    <ClCompile Include="src\shaders\lights\SceneLightingShader.cpp" />
+    <ClCompile Include="src\shaders\lights\SoftSpotShader.cpp" />
     <ClCompile Include="src\shaders\lights\SpotLightShader.cpp" />
     <ClCompile Include="src\shaders\ShaderProgram.cpp" />
     <ClCompile Include="src\shaders\Shaders.cpp" />
@@ -214,6 +217,7 @@
     <ClInclude Include="src\app\Controller.h" />
     <ClInclude Include="src\entities\Entity.h" />
     <ClInclude Include="src\entities\Light.h" />
+    <ClInclude Include="src\entities\SceneLights.h" />
     <ClInclude Include="src\entities\Square.h" />
     <ClInclude Include="src\models\DynamicModels.h" />
     <ClInclude Include="src\models\Lamp.h" />
@@ -228,12 +232,14 @@
     <ClInclude Include="src\renderEngine\Renderer.h" />
     <ClInclude Include="src\shaders\lights\LightShader.h" />
     <ClInclude Include="src\shaders\lights\PointLightShader.h" />
+    <ClInclude Include="src\shaders\lights\SceneLightingShader.h" />
+    <ClInclude Include="src\shaders\lights\SoftSpotShader.h" />
     <ClInclude Include="src\shaders\lights\SpotLightShader.h" />
     <ClInclude Include="src\shaders\Shaders.h" />
     <ClInclude Include="src\shaders\ShaderProgram.h" />
     <ClInclude Include="src\shaders\StaticShader.h" />
     <ClInclude Include="src\tests\ExampleApp.h" />
-    <ClInclude Include="src\tests\LIghtsApp.h" />
+    <ClInclude Include="src\tests\LightsApp.h" />
     <ClInclude Include="src\tests\ModelApp.h" />
     <ClInclude Include="src\tests\TerrainApp.h" />
     <ClInclude Include="src\tests\tests.h" />
@@ -256,8 +262,12 @@
     <None Include="src\shaders\glsl\lights\lightingShader.vs" />
     <None Include="src\shaders\glsl\lights\pointLight.fs" />
     <None Include="src\shaders\glsl\lights\pointLight.vs" />
+    <None Include="src\shaders\glsl\lights\sceneLighting.fs" />
+    <None Include="src\shaders\glsl\lights\sceneLighting.vs" />
     <None Include="src\shaders\glsl\lights\spotLight.fs" />
     <None Include="src\shaders\glsl\lights\spotLight.vs" />
+    <None Include="src\shaders\glsl\lights\spotLight_soft.fs" />
+    <None Include="src\shaders\glsl\lights\spotLight_soft.vs" />
     <None Include="src\shaders\glsl\meshShader.fs" />
     <None Include="src\shaders\glsl\meshShader.vs" />
     <None Include="src\shaders\glsl\modelShader.fs" />

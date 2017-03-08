@@ -1,22 +1,22 @@
-#include "SpotLightShader.h"
+#include "SoftSpotShader.h"
 
 
 
-SpotLightShader::SpotLightShader()
+SoftSpotShader::SoftSpotShader()
 {
 }
 
-SpotLightShader::SpotLightShader(ShaderPath a_shaderPath) : ShaderProgram(a_shaderPath)
+SoftSpotShader::SoftSpotShader(ShaderPath a_shaderPath) : ShaderProgram(a_shaderPath)
 {
 
 }
 
 
-SpotLightShader::~SpotLightShader()
+SoftSpotShader::~SoftSpotShader()
 {
 }
 
-void SpotLightShader::update(Camera & a_camera, Light & a_light)
+void SoftSpotShader::update(Camera & a_camera, Light & a_light)
 {
 	// update lighting
 	uniformVec3("light.direction", a_light.direction());
@@ -31,6 +31,8 @@ void SpotLightShader::update(Camera & a_camera, Light & a_light)
 	uniformFloat("light.quadratic", a_light.quadratic());
 	// spot
 	uniformFloat("light.cutOff", a_light.cutOff());
+	uniformFloat("light.outCutOff", a_light.outerCutOff());
+
 	// update view and projection
 	uniformMat4("view", a_camera.viewMatrix());
 	uniformMat4("projection", a_camera.projection());

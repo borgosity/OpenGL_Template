@@ -20,6 +20,7 @@ struct Shader
 	static ShaderPath lightShader;
 	static ShaderPath pointLight;
 	static ShaderPath spotLight;
+	static ShaderPath spotLight_soft;
 
 	static ShaderPath modelShader;
 	static ShaderPath meshShader;
