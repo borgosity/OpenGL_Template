@@ -1,12 +1,12 @@
 #include "Mesh.h"
 
 
-Mesh::Mesh(std::vector<Vertex> a_vertices, std::vector<GLuint> a_indices, std::vector<MeshTexture> a_textures)
+Mesh::Mesh(std::vector<Vertex> a_vertices, std::vector<GLuint> a_indices, std::vector<MeshTexture> a_textures, float a_shininess)
 {
 	m_vVertices = a_vertices;
 	m_vIndices = a_indices;
 	m_vTextures = a_textures;
-	m_fShininess = 32.0f;
+	a_shininess == 0.0f ? m_fShininess = 32.0f : m_fShininess = a_shininess;
 	// Now that we have all the required data, set the vertex buffers and its attribute pointers.
 	setupMesh();
 }
@@ -20,6 +20,8 @@ void Mesh::draw(ShaderProgram & a_shaderProgram)
 	// Bind appropriate textures
 	GLuint diffuseNr = 1;
 	GLuint specularNr = 1;
+	GLuint normalNr = 1;
+	GLuint emissiveNr = 1;
 	for (GLuint i = 0; i < m_vTextures.size(); i++)
 	{
 		glActiveTexture(GL_TEXTURE0 + i); // Active proper texture unit before binding
@@ -27,13 +29,26 @@ void Mesh::draw(ShaderProgram & a_shaderProgram)
 		std::stringstream ss;
 		std::string number;
 		std::string name = m_vTextures[i].type;
-		if (name == "texture_diffuse")
+		int hasEmissive = 0; // set emissive to false
+
+		if (name == "texture_diffuse") {
 			ss << diffuseNr++; // Transfer GLuint to stream
-		else if (name == "texture_specular")
+		}
+		else if (name == "texture_specular") {
 			ss << specularNr++; // Transfer GLuint to stream
+		}
+		else if (name == "texture_normal") {
+			ss << normalNr++; // Transfer GLuint to stream
+		}
+		else if (name == "texture_emissive") {
+			ss << emissiveNr++; // Transfer GLuint to stream
+			hasEmissive = 1;	// set emissive to true
+		}
 		number = ss.str();
+
 		// Now set the sampler to the correct texture unit
 		glUniform1i(glGetUniformLocation(a_shaderProgram.ID(), ("material." + name + number).c_str()), i);
+		glUniform1i(glGetUniformLocation(a_shaderProgram.ID(), "hasEmissive"), hasEmissive);
 // ## DEBUG ##
 		//std::cout << ("material." + name + number).c_str() << std::endl;
 		// And finally bind the texture

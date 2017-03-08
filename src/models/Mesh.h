@@ -14,7 +14,7 @@
 class Mesh
 {
 public:
-	Mesh(std::vector<Vertex> a_vertices, std::vector<GLuint> a_indices, std::vector<MeshTexture> a_textures);
+	Mesh(std::vector<Vertex> a_vertices, std::vector<GLuint> a_indices, std::vector<MeshTexture> a_textures, float a_shininess);
 	~Mesh();
 
 	void draw(ShaderProgram & a_shaderProgram);

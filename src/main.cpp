@@ -10,6 +10,7 @@
 #include "tests\ExampleApp.h"
 #include "tests\TerrainApp.h"
 #include "tests\ModelApp.h"
+#include "tests\LightsApp.h"
 
 
 /// main function
@@ -38,7 +39,8 @@ int main()
 
 	//ExampleApp * app = new ExampleApp();
 	//TerrainApp * app = new TerrainApp();
-	ModelApp * app = new ModelApp();
+	//ModelApp * app = new ModelApp();
+	LightsApp * app = new LightsApp();
 
 	if (app != nullptr)
 	{

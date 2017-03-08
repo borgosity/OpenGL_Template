@@ -1,13 +1,13 @@
-#include "ModelApp.h"
+#include "LightsApp.h"
 
 
 
-ModelApp::ModelApp()
+LightsApp::LightsApp()
 {
 }
 
 
-ModelApp::~ModelApp()
+LightsApp::~LightsApp()
 {
 	// display
 	deallocate(m_display);
@@ -18,6 +18,8 @@ ModelApp::~ModelApp()
 	// shaders
 	deallocate(m_meshSP);
 	deallocate(m_lightSP);
+	deallocate(m_pLightSP);
+
 	// textures
 	deallocate(m_whiteTexture);
 	deallocate(m_lightTexture);
@@ -32,23 +34,23 @@ ModelApp::~ModelApp()
 	deallocate(m_duckModel);
 	deallocate(m_jeepModel);
 	// raw models
-	deallocate(m_cubeRm);
 
 	// textured models
-	deallocate(m_lightingTM);
-	
 
 	// entities 
-
+	deallocate(m_square);
 	// lights
 	deallocate(m_lamp);
 	deallocate(m_light);
-
+	deallocate(m_pointLamp);
+	deallocate(m_pointLight);
+	deallocate(m_spotLamp);
+	deallocate(m_spotLight);
 }
 
-bool ModelApp::start()
+bool LightsApp::start()
 {
-	std::cout << "\n### --> Start ModelApp" << std::endl;
+	std::cout << "\n### --> Start LightsApp" << std::endl;
 
 	// camera
 	m_camera = new Camera(glm::vec3(0, 3, 10), CAM_SPEED, FOV, NEAR_PLANE, FAR_PLANE);
@@ -69,6 +71,7 @@ bool ModelApp::start()
 	m_staticShader = new StaticShader(Shader::phongShader);
 	m_lightSP = new LightShader(Shader::lightShader);
 	m_meshSP = new ShaderProgram(Shader::meshShader);
+	m_pLightSP = new PointLightShader(Shader::pointLight);
 
 	// load model to VAO
 	m_loader = new Loader();
@@ -77,12 +80,12 @@ bool ModelApp::start()
 	// load textures
 	m_whiteTexture = new Texture("res/textures/white.png");
 	m_lightTexture = new Texture("res/textures/light.png");
-	
+//-------------------------------- lights ----------------------------------	
 	// create lights
-	m_cubeRm = DynamicModels::cube();
-	m_lightingTM = new TexturedModel(*m_cubeRm, *m_lightTexture, *m_lightTexture, m_lightSP->ID());
-
 	m_lamp = new Lamp(glm::vec3(0.0f, 3.0f, 2.0f));
+	m_pointLamp = new Lamp(glm::vec3(4.0f, 2.0f, 2.0f));
+	m_spotLamp = new Lamp(glm::vec3(2.0f, 2.0f, 2.0f));
+
 	// light shader attributes
 	glm::vec3 lightPosition = m_lamp->position();
 	glm::vec3 lightColour = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -90,8 +93,30 @@ bool ModelApp::start()
 	glm::vec3 lightAmbient = glm::vec3(0.2f, 0.2f, 0.2f);
 	glm::vec3 lightDiffuse = glm::vec3(0.5f, 0.5f, 0.5f);
 	glm::vec3 lightSpecular = glm::vec3(1.0f, 1.0f, 1.0f);
+	// point light
+	glm::vec3 pLightDirection = -m_pointLamp->position();
+	glm::vec3 pLightAmbient = glm::vec3(0.2f, 0.2f, 0.2f);
+	glm::vec3 pLightDiffuse = glm::vec3(0.5f, 0.5f, 0.5f);
+	glm::vec3 pLightSpecular = glm::vec3(1.0f, 1.0f, 1.0f);
+	GLfloat	  pLightConstant = 1.0f;
+	GLfloat	  pLightLinear = 0.22f;
+	GLfloat	  pLightQuadratic = 0.20f;
+	// spot light
+	glm::vec3 sLightDirection = -m_pointLamp->position();
+	glm::vec3 sLightAmbient = glm::vec3(0.1f, 0.1f, 0.1f);
+	glm::vec3 sLightDiffuse = glm::vec3(0.8f, 0.8f, 0.8f);
+	glm::vec3 sLightSpecular = glm::vec3(1.0f, 1.0f, 1.0f);
+	GLfloat	  sLightConstant = 1.0f;
+	GLfloat	  sLightLinear = 0.22f;
+	GLfloat	  sLightQuadratic = 0.20f;
+	GLfloat   sLightCutOff = glm::cos(glm::radians(12.5f));
 
 	m_light = new Light(lightPosition, lightColour, lightDirection, lightAmbient, lightDiffuse, lightSpecular);
+	m_pointLight = new Light(pLightDirection, pLightAmbient, pLightDiffuse, pLightSpecular, pLightConstant, pLightLinear, pLightQuadratic);
+	m_spotLight = new Light(sLightDirection, sLightAmbient, sLightDiffuse, sLightSpecular, sLightConstant, sLightLinear, sLightQuadratic, sLightCutOff);
+
+	//----------------------------------- models ----------------------------
+	m_square = new Square(glm::vec3(0.0f, 0.0f, 0.0f));
 
 	// load models
 	m_crisisModel = new MeshModel("res/models/nanosuit/nanosuit.obj");
@@ -115,7 +140,7 @@ bool ModelApp::start()
 	return true;
 }
 
-bool ModelApp::update(GLfloat a_deltaTime)
+bool LightsApp::update(GLfloat a_deltaTime)
 {
 
 	m_cameraController->update(*m_camera, a_deltaTime);
@@ -123,34 +148,42 @@ bool ModelApp::update(GLfloat a_deltaTime)
 	return true;
 }
 
-bool ModelApp::fixedUpdate(GLfloat a_deltaTime)
+bool LightsApp::fixedUpdate(GLfloat a_deltaTime)
 {
 	return true;
 }
 
-bool ModelApp::draw(GLfloat a_deltaTime)
+bool LightsApp::draw(GLfloat a_deltaTime)
 {
 	GLdouble time = glfwGetTime();
 	// Render
 	// Clear the colorbuffer
 	m_renderer->prepare(0.0f, 0.2f, 0.2f);
 	// ###############################> START DRAW CODE <#########################################################
-	// Activate shader
+	// ------------ PointLight --------------------
+	m_pLightSP->start();
+
+	m_pLightSP->update(*m_camera, *m_pointLight);
+	m_duckModel->draw(*m_pLightSP);
+	m_dragonModel->draw(*m_pLightSP);
+	m_square->draw(*m_pLightSP);
+
+	m_pLightSP->stop();
+
+	//---------------- Directional Light -----------------
 	m_lightSP->start();
 	
 	// update shader with light
 	m_lightSP->update(*m_camera, *m_light);
 	
 	// draw model
-	m_crisisModel->draw(*m_lightSP);
-	//m_dragonModel->draw(*m_lightSP);
 	//m_bunnyModel->draw(*m_lightSP);
 	//m_buddhaModel->draw(*m_lightSP);
+	m_crisisModel->draw(*m_lightSP);
 	//m_lucyModel->transform = Maths::createTransormationMatrix(glm::vec3(-2.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
-	m_lucyModel->draw(*m_lightSP);	
+	m_lucyModel->draw(*m_lightSP);
 	m_soulSpearModel->draw(*m_lightSP);
 	// fbx
-	m_duckModel->draw(*m_lightSP);
 	//m_jeepModel->draw(*m_lightSP);
 
 	// stop shader
@@ -158,6 +191,7 @@ bool ModelApp::draw(GLfloat a_deltaTime)
 
 	// draw light source
 	m_lamp->draw(*m_camera);
+	m_pointLamp->draw(*m_camera);
 
 	// ##############################> END DRAW STUFF <###########################################################
 	// Swap the screen buffers
@@ -165,7 +199,7 @@ bool ModelApp::draw(GLfloat a_deltaTime)
 	return true;
 }
 
-bool ModelApp::stop()
+bool LightsApp::stop()
 {
 	// Properly de-allocate all resources once they've outlived their purpose
 

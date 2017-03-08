@@ -52,6 +52,15 @@
     <Filter Include="Source Files\assets\meshes">
       <UniqueIdentifier>{c4e1bc1e-aa86-484c-9a0c-9eaf45722115}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\shaders\lights">
+      <UniqueIdentifier>{1e747489-d620-4fcc-8738-1ac845f22f99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\shaders\glsl\lights">
+      <UniqueIdentifier>{8b03d97a-b269-452d-90ab-2ee40c5d7d30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\shaders\glsl\other">
+      <UniqueIdentifier>{70b4a57a-d18c-4741-b4b1-371e8d470d4e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -138,8 +147,20 @@
     <ClCompile Include="src\models\Lamp.cpp">
       <Filter>Source Files\assets\entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\shaders\LightShader.cpp">
-      <Filter>Source Files\shaders</Filter>
+    <ClCompile Include="src\shaders\lights\LightShader.cpp">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shaders\lights\PointLightShader.cpp">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shaders\lights\SpotLightShader.cpp">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tests\LightsApp.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\Square.cpp">
+      <Filter>Source Files\assets\entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,8 +248,20 @@
     <ClInclude Include="src\models\Lamp.h">
       <Filter>Source Files\assets\entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\shaders\LightShader.h">
-      <Filter>Source Files\shaders</Filter>
+    <ClInclude Include="src\shaders\lights\LightShader.h">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shaders\lights\PointLightShader.h">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shaders\lights\SpotLightShader.h">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tests\LIghtsApp.h">
+      <Filter>Source Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Square.h">
+      <Filter>Source Files\assets\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -238,83 +271,95 @@
     <None Include="src\shaders\glsl\cameraShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
-    <None Include="src\shaders\glsl\colourShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\colourShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\dualTextureShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\dualTextureShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\indexShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\indexShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\rippleShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\rippleShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\staticShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\staticShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\textureShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\textureShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\transformShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\transformShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\uniformShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\uniformShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\modelShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\modelShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\phongShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\phongShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
     <None Include="src\shaders\glsl\meshShader.fs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
     <None Include="src\shaders\glsl\meshShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
-    <None Include="src\shaders\glsl\lampShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
+    <None Include="src\shaders\glsl\lights\lampShader.fs">
+      <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lampShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
+    <None Include="src\shaders\glsl\lights\lampShader.vs">
+      <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lightingShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
+    <None Include="src\shaders\glsl\lights\lightingShader.fs">
+      <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lightingShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
+    <None Include="src\shaders\glsl\lights\lightingShader.vs">
+      <Filter>Source Files\shaders\glsl\lights</Filter>
+    </None>
+    <None Include="src\shaders\glsl\lights\pointLight.fs">
+      <Filter>Source Files\shaders\glsl\lights</Filter>
+    </None>
+    <None Include="src\shaders\glsl\lights\pointLight.vs">
+      <Filter>Source Files\shaders\glsl\lights</Filter>
+    </None>
+    <None Include="src\shaders\glsl\lights\spotLight.fs">
+      <Filter>Source Files\shaders\glsl\lights</Filter>
+    </None>
+    <None Include="src\shaders\glsl\lights\spotLight.vs">
+      <Filter>Source Files\shaders\glsl\lights</Filter>
+    </None>
+    <None Include="src\shaders\glsl\uniformShader.vs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\modelShader.fs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\modelShader.vs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\phongShader.fs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\phongShader.vs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\rippleShader.fs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\rippleShader.vs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\staticShader.fs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\staticShader.vs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\textureShader.fs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\textureShader.vs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\transformShader.fs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\transformShader.vs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\uniformShader.fs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\indexShader.vs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\indexShader.fs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\dualTextureShader.fs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\dualTextureShader.vs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\colourShader.fs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="src\shaders\glsl\colourShader.vs">
+      <Filter>Source Files\shaders\glsl\other</Filter>
     </None>
   </ItemGroup>
 </Project>

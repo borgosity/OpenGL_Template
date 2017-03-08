@@ -4,15 +4,17 @@
 #include "Light.h"
 #include "StaticShader.h"
 #include "lights/LightShader.h"
+#include "lights/PointLightShader.h"
 #include "MeshModel.h"
 #include "Lamp.h"
+#include "Square.h"
 
-class ModelApp :
+class LightsApp :
 	public Application
 {
 public:
-	ModelApp();
-	~ModelApp();
+	LightsApp();
+	~LightsApp();
 
 	bool start();
 	bool update(GLfloat a_deltaTime);
@@ -32,6 +34,8 @@ private:
 	StaticShader * m_staticShader = nullptr;
 	LightShader * m_lightSP = nullptr;
 	ShaderProgram * m_meshSP = nullptr;
+	PointLightShader * m_pLightSP = nullptr;
+
 
 	// textures
 	Texture * m_whiteTexture = nullptr;
@@ -48,16 +52,16 @@ private:
 	MeshModel * m_duckModel = nullptr;
 	MeshModel * m_jeepModel = nullptr;
 
-	// raw model
-	RawModel * m_cubeRm = nullptr;
-	// textured models
-	TexturedModel * m_lightingTM = nullptr;
-
 	// entities 
-
+	Square * m_square = nullptr;
 	// lights
 	Lamp *	m_lamp = nullptr;
+	Lamp *	m_pointLamp = nullptr;
+	Lamp *	m_spotLamp = nullptr;
+
 	Light * m_light = nullptr;
+	Light * m_pointLight = nullptr;
+	Light * m_spotLight = nullptr;
 
 
 };

@@ -66,6 +66,7 @@ Mesh MeshModel::processMesh(aiMesh & a_mesh, const aiScene & a_scene)
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
 	std::vector<MeshTexture> textures;
+	GLfloat shininess = 0.0f;
 
 	// Get mesh's vertices
 	for (GLuint i = 0; i < a_mesh.mNumVertices; i++)
@@ -112,6 +113,7 @@ Mesh MeshModel::processMesh(aiMesh & a_mesh, const aiScene & a_scene)
 		// Diffuse: diffuseTexture1
 		// Specular: specularTexture1
 		// Normal: normalTexture1
+		// Emissive: emissiveTexture1
 
 		// Diffuse maps
 		std::vector<MeshTexture> diffuseMaps = loadMaterialTextures(*material, aiTextureType_DIFFUSE, "texture_diffuse");
@@ -119,10 +121,20 @@ Mesh MeshModel::processMesh(aiMesh & a_mesh, const aiScene & a_scene)
 		// Specular maps
 		std::vector<MeshTexture> specularMaps = loadMaterialTextures(*material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+		// Normal maps
+		std::vector<MeshTexture> normalMaps = loadMaterialTextures(*material, aiTextureType_NORMALS, "texture_normal");
+		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+		// Emmisive maps
+		std::vector<MeshTexture> emissiveMaps = loadMaterialTextures(*material, aiTextureType_EMISSIVE, "texture_emissive");
+		textures.insert(textures.end(), emissiveMaps.begin(), emissiveMaps.end());
+
+		unsigned int max;
+		aiGetMaterialFloatArray(material, AI_MATKEY_SHININESS, &shininess, &max);
+
 	}
 
 	// Return a mesh object created from the extracted mesh data
-	return Mesh(vertices, indices, textures);
+	return Mesh(vertices, indices, textures, shininess);
 }
 
 std::vector<MeshTexture> MeshModel::loadMaterialTextures(aiMaterial & a_material, aiTextureType a_texType, std::string a_typeName)

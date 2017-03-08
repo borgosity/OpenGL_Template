@@ -161,9 +161,9 @@ RawModel * DynamicModels::square(GLfloat a_size)
 	GLfloat vertices[] = {
 		// Positions          // normals           // Texture Coords 
 		 a_size,  a_size, 0.0f,   0.0f, 0.0f, 1.0f,   1.0f, 1.0f,  // Top Right
-		 a_size, -a_size, 0.0f,   0.0f, 0.0f, 1.0f,   1.0f, 0.0f, // Bottom Right
-		-a_size, -a_size, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
-		-a_size,  a_size, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 1.0f  // Top Left 
+		 a_size, -a_size, 0.0f,   0.0f, 0.0f, 1.0f,   1.0f, 0.0f,  // Bottom Right
+		-a_size, -a_size, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,  // Bottom Left
+		-a_size,  a_size, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 1.0f   // Top Left 
 	};
 	GLuint indices[] = {  // Note that we start from 0!
 		0, 1, 3, // First Triangle
