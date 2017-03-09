@@ -10,7 +10,7 @@ Terrain::Terrain(glm::vec3 a_position, GLuint a_size)
 
 	m_uiGridSize = a_size;
 	m_uiVertNum = a_size;
-	m_m4Transform = Maths::createTransormationMatrix(a_position, glm::vec3(0.0f, 0.0f, 0.0f), 1.0f);
+	m_m4Transform = Maths::createTransormationMatrix(+glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.0f);
 	m_terrainModel = new RawModel();
 	m_terrainTexture = new Texture("res/textures/water.png");
 	m_fShininess = 16.0f;
@@ -38,7 +38,9 @@ void Terrain::draw(Camera & a_camera)
 	// pass transform to shader
 	m_shaderProgram->uniformMat4("model", m_m4Transform);
 	// set lamp object colour
-	m_shaderProgram->uniformVec3("lampColor", m_vTerrainColour);
+	m_shaderProgram->uniformVec3("lightPos", glm::vec3(0.0f, 4.0f, 0.0f));
+	m_shaderProgram->uniformVec3("viewPos", a_camera.position());
+	m_shaderProgram->uniformBool("blinn", 0);
 	m_shaderProgram->uniformFloat("time", time);
 
 	// Bind Textures using texture units
@@ -46,9 +48,9 @@ void Terrain::draw(Camera & a_camera)
 	glBindTexture(GL_TEXTURE_2D, m_perlinTexture);
 	//glBindTexture(GL_TEXTURE_2D, m_terrainTexture->ID());
 	glUniform1i(glGetUniformLocation(m_shaderProgram->ID(), "texture_perlin"), 0);
-	//glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, m_terrainTexture->ID());
-	//glUniform1i(glGetUniformLocation(m_shaderProgram->ID(), "texture_diffuse1"), 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_terrainTexture->ID());
+	glUniform1i(glGetUniformLocation(m_shaderProgram->ID(), "texture_diffuse1"), 0);
 
 	// bind vertex array
 	glBindVertexArray(m_terrainModel->vaoID());
@@ -92,7 +94,7 @@ void Terrain::perlinGeneration()
 			//	amplitude *= persistance;
 
 			//}
-			std::cout << glm::perlin(glm::vec2(x, y) * scale) * 0.5f + 0.5f << std::endl;
+			//std::cout << glm::perlin(glm::vec2(x, y) * scale) * 0.5f + 0.5f << std::endl;
 			perlinData[y* m_uiVertNum + x] = glm::perlin(glm::vec2(x, y) * scale) * 0.5f + 0.5f;
 		}
 	}
@@ -133,7 +135,7 @@ void Terrain::perlinRings()
 			float yVal = (y - m_uiVertNum / 2) / m_uiVertNum;
 			float distVal = glm::sqrt(xVal * xVal + yVal * yVal) + twist * perlinSize / 256.0f;
 			float sineVal = 128.0 * fabs(sin(2 * rings * distVal * 3.14159));
-			std::cout << sineVal << std::endl;			perlinData[y* m_uiVertNum + x] = glm::perlin(glm::vec2(x, y) * sineVal);
+			//std::cout << sineVal << std::endl;			perlinData[y* m_uiVertNum + x] = glm::perlin(glm::vec2(x, y) * sineVal);
 		}
 	}
 	// generate texture
