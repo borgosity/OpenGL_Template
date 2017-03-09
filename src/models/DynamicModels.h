@@ -12,7 +12,7 @@ public:
 	DynamicModels();
 	~DynamicModels();
 
-	static void grid(RawModel & a_rawmodel, unsigned int a_size, unsigned int a_vertCount);
+	static void grid(RawModel & a_rawmodel, GLuint a_size, GLuint a_vertCount);
 	static void squareTBN(RawModel & a_rawmodel, GLfloat a_size);
 	static RawModel * cube();
 	static RawModel * square(GLfloat a_size);

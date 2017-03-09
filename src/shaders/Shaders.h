@@ -25,6 +25,8 @@ struct Shader
 	static ShaderPath modelShader;
 	static ShaderPath meshShader;
 
+	static ShaderPath terrainShader;
+
 	static ShaderPath phongShader;
 	static ShaderPath rippleShader;
 

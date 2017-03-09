@@ -47,6 +47,7 @@ void Lamp::draw(Camera & a_camera)
 	glDrawArrays(GL_TRIANGLES, 0, m_lampTM->vertexCount());
 	// unbind vertex array
 	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	// stop shader
 	m_shaderProgram->stop();
 }
