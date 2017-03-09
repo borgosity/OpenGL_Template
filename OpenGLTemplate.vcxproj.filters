@@ -171,6 +171,12 @@
     <ClCompile Include="src\entities\SceneLights.cpp">
       <Filter>Source Files\assets\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\tests\ProceeduralApp.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\Terrain.cpp">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -279,6 +285,12 @@
       <Filter>Source Files\shaders\lights</Filter>
     </ClInclude>
     <ClInclude Include="src\entities\SceneLights.h">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tests\ProceeduralApp.h">
+      <Filter>Source Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Terrain.h">
       <Filter>Source Files\assets\entities</Filter>
     </ClInclude>
   </ItemGroup>
@@ -390,6 +402,12 @@
     </None>
     <None Include="src\shaders\glsl\lights\sceneLighting.vs">
       <Filter>Source Files\shaders\glsl\lights</Filter>
+    </None>
+    <None Include="src\shaders\glsl\terrainShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\terrainShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
     </None>
   </ItemGroup>
 </Project>

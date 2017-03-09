@@ -16,6 +16,7 @@ struct Light {
     vec3 diffuse;
     vec3 specular;
 
+	// attenuation
 	float constant;
     float linear;
     float quadratic;
@@ -55,18 +56,27 @@ void main()
 		float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 		vec3 specular = light.specular * spec * vec3(texture(material.texture_specular1, TexCoords));
 
+		// Attenuation
+        float distance    = length(light.position - FragPos);
+        float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));  
+
+		// ambient  *= attenuation;  remove because if we move to far away object should be lit by ambient light
+		diffuse  *= attenuation;
+        specular *= attenuation;   
+
 		if (hasEmissive == 0){
 			color = vec4(ambient + diffuse + specular, 1.0f); 
 		}
 		else {
 			// Emission
 			vec3 emission = vec3(texture(material.texture_emissive1, TexCoords)); 
+			emission *= attenuation;
 			// final colour
 			color = vec4(ambient + diffuse + specular + emission, 1.0f);  
 		}
 	}
 	else {
 		// else, use ambient light so scene isn't completely dark outside the spotlight.
-        color = vec4(light.ambient * vec3(texture(material.diffuse, TexCoords)), 1.0f);
+        color = vec4(light.ambient * vec3(texture(material.texture_diffuse1, TexCoords)), 1.0f);
 	}
 }

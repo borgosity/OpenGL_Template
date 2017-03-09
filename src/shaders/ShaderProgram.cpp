@@ -30,6 +30,9 @@ ShaderProgram::ShaderProgram(ShaderPath a_shaderPath)
 {
 	// Shaders
 	readFiles(a_shaderPath.vertexShader.c_str(), a_shaderPath.fragmentShader.c_str());
+	m_fsName = a_shaderPath.fragmentShader;
+	m_vsName = a_shaderPath.vertexShader;
+
 	m_iSuccess = 0;
 	m_uiVertexShaderID = loadShader(m_cpVertexShaderSource, GL_VERTEX_SHADER);
 	m_uiFragmentShaderID = loadShader(m_cpFragmentShaderSource, GL_FRAGMENT_SHADER);
@@ -139,7 +142,10 @@ std::string & ShaderProgram::readFile(std::string a_filePath)
 		shaderSource = shaderStream.str();
 	}
 	catch(std::ifstream::failure e) {
-		std::cout << "ERROR -> Failure reading shader file: " << std::endl;
+		std::cout << "ERROR -> Failure reading shader file: " 
+			<< "\n -- Vertex Shader = " << m_vsName
+			<< "\n -- Fragment Shader = " << m_fsName
+			<< std::endl;
 	}
 	// return shader source 
 	m_spShaderSourceTemp = shaderSource;
@@ -174,7 +180,10 @@ void ShaderProgram::readFiles(std::string a_vsFilePath, std::string a_fsFilePath
 		fsShaderSource = fsShaderStream.str();
 	}
 	catch (std::ifstream::failure e) {
-		std::cout << "ERROR -> Failure reading shader file: " << std::endl;
+		std::cout << "ERROR -> Failure reading shader file: " 
+			<< "\n -- Vertex Shader = " << m_vsName
+			<< "\n -- Fragment Shader = " << m_fsName
+			<< std::endl;
 	}
 	// return shader source 
 	m_cpVertexShaderSource = new GLchar[vsShaderSource.length() + 1];
@@ -197,7 +206,10 @@ GLuint ShaderProgram::loadShader(const GLchar * a_shaderSource, GLuint a_shaderT
 	// log failure
 	if (!m_iSuccess) {
 		glGetShaderInfoLog(shaderID, 512, NULL, m_iInfoLog);
-		std::cout << "ERROR -> SHADER COMPILATION_FAILED\n" << m_iInfoLog << std::endl;
+		std::cout << "ERROR -> SHADER COMPILATION_FAILED\n" 
+			<< "\n -- Vertex Shader = " << m_vsName
+			<< "\n -- Fragment Shader = " << m_fsName
+			<< "\n" << m_iInfoLog << std::endl;
 	}
 	// return ID
 	return shaderID;
@@ -216,7 +228,10 @@ void ShaderProgram::linkShaders(GLuint a_vertexShader, GLuint a_fragmentShader)
 	glGetProgramiv(m_uiProgramID, GL_LINK_STATUS, &m_iSuccess);
 	if (!m_iSuccess) {
 		glGetProgramInfoLog(m_uiProgramID, 512, NULL, m_iInfoLog);
-		std::cout << "ERROR -> SHADER PROGRAM LINKING_FAILED\n" << m_iInfoLog << std::endl;
+		std::cout << "ERROR -> SHADER PROGRAM LINKING_FAILED" 
+			<< "\n -- Vertex Shader = " << m_vsName
+			<< "\n -- Fragment Shader = " << m_fsName
+			<< "\n" << m_iInfoLog << std::endl;
 	}
 
 }

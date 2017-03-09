@@ -19,6 +19,7 @@ SpotLightShader::~SpotLightShader()
 void SpotLightShader::update(Camera & a_camera, Light & a_light)
 {
 	// update lighting
+	uniformVec3("light.position", a_light.position());
 	uniformVec3("light.direction", a_light.direction());
 	uniformVec3("viewPos", a_camera.position());
 	// directional
@@ -31,6 +32,7 @@ void SpotLightShader::update(Camera & a_camera, Light & a_light)
 	uniformFloat("light.quadratic", a_light.quadratic());
 	// spot
 	uniformFloat("light.cutOff", a_light.cutOff());
+
 	// update view and projection
 	uniformMat4("view", a_camera.viewMatrix());
 	uniformMat4("projection", a_camera.projection());

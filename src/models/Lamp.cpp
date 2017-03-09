@@ -47,6 +47,7 @@ void Lamp::draw(Camera & a_camera)
 	glDrawArrays(GL_TRIANGLES, 0, m_lampTM->vertexCount());
 	// unbind vertex array
 	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	// stop shader
 	m_shaderProgram->stop();
 }
@@ -55,7 +56,7 @@ void Lamp::setupLamp()
 {
 	m_lampTexture = new Texture("res/textures/lamp.png");
 	m_lampTM = new TexturedModel(*DynamicModels::cube(), *m_lampTexture, *m_lampTexture, m_shaderProgram->ID());
-	m_lamp = new Entity(m_lampTM, m_vPosition, glm::vec3(45.0F, 0, 45.0f), 0.25f);
+	m_lamp = new Entity(m_lampTM, m_vPosition, glm::vec3(0.0F, 0, 0.0f), 0.25f);
 	m_vLampColour = glm::vec3(1.0f, 1.0f, 1.0f);	// set lamp object colour to white
 	//m_vLightColour = glm::vec3(1.0f, 1.0f, 1.0f);	// set light's color (white)
 }

@@ -12,8 +12,9 @@ DynamicModels::~DynamicModels()
 {
 }
 
-void DynamicModels::grid(RawModel & a_rawmodel, unsigned int a_size, unsigned int a_vertCount)
+void DynamicModels::grid(RawModel & a_rawmodel, GLuint a_size, GLuint a_vertCount)
 {
+
 	Vertex * vertices = new Vertex[a_vertCount * a_vertCount];
 	unsigned int* indices = new unsigned int[(a_vertCount - 1) * (a_vertCount - 1) * 6];
 
@@ -30,6 +31,7 @@ void DynamicModels::grid(RawModel & a_rawmodel, unsigned int a_size, unsigned in
 	}
 	// defining index count based off quad count (2 triangles per quad)
 	unsigned int index = 0;
+
 	for (unsigned int r = 0; r < (a_vertCount - 1); r++) {
 		for (unsigned int c = 0; c < (a_vertCount - 1); c++) {
 			int topLeft = (r*a_vertCount) + c;
@@ -47,9 +49,12 @@ void DynamicModels::grid(RawModel & a_rawmodel, unsigned int a_size, unsigned in
 		}
 	}
 
+	//std::cout << index << " indices * " << sizeof(unsigned int) << " = " << (index * sizeof(unsigned int)) << std::endl;
+	//std::cout << ((a_vertCount - 1) * (a_vertCount - 1) * 8 * sizeof(unsigned int)) << std::endl;
+
 	// create raw model from vertices and indices
 	a_rawmodel =  m_loader->loadToVAO(vertices, (a_vertCount * a_vertCount) * sizeof(Vertex), 8,
-									  indices, (a_vertCount - 1) * (a_vertCount - 1) * 8 * sizeof(unsigned int));
+									  indices, (a_vertCount - 1) * (a_vertCount - 1) * 6 * sizeof(unsigned int));
 	// cleanup
 	delete[] vertices;
 	delete[] indices;

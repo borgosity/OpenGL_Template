@@ -1,13 +1,13 @@
-#include "LightsApp.h"
+#include "ProceeduralApp.h"
 
 
 
-LightsApp::LightsApp()
+ProceeduralApp::ProceeduralApp()
 {
 }
 
 
-LightsApp::~LightsApp()
+ProceeduralApp::~ProceeduralApp()
 {
 	// display
 	deallocate(m_display);
@@ -16,31 +16,29 @@ LightsApp::~LightsApp()
 	deallocate(m_camera);
 	deallocate(m_cameraController);
 	// shaders
-	deallocate(m_meshSP);
 	deallocate(m_lightSP);
 	deallocate(m_pLightSP);
 	deallocate(m_sLightSP);
 	deallocate(m_ssLightSP);
+	deallocate(m_terrainSP);
 
 	// textures
 	deallocate(m_whiteTexture);
 	deallocate(m_lightTexture);
 	// models
-	deallocate(m_crisisModel);
 	deallocate(m_dragonModel);
-	deallocate(m_bunnyModel);
-	deallocate(m_buddhaModel);
 	deallocate(m_lucyModel);
-	deallocate(m_soulSpearModel);
+
 	// fbx
 	deallocate(m_duckModel);
-	deallocate(m_jeepModel);
 	// raw models
 
 	// textured models
 
 	// entities 
 	deallocate(m_square);
+	deallocate(m_terrain);
+
 	// lights
 	deallocate(m_lamp);
 	deallocate(m_light);
@@ -52,9 +50,9 @@ LightsApp::~LightsApp()
 	deallocate(m_softSpotLight);
 }
 
-bool LightsApp::start()
+bool ProceeduralApp::start()
 {
-	std::cout << "\n### --> Start LightsApp" << std::endl;
+	std::cout << "\n### --> Start ProceeduralApp" << std::endl;
 
 	// camera
 	m_camera = new Camera(glm::vec3(0, 3, 10), CAM_SPEED, FOV, NEAR_PLANE, FAR_PLANE);
@@ -71,13 +69,11 @@ bool LightsApp::start()
 
 	// Build and compile our shader program
 	// initialise shader program
-
-	m_staticShader = new StaticShader(Shader::phongShader);
 	m_lightSP = new LightShader(Shader::lightShader);
-	m_meshSP = new ShaderProgram(Shader::meshShader);
 	m_pLightSP = new PointLightShader(Shader::pointLight);
 	m_sLightSP = new SpotLightShader(Shader::spotLight);
 	m_ssLightSP = new SoftSpotShader(Shader::spotLight_soft);
+	m_terrainSP = new ShaderProgram(Shader::terrainShader);
 
 	// load model to VAO
 	m_loader = new Loader();
@@ -92,11 +88,12 @@ bool LightsApp::start()
 	//----------------------------------- models ----------------------------
 	setupModels();
 
+	m_terrain = new Terrain(glm::vec3(-32.0f,0.0f, -32.0f), 64);
 
 	return true;
 }
 
-bool LightsApp::update(GLfloat a_deltaTime)
+bool ProceeduralApp::update(GLfloat a_deltaTime)
 {
 
 	m_cameraController->update(*m_camera, a_deltaTime);
@@ -104,18 +101,23 @@ bool LightsApp::update(GLfloat a_deltaTime)
 	return true;
 }
 
-bool LightsApp::fixedUpdate(GLfloat a_deltaTime)
+bool ProceeduralApp::fixedUpdate(GLfloat a_deltaTime)
 {
 	return true;
 }
 
-bool LightsApp::draw(GLfloat a_deltaTime)
+bool ProceeduralApp::draw(GLfloat a_deltaTime)
 {
 	GLdouble time = glfwGetTime();
 	// Render
 	// Clear the colorbuffer
 	m_renderer->prepare(0.0f, 0.2f, 0.2f);
 	// ###############################> START DRAW CODE <#########################################################
+
+	m_terrainSP->start();
+
+
+	m_terrainSP->stop();
 
 	//---------------- Directional Light -----------------
 	m_lightSP->start();
@@ -124,12 +126,11 @@ bool LightsApp::draw(GLfloat a_deltaTime)
 	m_lightSP->update(*m_camera, *m_light);
 	
 	// draw model
-	m_buddhaModel->draw(*m_lightSP);
-	m_crisisModel->draw(*m_lightSP);
-	m_soulSpearModel->draw(*m_lightSP);
-	// fbx
-	m_jeepModel->draw(*m_lightSP);
+	//m_duckModel->transform = Maths::createTransormationMatrix(glm::vec3(6.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.01f);
+	//m_duckModel->draw(*m_lightSP);
 
+	//m_dragonModel->transform = Maths::createTransormationMatrix(glm::vec3(4.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
+	//m_dragonModel->draw(*m_lightSP);
 	// stop shader
 	m_lightSP->stop();
 
@@ -138,12 +139,9 @@ bool LightsApp::draw(GLfloat a_deltaTime)
 
 	m_pLightSP->update(*m_camera, *m_pointLight);
 
-	m_bunnyModel->transform = Maths::createTransormationMatrix(glm::vec3(-4.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
-	m_bunnyModel->draw(*m_pLightSP);
-
-	//m_square->draw(*m_pLightSP);
-	m_lucyModel->transform = Maths::createTransormationMatrix(glm::vec3(-2.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
-	m_lucyModel->draw(*m_pLightSP);
+	
+	//m_lucyModel->transform = Maths::createTransormationMatrix(glm::vec3(-2.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
+	//m_lucyModel->draw(*m_pLightSP);
 
 	m_pLightSP->stop();
 
@@ -152,8 +150,6 @@ bool LightsApp::draw(GLfloat a_deltaTime)
 
 	m_sLightSP->update(*m_camera, *m_spotLight);
 
-	m_dragonModel->transform = Maths::createTransormationMatrix(glm::vec3(4.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
-	m_dragonModel->draw(*m_sLightSP);
 
 	m_sLightSP->stop();
 
@@ -162,13 +158,11 @@ bool LightsApp::draw(GLfloat a_deltaTime)
 
 	m_ssLightSP->update(*m_camera, *m_softSpotLight);
 
-	m_duckModel->transform = Maths::createTransormationMatrix(glm::vec3(6.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.01f);
-	m_duckModel->draw(*m_ssLightSP);
-
 
 	m_ssLightSP->stop();
 
 	
+	m_terrain->draw(*m_camera);
 
 	// draw light source
 	m_lamp->draw(*m_camera);
@@ -183,7 +177,7 @@ bool LightsApp::draw(GLfloat a_deltaTime)
 	return true;
 }
 
-bool LightsApp::stop()
+bool ProceeduralApp::stop()
 {
 	// Properly de-allocate all resources once they've outlived their purpose
 
@@ -193,7 +187,7 @@ bool LightsApp::stop()
 	return true;
 }
 
-void LightsApp::setupLights()
+void ProceeduralApp::setupLights()
 {
 	m_lamp = new Lamp(glm::vec3(0.0f, 3.0f, 2.0f));
 	m_pointLamp = new Lamp(glm::vec3(-3.0f, 2.0f, 0.0f));
@@ -244,28 +238,18 @@ void LightsApp::setupLights()
 
 }
 
-void LightsApp::setupModels()
+void ProceeduralApp::setupModels()
 {
 	m_square = new Square(glm::vec3(0.0f, 0.0f, 0.0f));
 
 	// load models
-	m_crisisModel = new MeshModel("res/models/nanosuit/nanosuit.obj");
-	m_crisisModel->transform = Maths::createTransormationMatrix(glm::vec3(0.0f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
-	m_bunnyModel = new MeshModel("res/models/stanford/Bunny.obj");
-	m_bunnyModel->transform = Maths::createTransormationMatrix(glm::vec3(-4.0f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
 	m_lucyModel = new MeshModel("res/models/stanford/Lucy.obj");
 	m_lucyModel->transform = Maths::createTransormationMatrix(glm::vec3(-2.0f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
-	m_soulSpearModel = new MeshModel("res/models/soulspear/soulspear.obj");
-	m_soulSpearModel->transform = Maths::createTransormationMatrix(glm::vec3(1.0f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.3f);
-	m_buddhaModel = new MeshModel("res/models/stanford/Buddha.obj");
-	m_buddhaModel->transform = Maths::createTransormationMatrix(glm::vec3(2.0f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
 	m_dragonModel = new MeshModel("res/models/stanford/Dragon.obj");
 	m_dragonModel->transform = Maths::createTransormationMatrix(glm::vec3(4.5f, -1.75f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.2f);
 	// fbx models
 	m_duckModel = new MeshModel("res/models/fbx/duck/duck_ascii.fbx");
 	m_duckModel->transform = Maths::createTransormationMatrix(glm::vec3(6.0f, -1.75f, 0.0f), glm::vec3(0.0f, 180.0f, 0.0f), 0.01f);
-	m_jeepModel = new MeshModel("res/models/fbx/jeep/jeep1.fbx");
-	m_jeepModel->transform = Maths::createTransormationMatrix(glm::vec3(-6.0f, -1.75f, 0.0f), glm::vec3(0.0f, 90.0f, 0.0f), 0.05f);
 
 }
 

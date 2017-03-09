@@ -2,13 +2,13 @@
 #include "ShaderProgram.h"
 
 
-class SpotLightShader :
+class SceneLightingShader :
 	public ShaderProgram
 {
 public:
-	SpotLightShader();
-	SpotLightShader(ShaderPath a_shaderPath);
-	virtual ~SpotLightShader();
+	SceneLightingShader();
+	SceneLightingShader(ShaderPath a_shaderPath);
+	virtual ~SceneLightingShader();
 
 	// load
 	void update(Camera & camera, Light & a_light);
