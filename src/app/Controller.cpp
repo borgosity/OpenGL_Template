@@ -16,6 +16,7 @@ GLfloat		Controller::m_fScrollXoffset = 0;
 GLfloat		Controller::m_fScrollYoffset = 0;
 // debug
 bool		Controller::m_bWireFrame = false;
+int			Controller::m_iMapSelector = 0;
 
 Controller::Controller()
 {
@@ -40,6 +41,7 @@ void Controller::keyCallback(GLFWwindow * a_window, int a_key, int a_scanCode, i
 	else if (a_action == GLFW_RELEASE) {
 		m_bKeys[a_key] = false;
 	}
+	// toggle wireframe
 	if (a_key == GLFW_KEY_L && a_action == GLFW_PRESS)
 	{
 		// toggle wireFrame bool

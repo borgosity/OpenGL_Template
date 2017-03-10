@@ -8,6 +8,7 @@ out VS_OUT{
 	vec3 Position;
 	vec3 Normal;
 	vec2 TexCoord;
+	float yHeight;
 } vs_out;
 
 
@@ -20,14 +21,15 @@ uniform sampler2D texture_perlin;
 
 void main()
 {
-
-	vec3 pos = position;
-	pos.y += texture(texture_perlin, texCoord).r * 5.0f;
-	//pos.y += texture(texture_perlin, texCoord).r * sin(time + pos.x);
-
     vs_out.Position = position;
     vs_out.Normal = normal;
     vs_out.TexCoord = texCoord;
-    
+	vs_out.yHeight = texture(texture_perlin, texCoord).r;
+
+	vec3 pos = position;
+	pos.y += (texture(texture_perlin, texCoord).r * 5.0f) - 5.0f;
+	//pos.y += texture(texture_perlin, texCoord).r * sin(time + pos.x);
+
+	    
 	gl_Position = projection * view * model * vec4(pos, 1.0f);
 }

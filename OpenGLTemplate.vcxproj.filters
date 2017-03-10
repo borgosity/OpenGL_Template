@@ -177,6 +177,9 @@
     <ClCompile Include="src\entities\Terrain.cpp">
       <Filter>Source Files\assets\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\app\UIController.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -292,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="src\entities\Terrain.h">
       <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\UIController.h">
+      <Filter>Source Files\app</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

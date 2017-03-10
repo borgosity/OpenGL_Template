@@ -15,6 +15,9 @@ ProceeduralApp::~ProceeduralApp()
 	deallocate(m_renderer);
 	deallocate(m_camera);
 	deallocate(m_cameraController);
+	deallocate(m_uiController);
+
+
 	// shaders
 	deallocate(m_lightSP);
 	deallocate(m_pLightSP);
@@ -56,7 +59,10 @@ bool ProceeduralApp::start()
 
 	// camera
 	m_camera = new Camera(glm::vec3(0, 3, 10), CAM_SPEED, FOV, NEAR_PLANE, FAR_PLANE);
+	
+	// controllers
 	m_cameraController = new CameraController();
+	m_uiController = new UIController();
 
 	// initialise display
 	m_display = new DisplayManager("Model Example App", SCREEN_W, SCREEN_H);
@@ -95,7 +101,13 @@ bool ProceeduralApp::start()
 
 bool ProceeduralApp::update(GLfloat a_deltaTime)
 {
-
+	// updat eui controller
+	m_uiController->update(a_deltaTime);
+	if (m_uiController->toggleMap()) {
+		m_terrain->toggleMaps();
+		m_uiController->toggleMap(false);
+	}
+	// update camera controller
 	m_cameraController->update(*m_camera, a_deltaTime);
 	
 	return true;
@@ -111,7 +123,7 @@ bool ProceeduralApp::draw(GLfloat a_deltaTime)
 	GLdouble time = glfwGetTime();
 	// Render
 	// Clear the colorbuffer
-	m_renderer->prepare(0.0f, 0.2f, 0.2f);
+	m_renderer->prepare(0.0f, 0.0f, 0.0f);
 	// ###############################> START DRAW CODE <#########################################################
 
 	m_terrainSP->start();
@@ -165,10 +177,10 @@ bool ProceeduralApp::draw(GLfloat a_deltaTime)
 	m_terrain->draw(*m_camera);
 
 	// draw light source
-	m_lamp->draw(*m_camera);
-	m_pointLamp->draw(*m_camera);
-	m_spotLamp->draw(*m_camera);
-	m_softSpotLamp->draw(*m_camera);
+	//m_lamp->draw(*m_camera);
+	//m_pointLamp->draw(*m_camera);
+	//m_spotLamp->draw(*m_camera);
+	//m_softSpotLamp->draw(*m_camera);
 
 
 	// ##############################> END DRAW STUFF <###########################################################

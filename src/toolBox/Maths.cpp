@@ -77,3 +77,27 @@ glm::mat4 Maths::quaternionTransformation(glm::vec3 a_translation, glm::quat a_r
 	// return transformed matrix
 	return matrix;
 }
+
+float Maths::minElement(float * a_array, int a_size)
+{
+	float result = 0.0f;
+		for (int i = 0; i < a_size; i++)
+		{
+			if (a_array[i] <= result){
+				result = a_array[i];
+			}
+		}
+	return result;
+}
+
+float Maths::maxElement(float * a_array, int a_size)
+{
+	float result = 0.0f;
+	for (int i = 0; i < a_size; i++)
+	{
+		if (a_array[i] >= result) {
+			result = a_array[i];
+		}
+	}
+	return result;
+}

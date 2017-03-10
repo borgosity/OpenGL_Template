@@ -34,6 +34,7 @@ protected:
 	static GLfloat	m_fScrollYoffset;
 	// debug variables
 	static bool m_bWireFrame;
+	static int m_iMapSelector;
 
 	// protected functions
 	virtual void keyPress(Camera & a_camera, GLfloat a_dt) = 0;

@@ -14,6 +14,8 @@
 #include "Square.h"
 #include "Terrain.h"
 
+#include "UIController.h"
+
 class ProceeduralApp :
 	public Application
 {
@@ -38,6 +40,8 @@ private:
 	Renderer *			m_renderer = nullptr;
 	Camera *			m_camera = nullptr;
 	CameraController *	m_cameraController = nullptr;
+	UIController *		m_uiController = nullptr;
+
 
 	// shaders
 	LightShader * m_lightSP = nullptr;
