@@ -7,12 +7,13 @@ Terrain::Terrain(glm::vec3 a_position, GLuint a_size)
 	m_vPosition = a_position;
 	m_shaderProgram = new ShaderProgram(Shader::terrainShader);
 	m_vTerrainColour = glm::vec3(1.0f, 1.0f, 1.0f);
-
+	// terrain grid
 	m_uiGridSize = a_size;
 	m_uiVertNum = a_size;
 	m_m4Transform = Maths::createTransormationMatrix(glm::vec3(-32.0f, 0.0f, -32.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.0f);
 	m_terrainModel = new RawModel();
-	
+
+	// textures
 	m_grassTexture = new Texture("res/textures/grass.png");
 	m_sandTexture = new Texture("res/textures/sand.png");
 	m_waterTexture = new Texture("res/textures/water.png");
@@ -90,6 +91,7 @@ void Terrain::draw(Camera & a_camera)
 	// unbind vertex array
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
+
 	// stop shader
 	m_shaderProgram->stop();
 }
