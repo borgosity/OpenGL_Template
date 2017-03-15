@@ -13,6 +13,8 @@
 #include "tests\LightsApp.h"
 #include "tests\ProceeduralApp.h"
 #include "tests\AnimationApp.h"
+#include "tests\ParticlesApp.h"
+
 
 
 /// main function
@@ -44,7 +46,8 @@ int main()
 	//ModelApp * app = new ModelApp();
 	//LightsApp * app = new LightsApp();
 	//ProceeduralApp * app = new ProceeduralApp();
-	AnimationApp * app = new AnimationApp();
+	//AnimationApp * app = new AnimationApp();
+	ParticlesApp * app = new ParticlesApp();
 
 
 

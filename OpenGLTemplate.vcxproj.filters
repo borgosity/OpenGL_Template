@@ -61,6 +61,12 @@
     <Filter Include="Source Files\shaders\glsl\other">
       <UniqueIdentifier>{70b4a57a-d18c-4741-b4b1-371e8d470d4e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\shaders\glsl\particles">
+      <UniqueIdentifier>{a1c5ee0c-322e-445c-9d19-ab8d18f9fbf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\shaders\particles">
+      <UniqueIdentifier>{713dfa3f-9162-4325-9393-d0316f2b3d6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -191,6 +197,12 @@
     </ClCompile>
     <ClCompile Include="src\shaders\AnimeShader.cpp">
       <Filter>Source Files\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tests\ParticlesApp.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shaders\particles\ParticleShader.cpp">
+      <Filter>Source Files\shaders\particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,6 +335,12 @@
     <ClInclude Include="src\shaders\AnimeShader.h">
       <Filter>Source Files\shaders</Filter>
     </ClInclude>
+    <ClInclude Include="src\tests\ParticlesApp.h">
+      <Filter>Source Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shaders\particles\ParticleShader.h">
+      <Filter>Source Files\shaders\particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\glsl\cameraShader.fs">
@@ -450,6 +468,12 @@
     </None>
     <None Include="src\shaders\glsl\animationShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\paricles\particleShader.fs">
+      <Filter>Source Files\shaders\glsl\particles</Filter>
+    </None>
+    <None Include="src\shaders\glsl\paricles\particleShader.vs">
+      <Filter>Source Files\shaders\glsl\particles</Filter>
     </None>
   </ItemGroup>
 </Project>

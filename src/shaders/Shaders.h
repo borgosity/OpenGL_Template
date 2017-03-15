@@ -21,6 +21,8 @@ struct Shader
 	static ShaderPath pointLight;
 	static ShaderPath spotLight;
 	static ShaderPath spotLight_soft;
+	// particles
+	static ShaderPath particleShader;
 
 	static ShaderPath animeShader;
 	static ShaderPath modelShader;

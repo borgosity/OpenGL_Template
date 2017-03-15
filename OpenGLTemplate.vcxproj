@@ -202,6 +202,7 @@
     <ClCompile Include="src\shaders\lights\SceneLightingShader.cpp" />
     <ClCompile Include="src\shaders\lights\SoftSpotShader.cpp" />
     <ClCompile Include="src\shaders\lights\SpotLightShader.cpp" />
+    <ClCompile Include="src\shaders\particles\ParticleShader.cpp" />
     <ClCompile Include="src\shaders\ShaderProgram.cpp" />
     <ClCompile Include="src\shaders\Shaders.cpp" />
     <ClCompile Include="src\shaders\StaticShader.cpp" />
@@ -209,6 +210,7 @@
     <ClCompile Include="src\tests\ExampleApp.cpp" />
     <ClCompile Include="src\tests\LightsApp.cpp" />
     <ClCompile Include="src\tests\ModelApp.cpp" />
+    <ClCompile Include="src\tests\ParticlesApp.cpp" />
     <ClCompile Include="src\tests\ProceeduralApp.cpp" />
     <ClCompile Include="src\tests\TerrainApp.cpp" />
     <ClCompile Include="src\tests\tests.cpp" />
@@ -247,6 +249,7 @@
     <ClInclude Include="src\shaders\lights\SceneLightingShader.h" />
     <ClInclude Include="src\shaders\lights\SoftSpotShader.h" />
     <ClInclude Include="src\shaders\lights\SpotLightShader.h" />
+    <ClInclude Include="src\shaders\particles\ParticleShader.h" />
     <ClInclude Include="src\shaders\Shaders.h" />
     <ClInclude Include="src\shaders\ShaderProgram.h" />
     <ClInclude Include="src\shaders\StaticShader.h" />
@@ -254,6 +257,7 @@
     <ClInclude Include="src\tests\ExampleApp.h" />
     <ClInclude Include="src\tests\LightsApp.h" />
     <ClInclude Include="src\tests\ModelApp.h" />
+    <ClInclude Include="src\tests\ParticlesApp.h" />
     <ClInclude Include="src\tests\ProceeduralApp.h" />
     <ClInclude Include="src\tests\TerrainApp.h" />
     <ClInclude Include="src\tests\tests.h" />
@@ -288,6 +292,8 @@
     <None Include="src\shaders\glsl\meshShader.vs" />
     <None Include="src\shaders\glsl\modelShader.fs" />
     <None Include="src\shaders\glsl\modelShader.vs" />
+    <None Include="src\shaders\glsl\paricles\particleShader.fs" />
+    <None Include="src\shaders\glsl\paricles\particleShader.vs" />
     <None Include="src\shaders\glsl\phongShader.fs" />
     <None Include="src\shaders\glsl\phongShader.vs" />
     <None Include="src\shaders\glsl\planeShader.fs" />

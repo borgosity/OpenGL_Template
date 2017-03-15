@@ -10,7 +10,8 @@
  ShaderPath Shader::pointLight =	{ "src/shaders/glsl/lights/pointLight.vs",		"src/shaders/glsl/lights/pointLight.fs" };
  ShaderPath Shader::spotLight =		{ "src/shaders/glsl/lights/spotLight.vs",	"src/shaders/glsl/lights/spotLight.fs" };
  ShaderPath Shader::spotLight_soft = { "src/shaders/glsl/lights/spotLight_soft.vs",	"src/shaders/glsl/lights/spotLight_soft.fs" };
-
+ // particles
+ ShaderPath Shader::particleShader = { "src/shaders/glsl/particles/particleShader.vs", "src/shaders/glsl/particles/particleShader.fs" };
  ShaderPath Shader::planeShader  = { "src/shaders/glsl/planeShader.vs",		"src/shaders/glsl/planeShader.fs" };
  ShaderPath Shader::terrainShader = { "src/shaders/glsl/terrainShader.vs",		"src/shaders/glsl/terrainShader.fs" };
 
