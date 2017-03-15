@@ -155,6 +155,16 @@ std::string & ShaderProgram::readFile(std::string a_filePath)
 
 void ShaderProgram::readFiles(std::string a_vsFilePath, std::string a_fsFilePath)
 {
+	// error check without failing
+	std::ifstream file1(a_vsFilePath);
+	std::ifstream file2(a_fsFilePath);
+	std::string badFile;
+	!file1.good() ? badFile = ("\n - " + a_vsFilePath) : badFile = "";
+	!file2.good() ? badFile += ( "\n - " + a_fsFilePath) : badFile += "";
+	if (badFile.length() > 0)
+		std::cout << "ERROR -> SHADER read failure: " << badFile << std::endl;
+
+
 	std::string vsShaderSource;
 	std::ifstream vsShaderFile;
 	std::string fsShaderSource;

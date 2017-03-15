@@ -11,10 +11,14 @@
  ShaderPath Shader::spotLight =		{ "src/shaders/glsl/lights/spotLight.vs",	"src/shaders/glsl/lights/spotLight.fs" };
  ShaderPath Shader::spotLight_soft = { "src/shaders/glsl/lights/spotLight_soft.vs",	"src/shaders/glsl/lights/spotLight_soft.fs" };
 
+ ShaderPath Shader::planeShader  = { "src/shaders/glsl/planeShader.vs",		"src/shaders/glsl/planeShader.fs" };
  ShaderPath Shader::terrainShader = { "src/shaders/glsl/terrainShader.vs",		"src/shaders/glsl/terrainShader.fs" };
 
+ ShaderPath Shader::animeShader = { "src/shaders/glsl/animationShader.vs",		"src/shaders/glsl/animationShader.fs" };
  ShaderPath Shader::meshShader =	{ "src/shaders/glsl/meshShader.vs",		"src/shaders/glsl/meshShader.fs" };
  ShaderPath Shader::modelShader =	{ "src/shaders/glsl/modelShader.vs",	"src/shaders/glsl/modelShader.fs" };
+ 
+ 
  ShaderPath Shader::phongShader =	{ "src/shaders/glsl/phongShader.vs",	"src/shaders/glsl/phongShader.fs" };
  ShaderPath Shader::rippleShader =	{ "src/shaders/glsl/rippleShader.vs",	"src/shaders/glsl/rippleShader.fs" };
  ShaderPath Shader::staticShader =	{ "src/shaders/glsl/staticShader.vs",	"src/shaders/glsl/staticShader.fs" };

@@ -22,9 +22,11 @@ struct Shader
 	static ShaderPath spotLight;
 	static ShaderPath spotLight_soft;
 
+	static ShaderPath animeShader;
 	static ShaderPath modelShader;
 	static ShaderPath meshShader;
 
+	static ShaderPath planeShader;
 	static ShaderPath terrainShader;
 
 	static ShaderPath phongShader;

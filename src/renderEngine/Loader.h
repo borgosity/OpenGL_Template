@@ -39,6 +39,13 @@ struct MeshTexture {
 	aiString path;
 };
 
+struct MeshCoords {
+	std::vector<Vertex> vertices;
+	std::vector<GLuint> indices;
+	std::vector<MeshTexture> textures;
+	GLfloat shininess;
+};
+
 class Loader
 {
 public:

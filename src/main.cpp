@@ -12,6 +12,7 @@
 #include "tests\ModelApp.h"
 #include "tests\LightsApp.h"
 #include "tests\ProceeduralApp.h"
+#include "tests\AnimationApp.h"
 
 
 /// main function
@@ -42,7 +43,9 @@ int main()
 	//TerrainApp * app = new TerrainApp();
 	//ModelApp * app = new ModelApp();
 	//LightsApp * app = new LightsApp();
-	ProceeduralApp * app = new ProceeduralApp();
+	//ProceeduralApp * app = new ProceeduralApp();
+	AnimationApp * app = new AnimationApp();
+
 
 
 	if (app != nullptr)

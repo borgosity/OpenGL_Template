@@ -180,6 +180,18 @@
     <ClCompile Include="src\app\UIController.cpp">
       <Filter>Source Files\app</Filter>
     </ClCompile>
+    <ClCompile Include="src\tests\AnimationApp.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\Plane.cpp">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\models\AnimatedModel.cpp">
+      <Filter>Source Files\assets\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shaders\AnimeShader.cpp">
+      <Filter>Source Files\shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -299,6 +311,18 @@
     <ClInclude Include="src\app\UIController.h">
       <Filter>Source Files\app</Filter>
     </ClInclude>
+    <ClInclude Include="src\tests\AnimationApp.h">
+      <Filter>Source Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Plane.h">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\models\AnimatedModel.h">
+      <Filter>Source Files\assets\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shaders\AnimeShader.h">
+      <Filter>Source Files\shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\glsl\cameraShader.fs">
@@ -413,6 +437,18 @@
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
     <None Include="src\shaders\glsl\terrainShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\planeShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\planeShader.vs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\animationShader.fs">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="src\shaders\glsl\animationShader.vs">
       <Filter>Source Files\shaders\glsl</Filter>
     </None>
   </ItemGroup>
