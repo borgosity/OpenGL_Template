@@ -2,15 +2,17 @@
 #include "Application.h"
 #include "OBJLoader.h"
 #include "Light.h"
-
+// shaders
 #include "StaticShader.h"
 #include "AnimeShader.h"
-/// lights
+#include "particles\ParticleShader.h"
+// lights
 #include "lights/LightShader.h"
 #include "lights/PointLightShader.h"
 #include "lights/SpotLightShader.h"
 #include "lights/SoftSpotShader.h"
-
+// particles
+#include "ParticleEmitter.h"
 // models
 #include "AnimatedModel.h"
 #include "MeshModel.h"
@@ -28,9 +30,9 @@ public:
 	~ParticlesApp();
 
 	bool start();
-	bool update(GLfloat a_deltaTime);
-	bool fixedUpdate(GLfloat a_deltaTime);
-	bool draw(GLfloat a_deltaTime);
+	bool update(GLdouble a_deltaTime);
+	bool fixedUpdate(GLdouble a_deltaTime);
+	bool draw(GLdouble a_deltaTime);
 	bool stop();
 
 private:
@@ -54,6 +56,8 @@ private:
 	SoftSpotShader * m_ssLightSP = nullptr;
 
 	AnimeShader * m_animeSP = nullptr;
+	ParticleShader * m_particleSP = nullptr;
+
 	ShaderProgram * m_planeSP = nullptr;
 
 	// textures
@@ -68,10 +72,12 @@ private:
 	// models fbx
 	MeshModel * m_duckModel = nullptr;
 
-
 	// entities 
 	Square * m_square = nullptr;
 	Plane * m_plane = nullptr;
+
+	// particles
+	ParticleEmitter * m_emitter = nullptr;
 
 	// lights
 	Lamp *	m_lamp = nullptr;

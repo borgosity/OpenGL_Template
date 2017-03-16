@@ -113,9 +113,9 @@ void Terrain::perlinGeneration()
 	float scale = (1.0f / m_uiVertNum) * 8;
 	int octaves = 6;
 
-	for  (int x = 0; x < m_uiVertNum; x++)
+	for  (unsigned int x = 0; x < m_uiVertNum; x++)
 	{
-		for (int y = 0; y < m_uiVertNum; y++)
+		for (unsigned int y = 0; y < m_uiVertNum; y++)
 		{
 			//std::cout << glm::perlin(glm::vec2(x, y) * scale) * 0.5f + 0.5f << std::endl;
 			perlinData[y* m_uiVertNum + x] = glm::perlin(glm::vec2(x, y) * scale) * 0.5f + 0.5f;
@@ -150,9 +150,9 @@ void Terrain::perlinGenNoisy()
 	float scale = (1.0f / m_uiVertNum) * 3;
 	int octaves = 2;
 
-	for (int x = 0; x < m_uiVertNum; x++)
+	for (unsigned int x = 0; x < m_uiVertNum; x++)
 	{
-		for (int y = 0; y < m_uiVertNum; y++)
+		for (unsigned int y = 0; y < m_uiVertNum; y++)
 		{
 			float amplitude = 1.0f;
 			float persistance = 0.3f;
@@ -213,14 +213,14 @@ void Terrain::perlinRings()
 	float twist = 0.1f; // turbulance strength
 	float perlinSize = 32.0f; // size of turbulance
 
-	for (int x = 0; x < m_uiVertNum; x++)
+	for (unsigned int x = 0; x < m_uiVertNum; x++)
 	{
-		for (int y = 0; y < m_uiVertNum; y++)
+		for (unsigned int y = 0; y < m_uiVertNum; y++)
 		{
-			float xVal = (x - m_uiVertNum / 2) / m_uiVertNum;
-			float yVal = (y - m_uiVertNum / 2) / m_uiVertNum;
-			float distVal = glm::sqrt(xVal * xVal + yVal * yVal) + twist * perlinSize / 256.0f;
-			float sineVal = 128.0 * fabs(sin(2 * rings * distVal * 3.14159));
+			GLfloat xVal = (GLfloat)((x - m_uiVertNum / 2) / m_uiVertNum);
+			GLfloat yVal = (GLfloat)((y - m_uiVertNum / 2) / m_uiVertNum);
+			GLfloat distVal = glm::sqrt(xVal * xVal + yVal * yVal) + twist * perlinSize / 256.0f;
+			GLfloat sineVal = (GLfloat)(128.0 * fabs(sin(2 * rings * distVal * 3.14159)));
 			//std::cout << sineVal << std::endl;
 			perlinData[y* m_uiVertNum + x] = glm::perlin(glm::vec2(x, y) * sineVal);
 		}

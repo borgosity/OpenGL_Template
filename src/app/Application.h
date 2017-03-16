@@ -33,9 +33,9 @@ public:
 	bool run();
 	virtual bool init();
 	virtual bool start();
-	virtual bool update(GLfloat a_deltaTime);
-	virtual bool fixedUpdate(GLfloat a_deltaTime);
-	virtual bool draw(GLfloat a_deltaTime);
+	virtual bool update(GLdouble a_deltaTime);
+	virtual bool fixedUpdate(GLdouble a_deltaTime);
+	virtual bool draw(GLdouble a_deltaTime);
 	virtual bool stop();
 
 protected:

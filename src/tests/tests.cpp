@@ -1641,8 +1641,6 @@ void threeDeeObjects()
 void camera()
 {
 	std::cout << "\n### --> Starting Transforms Tute" << std::endl;
-	// key strokes
-	bool keys[1024];
 
 
 	// initialise display

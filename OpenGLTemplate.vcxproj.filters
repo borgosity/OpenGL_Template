@@ -67,6 +67,9 @@
     <Filter Include="Source Files\shaders\particles">
       <UniqueIdentifier>{713dfa3f-9162-4325-9393-d0316f2b3d6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\particles">
+      <UniqueIdentifier>{2f95f9b8-58b5-4211-aa10-57f829f90d4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -204,6 +207,9 @@
     <ClCompile Include="src\shaders\particles\ParticleShader.cpp">
       <Filter>Source Files\shaders\particles</Filter>
     </ClCompile>
+    <ClCompile Include="src\particles\ParticleEmitter.cpp">
+      <Filter>Source Files\particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -340,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="src\shaders\particles\ParticleShader.h">
       <Filter>Source Files\shaders\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\particles\ParticleEmitter.h">
+      <Filter>Source Files\particles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

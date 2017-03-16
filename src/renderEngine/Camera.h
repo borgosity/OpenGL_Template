@@ -1,11 +1,14 @@
 #pragma once
+// std library includes
+#include <iostream>
+// opengl includes
 #include <glew.h>
 #include <glfw3.h>
 #include <glm.hpp>
 #include <gtc\matrix_transform.hpp>
-#include <iostream>
-
+// source includes
 #include "ConstValues.h"
+#include "Maths.h"
 
 
 class Camera
@@ -40,6 +43,9 @@ public:
 	glm::mat4	viewMatrix(glm::mat4 a_viewMatrix) { return m_mViewMatrix; };
 	glm::vec3	position() { return m_vPosition; };
 	glm::vec3	front() { return m_vFront; };
+	glm::mat4	transform() { return Maths::createTransormationMatrix(m_vPosition, 
+																	  glm::vec3(m_fPitch, m_fYaw, m_fRoll), 
+																	  1.0f); };
 	// eulers
 	GLfloat		pitch() { return m_fPitch; };
 	GLfloat		yaw() { return m_fYaw; };

@@ -28,7 +28,7 @@ void ParticleShader::update(Camera & a_camera, Light & a_light)
 	uniformBool("blinn", 0);
 	// animation key frame time
 	//std::cout << cosf(glfwGetTime() * 3) * 0.5f + 0.5f << std::endl;
-	uniformFloat("keyTime", cosf(glfwGetTime() * 3) * 0.5f + 0.5f);
+	uniformFloat("keyTime", cosf((float)glfwGetTime() * 3) * 0.5f + 0.5f);
 }
 
 

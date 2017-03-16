@@ -25,6 +25,7 @@ ParticlesApp::~ParticlesApp()
 	deallocate(m_ssLightSP);
 	deallocate(m_planeSP);
 	deallocate(m_animeSP);
+	deallocate(m_particleSP);
 
 	// textures
 	deallocate(m_whiteTexture);
@@ -43,6 +44,9 @@ ParticlesApp::~ParticlesApp()
 	// entities 
 	deallocate(m_square);
 	deallocate(m_plane);
+
+	// particles
+	deallocate(m_emitter);
 
 	// lights
 	deallocate(m_lamp);
@@ -84,6 +88,7 @@ bool ParticlesApp::start()
 
 	m_planeSP = new ShaderProgram(Shader::planeShader);
 	m_animeSP = new AnimeShader(Shader::animeShader);
+	m_particleSP = new ParticleShader(Shader::particleShader);
 
 	// load model to VAO
 	m_loader = new Loader();
@@ -99,27 +104,49 @@ bool ParticlesApp::start()
 	setupModels();
 
 	m_plane = new Plane(glm::vec3(-32.0f,0.0f, -32.0f), 64);
+
+	// ---------------------------- particles ----------------------------
+	GLuint  maxParticles = 1000;
+	GLuint  emitRate = 250;
+	GLfloat lifetimeMin = 0.1f;
+	GLfloat lifetimeMax = 0.5f;
+	GLfloat velocityMin = 0.5f;
+	GLfloat velocityMax = 3.5f;
+	GLfloat startSize = 0.05f;
+	GLfloat endSize = 0.001f;
+	const glm::vec4 startColour(1, 0, 0, 1);
+	const glm::vec4 endColour(1, 1, 0, 1);
+
+	m_emitter = new ParticleEmitter();
+	m_emitter->init(maxParticles, emitRate, 
+					lifetimeMin, lifetimeMax, 
+					velocityMin, velocityMax, 
+					startSize, endSize,
+					startColour, endColour);
 	
 	return true;
 }
 
-bool ParticlesApp::update(GLfloat a_deltaTime)
+bool ParticlesApp::update(GLdouble a_deltaTime)
 {
 	// updat eui controller
 	m_uiController->update(a_deltaTime);
 
 	// update camera controller
 	m_cameraController->update(*m_camera, a_deltaTime);
+
+	// update particles
+	m_emitter->update((GLfloat)a_deltaTime, m_camera->transform());
 	
 	return true;
 }
 
-bool ParticlesApp::fixedUpdate(GLfloat a_deltaTime)
+bool ParticlesApp::fixedUpdate(GLdouble a_deltaTime)
 {
 	return true;
 }
 
-bool ParticlesApp::draw(GLfloat a_deltaTime)
+bool ParticlesApp::draw(GLdouble a_deltaTime)
 {
 	GLdouble time = glfwGetTime();
 	// Render
@@ -130,7 +157,7 @@ bool ParticlesApp::draw(GLfloat a_deltaTime)
 	m_animeSP->start();
 	m_animeSP->update(*m_camera, *m_softSpotLight);
 	// draw stuff here
-	m_handAnimated->transform = Maths::createTransormationMatrix(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 1.0f);
+	m_handAnimated->transform = Maths::createTransormationMatrix(glm::vec3(0.0f, 1.0f, 0.5f), glm::vec3(0.0f, 25.0f, -90.0f), 2.0f);
 	m_handAnimated->animate(*m_animeSP);
 	//m_handModel->draw(*m_animeSP);
 	m_animeSP->stop();
@@ -173,6 +200,11 @@ bool ParticlesApp::draw(GLfloat a_deltaTime)
 
 	m_ssLightSP->stop();
 
+	// --------------- draw other stuff ----------------
+	m_particleSP->start();
+	m_particleSP->update(*m_camera, *m_softSpotLight);
+	m_emitter->draw(*m_particleSP);
+	m_particleSP->stop();
 	
 	//m_plane->draw(*m_camera);
 
@@ -180,7 +212,7 @@ bool ParticlesApp::draw(GLfloat a_deltaTime)
 	//m_lamp->draw(*m_camera);
 	//m_pointLamp->draw(*m_camera);
 	//m_spotLamp->draw(*m_camera);
-	m_softSpotLamp->draw(*m_camera);
+	//m_softSpotLamp->draw(*m_camera);
 
 
 	// ##############################> END DRAW STUFF <###########################################################
@@ -257,7 +289,7 @@ void ParticlesApp::setupModels()
 	// load models
 	m_handModel = new MeshModel("res/models/hand/hand_00.obj");
 	m_handModel->transform = Maths::createTransormationMatrix(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 2.0f);
-	m_handAnimated = new AnimatedModel("res/models/hand/hand_00.obj", "res/models/hand/hand_37.obj");
+	m_handAnimated = new AnimatedModel("res/models/hand/hand_00.obj", "res/models/hand/hand_00.obj");
 	m_handAnimated->transform = Maths::createTransormationMatrix(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 2.0f);
 
 	m_dragonModel = new MeshModel("res/models/stanford/Dragon.obj");

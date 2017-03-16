@@ -106,7 +106,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\app;$(SolutionDir)src\entities;$(SolutionDir)src\toolBox;$(SolutionDir)src\textures;$(SolutionDir)src\models;$(SolutionDir)src\shaders;$(SolutionDir)src\renderEngine\;$(SolutionDir)include\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\tiny_obj;$(SolutionDir)include\soil\;$(SolutionDir)include\assimp\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\app;$(SolutionDir)src\entities;$(SolutionDir)src\toolBox;$(SolutionDir)src\particles;$(SolutionDir)src\textures;$(SolutionDir)src\models;$(SolutionDir)src\shaders;$(SolutionDir)src\renderEngine\;$(SolutionDir)include\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\tiny_obj;$(SolutionDir)include\soil\;$(SolutionDir)include\assimp\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -192,6 +192,7 @@
     <ClCompile Include="src\models\OBJLoader.cpp" />
     <ClCompile Include="src\models\RawModel.cpp" />
     <ClCompile Include="src\models\TexturedModel.cpp" />
+    <ClCompile Include="src\particles\ParticleEmitter.cpp" />
     <ClCompile Include="src\renderEngine\Camera.cpp" />
     <ClCompile Include="src\renderEngine\DisplayManager.cpp" />
     <ClCompile Include="src\renderEngine\Loader.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="src\models\OBJLoader.h" />
     <ClInclude Include="src\models\RawModel.h" />
     <ClInclude Include="src\models\TexturedModel.h" />
+    <ClInclude Include="src\particles\ParticleEmitter.h" />
     <ClInclude Include="src\renderEngine\Camera.h" />
     <ClInclude Include="src\renderEngine\DisplayManager.h" />
     <ClInclude Include="src\renderEngine\Loader.h" />

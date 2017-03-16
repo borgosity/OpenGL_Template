@@ -2,9 +2,10 @@
 #version 410 core
 
 in VS_OUT {
-	vec3 Position;
+	vec4 Position;
 	vec3 Normal;
 	vec2 TexCoord;
+	vec4 Colour;
 } fs_in;
 
 out vec4 fragColor;
@@ -23,18 +24,22 @@ void main()
 {
     // set a default color to catch bugs
 	vec3 color = vec3(0.1f, 0.2f, 0.3f);
+	color = fs_in.Colour.rgb;
+
 	// assign textures
-	color = texture(texture_diffuse, fs_in.TexCoord).rgb;
+	//color = texture(texture_diffuse, fs_in.TexCoord).rgb;
 
     // Ambient
     vec3 ambient = 0.05 * color;
     // Diffuse
-    vec3 lightDir = normalize(lightPos - fs_in.Position);
-    vec3 normal = normalize(fs_in.Normal);
+    vec3 lightDir = normalize(lightPos - fs_in.Position.xyz);
+    //vec3 normal = normalize(fs_in.Normal);
+    vec3 normal = vec3(0.0f, 1.0f, 0.0f);
+
     float diff = max(dot(lightDir, normal), 0.0);
     vec3 diffuse = diff * color;
     // Specular
-    vec3 viewDir = normalize(viewPos - fs_in.Position);
+    vec3 viewDir = normalize(viewPos - fs_in.Position.xyz);
     vec3 reflectDir = reflect(-lightDir, normal);
     float spec = 0.0;
     if(blinn)

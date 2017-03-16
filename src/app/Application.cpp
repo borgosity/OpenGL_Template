@@ -54,17 +54,17 @@ bool Application::run()
 	return true;
 }
 
-bool Application::update(GLfloat a_deltaTime)
+bool Application::update(GLdouble a_deltaTime)
 {
 	return true;
 }
 
-bool Application::fixedUpdate(GLfloat a_deltaTime)
+bool Application::fixedUpdate(GLdouble a_deltaTime)
 {
 	return true;
 }
 
-bool Application::draw(GLfloat a_deltaTime)
+bool Application::draw(GLdouble a_deltaTime)
 {	
 	return true;
 }
