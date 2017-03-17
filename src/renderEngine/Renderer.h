@@ -17,6 +17,7 @@ public:
 
 	//void createProjectionMatrix();
 	void prepare(GLfloat red, GLfloat green, GLfloat blue);
+	void prepare(glm::vec4 a_colour);
 	void render(RawModel * model);
 	void render(RawModel * model, GLuint shaderProgram);
 	void renderInd(RawModel * model);

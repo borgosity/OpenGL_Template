@@ -1,5 +1,6 @@
 #include "DisplayManager.h"
-
+#include <imgui.h>
+#include "imgui_impl_glfw_gl3.h"
 
 
 DisplayManager::DisplayManager()
@@ -47,6 +48,9 @@ void DisplayManager::createDisplay()
 	{
 		std::cout << "Failed to initialise GLEW" << std::endl;
 	}
+
+	// ==== GUI initialise =================
+	ImGui_ImplGlfwGL3_Init(m_window, true);
 
 	// define rendering viewport
 	int width, height;

@@ -11,14 +11,14 @@ CameraController::~CameraController()
 {
 }
 /// update  Camera Controller
-void CameraController::update(Camera & a_camera, GLfloat a_dt)
+void CameraController::update(Camera & a_camera, GLdouble a_dt)
 {
 	// check for use input
-	keyPress(a_camera, a_dt);
+	keyPress(a_camera, (GLfloat)a_dt);
 	mouseMovement(a_camera);
 	mouseScroll(a_camera);
 	// update camera after input updates
-	a_camera.update(a_dt);
+	a_camera.update((GLfloat)a_dt);
 }
 /// User Keypress check
 void CameraController::keyPress(Camera & a_camera, GLfloat a_dt)

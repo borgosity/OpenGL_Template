@@ -55,6 +55,7 @@ void ParticleEmitter::update(GLfloat a_deltaTime, const glm::mat4 & a_cameraTran
 		else {
 			// move particle
 			particle->position += particle->velocity * a_deltaTime;
+			particle->position.x -= 5.0f * a_deltaTime;
 			// size particle
 			particle->size = glm::mix(m_fStartSize, m_fEndSize, particle->lifeTime / particle->lifeSpan);
 			// colour particle

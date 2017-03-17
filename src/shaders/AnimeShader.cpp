@@ -23,7 +23,8 @@ void AnimeShader::update(Camera & a_camera, Light & a_light)
 	// pass camera projection to shader
 	uniformMat4("projection", a_camera.projection());
 	// set lamp object colour
-	uniformVec3("lightPos", glm::vec3(0.0f, -25.0f, 0.0f));
+	uniformVec3("lightPos", m_lightPosition);
+	uniformVec4("specColour", m_specularColour);
 	uniformVec3("viewPos", a_camera.position());
 	uniformBool("blinn", 0);
 	// animation key frame time

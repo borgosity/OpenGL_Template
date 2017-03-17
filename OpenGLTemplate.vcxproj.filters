@@ -37,9 +37,6 @@
     <Filter Include="Source Files\assets\models">
       <UniqueIdentifier>{3513aa5e-192d-4a1f-9059-000820135fb1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\assets\models\tinyObj">
-      <UniqueIdentifier>{745fe59b-8e41-46ef-aa62-f76f9e180582}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\assets\textures">
       <UniqueIdentifier>{e1c9dc39-714f-4d17-9549-efbb1a7c743a}</UniqueIdentifier>
     </Filter>
@@ -69,6 +66,15 @@
     </Filter>
     <Filter Include="Source Files\particles">
       <UniqueIdentifier>{2f95f9b8-58b5-4211-aa10-57f829f90d4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dependencies">
+      <UniqueIdentifier>{e7227668-acbc-43d4-a2df-1514e891a9e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dependencies\tinyObj">
+      <UniqueIdentifier>{745fe59b-8e41-46ef-aa62-f76f9e180582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dependencies\imgui">
+      <UniqueIdentifier>{107b43f9-3ae3-4d08-b37f-237be623c38f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +142,7 @@
       <Filter>Source Files\assets\models</Filter>
     </ClCompile>
     <ClCompile Include="include\tiny_obj\tiny_obj_loader.cc">
-      <Filter>Source Files\assets\models\tinyObj</Filter>
+      <Filter>Source Files\dependencies\tinyObj</Filter>
     </ClCompile>
     <ClCompile Include="src\shaders\StaticShader.cpp">
       <Filter>Source Files\shaders</Filter>
@@ -210,6 +216,18 @@
     <ClCompile Include="src\particles\ParticleEmitter.cpp">
       <Filter>Source Files\particles</Filter>
     </ClCompile>
+    <ClCompile Include="src\tests\GUIApp.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui.cpp">
+      <Filter>Source Files\dependencies\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_draw.cpp">
+      <Filter>Source Files\dependencies\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_impl_glfw_gl3.cpp">
+      <Filter>Source Files\dependencies\imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -276,7 +294,7 @@
       <Filter>Source Files\assets\models</Filter>
     </ClInclude>
     <ClInclude Include="include\tiny_obj\tiny_obj_loader.h">
-      <Filter>Source Files\assets\models\tinyObj</Filter>
+      <Filter>Source Files\dependencies\tinyObj</Filter>
     </ClInclude>
     <ClInclude Include="src\shaders\StaticShader.h">
       <Filter>Source Files\shaders</Filter>
@@ -349,6 +367,21 @@
     </ClInclude>
     <ClInclude Include="src\particles\ParticleEmitter.h">
       <Filter>Source Files\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tests\GUIApp.h">
+      <Filter>Source Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imconfig.h">
+      <Filter>Source Files\dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui.h">
+      <Filter>Source Files\dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui_internal.h">
+      <Filter>Source Files\dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui_impl_glfw_gl3.h">
+      <Filter>Source Files\dependencies\imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

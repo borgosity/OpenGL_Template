@@ -23,6 +23,13 @@ void Renderer::prepare(GLfloat red, GLfloat green, GLfloat blue)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+void Renderer::prepare(glm::vec4 a_colour)
+{
+	// Clear the colorbuffer
+	glClearColor(a_colour.r, a_colour.g, a_colour.b, a_colour.a);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 /// render model
 void Renderer::render(RawModel * model)
 {

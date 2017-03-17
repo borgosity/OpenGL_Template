@@ -106,7 +106,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\app;$(SolutionDir)src\entities;$(SolutionDir)src\toolBox;$(SolutionDir)src\particles;$(SolutionDir)src\textures;$(SolutionDir)src\models;$(SolutionDir)src\shaders;$(SolutionDir)src\renderEngine\;$(SolutionDir)include\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\tiny_obj;$(SolutionDir)include\soil\;$(SolutionDir)include\assimp\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\app;$(SolutionDir)src\entities;$(SolutionDir)src\toolBox;$(SolutionDir)src\particles;$(SolutionDir)src\textures;$(SolutionDir)src\models;$(SolutionDir)src\shaders;$(SolutionDir)src\renderEngine\;$(SolutionDir)include\;$(SolutionDir)include\glew\;$(SolutionDir)include\glfw\;$(SolutionDir)include\tiny_obj;$(SolutionDir)include\soil\;$(SolutionDir)include\assimp\;$(SolutionDir)include\imgui\;$(SolutionDir)include\sdl2\;$(SolutionDir)lib\glm\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -172,6 +172,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\imgui\imgui.cpp" />
+    <ClCompile Include="include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="include\imgui\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="include\tiny_obj\tiny_obj_loader.cc" />
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\CameraController.cpp" />
@@ -209,6 +212,7 @@
     <ClCompile Include="src\shaders\StaticShader.cpp" />
     <ClCompile Include="src\tests\AnimationApp.cpp" />
     <ClCompile Include="src\tests\ExampleApp.cpp" />
+    <ClCompile Include="src\tests\GUIApp.cpp" />
     <ClCompile Include="src\tests\LightsApp.cpp" />
     <ClCompile Include="src\tests\ModelApp.cpp" />
     <ClCompile Include="src\tests\ParticlesApp.cpp" />
@@ -220,6 +224,10 @@
     <ClCompile Include="src\toolBox\Maths.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\imgui\imconfig.h" />
+    <ClInclude Include="include\imgui\imgui.h" />
+    <ClInclude Include="include\imgui\imgui_impl_glfw_gl3.h" />
+    <ClInclude Include="include\imgui\imgui_internal.h" />
     <ClInclude Include="include\tiny_obj\tiny_obj_loader.h" />
     <ClInclude Include="src\app\Application.h" />
     <ClInclude Include="src\app\CameraController.h" />
@@ -257,6 +265,7 @@
     <ClInclude Include="src\shaders\StaticShader.h" />
     <ClInclude Include="src\tests\AnimationApp.h" />
     <ClInclude Include="src\tests\ExampleApp.h" />
+    <ClInclude Include="src\tests\GUIApp.h" />
     <ClInclude Include="src\tests\LightsApp.h" />
     <ClInclude Include="src\tests\ModelApp.h" />
     <ClInclude Include="src\tests\ParticlesApp.h" />

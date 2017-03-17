@@ -1,10 +1,13 @@
 #pragma once
-#include "Controller.h"
+// opengl includes
 #include <glew.h>
 #include <glfw3.h>
 #include <glm.hpp>
-
+// depency includes
+#include <imgui.h>
+#include "imgui_impl_glfw_gl3.h"
 // source includes
+#include "Controller.h"
 // display
 #include "DisplayManager.h"
 #include "Loader.h"

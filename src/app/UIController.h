@@ -11,7 +11,7 @@ public:
 	UIController();
 	virtual ~UIController();
 
-	void update(GLfloat a_dt);
+	void update(GLdouble a_dt);
 
 	void keyPress(Camera & a_camera, GLfloat a_dt) override;
 	void mouseMovement(Camera & a_camera) override;
@@ -21,8 +21,11 @@ public:
 	bool toggleMap() { return m_bMapToggle; };
 	bool toggleMap(bool a_toggle) { m_bMapToggle = a_toggle; return m_bMapToggle; };
 
+	bool toggleCursor() { return m_bCursorToggle; };
+
 private:
 	bool m_bMapToggle = false;
+	bool m_bCursorToggle = false;
 
 };
 

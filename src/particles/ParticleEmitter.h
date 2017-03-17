@@ -35,6 +35,10 @@ public:
 			GLfloat a_velocityMin, GLfloat a_velocityMax,
 			GLfloat a_startSize, GLfloat a_endSize,
 			const glm::vec4 & a_StartColour, const glm::vec4 & a_endColour);
+	// getters, setters
+	void startColour(glm::vec4	a_startColour) { m_vStartColour = a_startColour; };
+	glm::vec3 emitterPosition() { return m_vPosition; };
+	glm::vec3 emitterPosition(glm::vec3 a_position) { m_vPosition = a_position; return m_vPosition;};
 
 private:
 	Particle *		m_particles = nullptr;

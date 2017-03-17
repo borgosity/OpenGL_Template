@@ -11,10 +11,10 @@ UIController::~UIController()
 {
 }
 /// update  Camera Controller
-void UIController::update(GLfloat a_dt)
+void UIController::update(GLdouble a_dt)
 {
 	// check for use input
-	keyPress(a_dt);
+	keyPress((GLfloat)a_dt);
 
 }
 /// User Keypress check
@@ -34,7 +34,20 @@ void UIController::mouseScroll(Camera & a_camera)
 void UIController::keyPress(GLfloat a_dt)
 {
 	// check if keys state has changed
-	if (m_bKeys[GLFW_KEY_M])
-		m_bMapToggle = !m_bMapToggle;
+	// - toggle maps
+	if (m_bKeys[GLFW_KEY_M] == true && !m_bMapToggle) {
+		m_bMapToggle = true;
+	}
+	else if (m_bKeys[GLFW_KEY_M] == false && m_bMapToggle) {
+		m_bMapToggle = false;
+	}
+
+	// - toggle cursor to enable UI interaction if left ALT pressed
+	if (m_bKeys[GLFW_KEY_LEFT_ALT] == true && !m_bCursorToggle) {
+		m_bCursorToggle = true;
+	}
+	else if (m_bKeys[GLFW_KEY_LEFT_ALT] == false && m_bCursorToggle){
+		m_bCursorToggle = false;
+	}
 }
 

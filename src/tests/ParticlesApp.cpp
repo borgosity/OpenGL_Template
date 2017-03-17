@@ -107,15 +107,15 @@ bool ParticlesApp::start()
 
 	// ---------------------------- particles ----------------------------
 	GLuint  maxParticles = 1000;
-	GLuint  emitRate = 250;
+	GLuint  emitRate = 200;
 	GLfloat lifetimeMin = 0.1f;
-	GLfloat lifetimeMax = 0.5f;
+	GLfloat lifetimeMax = 1.0f;
 	GLfloat velocityMin = 0.5f;
 	GLfloat velocityMax = 3.5f;
 	GLfloat startSize = 0.05f;
 	GLfloat endSize = 0.001f;
-	const glm::vec4 startColour(1, 0, 0, 1);
-	const glm::vec4 endColour(1, 1, 0, 1);
+	const glm::vec4 startColour(1, 0.6, 0, 1);
+	const glm::vec4 endColour(1, 0, 0, 1);
 
 	m_emitter = new ParticleEmitter();
 	m_emitter->init(maxParticles, emitRate, 
