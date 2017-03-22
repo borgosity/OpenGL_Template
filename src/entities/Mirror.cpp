@@ -4,13 +4,70 @@ Mirror::Mirror()
 {
 }
 
+Mirror::Mirror(glm::vec3 a_position)
+{
+	m_vPosition = a_position;
+	m_shaderProgram = new ShaderProgram(Shader::staticShader);
+	m_vColour = glm::vec3(1.0f, 1.0f, 1.0f);
+	m_m4Transform = Maths::createTransormationMatrix(a_position, glm::vec3(0.0f, 0.0f, 0.0f), 1.0f);
+	m_mirrorModel = DynamicModels::cube();
+	//m_mirrorModel = DynamicModels::square(1);
+
+	m_testTexture = new Texture("res/textures/dirt.png");
+
+	m_fShininess = 32.0f;
+
+	setupFBO();
+}
+
 
 Mirror::~Mirror()
 {
+	delete m_mirrorModel;
+	m_mirrorModel = nullptr;
 }
 
-void Mirror::update()
+void Mirror::bindFBO()
 {
+	glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
+}
+
+void Mirror::unbindFBO()
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void Mirror::draw(Camera & a_camera)
+{
+	float time = (float)glfwGetTime();
+
+	// Clear all relevant buffers
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	//glDisable(GL_DEPTH_TEST); 	
+
+	m_shaderProgram->start();
+	// pass camera position to shader 
+	m_shaderProgram->uniformBool("plain", false);
+	m_shaderProgram->uniformBool("invert", false);
+	m_shaderProgram->uniformBool("greyScale", true);
+	m_shaderProgram->uniformBool("sharpen", false);
+	m_shaderProgram->uniformBool("blur", false);
+	m_shaderProgram->uniformBool("edgeDetection", true);
+
+	// Draw Screen
+	glBindTexture(GL_TEXTURE_2D, m_TBO);	
+	glUniform1i(glGetUniformLocation(m_shaderProgram->ID(), "screenTexture"), 0);
+	
+	glBindVertexArray(m_mirrorModel->vaoID());
+	// draw arrays
+	//glDrawElements(GL_TRIANGLES, m_mirrorModel->vertexCount(), GL_UNSIGNED_INT, 0);
+	glDrawArrays(GL_TRIANGLES, 0, m_mirrorModel->vertexCount());
+	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	// stop shader
+	m_shaderProgram->stop();
 }
 ///
 /// Create Buffer Objects

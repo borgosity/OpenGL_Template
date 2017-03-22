@@ -175,7 +175,7 @@ RawModel * DynamicModels::square(GLfloat a_size)
 		1, 2, 3  // Second Triangle
 	};
 
-	return m_loader->loadToVAO(vertices, sizeof(vertices), 7, indices, sizeof(indices));
+	return m_loader->loadToVAO(vertices, sizeof(vertices), 8, indices, sizeof(indices));
 
 }
 

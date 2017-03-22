@@ -19,6 +19,7 @@
 #include "Lamp.h"
 #include "Square.h"
 #include "Plane.h"
+#include "Mirror.h"
 
 #include "UIController.h"
 
@@ -79,6 +80,7 @@ private:
 	// entities 
 	Square * m_square = nullptr;
 	Plane * m_plane = nullptr;
+	Mirror * m_mirror = nullptr;
 
 	// particles
 	ParticleEmitter * m_emitter = nullptr;

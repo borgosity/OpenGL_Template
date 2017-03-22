@@ -44,6 +44,7 @@ PostProApp::~PostProApp()
 	// entities 
 	deallocate(m_square);
 	deallocate(m_plane);
+	deallocate(m_mirror);
 
 	// particles
 	deallocate(m_emitter);
@@ -64,7 +65,7 @@ bool PostProApp::start()
 	std::cout << "\n### --> Start PostProApp" << std::endl;
 
 	// camera
-	m_camera = new Camera(glm::vec3(0, 3, 10), CAM_SPEED, FOV, NEAR_PLANE, FAR_PLANE);
+	m_camera = new Camera(glm::vec3(0, 1, 3), CAM_SPEED, FOV, NEAR_PLANE, FAR_PLANE);
 	
 	// controllers
 	m_cameraController = new CameraController();
@@ -104,6 +105,7 @@ bool PostProApp::start()
 	setupModels();
 
 	m_plane = new Plane(glm::vec3(0.0f,0.0f, 0.0f), 20);
+	m_mirror = new Mirror(glm::vec3(0.0f, 0.5f, 1.0f));
 
 	// ---------------------------- particles ----------------------------
 	GLuint  maxParticles = 1000;
@@ -117,7 +119,7 @@ bool PostProApp::start()
 	const glm::vec4 startColour(1, 0.6, 0, 1);
 	const glm::vec4 endColour(1, 0, 0, 1);
 
-	m_emitter = new ParticleEmitter();
+	m_emitter = new ParticleEmitter(glm::vec3(0.0f, 1.0f, 0.0f));
 	m_emitter->init(maxParticles, emitRate, 
 					lifetimeMin, lifetimeMax, 
 					velocityMin, velocityMax, 
@@ -165,80 +167,65 @@ bool PostProApp::draw(GLdouble a_deltaTime)
 	// Render
 	// Clear the colorbuffer
 	//m_renderer->prepare(0.0f, 0.0f, 0.0f);
-	ImGui_ImplGlfwGL3_NewFrame();
-	debugGUI();
+
+	// bind frame buffer start for post processing
+	glEnable(GL_DEPTH_TEST);
+	m_mirror->bindFBO();
+
+	// GUI start
+	//ImGui_ImplGlfwGL3_NewFrame();
+	//debugGUI();
 
 	m_renderer->prepare(m_clearColour);
 
-	
+	// ++++ Passs One +++++++++
 	// ###############################> START DRAW CODE <#########################################################
-
+	// hand animation
 	m_animeSP->start();
 	m_animeSP->specularColour(m_particleColour);
 	m_animeSP->lightPosition(m_emitter->emitterPosition());
 	m_animeSP->update(*m_camera, *m_softSpotLight);
-	// draw stuff here
 	//m_handAnimated->transform = Maths::createTransormationMatrix(m_handPosition, glm::vec3(0.0f, 0.0f, 0.0f), 2.0f);
 	//m_handAnimated->animate(*m_animeSP);
 	//m_handModel->draw(*m_animeSP);
 	m_animeSP->stop();
-
-	//---------------- Directional Light -----------------
-	m_lightSP->start();
-	
-	// update shader with light
-	m_lightSP->update(*m_camera, *m_light);
-	
-	// draw model
-
-	//m_dragonModel->transform = Maths::createTransormationMatrix(glm::vec3(4.0f, -1.75f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.2f);
-	//m_dragonModel->draw(*m_lightSP);
-	// stop shader
-	m_lightSP->stop();
-
-	// ------------ PointLight --------------------
-	m_pLightSP->start();
-	m_pLightSP->update(*m_camera, *m_pointLight);
-
-	//m_duckModel->transform = Maths::createTransormationMatrix(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, time * 25.0f, 0.0f), 0.01f);
-	//m_duckModel->draw(*m_pLightSP);
-	
-	m_pLightSP->stop();
-
-	// ------------ SpotLight --------------------
-	m_sLightSP->start();
-	m_sLightSP->update(*m_camera, *m_spotLight);
-
-	m_sLightSP->stop();
-
-	// ------------ SoftSpotLight -------------------
-	m_ssLightSP->start();
-
-	m_ssLightSP->update(*m_camera, *m_softSpotLight);
-
-	//m_handModel->transform = Maths::createTransormationMatrix(glm::vec3(-1.0f, 0.8f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.0f);
-	//m_handModel->draw(*m_ssLightSP);
-
-	m_ssLightSP->stop();
-
-	// --------------- draw other stuff ----------------
+	// particles
 	m_particleSP->start();
-
 	m_particleSP->update(*m_camera, *m_softSpotLight);
 	m_emitter->emitterPosition(m_emitterPosition);
 	m_emitter->draw(*m_particleSP);
 	m_particleSP->stop();
-	
+	// plane
 	m_plane->draw(*m_camera);
 
-	// draw light source
-	//m_lamp->draw(*m_camera);
-	//m_pointLamp->draw(*m_camera);
-	//m_spotLamp->draw(*m_camera);
-	//m_softSpotLamp->draw(*m_camera);
 
+	// ++++ Passs Two +++++++++
+	m_mirror->unbindFBO();
+	m_renderer->prepare(m_clearColour);
+	// hand animation
+	m_animeSP->start();
+	m_animeSP->specularColour(m_particleColour);
+	m_animeSP->lightPosition(m_emitter->emitterPosition());
+	m_animeSP->update(*m_camera, *m_softSpotLight);
+	//m_handAnimated->transform = Maths::createTransormationMatrix(m_handPosition, glm::vec3(0.0f, 0.0f, 0.0f), 2.0f);
+	//m_handAnimated->animate(*m_animeSP);
+	//m_handModel->draw(*m_animeSP);
+	m_animeSP->stop();
+	// particles
+	m_particleSP->start();
+	m_particleSP->update(*m_camera, *m_softSpotLight);
+	m_emitter->emitterPosition(m_emitterPosition);
+	m_emitter->draw(*m_particleSP);
+	m_particleSP->stop();
+	// plane
+	m_plane->draw(*m_camera);
 	// ------------------------- draw GUI -----------------------
-	ImGui::Render();
+	//ImGui::Render();
+
+
+	// ------------------------- post processing ----------------
+	m_mirror->draw(*m_camera);
+
 
 	// ##############################> END DRAW STUFF <###########################################################
 	// Swap the screen buffers
