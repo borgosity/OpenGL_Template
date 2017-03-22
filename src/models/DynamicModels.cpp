@@ -21,9 +21,9 @@ void DynamicModels::grid(RawModel & a_rawmodel, GLuint a_size, GLuint a_vertCoun
 	for (unsigned int r = 0; r < a_vertCount; r++) {
 		for (unsigned int c = 0; c < a_vertCount; c++) {
 			//vertices[r * a_vertCount + c].position = glm::vec3((float)c * a_size, 0, (float)r * a_size);
-			vertices[r * a_vertCount + c].position = glm::vec3((float)c / ((float)(a_vertCount) - 1 ) * a_size, 
+			vertices[r * a_vertCount + c].position = glm::vec3((float)c / ((float)(a_vertCount) - 1) * a_size - ((float)(a_vertCount) * 0.5f),
 																0, 
-																(float)r / ((float)(a_vertCount) - 1 ) * a_size);
+																(float)r / ((float)(a_vertCount) - 1) * a_size - ((float)(a_vertCount) * 0.5f));
 			vertices[r * a_vertCount + c].normal = glm::vec3(0, 1, 0);
 			vertices[r * a_vertCount + c].texCoords = glm::vec2((c / (float)(a_vertCount - 1)), 
 																(r / (float)(a_vertCount - 1)));

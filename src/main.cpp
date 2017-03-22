@@ -15,6 +15,7 @@
 #include "tests\AnimationApp.h"
 #include "tests\ParticlesApp.h"
 #include "tests\GUIApp.h"
+#include "tests\PostProApp.h"
 
 
 
@@ -49,7 +50,8 @@ int main()
 	//ProceeduralApp * app = new ProceeduralApp();
 	//AnimationApp * app = new AnimationApp();
 	//ParticlesApp * app = new ParticlesApp();
-	GUIApp * app = new GUIApp();
+	//GUIApp * app = new GUIApp();
+	PostProApp * app = new PostProApp();
 
 
 	if (app != nullptr)

@@ -10,7 +10,7 @@ Plane::Plane(glm::vec3 a_position, GLuint a_size)
 	// Plane grid
 	m_uiGridSize = a_size;
 	m_uiVertNum = a_size;
-	m_m4Transform = Maths::createTransormationMatrix(glm::vec3(-32.0f, 0.0f, -32.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.0f);
+	m_m4Transform = Maths::createTransormationMatrix(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.0f);
 	m_planeModel = new RawModel();
 
 	// textures

@@ -228,6 +228,12 @@
     <ClCompile Include="include\imgui\imgui_impl_glfw_gl3.cpp">
       <Filter>Source Files\dependencies\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="src\tests\PostProApp.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\Mirror.cpp">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -382,6 +388,12 @@
     </ClInclude>
     <ClInclude Include="include\imgui\imgui_impl_glfw_gl3.h">
       <Filter>Source Files\dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tests\PostProApp.h">
+      <Filter>Source Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Mirror.h">
+      <Filter>Source Files\assets\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
