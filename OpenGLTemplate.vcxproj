@@ -197,6 +197,8 @@
     <ClCompile Include="src\models\RawModel.cpp" />
     <ClCompile Include="src\models\TexturedModel.cpp" />
     <ClCompile Include="src\particles\ParticleEmitter.cpp" />
+    <ClCompile Include="src\renderEngine\AABB.cpp" />
+    <ClCompile Include="src\renderEngine\BoundingSphere.cpp" />
     <ClCompile Include="src\renderEngine\Camera.cpp" />
     <ClCompile Include="src\renderEngine\DisplayManager.cpp" />
     <ClCompile Include="src\renderEngine\Loader.cpp" />
@@ -252,6 +254,8 @@
     <ClInclude Include="src\models\RawModel.h" />
     <ClInclude Include="src\models\TexturedModel.h" />
     <ClInclude Include="src\particles\ParticleEmitter.h" />
+    <ClInclude Include="src\renderEngine\AABB.h" />
+    <ClInclude Include="src\renderEngine\BoundingSphere.h" />
     <ClInclude Include="src\renderEngine\Camera.h" />
     <ClInclude Include="src\renderEngine\DisplayManager.h" />
     <ClInclude Include="src\renderEngine\Loader.h" />

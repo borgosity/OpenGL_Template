@@ -43,18 +43,25 @@ void Mirror::draw(Camera & a_camera)
 	float time = (float)glfwGetTime();
 
 	// Clear all relevant buffers
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	//glClear(GL_COLOR_BUFFER_BIT);
 	//glDisable(GL_DEPTH_TEST); 	
 
 	m_shaderProgram->start();
+	m_shaderProgram->uniformMat4("view", a_camera.viewMatrix());
+	// pass camera projection to shader
+	m_shaderProgram->uniformMat4("projection", a_camera.projection());
+	m_shaderProgram->uniformMat4("model", m_m4Transform);
+
 	// pass camera position to shader 
-	m_shaderProgram->uniformBool("plain", false);
+	m_shaderProgram->uniformBool("standard", false);
 	m_shaderProgram->uniformBool("invert", false);
 	m_shaderProgram->uniformBool("greyScale", true);
 	m_shaderProgram->uniformBool("sharpen", false);
 	m_shaderProgram->uniformBool("blur", false);
 	m_shaderProgram->uniformBool("edgeDetection", true);
+
+
 
 	// Draw Screen
 	glBindTexture(GL_TEXTURE_2D, m_TBO);	

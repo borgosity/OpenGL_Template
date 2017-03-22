@@ -1,11 +1,15 @@
 #version 330 core
 
-in vec2 TexCoords;
+in VS_OUT {
+	vec3 Position;
+	vec3 Normal;
+	vec2 TexCoord;
+} fs_in;
 out vec4 color;
 
 uniform sampler2D screenTexture;
 
-uniform float plain;
+uniform float standard;
 uniform float invert;
 uniform float greyScale;
 uniform float sharpen;
@@ -45,10 +49,10 @@ void main()
 
 
 	if (invert == 1.0f) {
-		inverted = vec4(vec3(1.0 - texture(screenTexture, TexCoords)), 1.0);
+		inverted = vec4(vec3(1.0 - texture(screenTexture, fs_in.TexCoord)), 1.0);
 	}
-	if (greyScale == 1.0f && plain == 1.0f) {
-	    greyed = greyScaleImage(texture(screenTexture, TexCoords));
+	if (greyScale == 1.0f && standard == 1.0f) {
+	    greyed = greyScaleImage(texture(screenTexture, fs_in.TexCoord));
 	}
 	if (sharpen == 1.0f) {
 		sharpened = kernelEffect(sharpenKernel);
@@ -58,12 +62,12 @@ void main()
 	}
 	if (edgeDetection == 1.0f) {
 		edged = kernelEffect(edgeKernel);
-		if (greyScale ==1.0f) {
+		if (greyScale == 1.0f) {
 			edged = greyScaleImage(edged);
 		}
 	}
-	if (plain == 1.0f) {
-		color = texture(screenTexture, TexCoords);
+	if (standard == 1.0f) {
+		color = texture(screenTexture, fs_in.TexCoord);
 	}
 
 	color = plain + edged + blured + sharpened + greyed + inverted;
@@ -85,7 +89,7 @@ vec4 kernelEffect(float kernel[9]) {
     vec3 sampleTex[9];
     for(int i = 0; i < 9; i++)
     {
-        sampleTex[i] = vec3(texture(screenTexture, TexCoords.st + offsets[i]));
+        sampleTex[i] = vec3(texture(screenTexture, fs_in.TexCoord.st + offsets[i]));
     }
     vec3 col = vec3(0.0);
     for(int i = 0; i < 9; i++)

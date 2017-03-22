@@ -234,6 +234,12 @@
     <ClCompile Include="src\entities\Mirror.cpp">
       <Filter>Source Files\assets\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderEngine\AABB.cpp">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderEngine\BoundingSphere.cpp">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -394,6 +400,12 @@
     </ClInclude>
     <ClInclude Include="src\entities\Mirror.h">
       <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderEngine\AABB.h">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderEngine\BoundingSphere.h">
+      <Filter>Source Files\renderEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

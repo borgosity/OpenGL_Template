@@ -169,6 +169,7 @@ bool PostProApp::draw(GLdouble a_deltaTime)
 	//m_renderer->prepare(0.0f, 0.0f, 0.0f);
 
 	// bind frame buffer start for post processing
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 	m_mirror->bindFBO();
 
@@ -201,7 +202,7 @@ bool PostProApp::draw(GLdouble a_deltaTime)
 
 	// ++++ Passs Two +++++++++
 	m_mirror->unbindFBO();
-	m_renderer->prepare(m_clearColour);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// hand animation
 	m_animeSP->start();
 	m_animeSP->specularColour(m_particleColour);
