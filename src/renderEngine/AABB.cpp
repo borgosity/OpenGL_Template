@@ -7,6 +7,25 @@ AABB::AABB()
 	reset();
 }
 
+AABB::AABB(GLfloat * a_vertices, int a_sizeof, int a_vertexSize)
+{
+	int size = (a_sizeof / sizeof(GLfloat));
+	int increment = a_vertexSize - 3;
+	std::vector<glm::vec3> points = {};
+	// generate vector from vertices
+	for (int i = 0; i < size; i++)
+	{
+		glm::vec3 vec(0);
+		vec.x = a_vertices[i];
+		vec.y = a_vertices[i++];
+		vec.z = a_vertices[i++];
+		points.push_back(vec);
+		i += increment;
+	}
+	// set AABB
+	set(points);
+}
+
 
 AABB::~AABB()
 {
@@ -32,6 +51,5 @@ void AABB::set(const std::vector<glm::vec3>& a_points)
 		if (p.x > m_vMax.x) m_vMax.x = p.x;
 		if (p.y > m_vMax.y) m_vMax.y = p.y;
 		if (p.z > m_vMax.z) m_vMax.z = p.z;
-	}
-		
+	}	
 }

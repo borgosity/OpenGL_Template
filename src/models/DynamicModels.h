@@ -1,9 +1,12 @@
 #pragma once
+// opengl includes
 #include <glew.h>
 //#include <glfw3.h>
 #include <glm.hpp>
-
+// source includes
 #include "Loader.h"
+#include "AABB.h"
+#include "BoundingSphere.h"
 
 
 class DynamicModels

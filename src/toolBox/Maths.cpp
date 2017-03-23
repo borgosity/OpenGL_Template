@@ -101,3 +101,44 @@ float Maths::maxElement(float * a_array, int a_size)
 	}
 	return result;
 }
+
+void Maths::frustrumPlanes(const glm::mat4& a_projection, const glm::mat4& a_view, glm::vec4 * a_planes)
+{
+	glm::mat4 transform = a_projection * a_view;
+	// right side
+	a_planes[0] = glm::vec4(transform[0][3] - transform[0][0],
+							transform[1][3] - transform[1][0],
+							transform[2][3] - transform[2][0],
+							transform[3][3] - transform[3][0]);
+	// left side
+	a_planes[1] = glm::vec4(transform[0][3] + transform[0][0],
+							transform[1][3] + transform[1][0],
+							transform[2][3] + transform[2][0],
+							transform[3][3] + transform[3][0]);
+	// top
+	a_planes[2] = glm::vec4(transform[0][3] - transform[0][1],
+							transform[1][3] - transform[1][1],
+							transform[2][3] - transform[2][1],
+							transform[3][3] - transform[3][1]);
+	// bottom
+	a_planes[3] = glm::vec4(transform[0][3] + transform[0][1],
+							transform[1][3] + transform[1][1],
+							transform[2][3] + transform[2][1],
+							transform[3][3] + transform[3][1]);
+	// far
+	a_planes[4] = glm::vec4(transform[0][3] - transform[0][2],
+							transform[1][3] - transform[1][2],
+							transform[2][3] - transform[2][2],
+							transform[3][3] - transform[3][2]);
+	// near
+	a_planes[5] = glm::vec4(transform[0][3] + transform[0][2],
+							transform[1][3] + transform[1][2],
+							transform[2][3] + transform[2][2],
+							transform[3][3] + transform[3][2]);
+
+	// plane normalisation, based on length of normal
+	for (int i = 0; i < 6; i++) {
+		float d = glm::length(glm::vec3(a_planes[i]));
+		a_planes[i] /= d;
+	}
+}

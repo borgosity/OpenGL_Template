@@ -19,6 +19,10 @@ public:
 	static glm::mat4 quaternionTransformation(glm::vec3 a_translation, glm::quat a_rotation, float a_scale);
 	static float minElement(float * a_array, int a_size);
 	static float maxElement(float * a_array, int a_size);
+	static void frustrumPlanes(const glm::mat4& a_projection, 
+							   const glm::mat4& a_view,
+							   glm::vec4 * a_planes);
+
 
 };
 

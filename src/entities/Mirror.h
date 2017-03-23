@@ -14,6 +14,7 @@
 #include "ConstValues.h"
 #include "ShaderProgram.h"
 #include "DynamicModels.h"
+#include "AABB.h"
 
 class Mirror
 {
@@ -29,6 +30,7 @@ public:
 	glm::vec3 position(glm::vec3 a_position) { m_vPosition = a_position; return m_vPosition; };
 	glm::mat4 transform() { return m_m4Transform; };
 	glm::mat4 transform(glm::mat4 a_transform) { m_m4Transform = a_transform; return m_m4Transform; };
+	AABB * aabb() { return m_mirrorModel->aabb(); };
 
 private:
 	GLuint m_FBO; // frame buffer

@@ -114,14 +114,14 @@ RawModel * DynamicModels::cube()
 
 	GLfloat vertices[] = {
 		// Positions          // Normals           // Texture Coords
-		// front or back face
+		// back face
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
 		0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
 		0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
 		0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
 		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f,
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
-		// front or back face
+		// front face
 		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
 		0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
 		0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
@@ -158,7 +158,11 @@ RawModel * DynamicModels::cube()
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
 	};
 
-	return m_loader->loadToVAO(vertices, sizeof(vertices), 8);
+	AABB * aabb = new AABB(vertices, sizeof(vertices), 8);
+	RawModel * rawModel = m_loader->loadToVAO(vertices, sizeof(vertices), 8);
+	rawModel->aabb(aabb);
+
+	return rawModel;
 }
 
 RawModel * DynamicModels::square(GLfloat a_size)

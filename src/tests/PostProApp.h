@@ -20,9 +20,11 @@
 #include "Square.h"
 #include "Plane.h"
 #include "Mirror.h"
-
+// controllers
 #include "UIController.h"
-
+// conlisions
+#include "BoundingSphere.h"
+#include "AABB.h"
 
 class PostProApp :
 	public Application
@@ -43,6 +45,9 @@ private:
 	void setupModels();
 	void setupGUI();
 	void debugGUI();
+	bool culling();
+	bool AABBculling(AABB & a_box);
+
 
 	// display
 	DisplayManager *	m_display = nullptr;
@@ -100,6 +105,10 @@ private:
 
 	// GUI
 	glm::vec4 m_clearColour;
+
+	// collisions
+	glm::vec4		 m_vPlanes[6];
+	BoundingSphere * m_boundingSphere = nullptr;
 
 };
 

@@ -58,6 +58,9 @@ PostProApp::~PostProApp()
 	deallocate(m_spotLight);
 	deallocate(m_softSpotLamp);
 	deallocate(m_softSpotLight);
+
+	// collisions
+	deallocate(m_boundingSphere);
 }
 
 bool PostProApp::start()
@@ -132,12 +135,16 @@ bool PostProApp::start()
 	
 	m_particleColour = startColour;
 	m_animeSP->lightPosition(m_emitter->emitterPosition());
+
+	// -------------------------- collisions -------------------------
+	Maths::frustrumPlanes(m_camera->projection(), m_camera->viewMatrix(), m_vPlanes);
+	m_boundingSphere = new BoundingSphere(m_mirror->position(), 0.5f);
 	return true;
 }
 
 bool PostProApp::update(GLdouble a_deltaTime)
 {
-	// updat eui controller
+	// update ui controller
 	m_uiController->update(a_deltaTime);
 	if (m_uiController->toggleCursor()) {
 		glfwSetInputMode(m_display->window(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -152,6 +159,9 @@ bool PostProApp::update(GLdouble a_deltaTime)
 	// update particles
 	m_emitter->startColour(m_particleColour);
 	m_emitter->update((GLfloat)a_deltaTime, m_camera->transform());
+
+	// update planes and call frustrum culling update
+	Maths::frustrumPlanes(m_camera->projection(), m_camera->viewMatrix(), m_vPlanes);
 	
 	return true;
 }
@@ -164,9 +174,6 @@ bool PostProApp::fixedUpdate(GLdouble a_deltaTime)
 bool PostProApp::draw(GLdouble a_deltaTime)
 {
 	GLdouble time = glfwGetTime();
-	// Render
-	// Clear the colorbuffer
-	//m_renderer->prepare(0.0f, 0.0f, 0.0f);
 
 	// bind frame buffer start for post processing
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -177,6 +184,8 @@ bool PostProApp::draw(GLdouble a_deltaTime)
 	//ImGui_ImplGlfwGL3_NewFrame();
 	//debugGUI();
 
+	// Render
+	// Clear the colorbuffer
 	m_renderer->prepare(m_clearColour);
 
 	// ++++ Passs One +++++++++
@@ -225,7 +234,9 @@ bool PostProApp::draw(GLdouble a_deltaTime)
 
 
 	// ------------------------- post processing ----------------
-	m_mirror->draw(*m_camera);
+	if (AABBculling(*m_mirror->aabb())) {
+		m_mirror->draw(*m_camera);
+	}
 
 
 	// ##############################> END DRAW STUFF <###########################################################
@@ -339,5 +350,55 @@ void PostProApp::debugGUI()
 		ImGui::ColorEdit3("Emitter Position", (float*)&m_emitterPosition);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::End();
+}
+
+bool PostProApp::culling()
+{
+	bool result = true;
+	// iterate through planes
+	for (int i = 0; i < 6; i++)
+	{
+		float d = glm::dot(glm::vec3(m_vPlanes[i]), m_boundingSphere->centre()) + m_vPlanes[i].w;
+		// if outside of plane return false
+		if (d < -m_boundingSphere->radius()) {
+			result = false;
+			break;
+		}
+	}
+	return result;
+}
+
+bool PostProApp::AABBculling(AABB & a_box)
+{
+	bool result = true;
+	// Indexed for the 'index trick' later
+	glm::vec3 box[] = { a_box.min(), a_box.max() };
+
+	// We only need to do 6 point-plane tests
+	for (int i = 0; i < 6; ++i)
+	{
+		// This is the current plane
+		glm::vec4 p = m_vPlanes[i];
+
+		// p-vertex selection (with the index trick)
+		// According to the plane normal we can know the
+		// indices of the positive vertex
+		const int px = static_cast<int>(p.x > 0.0f);
+		const int py = static_cast<int>(p.y > 0.0f);
+		const int pz = static_cast<int>(p.z > 0.0f);
+
+		// How far is p-vertex from the origin
+		const float dp = (p.x*box[px].x) +
+						 (p.y*box[py].y) +
+						 (p.z*box[pz].z);
+
+		// Doesn't intersect if it is behind the plane
+		if (dp < -p.w) {
+			result = false;
+			break;
+		}
+
+	}
+	return result;
 }
 
