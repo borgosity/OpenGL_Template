@@ -240,6 +240,9 @@
     <ClCompile Include="src\renderEngine\BoundingSphere.cpp">
       <Filter>Source Files\renderEngine</Filter>
     </ClCompile>
+    <ClCompile Include="src\tests\AssessmentApp.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="src\renderEngine\BoundingSphere.h">
       <Filter>Source Files\renderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tests\AssessmentApp.h">
+      <Filter>Source Files\tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

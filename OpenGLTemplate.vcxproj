@@ -214,6 +214,7 @@
     <ClCompile Include="src\shaders\Shaders.cpp" />
     <ClCompile Include="src\shaders\StaticShader.cpp" />
     <ClCompile Include="src\tests\AnimationApp.cpp" />
+    <ClCompile Include="src\tests\AssessmentApp.cpp" />
     <ClCompile Include="src\tests\ExampleApp.cpp" />
     <ClCompile Include="src\tests\GUIApp.cpp" />
     <ClCompile Include="src\tests\LightsApp.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="src\shaders\ShaderProgram.h" />
     <ClInclude Include="src\shaders\StaticShader.h" />
     <ClInclude Include="src\tests\AnimationApp.h" />
+    <ClInclude Include="src\tests\AssessmentApp.h" />
     <ClInclude Include="src\tests\ExampleApp.h" />
     <ClInclude Include="src\tests\GUIApp.h" />
     <ClInclude Include="src\tests\LightsApp.h" />
