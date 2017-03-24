@@ -303,8 +303,8 @@
     <None Include="src\shaders\glsl\meshShader.vs" />
     <None Include="src\shaders\glsl\modelShader.fs" />
     <None Include="src\shaders\glsl\modelShader.vs" />
-    <None Include="src\shaders\glsl\paricles\particleShader.fs" />
-    <None Include="src\shaders\glsl\paricles\particleShader.vs" />
+    <None Include="src\shaders\glsl\particles\particleShader.fs" />
+    <None Include="src\shaders\glsl\particles\particleShader.vs" />
     <None Include="src\shaders\glsl\phongShader.fs" />
     <None Include="src\shaders\glsl\phongShader.vs" />
     <None Include="src\shaders\glsl\planeShader.fs" />
