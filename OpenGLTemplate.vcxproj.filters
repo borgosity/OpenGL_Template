@@ -228,6 +228,21 @@
     <ClCompile Include="include\imgui\imgui_impl_glfw_gl3.cpp">
       <Filter>Source Files\dependencies\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="src\tests\PostProApp.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\Mirror.cpp">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderEngine\AABB.cpp">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderEngine\BoundingSphere.cpp">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tests\AssessmentApp.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tests\tests.h">
@@ -382,6 +397,21 @@
     </ClInclude>
     <ClInclude Include="include\imgui\imgui_impl_glfw_gl3.h">
       <Filter>Source Files\dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tests\PostProApp.h">
+      <Filter>Source Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Mirror.h">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderEngine\AABB.h">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderEngine\BoundingSphere.h">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tests\AssessmentApp.h">
+      <Filter>Source Files\tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

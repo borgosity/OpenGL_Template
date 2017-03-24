@@ -199,8 +199,8 @@ void ShaderProgram::readFiles(std::string a_vsFilePath, std::string a_fsFilePath
 	m_cpVertexShaderSource = new GLchar[vsShaderSource.length() + 1];
 	m_cpFragmentShaderSource = new GLchar[fsShaderSource.length() + 1];
 
-	strcpy((char*)m_cpVertexShaderSource, vsShaderSource.c_str());
-	strcpy((char*)m_cpFragmentShaderSource, fsShaderSource.c_str());
+	strcpy_s((char*)m_cpVertexShaderSource, vsShaderSource.length() + 1, vsShaderSource.c_str());
+	strcpy_s((char*)m_cpFragmentShaderSource, fsShaderSource.length() + 1, fsShaderSource.c_str());
 
 }
 

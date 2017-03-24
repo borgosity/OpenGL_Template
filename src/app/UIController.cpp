@@ -35,18 +35,18 @@ void UIController::keyPress(GLfloat a_dt)
 {
 	// check if keys state has changed
 	// - toggle maps
-	if (m_bKeys[GLFW_KEY_M] == true && !m_bMapToggle) {
+	if (m_bKeys[GLFW_KEY_M] == (GLboolean)true && !m_bMapToggle) {
 		m_bMapToggle = true;
 	}
-	else if (m_bKeys[GLFW_KEY_M] == false && m_bMapToggle) {
+	else if (m_bKeys[GLFW_KEY_M] == (GLboolean)false && m_bMapToggle) {
 		m_bMapToggle = false;
 	}
 
 	// - toggle cursor to enable UI interaction if left ALT pressed
-	if (m_bKeys[GLFW_KEY_LEFT_ALT] == true && !m_bCursorToggle) {
+	if (m_bKeys[GLFW_KEY_LEFT_ALT] == (GLboolean)true && !m_bCursorToggle) {
 		m_bCursorToggle = true;
 	}
-	else if (m_bKeys[GLFW_KEY_LEFT_ALT] == false && m_bCursorToggle){
+	else if (m_bKeys[GLFW_KEY_LEFT_ALT] == (GLboolean)false && m_bCursorToggle){
 		m_bCursorToggle = false;
 	}
 }

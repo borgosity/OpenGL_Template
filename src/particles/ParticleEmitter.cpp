@@ -12,6 +12,16 @@ ParticleEmitter::ParticleEmitter()
 	EBO = 0;
 }
 
+ParticleEmitter::ParticleEmitter(glm::vec3 a_position)
+{
+	m_uiFirstDead = 0;
+	m_uiMaxParticles = 0;
+	m_vPosition = a_position;
+	VAO = 0;
+	VBO = 0;
+	EBO = 0;
+}
+
 
 ParticleEmitter::~ParticleEmitter()
 {
@@ -55,7 +65,7 @@ void ParticleEmitter::update(GLfloat a_deltaTime, const glm::mat4 & a_cameraTran
 		else {
 			// move particle
 			particle->position += particle->velocity * a_deltaTime;
-			particle->position.x -= 5.0f * a_deltaTime;
+			particle->position.y += 5.0f * a_deltaTime;
 			// size particle
 			particle->size = glm::mix(m_fStartSize, m_fEndSize, particle->lifeTime / particle->lifeSpan);
 			// colour particle

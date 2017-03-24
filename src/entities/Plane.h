@@ -30,6 +30,7 @@ private:
 	glm::mat4		m_m4Transform;
 	glm::vec3		m_vPlaneColour;
 	GLuint			m_uiSize;
+
 	// default grid settings
 	GLuint			m_uiGridSize;
 	GLuint			m_uiVertNum;

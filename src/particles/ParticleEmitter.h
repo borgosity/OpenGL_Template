@@ -26,6 +26,7 @@ class ParticleEmitter
 {
 public:
 	ParticleEmitter();
+	ParticleEmitter(glm::vec3 a_position);
 	~ParticleEmitter();
 
 	void update(GLfloat a_deltaTime, const glm::mat4 & a_cameraTransform);
