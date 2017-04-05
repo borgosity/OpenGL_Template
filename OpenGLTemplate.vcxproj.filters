@@ -16,9 +16,6 @@
     <Filter Include="Source Files\renderEngine">
       <UniqueIdentifier>{af574f29-2bf4-43c0-9a01-f222d9f3bcff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests">
-      <UniqueIdentifier>{461d30e9-814f-40ac-881f-1d664d937f64}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\shaders">
       <UniqueIdentifier>{79cd287e-8b0b-40cc-9804-0b1a5fcfb3ab}</UniqueIdentifier>
     </Filter>
@@ -78,146 +75,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderEngine\DisplayManager.cpp">
-      <Filter>Source Files\renderEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderEngine\Loader.cpp">
-      <Filter>Source Files\renderEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderEngine\Renderer.cpp">
-      <Filter>Source Files\renderEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tests\tests.cpp">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\ShaderProgram.cpp">
-      <Filter>Source Files\shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="src\models\RawModel.cpp">
-      <Filter>Source Files\assets\models</Filter>
-    </ClCompile>
-    <ClCompile Include="src\models\TexturedModel.cpp">
-      <Filter>Source Files\assets\models</Filter>
-    </ClCompile>
-    <ClCompile Include="src\textures\ModelTexture.cpp">
-      <Filter>Source Files\assets\textures</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\Shaders.cpp">
-      <Filter>Source Files\shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="src\textures\Texture.cpp">
-      <Filter>Source Files\assets\textures</Filter>
-    </ClCompile>
-    <ClCompile Include="src\toolBox\Maths.cpp">
-      <Filter>Source Files\toolBox</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderEngine\Camera.cpp">
-      <Filter>Source Files\renderEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\entities\Entity.cpp">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\models\DynamicModels.cpp">
-      <Filter>Source Files\assets\models</Filter>
-    </ClCompile>
-    <ClCompile Include="src\app\Application.cpp">
-      <Filter>Source Files\app</Filter>
-    </ClCompile>
-    <ClCompile Include="src\app\Controller.cpp">
-      <Filter>Source Files\app</Filter>
-    </ClCompile>
-    <ClCompile Include="src\app\CameraController.cpp">
-      <Filter>Source Files\app</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tests\TerrainApp.cpp">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tests\ExampleApp.cpp">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\models\OBJLoader.cpp">
-      <Filter>Source Files\assets\models</Filter>
-    </ClCompile>
     <ClCompile Include="include\tiny_obj\tiny_obj_loader.cc">
       <Filter>Source Files\dependencies\tinyObj</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\StaticShader.cpp">
-      <Filter>Source Files\shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="src\entities\Light.cpp">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tests\ModelApp.cpp">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\models\Mesh.cpp">
-      <Filter>Source Files\assets\meshes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\models\MeshModel.cpp">
-      <Filter>Source Files\assets\meshes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\models\Lamp.cpp">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\lights\LightShader.cpp">
-      <Filter>Source Files\shaders\lights</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\lights\PointLightShader.cpp">
-      <Filter>Source Files\shaders\lights</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\lights\SpotLightShader.cpp">
-      <Filter>Source Files\shaders\lights</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tests\LightsApp.cpp">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\entities\Square.cpp">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\lights\SoftSpotShader.cpp">
-      <Filter>Source Files\shaders\lights</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\lights\SceneLightingShader.cpp">
-      <Filter>Source Files\shaders\lights</Filter>
-    </ClCompile>
-    <ClCompile Include="src\entities\SceneLights.cpp">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tests\ProceeduralApp.cpp">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\entities\Terrain.cpp">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\app\UIController.cpp">
-      <Filter>Source Files\app</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tests\AnimationApp.cpp">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\entities\Plane.cpp">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\models\AnimatedModel.cpp">
-      <Filter>Source Files\assets\models</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\AnimeShader.cpp">
-      <Filter>Source Files\shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tests\ParticlesApp.cpp">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\particles\ParticleShader.cpp">
-      <Filter>Source Files\shaders\particles</Filter>
-    </ClCompile>
-    <ClCompile Include="src\particles\ParticleEmitter.cpp">
-      <Filter>Source Files\particles</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tests\GUIApp.cpp">
-      <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="include\imgui\imgui.cpp">
       <Filter>Source Files\dependencies\imgui</Filter>
@@ -228,163 +87,130 @@
     <ClCompile Include="include\imgui\imgui_impl_glfw_gl3.cpp">
       <Filter>Source Files\dependencies\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\tests\PostProApp.cpp">
-      <Filter>Source Files\tests</Filter>
+    <ClCompile Include="src\OpenGLTemplate\app\Application.cpp">
+      <Filter>Source Files\app</Filter>
     </ClCompile>
-    <ClCompile Include="src\entities\Mirror.cpp">
+    <ClCompile Include="src\OpenGLTemplate\app\CameraController.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\app\Controller.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\app\UIController.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\entities\Entity.cpp">
       <Filter>Source Files\assets\entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderEngine\AABB.cpp">
+    <ClCompile Include="src\OpenGLTemplate\entities\Lamp.cpp">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\entities\Light.cpp">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\entities\Mirror.cpp">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\entities\Plane.cpp">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\entities\SceneLights.cpp">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\entities\Square.cpp">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\entities\Terrain.cpp">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\models\Mesh.cpp">
+      <Filter>Source Files\assets\meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\models\MeshModel.cpp">
+      <Filter>Source Files\assets\meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\models\AnimatedModel.cpp">
+      <Filter>Source Files\assets\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\models\DynamicModels.cpp">
+      <Filter>Source Files\assets\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\models\OBJLoader.cpp">
+      <Filter>Source Files\assets\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\models\RawModel.cpp">
+      <Filter>Source Files\assets\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\models\TexturedModel.cpp">
+      <Filter>Source Files\assets\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\textures\ModelTexture.cpp">
+      <Filter>Source Files\assets\textures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\textures\Texture.cpp">
+      <Filter>Source Files\assets\textures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\particles\ParticleEmitter.cpp">
+      <Filter>Source Files\particles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\renderEngine\AABB.cpp">
       <Filter>Source Files\renderEngine</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderEngine\BoundingSphere.cpp">
+    <ClCompile Include="src\OpenGLTemplate\renderEngine\BoundingSphere.cpp">
       <Filter>Source Files\renderEngine</Filter>
     </ClCompile>
-    <ClCompile Include="src\tests\AssessmentApp.cpp">
-      <Filter>Source Files\tests</Filter>
+    <ClCompile Include="src\OpenGLTemplate\renderEngine\Camera.cpp">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\renderEngine\DisplayManager.cpp">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\renderEngine\Loader.cpp">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\renderEngine\Renderer.cpp">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\shaders\lights\LightShader.cpp">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\shaders\lights\PointLightShader.cpp">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\shaders\lights\SceneLightingShader.cpp">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\shaders\lights\SoftSpotShader.cpp">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\shaders\lights\SpotLightShader.cpp">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\shaders\particles\ParticleShader.cpp">
+      <Filter>Source Files\shaders\particles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\shaders\AnimeShader.cpp">
+      <Filter>Source Files\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\shaders\ShaderProgram.cpp">
+      <Filter>Source Files\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\shaders\Shaders.cpp">
+      <Filter>Source Files\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\shaders\StaticShader.cpp">
+      <Filter>Source Files\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\toolBox\Maths.cpp">
+      <Filter>Source Files\toolBox</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLTemplate\main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\tests\tests.h">
-      <Filter>Source Files\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\ShaderProgram.h">
-      <Filter>Source Files\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="src\renderEngine\Renderer.h">
-      <Filter>Source Files\renderEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\renderEngine\Loader.h">
-      <Filter>Source Files\renderEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\renderEngine\DisplayManager.h">
-      <Filter>Source Files\renderEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\models\RawModel.h">
-      <Filter>Source Files\assets\models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\models\TexturedModel.h">
-      <Filter>Source Files\assets\models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\textures\ModelTexture.h">
-      <Filter>Source Files\assets\textures</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\Shaders.h">
-      <Filter>Source Files\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="src\textures\Texture.h">
-      <Filter>Source Files\assets\textures</Filter>
-    </ClInclude>
-    <ClInclude Include="src\toolBox\Maths.h">
-      <Filter>Source Files\toolBox</Filter>
-    </ClInclude>
-    <ClInclude Include="src\renderEngine\Camera.h">
-      <Filter>Source Files\renderEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entities\Entity.h">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\models\DynamicModels.h">
-      <Filter>Source Files\assets\models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\app\Application.h">
-      <Filter>Source Files\app</Filter>
-    </ClInclude>
-    <ClInclude Include="src\app\Controller.h">
-      <Filter>Source Files\app</Filter>
-    </ClInclude>
-    <ClInclude Include="src\app\CameraController.h">
-      <Filter>Source Files\app</Filter>
-    </ClInclude>
-    <ClInclude Include="src\app\ConstValues.h">
-      <Filter>Source Files\app</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tests\TerrainApp.h">
-      <Filter>Source Files\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tests\ExampleApp.h">
-      <Filter>Source Files\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="src\models\OBJLoader.h">
-      <Filter>Source Files\assets\models</Filter>
-    </ClInclude>
     <ClInclude Include="include\tiny_obj\tiny_obj_loader.h">
       <Filter>Source Files\dependencies\tinyObj</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\StaticShader.h">
-      <Filter>Source Files\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entities\Light.h">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tests\ModelApp.h">
-      <Filter>Source Files\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="src\models\Mesh.h">
-      <Filter>Source Files\assets\meshes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\models\MeshModel.h">
-      <Filter>Source Files\assets\meshes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\models\Lamp.h">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\lights\LightShader.h">
-      <Filter>Source Files\shaders\lights</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\lights\PointLightShader.h">
-      <Filter>Source Files\shaders\lights</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\lights\SpotLightShader.h">
-      <Filter>Source Files\shaders\lights</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entities\Square.h">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tests\LightsApp.h">
-      <Filter>Source Files\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\lights\SoftSpotShader.h">
-      <Filter>Source Files\shaders\lights</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\lights\SceneLightingShader.h">
-      <Filter>Source Files\shaders\lights</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entities\SceneLights.h">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tests\ProceeduralApp.h">
-      <Filter>Source Files\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entities\Terrain.h">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\app\UIController.h">
-      <Filter>Source Files\app</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tests\AnimationApp.h">
-      <Filter>Source Files\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entities\Plane.h">
-      <Filter>Source Files\assets\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\models\AnimatedModel.h">
-      <Filter>Source Files\assets\models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\AnimeShader.h">
-      <Filter>Source Files\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tests\ParticlesApp.h">
-      <Filter>Source Files\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders\particles\ParticleShader.h">
-      <Filter>Source Files\shaders\particles</Filter>
-    </ClInclude>
-    <ClInclude Include="src\particles\ParticleEmitter.h">
-      <Filter>Source Files\particles</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tests\GUIApp.h">
-      <Filter>Source Files\tests</Filter>
     </ClInclude>
     <ClInclude Include="include\imgui\imconfig.h">
       <Filter>Source Files\dependencies\imgui</Filter>
@@ -398,154 +224,259 @@
     <ClInclude Include="include\imgui\imgui_impl_glfw_gl3.h">
       <Filter>Source Files\dependencies\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\tests\PostProApp.h">
-      <Filter>Source Files\tests</Filter>
+    <ClInclude Include="src\OpenGLTemplate\app\Application.h">
+      <Filter>Source Files\app</Filter>
     </ClInclude>
-    <ClInclude Include="src\entities\Mirror.h">
+    <ClInclude Include="src\OpenGLTemplate\app\CameraController.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\app\ConstValues.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\app\Controller.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\app\UIController.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\entities\Entity.h">
       <Filter>Source Files\assets\entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderEngine\AABB.h">
+    <ClInclude Include="src\OpenGLTemplate\entities\Lamp.h">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\entities\Light.h">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\entities\Mirror.h">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\entities\Plane.h">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\entities\SceneLights.h">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\entities\Square.h">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\entities\Terrain.h">
+      <Filter>Source Files\assets\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\models\Mesh.h">
+      <Filter>Source Files\assets\meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\models\MeshModel.h">
+      <Filter>Source Files\assets\meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\models\AnimatedModel.h">
+      <Filter>Source Files\assets\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\models\DynamicModels.h">
+      <Filter>Source Files\assets\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\models\OBJLoader.h">
+      <Filter>Source Files\assets\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\models\RawModel.h">
+      <Filter>Source Files\assets\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\models\TexturedModel.h">
+      <Filter>Source Files\assets\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\textures\ModelTexture.h">
+      <Filter>Source Files\assets\textures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\textures\Texture.h">
+      <Filter>Source Files\assets\textures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\particles\ParticleEmitter.h">
+      <Filter>Source Files\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\renderEngine\AABB.h">
       <Filter>Source Files\renderEngine</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderEngine\BoundingSphere.h">
+    <ClInclude Include="src\OpenGLTemplate\renderEngine\BoundingSphere.h">
       <Filter>Source Files\renderEngine</Filter>
     </ClInclude>
-    <ClInclude Include="src\tests\AssessmentApp.h">
-      <Filter>Source Files\tests</Filter>
+    <ClInclude Include="src\OpenGLTemplate\renderEngine\Camera.h">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\renderEngine\DisplayManager.h">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\renderEngine\Loader.h">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\renderEngine\Renderer.h">
+      <Filter>Source Files\renderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\shaders\lights\LightShader.h">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\shaders\lights\PointLightShader.h">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\shaders\lights\SceneLightingShader.h">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\shaders\lights\SoftSpotShader.h">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\shaders\lights\SpotLightShader.h">
+      <Filter>Source Files\shaders\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\shaders\particles\ParticleShader.h">
+      <Filter>Source Files\shaders\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\shaders\AnimeShader.h">
+      <Filter>Source Files\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\shaders\ShaderProgram.h">
+      <Filter>Source Files\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\shaders\Shaders.h">
+      <Filter>Source Files\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\shaders\StaticShader.h">
+      <Filter>Source Files\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLTemplate\toolBox\Maths.h">
+      <Filter>Source Files\toolBox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\glsl\cameraShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\cameraShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\meshShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\meshShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
-    </None>
-    <None Include="src\shaders\glsl\lights\lampShader.fs">
+    <None Include="res\glsl\lights\lampShader.frag">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lights\lampShader.vs">
+    <None Include="res\glsl\lights\lampShader.vert">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lights\lightingShader.fs">
+    <None Include="res\glsl\lights\lightingShader.frag">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lights\lightingShader.vs">
+    <None Include="res\glsl\lights\lightingShader.vert">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lights\pointLight.fs">
+    <None Include="res\glsl\lights\pointLight.frag">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lights\pointLight.vs">
+    <None Include="res\glsl\lights\pointLight.vert">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lights\spotLight.fs">
+    <None Include="res\glsl\lights\sceneLighting.frag">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lights\spotLight.vs">
+    <None Include="res\glsl\lights\sceneLighting.vert">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\uniformShader.vs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\modelShader.fs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\modelShader.vs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\phongShader.fs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\phongShader.vs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\rippleShader.fs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\rippleShader.vs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\staticShader.fs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\staticShader.vs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\textureShader.fs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\textureShader.vs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\transformShader.fs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\transformShader.vs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\uniformShader.fs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\indexShader.vs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\indexShader.fs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\dualTextureShader.fs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\dualTextureShader.vs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\colourShader.fs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\colourShader.vs">
-      <Filter>Source Files\shaders\glsl\other</Filter>
-    </None>
-    <None Include="src\shaders\glsl\lights\spotLight_soft.fs">
+    <None Include="res\glsl\lights\spotLight.frag">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lights\spotLight_soft.vs">
+    <None Include="res\glsl\lights\spotLight.vert">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lights\sceneLighting.fs">
+    <None Include="res\glsl\lights\spotLight_soft.frag">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\lights\sceneLighting.vs">
+    <None Include="res\glsl\lights\spotLight_soft.vert">
       <Filter>Source Files\shaders\glsl\lights</Filter>
     </None>
-    <None Include="src\shaders\glsl\terrainShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
+    <None Include="res\glsl\other\colourShader.frag">
+      <Filter>Source Files\shaders\glsl\other</Filter>
     </None>
-    <None Include="src\shaders\glsl\terrainShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
+    <None Include="res\glsl\other\colourShader.vert">
+      <Filter>Source Files\shaders\glsl\other</Filter>
     </None>
-    <None Include="src\shaders\glsl\planeShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
+    <None Include="res\glsl\other\dualTextureShader.frag">
+      <Filter>Source Files\shaders\glsl\other</Filter>
     </None>
-    <None Include="src\shaders\glsl\planeShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
+    <None Include="res\glsl\other\dualTextureShader.vert">
+      <Filter>Source Files\shaders\glsl\other</Filter>
     </None>
-    <None Include="src\shaders\glsl\animationShader.fs">
-      <Filter>Source Files\shaders\glsl</Filter>
+    <None Include="res\glsl\other\indexShader.frag">
+      <Filter>Source Files\shaders\glsl\other</Filter>
     </None>
-    <None Include="src\shaders\glsl\animationShader.vs">
-      <Filter>Source Files\shaders\glsl</Filter>
+    <None Include="res\glsl\other\indexShader.vert">
+      <Filter>Source Files\shaders\glsl\other</Filter>
     </None>
-    <None Include="src\shaders\glsl\particles\particleShader.fs">
+    <None Include="res\glsl\other\modelShader.frag">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\modelShader.vert">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\phongShader.frag">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\phongShader.vert">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\rippleShader.frag">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\rippleShader.vert">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\staticShader.frag">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\staticShader.vert">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\textureShader.frag">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\textureShader.vert">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\transformShader.frag">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\transformShader.vert">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\uniformShader.frag">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\other\uniformShader.vert">
+      <Filter>Source Files\shaders\glsl\other</Filter>
+    </None>
+    <None Include="res\glsl\particles\particleShader.frag">
       <Filter>Source Files\shaders\glsl\particles</Filter>
     </None>
-    <None Include="src\shaders\glsl\particles\particleShader.vs">
+    <None Include="res\glsl\particles\particleShader.vert">
       <Filter>Source Files\shaders\glsl\particles</Filter>
+    </None>
+    <None Include="res\glsl\animationShader.frag">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="res\glsl\animationShader.vert">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="res\glsl\cameraShader.frag">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="res\glsl\cameraShader.vert">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="res\glsl\meshShader.frag">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="res\glsl\meshShader.vert">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="res\glsl\planeShader.frag">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="res\glsl\planeShader.vert">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="res\glsl\terrainShader.frag">
+      <Filter>Source Files\shaders\glsl</Filter>
+    </None>
+    <None Include="res\glsl\terrainShader.vert">
+      <Filter>Source Files\shaders\glsl</Filter>
     </None>
   </ItemGroup>
 </Project>
